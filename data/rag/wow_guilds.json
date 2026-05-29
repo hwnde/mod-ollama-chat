@@ -138,5 +138,75 @@
     "content": "A warband sworn to Chieftain Cairne Bloodhoof of Thunder Bluff — heavy-axe veterans of the long Grimtotem feud, the centaur raids out of Desolace, and the Quilboar hostings out of the Razormane camps in the Barrens. They wear plain hide-and-bronze, no painted heraldry; the chief himself dislikes ornament. They drink at the Pools of Vision before each march and bury their dead under stone, not pyre. They take only tauren, save for one orc who saved an officer in a centaur ambush at the Crossroads, and was offered a tabard in the field and chose to keep it.",
     "keywords": ["bloodhoof warband", "bloodhoof", "cairne", "tauren", "warrior", "mulgore", "thunder bluff", "grimtotem", "wrathgate", "horde", "guild", "wintergrasp"],
     "tags": ["guild", "horde", "warrior", "tauren", "bloodhoof"]
+  },
+  {
+    "id": "wow_guild_frostwolf_honor_guard",
+    "title": "Frostwolf Honor Guard",
+    "content": "The veteran axemen of the Frostwolf clan — those who followed Thrall through Lordaeron's prisons, the breaking of the orc clans on Kalimdor, and the founding of Orgrimmar. They serve as the Warchief's standing escort when he moves between Grommash Hold and the field, and they keep the Frostwolves' old mountain-rites against the day the clan returns north to Alterac. Their elders fought beside Drek'Thar at the Wetlands crossings; the younger ones cut their teeth in Alterac Valley's long stalemate. Their tabard bears a black wolf-head on iron-grey; they take no oath but to the Warchief and the clan.",
+    "keywords": ["frostwolf", "honor guard", "thrall", "drek'thar", "warrior", "orc", "horde", "orgrimmar", "alterac valley", "warchief", "guild"],
+    "tags": ["guild", "horde", "warrior", "orc", "frostwolf"]
+  },
+  {
+    "id": "wow_guild_spiritbearers_senjin",
+    "title": "Spiritbearers of Sen'jin",
+    "content": "A troll religious order out of the Echo Isles — shadow-hunters and witch-doctors who carry the loa-rites that Sen'jin himself bore before he fell to the Sea Witch's serpents in the Vale. They speak to the wild gods at the old standing stones beneath Sen'jin Village and walk the long roads to Zul'Drak when the loa there grow restless. Their elders remember when the Darkspear lived in the Stranglethorn jungle; the younger ones have only known the village under Vol'jin's hand. They take troll shamans and priests as a matter of birth-right, and a few orcs who learned to drink the loa's cup without choking. Their tabard is bone-white on dark green.",
+    "keywords": ["spiritbearers", "sen'jin", "darkspear", "troll", "shaman", "priest", "loa", "vol'jin", "echo isles", "horde", "guild"],
+    "tags": ["guild", "horde", "shaman", "troll", "darkspear", "loa"]
+  },
+  {
+    "id": "wow_guild_stormpike_wildcats",
+    "title": "Stormpike Wildcats",
+    "content": "A war-band drawn from the Stormpike clan's western lodges — dwarven hunters and gun-handed warriors who hold the icy ridges of Alterac Valley against Drek'Thar's Frostwolves. Their elders served under Vanndar Stormpike at the Field of Strife; the younger ones came down from Khaz Modan in their grandfathers' boots. They keep a forward camp at Frostwolf Pass and a winter hall at Dun Baldar's south rampart. They share strong drink with any Alliance soldier and answer to High Captain Justin Bartlett when the line breaks. Their tabard is white and storm-blue; their gun-stocks bear three notches each for an orc taken in trade.",
+    "keywords": ["stormpike", "wildcats", "dwarf", "hunter", "warrior", "alliance", "alterac valley", "vanndar stormpike", "khaz modan", "frostwolf", "guild"],
+    "tags": ["guild", "alliance", "hunter", "dwarf", "stormpike"]
+  },
+  {
+    "id": "wow_guild_si7_black_daggers",
+    "title": "SI:7 Black Daggers",
+    "content": "The deniable hand of Stormwind Intelligence — rogues, infiltrators, and quiet poisoners who answer to Master Mathias Shaw out of the Old Town safehouse. The Black Daggers take work the Vanguard's swordsmen cannot: shadowing Defias remnants in Westfall, slipping Forsaken agents out of Tirisfal's farms, and one job in Dalaran's Underbelly that no one is permitted to record. They take recruits from the human merchant houses, the night-elf assassin-school at Auberdine, and a few gnomes from Tinker Town with very particular gifts. Their tabard, when worn, shows a black dagger on a charcoal field; most of the time it isn't worn.",
+    "keywords": ["si:7", "black daggers", "rogue", "mathias shaw", "stormwind", "old town", "human", "night elf", "alliance", "spy", "guild"],
+    "tags": ["guild", "alliance", "rogue", "stormwind", "si7"]
+  },
+  {
+    "id": "wow_guild_argent_lance",
+    "title": "Argent Lance",
+    "content": "A heavy-cavalry order of paladins sworn to Highlord Tirion Fordring's banner — the mounted hand of the Argent Crusade that rides where its footmen cannot reach. Their captains served the Silver Hand before the order was broken at Stratholme; the younger knights were anointed at Light's Hope Chapel in the years since the Ashbringer's reforging. They keep a chapter house at Tyr's Hand and answer to Lord Maxwell Tyrosus when Tirion is afield. They take human and dwarf knights as a matter of course, and increasingly draenei vindicators who shed their Aldor stole for the lance. Their tabard is gold-and-silver-trimmed white.",
+    "keywords": ["argent lance", "argent crusade", "paladin", "tirion fordring", "maxwell tyrosus", "light's hope", "tyr's hand", "human", "dwarf", "alliance", "guild"],
+    "tags": ["guild", "alliance", "paladin", "argent-crusade", "light"]
+  },
+  {
+    "id": "wow_guild_ironforge_mountainshields",
+    "title": "Ironforge Mountainshields",
+    "content": "The standing infantry of the Ironforge Senate's military arm — warriors and paladins of the Bronzebeard line, with a handful of Wildhammer dwarves who came down from Aerie Peak when the Senate's call went out. They hold the road from Kharanos to the Ironforge gates and the deep galleries where the city's vaults touch the old Titan-works. Their elders fought through the Second War alongside the Bronzebeard king; their initiates drill the Hall of Arms under Senator Magni Bronzebeard's old standard. They take dwarves of any clan and gnomes who serve as their gun-smiths and explosives-handlers. Their tabard is bronze-and-rust on slate.",
+    "keywords": ["ironforge", "mountainshields", "dwarf", "warrior", "paladin", "bronzebeard", "magni", "kharanos", "hall of arms", "wildhammer", "alliance", "guild"],
+    "tags": ["guild", "alliance", "warrior", "dwarf", "ironforge"]
+  },
+  {
+    "id": "wow_guild_reclaimers_gnomeregan",
+    "title": "Reclaimers of Gnomeregan",
+    "content": "A gnomish company sworn to High Tinker Mekkatorque's reclamation campaign — engineers, mechanic-warriors, and a handful of mages who learned arcane from the same teachers who taught them to wire a turret. They keep a forward camp at New Tinkertown above the old city and answer to Mekkatorque's enemies through any one of three field captains. Their elders survived the irradiation that drove the gnomes from the city; the younger ones were born in Ironforge's refugee quarters and have not yet set foot inside Gnomeregan's outer halls. They take gnomes of every speciality and a few dwarves who can fit through the gallery doors. Their tabard is brass-and-copper on workshop-grey.",
+    "keywords": ["reclaimers", "gnomeregan", "mekkatorque", "gnome", "engineer", "thermaplugg", "new tinkertown", "ironforge", "alliance", "guild"],
+    "tags": ["guild", "alliance", "gnome", "gnomeregan"]
+  },
+  {
+    "id": "wow_guild_earthen_ring_conclave",
+    "title": "Earthen Ring Conclave",
+    "content": "A neutral fellowship of shamans drawn from Mulgore and the Exodar — tauren elementalists who walked the long path with Hamuul Runetotem, and draenei vindicators who carried the Light's understanding of the elements out of Outland's ruin. They keep a small camp at Nighthaven and a second on the Maelstrom's outer rim, and they answer to the Earthen Ring's leadership through circle-elder Muln Earthfury when his counsel reaches them. They mend the seared earth where the Burning Legion has wounded it and listen to the elements no one else has time for. Their tabard is unstitched bronze on slate; they share fire and salt with any race that respects the bond.",
+    "keywords": ["earthen ring", "conclave", "shaman", "tauren", "draenei", "neutral", "muln earthfury", "maelstrom", "moonglade", "elementalist", "guild"],
+    "tags": ["guild", "neutral", "shaman", "tauren", "draenei", "earthen-ring"]
+  },
+  {
+    "id": "wow_guild_kirin_tor_magistrate",
+    "title": "Kirin Tor Magistrate",
+    "content": "A circle of arcanists serving the Kirin Tor's lesser council — Dalaran's working magisters, not its archmagi, but the ones who actually adjudicate arcane disputes when two members of the city's guilds bring grievance. They keep chambers in the Violet Citadel and offices in the Underbelly's quieter alcoves, and they answer ultimately to Rhonin's circle through Vereesa Windrunner when she still walks the council halls. Many took up scholarship under Antonidas at Dalaran's first founding; the younger members came of age in the city as it rose above Crystalsong Forest. They wear violet trimmed in silver, and their judgments are not appealable to crowns or chieftains.",
+    "keywords": ["kirin tor", "magistrate", "mage", "dalaran", "rhonin", "vereesa", "antonidas", "violet citadel", "scholar", "neutral", "guild"],
+    "tags": ["guild", "neutral", "mage", "kirin-tor", "scholar"]
+  },
+  {
+    "id": "wow_guild_stalwart_vigil",
+    "title": "The Stalwart Vigil",
+    "content": "A standing company of veterans from every front of the Lich King's war — the men and women who hold the line against the Scourge at Icecrown Citadel's outer barbicans. The Vigil takes its captains from any race or faction that has lost enough to the Lich King to swear the oath: a draenei vindicator beside a Forsaken deathstalker, a human paladin beside a tauren druid, a sin'dorei magister beside a Stormwind ranger. They answer to Highlord Bolvar Fordragon's old standard, kept now by Lady Jaina Proudmoore in her field tent above Crusaders' Pinnacle. They drill the Argent Tournament Grounds at sunset and march on the Citadel before each new moon. Their tabard is the Vigil's pale lantern on a black field.",
+    "keywords": ["stalwart vigil", "icecrown", "lich king", "bolvar", "jaina proudmoore", "argent tournament", "crusaders' pinnacle", "raid", "neutral", "guild"],
+    "tags": ["guild", "neutral", "raid", "icecrown"]
   }
 ]
