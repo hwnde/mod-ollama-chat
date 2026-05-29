@@ -278,7 +278,7 @@ OllamaChat.RandomChatterMaxBotsPerPlayer = 2
 #   Description: The template string for random bot chatter prompts.
 #   Placeholders (named): {bot_name} {bot_level} {bot_class} {bot_race} {bot_gender} {bot_role} {bot_faction} {bot_area} {bot_zone} {bot_map} {bot_personality} {bot_personality_name} {environment_info}
 #   Note: {bot_personality_name} contains the name/key of the personality (e.g., "grumpy", "helpful"), while {bot_personality} contains the full personality description text.
-OllamaChat.RandomChatterPromptTemplate = "You are a Wrath-era WoW player. Name: {bot_name}, Level: {bot_level} {bot_class}, {bot_race} {bot_gender}, Spec: {bot_role}, Faction: {bot_faction}. Location: {bot_area}, Zone: {bot_zone}, Map: {bot_map}. MAKE SURE YOU RESPOND USING YOUR PERSONALITY, WHICH IS: {bot_personality_name}: {bot_personality}. {environment_info} Reply casually in under 15 words. No quotes, markdown, symbols, or emojis. Use real WoW slang. Avoid uncommon jargon or formatting."
+OllamaChat.RandomChatterPromptTemplate = "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, standing in {bot_area} of {bot_zone}. Personality: {bot_personality_name}: {bot_personality}. {environment_info} Speak aloud in under 15 words about your immediate surroundings — what is here in {bot_area}, what you see, who passes, the work or trouble of this very place. Do not raise the wider war, the Scourge, or the Lich King unless you stand at a front where that fight is being waged."
 
 # OllamaChat.RandomChatterPromptVariations
 #   Description: Pipe-separated (|) list of additional prompt instructions that will be randomly selected and appended to the RandomChatterPromptTemplate.
@@ -287,7 +287,7 @@ OllamaChat.RandomChatterPromptTemplate = "You are a Wrath-era WoW player. Name: 
 #                Leave empty to disable variations and use only the base template.
 #   Example:     "Talk about the weather or environment.|Comment on your current task or goal.|Make an observation about nearby creatures or players."
 #   Default:     (see below for Wrath-era appropriate variations)
-OllamaChat.RandomChatterPromptVariations = "Complain about something typical WoW players complain about.|Make a casual observation about leveling or grinding.|Share your opinion on Horde vs Alliance.|Comment on how tough or easy the zone feels.|Make a joke or sarcastic remark about WoW.|Mention something about the Lich King expansion.|Talk about wanting better gear or loot.|Comment on flying mounts or Northrend travel.|Complain about repair costs or gold.|Make an observation about your class in general.|Comment on dungeon finder or group content.|Talk about daily quests or reputation grinds.|Mention Death Knights being OP or annoying.|Share your thoughts on arena or battlegrounds.|Complain about nerfed abilities or changes.|Talk about needing to farm materials or gold.|Comment on the cold weather in Northrend.|Mention wanting to raid or do heroics.|Talk about achievements being too grindy.|Make a casual remark about quest objectives."
+OllamaChat.RandomChatterPromptVariations = "Mutter about the weather right here.|Comment on the nearest building, road, or landmark.|Wonder aloud about the price of bread, ale, or something local.|Curse a local pest, beast, or bit of bad weather.|Speak of a recent encounter on the road into this place.|Note a smell, sound, or sight close at hand.|Comment on the tavern, inn, or quartermaster of this town.|Recall a rumor heard recently in this region.|Pray briefly to the Light, the ancestors, Elune, or the Earth Mother.|Speak of an old wound that still aches.|Mention a kinsman or comrade you parted from nearby.|Voice unease about a stranger passing close by.|Comment on the wildlife or terrain in plain sight.|Wonder aloud about news from a neighbouring town.|Mention hunger, thirst, sore feet, or a long road still ahead.|Speak of a trader or vendor's craft you noticed today.|Note what you carry, or what you mean to buy or sell here.|Speak of a small task you mean to do before nightfall.|Voice longing for somewhere quieter, or louder, than this.|Mention the road you walked to get here."
 
 # OllamaChat.RandomChatterQuestionVariations
 #   Description: Pipe-separated (|) list of prompt instructions telling the LLM to generate questions that will stimulate OTHER bots or players to respond.
@@ -298,7 +298,7 @@ OllamaChat.RandomChatterPromptVariations = "Complain about something typical WoW
 #                Leave empty to disable question variations and only use statement variations.
 #   Example:     "Ask about dungeon preferences.|Ask if anyone wants to PvP.|Ask about raid progression."
 #   Default:     (see below for engaging Wrath-era question prompts designed to stimulate bot-to-bot and player-to-bot conversations)
-OllamaChat.RandomChatterQuestionVariations = "Ask if others think this zone is difficult.|Ask about favorite dungeons.|Ask about Icecrown Citadel progression.|Ask about daily quest frustrations.|Ask about Naxxramas difficulty compared to original.|Ask what spec people are running.|Ask about Death Knight popularity.|Ask about upcoming Death Knight nerfs.|Ask about gold-making strategies in Wrath.|Ask if anyone is farming badges.|Ask about excitement for Ulduar.|Ask if dual spec was worth the cost.|Ask about opinions on the old talent trees.|Ask about favorite raid bosses.|Ask if flying mounts ruined world PvP.|Ask who's doing arena this season.|Ask about arena ratings.|Ask about Wintergrasp balance.|Ask about Oculus dungeon opinions.|Ask which professions make the most gold.|Ask about old-world flying possibilities.|Ask about reputation mount farming.|Ask which heroic dungeon is hardest.|Ask if emblems are too easy to get."
+OllamaChat.RandomChatterQuestionVariations = "Ask if the road nearby is safe to travel.|Ask what the local inn or tavern is like.|Ask after a kinsman or companion in this region.|Ask for word from a neighbouring town.|Ask what beast or bandit has been troubling this area.|Ask about the local quartermaster, smith, or innkeeper.|Ask if anyone here knows a good place to rest.|Ask if the herd, harvest, or hunt is going well in these parts.|Ask if a stranger passing by seems friend or foe.|Ask about a recent rumour in this town.|Ask after a missing companion last seen close to here.|Ask if anyone needs an extra blade on the road.|Ask what brings the stranger to these lands.|Ask about strange lights or sounds in the night.|Ask whether the locals deal fairly with outsiders.|Ask whether the local elder, chief, or magistrate has spoken lately.|Ask where the nearest healer or priest can be found.|Ask whether work or coin can be found nearby.|Ask after the weather to come.|Ask what is brewing in the kettle at the nearest inn."
 
 # --------------------------------------------
 # EVENT CHATTER SYSTEM
@@ -335,7 +335,7 @@ OllamaChat.EventChatterMaxBotsPerPlayer = 2
 
 #     Placeholders (named): {bot_name} {bot_level} {bot_class} {bot_race} {bot_gender} {bot_role} {bot_faction} {bot_area} {bot_zone} {bot_map} {bot_personality} {bot_personality_name} {event_type} {event_detail} {actor_name} {sentiment_info}
 #     Note: {bot_personality_name} contains the name/key of the personality (e.g., "grumpy", "helpful"), while {bot_personality} contains the full personality description text.
-OllamaChat.EventChatterPromptTemplate = "You are {bot_name}, a level {bot_level} {bot_class} ({bot_race} {bot_gender}) specializing as a {bot_role} from the {bot_faction} faction. You are currently in {bot_area}, Zone: {bot_zone}, Map: {bot_map}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} Event: {actor_name} {event_type} {event_detail}. Respond to this specific Event that just happened in character, casually, in under 15 words. Avoid emojis, markdown, or narration."
+OllamaChat.EventChatterPromptTemplate = "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, standing in {bot_area} of {bot_zone}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} You have just witnessed: {actor_name} {event_type} {event_detail}. React in under 15 words, grounded in what just happened here in {bot_area} — not in the wider war."
 
 # --------------------------------------------
 # TYPING SIMULATION
@@ -374,12 +374,12 @@ OllamaChat.TypingSimulationDelayPerChar = 250
 #                  When enabled (1), bots will respond with distinct personalities based on their assigned type.
 #                  When disabled (0), bots will use a neutral/default response style.
 #     Default:     0 (false)
-OllamaChat.EnableRPPersonalities = 0
+OllamaChat.EnableRPPersonalities = 1
 
 # OllamaChat.DefaultPersonalityPrompt
 #     Description: The fallback personality description used when a bot has no specific roleplay type assigned.
 #     Default:     Talk like a standard WoW player.
-OllamaChat.DefaultPersonalityPrompt = "Speak like a real WoW player from Wrath. Stay in character and use casual in-game tone."
+OllamaChat.DefaultPersonalityPrompt = "A weathered, plain-spoken traveler — guarded with strangers, loyal to your kin."
 
 # --------------------------------------------
 # CONVERSATION HISTORY AND SNAPSHOT SYSTEM
@@ -474,7 +474,7 @@ OllamaChat.SentimentPromptTemplate = "Your relationship sentiment with {player_n
 #   Description: The main template for bot chat prompts sent to the LLM.
 #   Placeholders (named): {bot_name} {bot_level} {bot_class} {bot_personality} {bot_personality_name} {player_level} {player_class} {player_name} {player_message} {extra_info} {sentiment_info}
 #   Note: {bot_personality_name} contains the name/key of the personality (e.g., "grumpy", "helpful"), while {bot_personality} contains the full personality description text.
-OllamaChat.ChatPromptTemplate = "You're a Wrath-era WoW player familiar with Vanilla and TBC. Name: {bot_name}, Level: {bot_level} {bot_class}, MAKE SURE YOU RESPOND USING YOUR PERSONALITY, WHICH IS: {bot_personality_name}: {bot_personality}. {sentiment_info} {chat_history} A level {player_level} {player_class} named {player_name} said: '{player_message}'. {extra_info} Reply naturally in under 15 words. Use authentic WoW tone. Be blunt if provoked. Be precise if giving directions. Never contradict your class, race, or location. Never act like a narrator—just respond like a player."
+OllamaChat.ChatPromptTemplate = "You are {bot_name}, a {bot_class}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} {chat_history} {player_name}, a {player_class}, says to you: '{player_message}'. {extra_info} Reply in under 20 words. Answer what {player_name} actually asked — speak of your surroundings, the local lands, your craft, or your kin. Raise the wider war, the Scourge, or the Lich King only if {player_name} brings them up or you stand at a war front. No prefix."
 
 # OllamaChat.ChatExtraInfoTemplate
 #   Description: The context/details string about the bot and player, injected into the chat prompt as the last parameter.

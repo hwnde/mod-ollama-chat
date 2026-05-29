@@ -2,106 +2,433 @@
   {
     "id": "quest_class_stories",
     "title": "Class-Specific Storylines",
-    "content": "Each class has unique quests that tell their story. Paladins have the Silver Hand storyline, warlocks have demonic pacts, hunters have beast mastery. Class quests provide unique items and abilities. They often involve important lore figures. Completing class quests enhances understanding of class identity and provides powerful rewards.",
-    "keywords": ["class stories", "paladin", "warlock", "hunter", "silver hand", "lore", "identity", "each class", "unique quests", "tell their story", "silver hand storyline", "demonic pacts", "beast mastery", "provide unique items", "abilities", "important lore figures", "completing class quests", "enhances understanding", "powerful rewards"],
-    "tags": ["quests", "story", "class", "lore"]
+    "content": "Every calling in Azeroth carries its own burdens and tests. The Knights of the Silver Hand still measure their initiates against Tirion Fordring's example, sending them to vigils and trials that prove devotion before the Light. Warlocks bind themselves to demons through pacts written in their own blood, and the price is rarely what the binding first seems. Hunters wander Kalimdor and the Eastern Kingdoms seeking beasts worthy of their bond, learning patience from elders and scars from prey. Such trials shape who walks back out of them, and what they carry home.",
+    "keywords": [
+      "class stories",
+      "paladin",
+      "warlock",
+      "hunter",
+      "silver hand",
+      "lore",
+      "identity",
+      "each class",
+      "unique quests",
+      "tell their story",
+      "silver hand storyline",
+      "demonic pacts",
+      "beast mastery",
+      "provide unique items",
+      "abilities",
+      "important lore figures",
+      "completing class quests",
+      "enhances understanding",
+      "powerful rewards"
+    ],
+    "tags": [
+      "quests",
+      "story",
+      "class",
+      "lore"
+    ]
   },
   {
     "id": "quest_zone_storylines",
     "title": "Zone Story Arcs",
-    "content": "Each zone has a main storyline that guides players through the area. Examples include the Defias Brotherhood in Westfall, the Scourge invasion in the Plaguelands, or the silithid threat in Silithus. Zone stories connect to larger world events. Following zone storylines provides better loot and understanding of the world.",
-    "keywords": ["zone storylines", "defias brotherhood", "scourge", "silithid", "world events", "loot", "each zone", "main storyline", "guides players", "through the area", "westfall", "scourge invasion", "plaguelands", "silithid threat", "silithus", "connect to larger", "following zone storylines", "provides better loot", "understanding of the world"],
-    "tags": ["quests", "story", "zones", "progression"]
+    "content": "Each corner of the world carries its own slow-burning war. In Westfall the Defias Brotherhood still strangle the farmsteads, masked and bitter, hunted by Stormwind patrols that never seem to catch them. The Plaguelands lie under the Scourge's pall, where the Argent Crusade and the Ebon Blade trade ground with the dead. Far south in Silithus the silithid pour from the dunes, and the Cenarion Circle's druids hold the line against an old, insect intelligence stirring beneath the sand. The threads of these struggles knot together — Westfall's bandits feed on the same hunger that drove half of Lordaeron's refugees south, Silithus's silithid woke as Ahn'Qiraj's gate opened, and the Plaguelands have not been quiet since Arthas marched on Stratholme.",
+    "keywords": [
+      "zone storylines",
+      "defias brotherhood",
+      "scourge",
+      "silithid",
+      "world events",
+      "loot",
+      "each zone",
+      "main storyline",
+      "guides players",
+      "through the area",
+      "westfall",
+      "scourge invasion",
+      "plaguelands",
+      "silithid threat",
+      "silithus",
+      "connect to larger",
+      "following zone storylines",
+      "provides better loot",
+      "understanding of the world"
+    ],
+    "tags": [
+      "quests",
+      "story",
+      "zones",
+      "progression"
+    ]
   },
   {
     "id": "quest_reputation_grinds",
     "title": "Reputation Quest Hubs",
-    "content": "Many factions have extensive quest lines for reputation. The Cenarion Circle in Silithus, the Argent Dawn in the Plaguelands, the Thorium Brotherhood in Searing Gorge. Reputation quests often involve grinding specific activities. High reputation unlocks better rewards and access to exclusive content.",
-    "keywords": ["reputation quests", "cenarion circle", "argent dawn", "thorium brotherhood", "grinding", "many factions", "extensive quest lines", "silithus", "plaguelands", "searing gorge", "involve grinding", "specific activities", "high reputation", "unlocks better rewards", "access to", "exclusive content"],
-    "tags": ["quests", "reputation", "grinding", "rewards"]
+    "content": "Trust is earned slowly among the orders of Azeroth. The Cenarion Circle, encamped in Silithus, weighs a newcomer's worth in silithid carapaces and patient labour at Cenarion Hold. The Argent Dawn, now risen into the Argent Crusade under Tirion Fordring, measures faith by the quiet work of cleansing the Plaguelands one acre at a time. Deep in the Searing Gorge the Thorium Brotherhood judges by craftsmanship, ore, and a willingness to stand against the Dark Iron. Only after long service do these factions open their armouries and their inner counsels.",
+    "keywords": [
+      "reputation quests",
+      "cenarion circle",
+      "argent dawn",
+      "thorium brotherhood",
+      "grinding",
+      "many factions",
+      "extensive quest lines",
+      "silithus",
+      "plaguelands",
+      "searing gorge",
+      "involve grinding",
+      "specific activities",
+      "high reputation",
+      "unlocks better rewards",
+      "access to",
+      "exclusive content"
+    ],
+    "tags": [
+      "quests",
+      "reputation",
+      "grinding",
+      "rewards"
+    ]
   },
   {
     "id": "quest_dungeon_quests",
     "title": "Dungeon and Raid Quests",
-    "content": "Many dungeons and raids have associated quests. Blackrock Depths has the Dark Iron dwarves storyline, Stratholme has the Scourge invasion quests. Dungeon quests often provide attunement or access to harder content. They explain the dungeon's lore and provide additional rewards beyond boss loot.",
-    "keywords": ["dungeon quests", "blackrock depths", "stratholme", "attunement", "lore", "rewards", "many dungeons", "raids", "associated quests", "dark iron dwarves", "storyline", "scourge invasion quests", "provide attunement", "access to harder content", "explain the dungeon", "additional rewards", "beyond boss loot"],
-    "tags": ["quests", "dungeons", "raids", "lore"]
+    "content": "The great delvings and ruined cities of Azeroth all have their own unfinished business. Beneath Blackrock Mountain the Dark Iron dwarves still scheme in their forge-halls, bound to the imprisoned lord Ragnaros and feuding endlessly with the Thorium Brotherhood above. Stratholme is a wound that has not closed since Arthas culled it; the Scourge holds the eastern districts, the Argent Crusade presses from without, and the dead far outnumber the living. Those sent into such places carry orders from kings, archmages, and crusaders, and what they bring back changes the shape of the war.",
+    "keywords": [
+      "dungeon quests",
+      "blackrock depths",
+      "stratholme",
+      "attunement",
+      "lore",
+      "rewards",
+      "many dungeons",
+      "raids",
+      "associated quests",
+      "dark iron dwarves",
+      "storyline",
+      "scourge invasion quests",
+      "provide attunement",
+      "access to harder content",
+      "explain the dungeon",
+      "additional rewards",
+      "beyond boss loot"
+    ],
+    "tags": [
+      "quests",
+      "dungeons",
+      "raids",
+      "lore"
+    ]
   },
   {
     "id": "quest_world_events",
     "title": "World Event Quests",
-    "content": "Major world events have extensive quest lines. The Ahn'Qiraj War Effort required collecting resources across Azeroth. The Scourge Invasion had defense quests in major cities. World event quests involve massive coordination and provide unique rewards. They create memorable experiences for the entire playerbase.",
-    "keywords": ["world event quests", "ahnqiraj", "scourge invasion", "coordination", "memorable", "major world events", "extensive quest lines", "ahn qiraj war effort", "required collecting", "resources across azeroth", "defense quests", "major cities", "involve massive coordination", "provide unique rewards", "create memorable experiences", "entire playerbase"],
-    "tags": ["quests", "events", "world", "coordination"]
+    "content": "Some struggles are too large for any single regiment. The Ahn'Qiraj War Effort demanded grain from Westfall, bandages from Stormwind's clerics, copper bars from Ironforge's smelters, all heaped at the gates of the scarab wall while the silithid massed within. The Scourge Invasion that preceded the march on Northrend saw necropolises blot out the sun above Stormwind and Orgrimmar, and every able hand turned to defending the boneyards in the streets. These were not skirmishes; they were the kind of days bards still sing about by tavern fires from Booty Bay to Brill.",
+    "keywords": [
+      "world event quests",
+      "ahnqiraj",
+      "scourge invasion",
+      "coordination",
+      "memorable",
+      "major world events",
+      "extensive quest lines",
+      "ahn qiraj war effort",
+      "required collecting",
+      "resources across azeroth",
+      "defense quests",
+      "major cities",
+      "involve massive coordination",
+      "provide unique rewards",
+      "create memorable experiences",
+      "entire playerbase"
+    ],
+    "tags": [
+      "quests",
+      "events",
+      "world",
+      "coordination"
+    ]
   },
   {
     "id": "quest_epic_questlines",
     "title": "Epic Quest Chains",
-    "content": "Some quests form long, involved storylines. The Warlock artifact quests, the Paladin epic mounts, the Hunter epic bow quests. Epic quests often span multiple zones and require significant time investment. They provide the most powerful and unique rewards in the game.",
-    "keywords": ["epic questlines", "warlock artifacts", "paladin mounts", "hunter bow", "investment", "some quests", "form long", "involved storylines", "warlock artifact quests", "paladin epic mounts", "hunter epic bow quests", "span multiple zones", "require significant", "time investment", "provide the most", "powerful", "unique rewards", "in the game"],
-    "tags": ["quests", "epic", "storylines", "rewards"]
+    "content": "Certain undertakings consume years rather than days. Warlocks who covet the dreadsteed or the felsteed must hunt scattered tomes and bargain with infernal powers across half the world. A paladin's charger is no mere mount but the culmination of pilgrimage, trial, and combat against demonic pretenders within the Scarlet Monastery itself. Hunters seeking Rhok'delar walk from the Hinterlands to Winterspring tracking dragonkin and ancients older than the Sundering. Such pursuits leave a mark on those who finish them, and a longer one on those who do not.",
+    "keywords": [
+      "epic questlines",
+      "warlock artifacts",
+      "paladin mounts",
+      "hunter bow",
+      "investment",
+      "some quests",
+      "form long",
+      "involved storylines",
+      "warlock artifact quests",
+      "paladin epic mounts",
+      "hunter epic bow quests",
+      "span multiple zones",
+      "require significant",
+      "time investment",
+      "provide the most",
+      "powerful",
+      "unique rewards",
+      "in the game"
+    ],
+    "tags": [
+      "quests",
+      "epic",
+      "storylines",
+      "rewards"
+    ]
   },
   {
     "id": "quest_profession_quests",
     "title": "Profession Quest Lines",
-    "content": "Professions have quests that advance their story. Blacksmithing has the Dark Iron quests, alchemy has the Elixir of Vigor, fishing has the Nat Pagle quests. Profession quests provide recipes, tools, and understanding of the profession's lore. They often require gathering rare materials or completing difficult tasks.",
-    "keywords": ["profession quests", "blacksmithing", "alchemy", "fishing", "recipes", "tools", "professions have quests", "advance their story", "dark iron quests", "elixir of vigor", "nat pagle quests", "provide recipes", "understanding of", "profession lore", "require gathering", "rare materials", "completing difficult tasks"],
-    "tags": ["quests", "professions", "lore", "recipes"]
+    "content": "Every craft in Azeroth has its masters and its trials. Smiths who would forge the black anvil's secrets must first earn the grudging respect of the Thorium Brotherhood and brave the Dark Iron forges of Blackrock Depths. Alchemists chase the Elixir of Vigor through old recipes and rarer reagents. Nat Pagle on Dustwallow's shores tests aspiring anglers with lures and patience, sending them after Mudskunk and the Lurker before he speaks of deeper secrets. The knowledge passed down in such apprenticeships rarely comes cheap, and is seldom written in any book a stranger might find.",
+    "keywords": [
+      "profession quests",
+      "blacksmithing",
+      "alchemy",
+      "fishing",
+      "recipes",
+      "tools",
+      "professions have quests",
+      "advance their story",
+      "dark iron quests",
+      "elixir of vigor",
+      "nat pagle quests",
+      "provide recipes",
+      "understanding of",
+      "profession lore",
+      "require gathering",
+      "rare materials",
+      "completing difficult tasks"
+    ],
+    "tags": [
+      "quests",
+      "professions",
+      "lore",
+      "recipes"
+    ]
   },
   {
     "id": "quest_faction_conflicts",
     "title": "Faction Conflict Quests",
-    "content": "Quests that involve Alliance vs Horde conflicts. The battle for Ashenvale, the wars in the Plaguelands, the Stromgarde conflicts. These quests provide context for world PvP and create stakes for faction loyalty. They often involve attacking enemy cities or defending territory.",
-    "keywords": ["faction_conflicts", "alliance", "horde", "ashenvale", "plaguelands", "stromgarde"],
-    "tags": ["quests", "factions", "conflicts", "pvp"]
+    "content": "The truce between Stormwind and Orgrimmar grows thinner with each season of the war in the north. In Ashenvale the night elves and the Warsong loggers tear at one another over every felled tree, and Sylvanas's Forsaken push against the last Alliance holdouts in the Plaguelands and Hillsbrad. Stromgarde's ruin remains a knife-edge between the Syndicate, the Forsaken, and the Stromic remnant. Captains on both sides speak of distant fronts, but the older borders bleed easier — the Barrens crossings that the Horde took after the Third War, the Arathi Highlands that Stromgarde never fully ceded, the Hillsbrad hamlets the Forsaken claimed acre by acre — and Garrosh and Varian both have generals eager to spill fresh blood over old maps.",
+    "keywords": [
+      "faction_conflicts",
+      "alliance",
+      "horde",
+      "ashenvale",
+      "plaguelands",
+      "stromgarde"
+    ],
+    "tags": [
+      "quests",
+      "factions",
+      "conflicts",
+      "pvp"
+    ]
   },
   {
     "id": "quest_lore_quests",
     "title": "Lore-Revealing Quests",
-    "content": "Quests that reveal important Warcraft lore. The story of Medivh and the Dark Portal, the fall of Quel'Thalas, the corruption of the orcs. These quests often involve reading books, speaking to NPCs, or exploring ancient ruins. They enhance understanding of the game's rich history and mythology.",
-    "keywords": ["lore_quests", "medivh", "dark_portal", "quelthalas", "orcs", "history"],
-    "tags": ["quests", "lore", "story", "history"]
+    "content": "The world's deeper history is not kept in any single library. The truth of Medivh, last Guardian of Tirisfal, lies scattered across Karazhan's haunted halls and the broken stones of the Dark Portal he opened in Deadwind. The fall of Quel'Thalas, where Arthas drove his runeblade through the Sunwell, is mourned still by Lor'themar Theron's blood elves and by the high elves of Quel'Lithien. The orcs' old corruption by Mannoroth's blood, broken at last by Grom Hellscream at Demon Fall Canyon, is a wound Thrall remembers in every council he holds.",
+    "keywords": [
+      "lore_quests",
+      "medivh",
+      "dark_portal",
+      "quelthalas",
+      "orcs",
+      "history"
+    ],
+    "tags": [
+      "quests",
+      "lore",
+      "story",
+      "history"
+    ]
   },
   {
     "id": "quest_escort_quests",
     "title": "Escort and Protection Quests",
-    "content": "Quests where players must escort NPCs to destinations while protecting them from enemies. Examples include escorting the druid to Moonglade or protecting the caravan in Thousand Needles. Escort quests can be challenging due to mob aggro and pathing issues. They often provide good rewards for successful completion.",
-    "keywords": ["escort quests", "protection", "druid", "caravan", "challenging", "rewards", "players must escort", "npcs to destinations", "protecting them", "from enemies", "escorting the druid", "moonglade", "protecting the caravan", "thousand needles", "due to mob aggro", "pathing issues", "provide good rewards", "successful completion"],
-    "tags": ["quests", "escort", "protection", "challenging"]
+    "content": "Some travellers cannot make their journeys alone. A wounded druid limping back to Moonglade through the high passes is easy prey for furbolg gone savage or satyr lying in wait. The goblin caravans crossing Thousand Needles draw centaur raiders the moment their wheels grind into the dust. Stormwind couriers, Argent messengers, prisoners walked out of bandit camps, refugees fleeing the Plaguelands — all need a sword at their shoulder. Such work is dangerous in ways open battle is not, for the charge dies the moment attention wanders, and a single arrow can undo days of careful escort.",
+    "keywords": [
+      "escort quests",
+      "protection",
+      "druid",
+      "caravan",
+      "challenging",
+      "rewards",
+      "players must escort",
+      "npcs to destinations",
+      "protecting them",
+      "from enemies",
+      "escorting the druid",
+      "moonglade",
+      "protecting the caravan",
+      "thousand needles",
+      "due to mob aggro",
+      "pathing issues",
+      "provide good rewards",
+      "successful completion"
+    ],
+    "tags": [
+      "quests",
+      "escort",
+      "protection",
+      "challenging"
+    ]
   },
   {
     "id": "quest_collection_quests",
     "title": "Collection and Gathering Quests",
-    "content": "Quests that require collecting specific items. Gathering rare herbs, killing specific mobs for drops, finding hidden objects. Examples include the collection quests in Un'Goro Crater or the breadcrumb quests in zones. These quests teach exploration and efficient farming techniques.",
-    "keywords": ["collection quests", "gathering", "herbs", "drops", "exploration", "farming", "require collecting", "specific items", "gathering rare herbs", "killing specific mobs", "finding hidden objects", "un goro crater", "breadcrumb quests", "zones", "teach exploration", "efficient farming", "techniques"],
-    "tags": ["quests", "collection", "gathering", "exploration"]
+    "content": "Armies and apothecaries alike run on small things gathered in great number. Cenarion herbalists send acolytes into Un'Goro's steaming basin for sungrass and bloodvine, and into the high glades of Felwood for the rarer fronds touched by Emerald sleep. Hunters take pelts and tusks to fletchers in Booty Bay; cooks demand crawler meat from Auberdine's tide pools. The old Ahn'Qiraj War Effort taught every quartermaster from Stormwind to Thunder Bluff that wars are won as much by bandage-rollers and grain-counters as by warriors. A traveller who reads the land well can earn coin and favour at every hearth between Westfall and the Eastern Plaguelands simply by paying attention.",
+    "keywords": [
+      "collection quests",
+      "gathering",
+      "herbs",
+      "drops",
+      "exploration",
+      "farming",
+      "require collecting",
+      "specific items",
+      "gathering rare herbs",
+      "killing specific mobs",
+      "finding hidden objects",
+      "un goro crater",
+      "breadcrumb quests",
+      "zones",
+      "teach exploration",
+      "efficient farming",
+      "techniques"
+    ],
+    "tags": [
+      "quests",
+      "collection",
+      "gathering",
+      "exploration"
+    ]
   },
   {
     "id": "quest_timed_quests",
     "title": "Timed and Race Quests",
-    "content": "Quests with time limits or racing elements. Racing against other players, completing objectives before time runs out. Examples include the race to the finish in certain zones or timed defense quests. These quests require speed and efficiency. They often provide bonus rewards for fast completion.",
-    "keywords": ["timed quests", "racing", "speed", "efficiency", "bonus rewards", "defense", "time limits", "racing elements", "racing against other players", "completing objectives", "before time runs out", "race to the finish", "certain zones", "timed defense quests", "require speed", "provide bonus rewards", "fast completion"],
-    "tags": ["quests", "timed", "racing", "speed"]
+    "content": "Some tasks are bound to the turning of a glass. A Theramore courier must reach Northwatch before the tide cuts the road. The Stormwind harbour masters time their gryphon runs against the weather rolling in off the Veiled Sea. When the Scourge crashed against the city gates the defenders had only minutes between waves to shore up the barricades before the necropolises loosed another tide of ghouls. Such moments forgive nothing — a hesitation costs the runner, the caravan, or the whole street, and the survivors remember who arrived in time and who did not.",
+    "keywords": [
+      "timed quests",
+      "racing",
+      "speed",
+      "efficiency",
+      "bonus rewards",
+      "defense",
+      "time limits",
+      "racing elements",
+      "racing against other players",
+      "completing objectives",
+      "before time runs out",
+      "race to the finish",
+      "certain zones",
+      "timed defense quests",
+      "require speed",
+      "provide bonus rewards",
+      "fast completion"
+    ],
+    "tags": [
+      "quests",
+      "timed",
+      "racing",
+      "speed"
+    ]
   },
   {
     "id": "quest_group_quests",
     "title": "Group and Raid Quests",
-    "content": "Quests designed for groups or raids. The Molten Core attunement quests, the Ahn'Qiraj opening quests. These quests require coordination and often involve difficult combat. They provide access to endgame content and powerful rewards. Group quests teach teamwork and strategy.",
-    "keywords": ["group quests", "raid quests", "molten core", "ahnqiraj", "coordination", "teamwork", "designed for groups", "raids", "molten core attunement", "ahn qiraj opening", "require coordination", "difficult combat", "provide access", "endgame content", "powerful rewards", "teach teamwork", "strategy"],
-    "tags": ["quests", "group", "raid", "coordination"]
+    "content": "Certain enemies cannot be answered by any lone blade. The march into Molten Core required attunement by Lothos Riftwaker and the cooperation of a full warband, for Ragnaros is no mortal foe. The opening of the scarab gate at Ahn'Qiraj asked the same of the assembled clans of Kalimdor — Cenarion druids, Brood of Nozdormu, sword and spell side by side beneath the dunes. Karazhan's haunted floors still test those who would set Medivh's ghost to rest, and Naxxramas drifted once over the Plaguelands before it was thrown back. Such walls are broken by a hundred banners together or not at all.",
+    "keywords": [
+      "group quests",
+      "raid quests",
+      "molten core",
+      "ahnqiraj",
+      "coordination",
+      "teamwork",
+      "designed for groups",
+      "raids",
+      "molten core attunement",
+      "ahn qiraj opening",
+      "require coordination",
+      "difficult combat",
+      "provide access",
+      "endgame content",
+      "powerful rewards",
+      "teach teamwork",
+      "strategy"
+    ],
+    "tags": [
+      "quests",
+      "group",
+      "raid",
+      "coordination"
+    ]
   },
   {
     "id": "quest_repeatable_quests",
     "title": "Repeatable and Daily Quests",
-    "content": "Quests that can be completed multiple times. Daily quests for reputation, repeatable quests for gold or items. Examples include the Cenarion Circle dailies or the fishing daily quests. Repeatable quests provide ongoing activities and rewards. They help with gearing and reputation grinding.",
-    "keywords": ["repeatable quests", "daily quests", "cenarion circle", "fishing", "ongoing", "grinding", "completed multiple times", "daily quests for reputation", "repeatable quests for gold", "items", "cenarion circle dailies", "fishing daily quests", "provide ongoing activities", "rewards", "help with gearing", "reputation grinding"],
-    "tags": ["quests", "repeatable", "daily", "grinding"]
+    "content": "The war does not end at sundown, and neither does the work behind it. The Cenarion Circle's emissaries in Silithus send the same patrols out each dawn against the silithid that boil up from the dunes. Nat Pagle in Dustwallow still wagers a coin daily on whatever rare fish stirs his curiosity. The Thorium Brotherhood in the Searing Gorge takes ore and steel from any smith who would earn their notice, and the Argent emissaries at Light's Hope have not stopped cleansing the Plaguelands one acre at a time since the day Tirion raised their banner. Such daily labours are how kingdoms stay fed and standing armies stay sharp.",
+    "keywords": [
+      "repeatable quests",
+      "daily quests",
+      "cenarion circle",
+      "fishing",
+      "ongoing",
+      "grinding",
+      "completed multiple times",
+      "daily quests for reputation",
+      "repeatable quests for gold",
+      "items",
+      "cenarion circle dailies",
+      "fishing daily quests",
+      "provide ongoing activities",
+      "rewards",
+      "help with gearing",
+      "reputation grinding"
+    ],
+    "tags": [
+      "quests",
+      "repeatable",
+      "daily",
+      "grinding"
+    ]
   },
   {
     "id": "quest_hidden_quests",
     "title": "Hidden and Secret Quests",
-    "content": "Quests not obviously marked on the map. Hidden quests require exploration, talking to specific NPCs, or discovering secret areas. Examples include the quest for the Green Hills of Stranglethorn pages or the hidden quests in Blackrock Mountain. Finding hidden quests provides satisfaction and unique rewards.",
-    "keywords": ["hidden quests", "secret quests", "exploration", "green hills", "blackrock mountain", "satisfaction", "not obviously marked", "on the map", "require exploration", "talking to specific npcs", "discovering secret areas", "quest for the", "green hills of stranglethorn", "pages", "hidden quests in", "finding hidden quests", "provides satisfaction", "unique rewards"],
-    "tags": ["quests", "hidden", "secret", "exploration"]
+    "content": "Not all of Azeroth's tasks are pinned to noticeboards in town squares. The torn pages of Hemet Nesingwary's Green Hills of Stranglethorn lie scattered through the jungle, gathered only by those who notice them among the leaf litter. In Blackrock Mountain certain Dark Iron prisoners will speak only to a stranger who knows the right name to ask after. Old hermits in Loch Modan, half-mad bog wanderers in Dustwallow, drunkards in the Slaughtered Lamb — each holds a thread, if a traveller has the patience to listen and the wit to pull.",
+    "keywords": [
+      "hidden quests",
+      "secret quests",
+      "exploration",
+      "green hills",
+      "blackrock mountain",
+      "satisfaction",
+      "not obviously marked",
+      "on the map",
+      "require exploration",
+      "talking to specific npcs",
+      "discovering secret areas",
+      "quest for the",
+      "green hills of stranglethorn",
+      "pages",
+      "hidden quests in",
+      "finding hidden quests",
+      "provides satisfaction",
+      "unique rewards"
+    ],
+    "tags": [
+      "quests",
+      "hidden",
+      "secret",
+      "exploration"
+    ]
   }
 ]

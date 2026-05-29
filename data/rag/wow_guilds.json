@@ -1,0 +1,142 @@
+[
+  {
+    "id": "wow_guild_sons_of_guldan",
+    "title": "Sons of Gul'dan",
+    "content": "A black-banner cabal that takes its name from the warlock who first led the orcish clans into the Burning Legion's hand. Their officers wear his sigil openly — a hooded shaman's mask scored with three claw-marks — and gather in the smoke-rooms of Orgrimmar's Cleft of Shadow rather than the open Drag. Their warlocks bind succubi and voidwalkers without apology, and they keep no oath to Thrall's shamans. Most of the Horde will not drink with them, but few are foolish enough to say so within earshot.",
+    "keywords": ["sons of gul'dan", "gul'dan", "warlock", "orc", "horde", "guild", "fel", "demon", "orgrimmar", "cleft of shadow", "cabal"],
+    "tags": ["guild", "horde", "warlock", "orc", "fel"]
+  },
+  {
+    "id": "wow_guild_acherus_vanguard",
+    "title": "Acherus Vanguard",
+    "content": "A company of death knights freed at the breaking of Light's Hope Chapel, who chose, having no living tribe left to return to, to keep the name of the necropolis they were forged in. They ride the old roads of Lordaeron — Tirisfal, Andorhal's dead villages, the Bulwark — as a recovery column, retrieving fellows the Ebon Blade has not yet found and putting down those too far gone. Their captain is a tauren whose first death came in the Grimtotem raids on Mulgore; raised at Acherus, broken from Arthas's hand at Light's Hope, he says little, and what he says is heard. Their banner is the Ebon Blade's sigil over a black bull's skull.",
+    "keywords": ["acherus vanguard", "acherus", "death knight", "ebon blade", "tauren", "horde", "guild", "necropolis", "plaguelands", "icecrown", "lich king"],
+    "tags": ["guild", "horde", "death-knight", "tauren", "ebon-blade"]
+  },
+  {
+    "id": "wow_guild_stormwind_vanguard",
+    "title": "Stormwind Vanguard",
+    "content": "Veteran swordsmen of the city's standing army — sons and grandsons of the men who held Stormwind Keep through the First War and rebuilt it after Lothar fell at Blackrock. Their elder captains marched through the second Dark Portal into Outland under Khadgar's banner; the younger ones cut their teeth in the Defias's long shadow over Westfall. They train in the Old Town barracks when home and ride with the SI:7 columns when not, answering through High Marshal Twinbraid to the king directly. New recruits drill six weeks before they are given a tabard. The Vanguard takes no warlocks and no oath-breakers; what else a soldier brings, it does not ask.",
+    "keywords": ["stormwind vanguard", "stormwind", "human", "warrior", "alliance", "guild", "varian wrynn", "si:7", "old town", "northrend", "military"],
+    "tags": ["guild", "alliance", "warrior", "human", "stormwind"]
+  },
+  {
+    "id": "wow_guild_ashenvale_sentinels",
+    "title": "Ashenvale Sentinels",
+    "content": "Daughters and watchful sons of the Sentinel order who keep the forest road between Astranaar and the Zoram Strand. They answer to Shandris Feathermoon at Feathermoon Stronghold, though most have not seen her in a season; the orders that reach them come written in Darnassian on bark slips. They ride sabers, not horses, and they shoot first when Warsong scouts are sighted. New recruits are taken on a month's trial in the deep woods, and not all come back.",
+    "keywords": ["ashenvale sentinels", "ashenvale", "sentinel", "night elf", "hunter", "alliance", "guild", "shandris feathermoon", "astranaar", "warsong", "kaldorei"],
+    "tags": ["guild", "alliance", "hunter", "night-elf", "sentinel"]
+  },
+  {
+    "id": "wow_guild_knights_ebon_hold",
+    "title": "Knights of the Ebon Hold",
+    "content": "Heavy cavalry of the Ebon Blade who keep the front near the Hold itself — the floating necropolis above the Eastern Plaguelands that Highlord Mograine claimed when the Lich King's chain broke. The Hold's dwarves are veterans of Ironforge's mountain regiments, dead a season or two, riding skeletal chargers now in plate that no smith in Khaz Modan ever forged. They speak less than living dwarves, drink as much, and pay for their own ale. Their grandmaster sends them where the Argent Crusade will not.",
+    "keywords": ["knights of the ebon hold", "ebon hold", "ebon blade", "death knight", "dwarf", "alliance", "guild", "mograine", "plaguelands", "necropolis", "ironforge"],
+    "tags": ["guild", "alliance", "death-knight", "dwarf", "ebon-blade"]
+  },
+  {
+    "id": "wow_guild_stalkers_teldrassil",
+    "title": "Stalkers of Teldrassil",
+    "content": "A younger company than the Sentinels — drawn from the kaldorei who came of age after Teldrassil's growing, and who never knew the long sleep. They patrol the World Tree's lower boughs and the Wellspring shores, hunting satyrs and night-saber poachers, and they take ranger initiates as young as fifty winters. Their tabard bears the moon-and-crescent over a single white feather. Word among the Darnassian guards is that they answer to a captain who was a priest of Elune before she put her stole away and took up the bow.",
+    "keywords": ["stalkers of teldrassil", "teldrassil", "night elf", "hunter", "ranger", "kaldorei", "alliance", "guild", "darnassus", "elune", "world tree"],
+    "tags": ["guild", "alliance", "hunter", "night-elf", "ranger"]
+  },
+  {
+    "id": "wow_guild_darkspear_shadowstalkers",
+    "title": "Darkspear Shadowstalkers",
+    "content": "Shadow-hunters and quiet blades of the Darkspear tribe — Sen'jin's hidden hand. They are bound by old oaths to the chieftain, by newer ones to Vol'jin, and by the long memory of when the Darkspear lost their first home in the Stranglethorn Vale to the Gurubashi and the murlocs. They take work that the Warchief's grunts cannot — slipping into Theramore's outer farms, the old Zul'Gurub ruins, and the deeper haunts where Amani trolls still hold against the sin'dorei. Their initiates are marked by a small bone-needle tattoo above the right eye. They share fire and rum with the Echo Isles' own; they trust no orc, and few of their own.",
+    "keywords": ["darkspear shadowstalkers", "darkspear", "troll", "rogue", "shadowhunter", "sen'jin", "vol'jin", "echo isles", "horde", "guild"],
+    "tags": ["guild", "horde", "rogue", "troll", "darkspear"]
+  },
+  {
+    "id": "wow_guild_argent_vigil",
+    "title": "Argent Vigil",
+    "content": "A standing company of the Argent Crusade pledged at Light's Hope Chapel — where the Lich King's own butchers fell to the Light in the same hour, and Tirion Fordring lifted the Ashbringer reforged. Their elder knights served the old Argent Dawn through the long quiet years of cleansing the Plaguelands acre by acre, and a few still remember Uther's banner before Stratholme. They wear the Crusade's gold-and-white openly, and answer to Highlord Tirion Fordring through Lord Maxwell Tyrosus. Their roster takes any race or rite — a Forsaken in the field beside a Stormwind footman — so long as the oath is given and held. They sing the Light's evening hymn before each muster, and not always in Common.",
+    "keywords": ["argent vigil", "argent crusade", "paladin", "alliance", "guild", "light's hope", "icecrown", "tirion fordring", "maxwell tyrosus", "human", "crusaders' pinnacle"],
+    "tags": ["guild", "neutral", "paladin", "argent-crusade", "light"]
+  },
+  {
+    "id": "wow_guild_daughters_cenarius",
+    "title": "Daughters of Cenarius",
+    "content": "A circle of kaldorei druidesses sworn to the demigod-stag of the Moonglade. They walk the long path of barkskin — leaf into hide, hide into branch, branch into the deeper dream — and they answer to the elder druids of the Cenarion Enclave in Darnassus, though many have not slept in a moonwell for years. Their eldest fought beside Malfurion at the breaking of Nordrassil when Archimonde climbed Hyjal; the younger ones now mend the felwood-poisoned glens that the Burning Legion left behind. None of them take a tabard willingly; the sigil is a green stag-head, and it shows only when they wish.",
+    "keywords": ["daughters of cenarius", "cenarius", "druid", "night elf", "kaldorei", "moonglade", "cenarion enclave", "darnassus", "felwood", "alliance", "guild"],
+    "tags": ["guild", "alliance", "druid", "night-elf", "cenarion"]
+  },
+  {
+    "id": "wow_guild_violet_eye",
+    "title": "The Violet Eye",
+    "content": "A scholarly order founded by the archmage Khadgar in the years after Karazhan fell silent, charged with watching the tower of Medivh and naming what walks there. The Eye's members carry a small violet glass charm and answer to no court directly. Many are mages; some, more quietly, are warlocks who learned to keep their company welcome only by leaving most of what they study unspoken. They send couriers between Stormwind and Dalaran on horseback rather than by portal, on the principle that what a mage opens, a demon may follow through.",
+    "keywords": ["the violet eye", "violet eye", "karazhan", "medivh", "khadgar", "warlock", "mage", "scholar", "dalaran", "alliance", "guild"],
+    "tags": ["guild", "neutral", "warlock", "scholar", "karazhan"]
+  },
+  {
+    "id": "wow_guild_deathstalker_cabal",
+    "title": "The Deathstalker Cabal",
+    "content": "A black-cloak company drawn from the Royal Apothecary Society's outer ranks and the Deathstalker corps both — Forsaken who chose neither pure venom-work nor pure shadow-work but braided the two. Their senior officers were among the first to tear free of the Lich King's chain when Sylvanas broke his hold and led them down into Capital City's catacombs; some still bear the brands the Scourge put on their bones. They report up through the Undercity to the Banshee Queen's chair directly, by way of channels few are told the names of. They keep their faces hooded in Tirisfal's open daylight not from shame but from old habit. The Cabal welcomes warlocks the Royal Apothecaries find too erratic, and apothecaries the warlocks find too cautious.",
+    "keywords": ["the deathstalker cabal", "deathstalker", "forsaken", "warlock", "undercity", "sylvanas", "royal apothecary", "tirisfal", "horde", "guild", "cabal"],
+    "tags": ["guild", "horde", "warlock", "forsaken", "undercity"]
+  },
+  {
+    "id": "wow_guild_aldor_lightbearers",
+    "title": "Aldor Lightbearers",
+    "content": "Priests of the Aldor in their third exile — first from Argus when the eredar gave themselves to Sargeras, then from Draenor when the orcs of the Legion's whisper broke their cities, now from Shattrath itself when Kael'thas's blood elves seized the Tempest Keep. They are sworn to A'dal of Shattrath, but A'dal speaks in song too rare for many to hear, and the company's senior anchorite — a draenei matriarch out of the Exodar — speaks for him. They mend the wounded in field tents that smell of incense and seared bone, and they refuse no soldier the Light's word, including the dying who whisper for it in tongues she does not know.",
+    "keywords": ["aldor lightbearers", "aldor", "priest", "draenei", "light", "shattrath", "a'dal", "exodar", "naaru", "alliance", "guild"],
+    "tags": ["guild", "alliance", "priest", "draenei", "aldor"]
+  },
+  {
+    "id": "wow_guild_keepers_moonglade",
+    "title": "Keepers of Moonglade",
+    "content": "A wardenship of druids living in the long quiet of the Moonglade itself, between Felwood's blight and Winterspring's snow. They tend the moonwell at Nighthaven and walk the dreamways under Keeper Remulos's care. They take in tauren druids of the Cenarion Circle as readily as their own kaldorei kin; the war on the surface is not their first concern. When they ride out, it is because a corruption has reached past the glade's wards — and then they ride with claw and root, and Felwood remembers them.",
+    "keywords": ["keepers of moonglade", "moonglade", "druid", "remulos", "nighthaven", "cenarion circle", "night elf", "felwood", "winterspring", "alliance", "guild"],
+    "tags": ["guild", "neutral", "druid", "night-elf", "cenarion"]
+  },
+  {
+    "id": "wow_guild_magisters_silvermoon",
+    "title": "Magisters of Silvermoon",
+    "content": "A circle of arcanists drawn from Silvermoon's surviving magister-houses — those who did not follow Kael'thas Sunstrider into Outland's ruin. They keep apartments in the Royal Exchange and laboratories in the Court of the Sun, and most have lectured at least one season at the Magisters' Terrace. Their senior — an old half-blind woman who served the Sunstrider line before the Scourge came up the Dead Scar — chooses initiates herself, and refuses more often than she accepts. They wear red and gold, and they do not forgive Arthas easily.",
+    "keywords": ["magisters of silvermoon", "magister", "silvermoon", "blood elf", "sin'dorei", "mage", "kael'thas", "sunstrider", "dead scar", "horde", "guild"],
+    "tags": ["guild", "horde", "mage", "blood-elf", "silvermoon"]
+  },
+  {
+    "id": "wow_guild_acolytes_acherus",
+    "title": "Acolytes of Acherus",
+    "content": "Newer dead than the Vanguard — initiates of the Ebon Hold who took up the rune-blade in the past season and still answer to the masters above. They drill the dueling-grounds of Acherus when the Hold is not moving, and they bunker at Death's Breach when the Argent Crusade calls for line-troops. Most are dwarves out of Khaz Modan whose families have buried them already and would not welcome them home. They keep their old surnames anyway, as a courtesy to themselves.",
+    "keywords": ["acolytes of acherus", "acherus", "ebon hold", "ebon blade", "death knight", "dwarf", "alliance", "guild", "khaz modan", "death's breach", "initiate"],
+    "tags": ["guild", "alliance", "death-knight", "dwarf", "ebon-blade"]
+  },
+  {
+    "id": "wow_guild_emerald_wardens",
+    "title": "The Emerald Wardens",
+    "content": "Wardens of the Emerald Dream's outer paths — druids who spend half their lives asleep and the other half watching the waking world from the eyes of stag and owl. They walk the green-hued borders between Moonglade, Hyjal, and the deeper Dream. Of late, those borders have grown sour; the Nightmare presses where it should not, and Wardens come back with claw-marks no living beast left. Their order has no fortress, no banner, no song; you know them by the bark-rune at the wrist.",
+    "keywords": ["the emerald wardens", "emerald dream", "warden", "druid", "night elf", "hyjal", "moonglade", "nightmare", "alliance", "guild"],
+    "tags": ["guild", "alliance", "druid", "night-elf", "emerald-dream"]
+  },
+  {
+    "id": "wow_guild_sindorei_blood_knights",
+    "title": "Sin'dorei Blood Knights",
+    "content": "The order founded by Lady Liadrin when Quel'Thalas needed paladins of its own and the Alliance would not lend them — sin'dorei knights who bent the Light by force to their hand, drawing on M'uru's broken radiance until A'dal's mercy let them keep it freely. They train at the Hall of Blood in Silvermoon under Master Belathis, and they march under Liadrin's banner. They are neither apologetic nor proud about the years of compulsion; they simply hold the Light now, and use it. Their colours are scarlet and gold.",
+    "keywords": ["sin'dorei blood knights", "blood knight", "sin'dorei", "blood elf", "paladin", "liadrin", "m'uru", "silvermoon", "hall of blood", "light", "horde", "guild"],
+    "tags": ["guild", "horde", "paladin", "blood-elf", "silvermoon"]
+  },
+  {
+    "id": "wow_guild_burning_blade_coven",
+    "title": "Burning Blade Coven",
+    "content": "Inheritors of the old Burning Blade Clan — the orc warlock-line that worshipped fel-fire and the demon Mannoroth long before Gul'dan's Stormreavers rose. They keep to the Drag in Orgrimmar's lower terrace and to certain caves above Razor Hill that no orc patrol enters by choice. They bind imps and felhunters openly and speak of Mannoroth's name without flinching. Most of the Horde considers them a buried disgrace; they consider that the Horde has forgotten what made it strong.",
+    "keywords": ["burning blade coven", "burning blade", "orc", "warlock", "coven", "mannoroth", "fel", "orgrimmar", "the drag", "razor hill", "horde", "guild"],
+    "tags": ["guild", "horde", "warlock", "orc", "burning-blade"]
+  },
+  {
+    "id": "wow_guild_runetotem_earthwalkers",
+    "title": "Runetotem Earthwalkers",
+    "content": "A druidic kinship out of Mulgore that traces its line back to Hamuul Runetotem, the first tauren druid taught at the Moonglade by Malfurion's own circle. They walk the long earth-paths between Thunder Bluff, Mulgore, and the Stonetalon Mountains, and they answer to the Cenarion Circle through Hamuul himself when he calls. Their elders walked Felwood and Ashenvale in the long mending after Archimonde's fall at Hyjal; the younger ones patrol the Cenarion Wall against the silithid stirring out of Silithus. They take in young druids of any tauren tribe — Bloodhoof, Skychaser, Wildmane — and a few sin'dorei, lately, on probation.",
+    "keywords": ["runetotem earthwalkers", "runetotem", "tauren", "druid", "hamuul", "moonglade", "mulgore", "thunder bluff", "cenarion circle", "horde", "guild"],
+    "tags": ["guild", "horde", "druid", "tauren", "cenarion"]
+  },
+  {
+    "id": "wow_guild_bloodhoof_warband",
+    "title": "Bloodhoof Warband",
+    "content": "A warband sworn to Chieftain Cairne Bloodhoof of Thunder Bluff — heavy-axe veterans of the long Grimtotem feud, the centaur raids out of Desolace, and the Quilboar hostings out of the Razormane camps in the Barrens. They wear plain hide-and-bronze, no painted heraldry; the chief himself dislikes ornament. They drink at the Pools of Vision before each march and bury their dead under stone, not pyre. They take only tauren, save for one orc who saved an officer in a centaur ambush at the Crossroads, and was offered a tabard in the field and chose to keep it.",
+    "keywords": ["bloodhoof warband", "bloodhoof", "cairne", "tauren", "warrior", "mulgore", "thunder bluff", "grimtotem", "wrathgate", "horde", "guild", "wintergrasp"],
+    "tags": ["guild", "horde", "warrior", "tauren", "bloodhoof"]
+  }
+]

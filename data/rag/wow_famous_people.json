@@ -1,0 +1,261 @@
+[
+  {
+    "id": "person_thrall",
+    "title": "Thrall, Warchief of the Horde",
+    "content": "Thrall holds the Warchief's seat in Orgrimmar's Valley of Wisdom. Orc by blood, raised in the Durnholde pens of the Eastern Kingdoms, he broke his chains and led his people across the sea to found Durotar. The Horde he gathered binds tauren, troll, orc, Forsaken, and blood elf under one banner. He walks barefoot when he can, listens to the spirits, and speaks Doomhammer's name with care. The shaman's path matters to him more than the throne, and those who have served under him say he sits the seat lightly.",
+    "keywords": ["thrall", "go'el", "warchief", "horde", "orgrimmar", "durotar", "shaman", "doomhammer", "valley of wisdom", "orc"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_sylvanas_windrunner",
+    "title": "Sylvanas Windrunner, Banshee Queen of the Forsaken",
+    "content": "Sylvanas Windrunner holds the throne of the Undercity in the deep crypts beneath the ruins of Lordaeron, where she rules the Forsaken. She was Ranger-General of Silvermoon before Arthas marched through Quel'Thalas and slew her at the Sunwell, raising her as a banshee in his service before she tore free of his chains and brought the Forsaken into the Horde under Thrall's uneasy tolerance. Her hatred of the Scourge is matched only by her contempt for those who once abandoned the dead to their fate. Royal apothecaries and dark rangers answer to her; she keeps her own counsel above all others.",
+    "keywords": ["sylvanas", "sylvanas windrunner", "banshee queen", "dark lady", "forsaken", "undercity", "tirisfal", "ranger-general", "quel'thalas"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_cairne_bloodhoof",
+    "title": "Cairne Bloodhoof, High Chieftain of the Tauren",
+    "content": "Cairne Bloodhoof holds Thunder Bluff on the high mesas above Mulgore, where the tauren have built their home on sacred ground. Oldest of the Horde chieftains, he carries the Bloodhoof name and the weight of his people's long migration. He brought the tauren into the Horde during the flight across the Great Sea, and his bond with Thrall predates the founding of Durotar. He walks with the great runespear, slow to anger and slower to forgive a broken pact. The Grimtotem clans of the southern strongholds chafe under his authority and would see his son Baine fail to inherit what he has built.",
+    "keywords": ["cairne", "cairne bloodhoof", "high chieftain", "tauren", "thunder bluff", "mulgore", "bloodhoof"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_voljin",
+    "title": "Vol'jin, Chieftain of the Darkspear",
+    "content": "Vol'jin leads the Darkspear trolls from the Valley of Spirits in Orgrimmar and from the reclaimed Echo Isles off Durotar's coast. Son of Sen'jin, he took the chieftain's mask when his father fell on those islands at the hands of the Sea Witch's murloc servants. He speaks for trollkind in Thrall's war council and is the only voice in that hall who saw the Sea Witch's serpents close enough to count their scales. His shadow hunters keep a running count of Garrosh's movements in the Borean Tundra. The shadow hunters at his side answer to no other house and walk where he walks.",
+    "keywords": ["vol'jin", "voljin", "darkspear", "troll", "echo isles", "sen'jin", "orgrimmar"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_lor_themar_theron",
+    "title": "Lor'themar Theron, Regent Lord of Quel'Thalas",
+    "content": "Lor'themar Theron holds Silvermoon as Regent Lord of Quel'Thalas, the seat vacant of any king since the Sunstrider line ended with Kael'thas's fall. He was a Ranger-Lord before the Scourge breached the Sunwell; he took the regency by survival as much as by right. He walks a careful line between blood-elven independence and the Horde alliance that keeps the Forsaken from pressing too close at the western gate. Halduron Brightwing and Rommath sit his council, and the Magisters answer to him grudgingly. The remade Sunwell at the Isle of Quel'Danas is his charge now, an old wound still raw.",
+    "keywords": ["lor'themar", "lor'themar theron", "regent lord", "quel'thalas", "silvermoon", "blood elves", "sin'dorei", "ranger"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_garrosh_hellscream",
+    "title": "Garrosh Hellscream, Overlord of the Warsong",
+    "content": "Garrosh Hellscream holds Warsong Hold in the Borean Tundra, the Horde's forward spear in Northrend. Son of Grom Hellscream, he carries Gorehowl, his father's axe, and has shouldered the name with every swing. Thrall pulled him from Garadar in Nagrand to lead the Horde war effort in the north, and Garrosh has repaid that trust with aggressive advance. He is loud where Thrall is quiet, impatient where Thrall is patient; the older chieftains exchange long looks at the war-table when his counsel runs against the Warchief's. The Warsong veterans who serve under him at the Hold hear the name Hellscream and need no other argument.",
+    "keywords": ["garrosh", "garrosh hellscream", "overlord", "warsong hold", "northrend", "borean tundra", "hellscream", "mag'har"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_varian_wrynn",
+    "title": "King Varian Wrynn of Stormwind",
+    "content": "Varian Wrynn sits the throne of Stormwind Keep above the cathedral district, the Lion of Azeroth returned after years of absence. His father Llane fell to an assassin's blade when Varian was a boy; he was later taken, sundered into two halves, and forged into the gladiator Lo'Gosh in the southern slave pits. The two pieces of him were made one man again in Theramore, and the temper from those years has not left him. He is father to Anduin, who carries a gentler nature by a wide measure. His stiffness toward Thrall and the Horde runs older than the throne's policy; his council brings Horde dispatches to him last, when they bring them at all.",
+    "keywords": ["varian", "varian wrynn", "king of stormwind", "stormwind", "lo'gosh", "alliance", "wolf"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_magni_bronzebeard",
+    "title": "King Magni Bronzebeard of Ironforge",
+    "content": "Magni Bronzebeard holds the High Seat in Ironforge's central chamber, his war hammer across his lap. Eldest of three brothers — Brann wanders far afield gathering relics, and Muradin was long thought dead in Northrend until very recent rumor changed that account. His daughter Moira ran off with the Dark Iron emperor Thaurissan, and the grief of that has shadowed the throne for years. He keeps the Alliance bond with Stormwind close and Tyrande's people close after that. Petitioners who come before the High Seat find a king quicker to refuse than he once was, and the dwarven thanes do not press him.",
+    "keywords": ["magni", "magni bronzebeard", "king of ironforge", "ironforge", "bronzebeard", "dwarf", "high seat"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_mekkatorque",
+    "title": "High Tinker Gelbin Mekkatorque of the Gnomeregan Exiles",
+    "content": "Gelbin Mekkatorque leads the gnomish exiles from Tinker Town inside Ironforge, the only seat left to them since Gnomeregan fell to trogg invasion and Sicco Thermaplugg's deliberate irradiation of the city. He is inventor, machinist, and the closest thing the gnomes have to a sovereign. He plans the retaking of Gnomeregan with the patience of a man who has run the calculations many times. His friendship with Magni predates the fall; the Bronzebeards keep a workshop open for gnomish engineers in Ironforge's lower ring. The gnomish outposts in Northrend answer to his sealed orders.",
+    "keywords": ["mekkatorque", "gelbin mekkatorque", "high tinker", "gnomeregan", "tinker town", "ironforge", "gnome", "exiles"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_tyrande_whisperwind",
+    "title": "Tyrande Whisperwind, High Priestess of Elune",
+    "content": "Tyrande Whisperwind holds the Temple of the Moon in Darnassus, where the Sentinels and the Sisters of Elune answer to her call. She has led the kaldorei through the long centuries when Malfurion walked the Emerald Dream more than the waking world. The night elves came into the Alliance at her decision, after the Burning Legion's third invasion proved that no people survives alone. She is wed to Malfurion, and the bond between them is older than any kingdom standing on this map. The night sabers the Sentinels ride are bred from her watch; the bow is hers when necessity demands it.",
+    "keywords": ["tyrande", "tyrande whisperwind", "high priestess", "elune", "darnassus", "kaldorei", "night elves", "sentinels"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_malfurion_stormrage",
+    "title": "Malfurion Stormrage, Archdruid",
+    "content": "Malfurion Stormrage's body lies at Moonglade while his spirit walks the Emerald Dream, waking into the physical world only in fragments and intervals. He was the first druid taught by Cenarius, the first to draw the bear and the storm-crow into his form. He is brother to the lost Illidan and husband to Tyrande, and the Cenarion Circle's elders carry his counsel when they can reach him. Recent rumor says he stirs more often than before, responding to something that calls from Hyjal. The eldest druids of the circle pass his words along in careful succession.",
+    "keywords": ["malfurion", "malfurion stormrage", "archdruid", "moonglade", "emerald dream", "kaldorei", "night elves", "cenarius"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_velen",
+    "title": "Velen, Prophet of the Draenei",
+    "content": "Velen leads the draenei from the Exodar, the broken naaru vessel grounded on the Azuremyst shores. He took his people from Argus before the eredar fell to the Legion, and has led them through flight measured not in years but in ages. He speaks with the Naaru; the counsel of A'dal and the dying K'ure shapes his vision. The Vindicators stand his honor guard, and the draenei hold their place on the Alliance roll since the Exodar's crash brought them to Azeroth. The Vindicators of his honor guard do not speak Kil'jaeden's name within his hearing; the elder draenei remember when the Deceiver was Velen's closest brother.",
+    "keywords": ["velen", "the prophet", "draenei", "exodar", "azuremyst", "naaru", "argus"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_muradin_bronzebeard",
+    "title": "Muradin Bronzebeard, Believed-Lost Prince",
+    "content": "Muradin Bronzebeard held the explorer's commission of the Bronzebeards in Khaz Modan, brother to Magni and Brann. He stood with Arthas in Dragonblight at the drawing of the runeblade Frostmourne, and when the chamber shattered he was left for dead on the ice. Ironforge mourned him for years, and the name went onto the list of those claimed by Northrend. Recent rumor out of Wintergarde and the Halls of Stone says he walks again, his memory returned through strange company on the frozen plains. The kingdom has not yet dared to celebrate; word is still spreading south.",
+    "keywords": ["muradin", "muradin bronzebeard", "bronzebeard", "frostmourne", "northrend", "ironforge", "dwarven explorer"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_tirion_fordring",
+    "title": "Highlord Tirion Fordring of the Argent Crusade",
+    "content": "Tirion Fordring holds the field at Light's Hope Chapel in the Eastern Plaguelands, and the new Argent Vanguard at the foot of Icecrown. A knight of the Silver Hand in his youth, he was cast out of the Order for sparing an orc's life and spent years in exile before the Light reclaimed him. When the Scourge broke against Light's Hope and Darion Mograine knelt before him, the Ashbringer passed into his hands, cleansed by the Light he channeled when Mograine yielded the blade. The Argent Crusade wears no king's colors and answers to neither Horde nor Alliance.",
+    "keywords": ["tirion", "tirion fordring", "highlord", "argent crusade", "argent dawn", "light's hope", "icecrown", "ashbringer", "paladin"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_bolvar_fordragon",
+    "title": "Highlord Bolvar Fordragon, Lost at the Wrathgate",
+    "content": "Bolvar Fordragon held Stormwind's regency through the long years of Varian's disappearance and was the first to hold the throne-room seat without claiming the crown. He led the Alliance spear to the gates of Icecrown at the Wrathgate; the plague loosed by Putress's flasks broke the assault and Bolvar fell beneath the green mist on the bridge. His body was never recovered from that field. Some say the dragons of the Wyrmrest Accord bore him north and that he yet lives in some shape. Stormwind keeps a chair at the Council waiting for him.",
+    "keywords": ["bolvar", "bolvar fordragon", "highlord", "wrathgate", "stormwind", "regent", "icecrown"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_darion_mograine",
+    "title": "Highlord Darion Mograine of the Ebon Blade",
+    "content": "Darion Mograine commands the Knights of the Ebon Blade from the floating necropolis Acherus, which drifts above the eastern continent. He is the son of Alexandros Mograine, the first Ashbringer, and was raised into undeath by the Scourge himself. He led the death knights to break free of the Lich King's leash at Light's Hope Chapel, where his blade refused him and the battle turned. He knelt in the courtyard and offered the Ashbringer to Tirion Fordring with his own hands. The Ebon Blade ride against Icecrown now, side by side with those they once hunted.",
+    "keywords": ["darion", "darion mograine", "ebon blade", "death knight", "acherus", "scarlet enclave", "lich king", "ashbringer"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_jaina_proudmoore",
+    "title": "Lady Jaina Proudmoore of Theramore",
+    "content": "Jaina Proudmoore holds Theramore Isle off Dustwallow Marsh — the city she raised from a sandbar with the refugees of Lordaeron's fall. She was Antonidas's prize apprentice in Dalaran before the plague ran past saving and she led her people west across the sea. She stood with Thrall and Tyrande at Mount Hyjal against Archimonde; the bond with the Warchief outlasted her father Daelin's enmity, and his fleet's destruction at Theramore's harbor. Her counsel on the Northrend campaign runs cooler than Varian's, and his court sends messengers to Theramore more often than it admits.",
+    "keywords": ["jaina", "jaina proudmoore", "theramore", "kalimdor", "kul tiras", "archmage", "kirin tor", "antonidas"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_rhonin",
+    "title": "Archmage Rhonin, Leader of the Kirin Tor",
+    "content": "Rhonin holds the Violet Citadel in Dalaran, the city he lifted into the sky above Crystalsong Forest to bring the Kirin Tor's full weight to the war in Northrend. He took the Archmage's seat after Antonidas's death at the Sunwell. He bears red hair and a reputation for temper that has nonetheless steered the Kirin Tor through the Nexus War and the alliance with the Sunreavers. He is wed to Vereesa Windrunner, the youngest of the three sisters, and their twin sons grow up behind the Citadel's walls. Krasus sits among the six on his council; the dragon's secret sits near the same table.",
+    "keywords": ["rhonin", "archmage rhonin", "kirin tor", "dalaran", "violet citadel", "human mage", "vereesa windrunner"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_khadgar",
+    "title": "Archmage Khadgar of Shattrath",
+    "content": "Khadgar walks Shattrath in Outland, where the Sha'tar city is his post and the naaru A'dal his nearest council. He was Medivh's apprentice when the Dark Portal first opened; the Guardian's magic aged him in a night and left him with white hair he has worn ever since. He closed the Portal once and was caught on the Outland side when it tore open again. He counsels Velen and the naaru-aligned who come to Shattrath, and any scholar seeking the history of the First War. Dalaran's post-riders carry letters to him when they can find him, which is not reliably often.",
+    "keywords": ["khadgar", "archmage khadgar", "shattrath", "outland", "kirin tor", "naaru", "medivh", "sorcerer"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_brann_bronzebeard",
+    "title": "Brann Bronzebeard, Explorer",
+    "content": "Brann Bronzebeard carries the Explorers' League charter from Ironforge and is the last person in that city's records who sits still long enough to read it. Brother to Magni and Muradin, he was in Uldaman when most kings were still fighting for the Eastern Kingdoms. The last reliable word has him deep in the Storm Peaks dig sites near Ulduar, cracking titan seals that no other living dwarf has named correctly. He cracked the Uldaman vault in Khaz Modan and has pried open more titan ruins than any scholar working Northrend today. Magni sends letters that go months unanswered.",
+    "keywords": ["brann", "brann bronzebeard", "explorer", "explorers' league", "bronzebeard", "uldaman", "ulduar", "titan"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_arthas_menethil",
+    "title": "Prince Arthas Menethil, Lordaeron's Lost Son",
+    "content": "Arthas Menethil was Crown Prince of Lordaeron and a Knight of the Silver Hand under Uther before the plague consumed the north. He rode into the Scourge outbreak, called the cull at Stratholme over Uther's refusal, and chased Mal'Ganis north into the Dragonblight wastes where he drew the runeblade Frostmourne from its icy chamber and traded his soul for the power to strike his quarry down. He returned to Capital City and killed his own father King Terenas on the throne with that same blade. Lordaeron mourns him as a son who died at the moment the blade closed his hand; whatever wears the helm now is not him. Mothers in the surviving northern villages still teach their children the prince he was before Stratholme.",
+    "keywords": ["arthas", "arthas menethil", "prince of lordaeron", "lordaeron", "stratholme", "paladin", "silver hand", "lich king"],
+    "tags": ["people", "alliance", "dead"]
+  },
+  {
+    "id": "person_terenas_menethil",
+    "title": "King Terenas Menethil of Lordaeron",
+    "content": "Terenas Menethil ruled Lordaeron through the years between the Second War and the plague, and his crown was the seat that bound humanity together when the Horde first broke out of the Dark Portal. He wove the original Alliance that drove the Horde back at Blackrock, holding humans, dwarves, elves, and gnomes under one cause through years of hard war. He was cut down by his own son in his own throne room, a crown rolling across the stones as Lordaeron ended in a single blow. The ruined capital still holds his bones; what remains of the old kingdom's loyalty names him with hat in hand. The Forsaken throne sits where his did now, and the irony is not lost on anyone old enough to remember the hall.",
+    "keywords": ["terenas", "king terenas", "menethil", "lordaeron", "capital city", "alliance of lordaeron"],
+    "tags": ["people", "alliance", "dead"]
+  },
+  {
+    "id": "person_uther_lightbringer",
+    "title": "Uther the Lightbringer, First of the Silver Hand",
+    "content": "Uther the Lightbringer was the first paladin and the founder of the Order of the Silver Hand, raised to that purpose under Archbishop Faol when the Second War called for a new kind of warrior in service to the Light. He taught Arthas the oaths and the codes of the order, and when Arthas called for the cull at Stratholme, Uther refused him and walked away. He fell at Andorhal defending King Terenas's urn from his former student, struck down by Frostmourne before the curse could be broken. The paladins of the new orders still recite his oath at investiture, and the Argent Crusade carries his name on its standards even now.",
+    "keywords": ["uther", "uther lightbringer", "silver hand", "paladin", "stratholme", "andorhal", "lordaeron", "light"],
+    "tags": ["people", "alliance", "dead"]
+  },
+  {
+    "id": "person_anduin_lothar",
+    "title": "Anduin Lothar, Lion of Azeroth",
+    "content": "Anduin Lothar commanded the Alliance armies through the Second War and was the last living blood of the royal Arathi line, though he never sought the crown that bloodline carried. He gathered the kingdoms of Azeroth, Lordaeron, and their kin against the Horde after Stormwind fell, and drove the war to its conclusion at the foot of the Dark Portal. He fell in the Black Morass in single combat with Orgrim Doomhammer, and the armies he had led pressed on to close the Portal and end the war he had started without him. Veterans of Stormwind's old regiments still raise the toast when his name is spoken at the table. The young Prince Varian was named for him; those who served at court under King Varian say he never spoke that name lightly.",
+    "keywords": ["lothar", "anduin lothar", "lion of azeroth", "second war", "dark portal", "alliance commander", "orgrim doomhammer"],
+    "tags": ["people", "alliance", "dead"]
+  },
+  {
+    "id": "person_grom_hellscream",
+    "title": "Grommash Hellscream, Slayer of Mannoroth",
+    "content": "Grommash Hellscream was chieftain of the Warsong clan and the first orc to drink Mannoroth's blood, binding the Horde to the Burning Legion before Thrall's time. When Thrall brought him the chance to redeem that choice in Ashenvale, he drank the demon's blood again to lure Mannoroth into single combat, then cleaved the pit lord through with Gorehowl and died in the breaking of the curse, freed the orcs of the demon's chain at the cost of his own breath. His son Garrosh carries the axe now, and Warsong veterans speak of Grom the way one speaks of a saint — a man who bought back what he had sold with the only coin he had left.",
+    "keywords": ["grom", "grommash", "grom hellscream", "warsong", "mannoroth", "ashenvale", "demon's blood", "gorehowl"],
+    "tags": ["people", "horde", "dead"]
+  },
+  {
+    "id": "person_archmage_antonidas",
+    "title": "Archmage Antonidas of Dalaran",
+    "content": "Antonidas led the Kirin Tor when Lordaeron still stood. He taught Jaina Proudmoore, counseled King Terenas, and refused to flee Dalaran when the plague rose. He fell at Stratholme, struck down by his own former pupil after Arthas turned. Mages still speak his name with a bared head; the Violet Citadel keeps an empty chair where he used to sit at council, and apprentices learn the conjurations he set down before any newer work. The loss is fresh enough that grief and respect run together when the old archmages name him.",
+    "keywords": ["antonidas", "archmage antonidas", "kirin tor", "dalaran", "stratholme", "jaina", "terenas", "violet citadel", "magic"],
+    "tags": ["people", "alliance", "dead"]
+  },
+  {
+    "id": "person_kaelthas_sunstrider",
+    "title": "Prince Kael'thas Sunstrider of Quel'Thalas",
+    "content": "Kael'thas Sunstrider was the last of the Sunstrider line, heir to the throne of Quel'Thalas after his father Anasterian fell to the Scourge at the Sunwell's breaking. He led his people into the Alliance of Lordaeron, then out of it when Garithos's contempt made the alliance hollow, then to Outland in search of power enough to save the blood elves' magic-hunger. He took Tempest Keep from the naaru and made common cause with Illidan, then bent the knee to Kil'jaeden when Illidan's strength proved insufficient. He was cut down in the Magisters' Terrace on Quel'Danas as he tried to summon the Burning Legion into his rebuilt Sunwell. The blood elves who remained under Lor'themar still speak his name softly, the grief and the shame running together.",
+    "keywords": ["kael'thas", "kaelthas", "kael'thas sunstrider", "sunstrider", "blood elves", "tempest keep", "magisters' terrace", "quel'danas"],
+    "tags": ["people", "horde", "dead"]
+  },
+  {
+    "id": "person_illidan_stormrage",
+    "title": "Illidan Stormrage, the Betrayer",
+    "content": "Illidan Stormrage was twin to Malfurion and once stood beside Tyrande in the moonlit courts of Kalimdor before the Burning Legion first came to this world. He drank from the Well of Eternity when the Legion's power seemed like the only answer, and bore afterward the eyes that Sargeras burned out and the gift of demon-sight in their place. He took the Skull of Gul'dan into himself and became the first demon hunter of his kind, reshaping himself into something no longer entirely elven. He held the Black Temple of Outland for years, refusing to bow when Kil'jaeden's summons came. He was cut down in the Temple's innermost hall by a small band, and those who fought there do not speak of it easily. The Black Temple still smells of him.",
+    "keywords": ["illidan", "illidan stormrage", "the betrayer", "black temple", "outland", "demon hunter", "elune", "tyrande"],
+    "tags": ["people", "neutral", "dead"]
+  },
+  {
+    "id": "person_lich_king",
+    "title": "The Lich King, Sovereign of the Scourge",
+    "content": "In the oldest tellings, two were made one: the orc shaman Ner'zhul, broken by Kil'jaeden and sealed into the Frozen Throne, and the prince Arthas Menethil who set the helm upon his head and joined him there. Whatever was the man in him is buried now beneath the metal; the throne speaks in a voice neither of them owned alone. Frostmourne rests at its side; the Scourge — from San'layn lords to shambling abomination — moves as a single will across the north. The storm above Icecrown is not weather; the dead make it. The Argent Crusade and the Ebon Blade march on that fortress because no peace is offered while the throne stands.",
+    "keywords": ["lich king", "icecrown", "frozen throne", "scourge", "frostmourne", "ner'zhul", "arthas", "death"],
+    "tags": ["people", "neutral", "legendary"]
+  },
+  {
+    "id": "person_aegwynn",
+    "title": "Magna Aegwynn, Last Guardian of Tirisfal",
+    "content": "Spoken of with awe among the Kirin Tor, Aegwynn held the Guardian's mantle for nine hundred years, far longer than any who came before or since. In her prime she struck Sargeras's avatar down in Northrend's tundra — and bore unknowing the fragment of him that lay hidden in her body for centuries. In defiance of the Council of Tirisfal she bore Medivh in secret and passed her power to him at his birth. She walks still — old now, hidden, but not gone; those who have found her say she keeps watch from a hold she will not name. The Kirin Tor speak of her with the awe one reserves for a living legend.",
+    "keywords": ["aegwynn", "magna aegwynn", "guardian of tirisfal", "tirisfal", "council of tirisfal", "medivh", "sargeras", "magic"],
+    "tags": ["people", "neutral", "legendary"]
+  },
+  {
+    "id": "person_medivh",
+    "title": "Medivh, the Last Guardian and the Prophet",
+    "content": "Medivh was the Last Guardian, son of Aegwynn and the court musician Nielas Aran, born already carrying a Guardian's full power. In the oldest tellings, Sargeras's seed woke in him; the dark thing that wore his face opened the Dark Portal and brought the orcish Horde across the sea. He was struck down in the chamber beneath Karazhan by his companion Anduin Lothar and did not rise again as a man. He returned at the Third War as the Prophet — the raven who warned Jaina to flee Lordaeron and Thrall to lead his people west to Kalimdor. Karazhan stands abandoned now, and those who have walked its towers say the shape of his thought remains in every corridor.",
+    "keywords": ["medivh", "the prophet", "guardian", "tirisfal", "karazhan", "dark portal", "sargeras", "raven"],
+    "tags": ["people", "neutral", "legendary"]
+  },
+  {
+    "id": "people_dragon_aspects",
+    "title": "The Dragon Aspects",
+    "content": "Five wyrms were chosen by the Titans before they departed, each given dominion over a thread of the world's making. Alexstrasza the Life-Binder, red, keeps Wyrmrest Temple in Dragonblight; without her warmth nothing draws breath in the frozen wastes around her. Malygos the Spell-Weaver, blue, ruled magic for an age — and rules it still in fury, his Nexus War against mortal magi filling the skies above the Borean Tundra with lightning from his keep at Coldarra. Nozdormu the Timeless One, bronze, walks the Caverns of Time when he walks at all; the bronze flight has been searching for him, and he has not answered their calls. Ysera the Dreamer, green, sleeps in the Emerald Dream with Malfurion at her side and the Cenarion Circle at her gate. Neltharion the Earth-Warder is no more; what remains is Deathwing, lost to madness in the deep places, and the flight that should have been his is broken.",
+    "keywords": ["dragon aspects", "alexstrasza", "malygos", "nozdormu", "ysera", "neltharion", "deathwing", "wyrmrest", "nexus war"],
+    "tags": ["people", "aspect", "legendary"]
+  },
+  {
+    "id": "people_old_gods",
+    "title": "The Old Gods",
+    "content": "Before the Titans laid the world's bones, the Old Gods coiled beneath the soil and whispered into sleeping minds. Four are named in the oldest tellings: Y'Shaarj, the eldest, torn from the world long ago; C'Thun, sealed beneath Silithus until the qiraji broke his prison and the world rallied to put him down again; N'Zoth, whose voice runs through the deep currents; and Yogg-Saron, bound now in the bowels of Ulduar, whose madness leaks into Northrend's stones. The Titans buried them rather than slay them. The buried do not stay quiet.",
+    "keywords": ["old gods", "yogg-saron", "c'thun", "n'zoth", "y'shaarj", "ulduar", "ahn'qiraj", "silithus", "titans", "ancient"],
+    "tags": ["people", "old_god", "legendary"]
+  },
+  {
+    "id": "people_pantheon",
+    "title": "The Titans of the Pantheon",
+    "content": "Long before mortals walked, the Titans shaped the world from molten earth and set the bones of Azeroth in place. Aman'Thul the Highfather sits eldest of the Pantheon, the slow turning of stars his measure. Eonar gave life to the world's green things and the breath in the lungs of beasts. Khaz'goroth shaped stone and metal; the dwarves and the earthen are his work, half-remembered now in the veins of ore that run beneath Khaz Modan. Norgannon wrote the laws of magic that the wizards still trace in every academy from Dalaran to Silvermoon. Aggramar was the Pantheon's champion and Sargeras's closest companion, before Sargeras turned and unmade that bond. Sargeras's fall — once the greatest of them, now lord of the Burning Legion — is the wound the Pantheon does not speak of. Their works lie buried in Ulduar and in the older vaults beneath the Storm Peaks, waiting as they have always waited.",
+    "keywords": ["titans", "pantheon", "aman'thul", "eonar", "khaz'goroth", "norgannon", "aggramar", "sargeras", "ulduar"],
+    "tags": ["people", "titan", "legendary"]
+  },
+  {
+    "id": "people_naaru",
+    "title": "The Naaru, the Lights",
+    "content": "The naaru are beings of pure Light, neither flesh nor stone; they shift between forms of radiance and deep void as their long cycles turn. A'dal holds the central chamber of the Terrace of Light in Shattrath, the Sha'tar city in Outland; pilgrims of every faith and faction come to stand in his hall. Xe'ra walked among the draenei in the long age before Argus fell, and her counsel set Velen on the path that carried his people across the dark between worlds to Azeroth. K'ure is fading at the heart of the Exodar's wrecked engines on Azuremyst Isle; the draenei priests tend him as one tends the dying. The naaru speak rarely, and when they speak the world listens; the Light invoked in every chapel from Stormwind to Shattrath has its source in them, whether the worshippers who light those candles know it or not.",
+    "keywords": ["naaru", "a'dal", "xe'ra", "k'ure", "draenei", "shattrath", "exodar", "light", "void"],
+    "tags": ["people", "naaru", "legendary"]
+  },
+  {
+    "id": "people_demigods",
+    "title": "The Demigods of the Wild",
+    "content": "The demigods were born of the world itself, children of the Wild and the green places where mortal feet rarely fall. Cenarius the Forest Lord, half-stag, half-god, taught Malfurion the first druid's craft in the groves of Moonglade; he was cut down by Grom Hellscream in Ashenvale and walks again, restored through the Cenarion Circle's long vigil. Malorne the White Stag was Cenarius's father, slain at the Well of Eternity in the War of the Ancients. Ursoc and Ursol, the twin bear-gods, fell defending the kaldorei in that same war; their groves remain the druid of the claw's pilgrimage. Goldrinn — Lo'Gosh to the worgen — was the great wolf, slain by Archimonde's hand; his spirit yet runs the dreaming forests beneath the waking earth. Their names belong to the druids' rolls and to the rituals night elves still keep in the high hollows.",
+    "keywords": ["demigods", "ancients", "cenarius", "malorne", "ursoc", "ursol", "goldrinn", "lo'gosh", "wild gods", "moonglade"],
+    "tags": ["people", "demigod", "legendary"]
+  },
+  {
+    "id": "people_legion_lords",
+    "title": "The Named Lords of the Burning Legion",
+    "content": "Behind every demon banner that has burned a city, a few names recur. Sargeras was the first of them — the Titan who turned — and the host he raised marches at his word, though he has not walked the lower planes himself in an age. Kil'jaeden the Deceiver, eredar, is the architect; he shaped the orcish Horde into the Legion's spear before Thrall's time, and was Velen's closest brother before the world as it now stands began. Archimonde the Defiler led the Legion's third coming and was undone at Hyjal by the Sentinels, the Horde, and the kaldorei together, with the Well of Eternity's twin doom upon him. Mannoroth, the pit lord, dragged the orcs into the blood-pact and was slain by Grommash Hellscream in Ashenvale. Magtheridon, dread lord of Outland, is chained in the Hellfire Citadel beneath the ground; he is not dead.",
+    "keywords": ["burning legion", "kil'jaeden", "archimonde", "mannoroth", "magtheridon", "sargeras", "eredar", "outland"],
+    "tags": ["people", "legion", "legendary"]
+  }
+]
