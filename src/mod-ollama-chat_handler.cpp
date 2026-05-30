@@ -450,6 +450,15 @@ std::string ComputeChannelKey(ChatChannelSourceLocal sourceLocal, Channel* chann
             if (channel)
                 return "C:" + channel->GetName();
             return "";
+        case SRC_SAY_LOCAL:
+        case SRC_YELL_LOCAL:
+            // Proximity chat has no Channel*; scope a shared buffer to the sender's
+            // map+zone. Say and Yell share one "recent talk around here" thread, and the
+            // team-id prefix keeps it single-faction (matches eligibility filtering).
+            // Zone is coarser than Say's true ~25yd range, but an acceptable v1 approximation.
+            return "S:" + std::to_string(sender->GetTeamId())
+                 + ":" + std::to_string(sender->GetMapId())
+                 + ":" + std::to_string(sender->GetZoneId());
         default:
             return "";
     }
