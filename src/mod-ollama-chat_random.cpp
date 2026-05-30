@@ -45,6 +45,7 @@ void OllamaBotRandomChatter::OnUpdate(uint32 diff)
         if (difftime(now, g_LastHistorySaveTime) >= g_ConversationHistorySaveInterval * 60)
         {
             SaveBotConversationHistoryToDB();
+            CleanupChannelThreads();
             g_LastHistorySaveTime = now;
         }
     }
