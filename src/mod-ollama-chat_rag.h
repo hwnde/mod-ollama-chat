@@ -9,14 +9,17 @@
 struct RAGEntry {
     std::string id;
     std::string title;
+    std::string short_description;
     std::string content;
     std::vector<std::string> keywords;
     std::vector<std::string> tags;
+    std::vector<std::string> references;
 };
 
 struct RAGResult {
     const RAGEntry* entry;
     float similarity;
+    bool isReference = false;
 };
 
 class OllamaRAGSystem {
@@ -57,6 +60,7 @@ private:
 
 private:
     std::vector<RAGEntry> m_ragEntries;
+    std::unordered_map<std::string, const RAGEntry*> m_idIndex;
     std::vector<std::string> m_vocabulary;
     bool m_initialized;
 };

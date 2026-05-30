@@ -21,6 +21,7 @@ bool OllamaRAGSystem::Initialize()
     }
 
     m_ragEntries.clear();
+    m_idIndex.clear();
     m_vocabulary.clear();
 
     // Use the configured RAG data path directly
@@ -46,6 +47,34 @@ bool OllamaRAGSystem::Initialize()
         }
     }
     m_vocabulary.assign(vocabSet.begin(), vocabSet.end());
+
+    // Build id -> entry index for one-hop reference resolution.
+    // m_ragEntries is never mutated after this point, so element pointers stay valid.
+    for (const auto& entry : m_ragEntries) {
+        m_idIndex[entry.id] = &entry;
+    }
+
+    // Validate references at load. Logs only; never aborts startup.
+    uint32_t refTotal = 0;
+    uint32_t refDangling = 0;
+    for (const auto& entry : m_ragEntries) {
+        for (const auto& refId : entry.references) {
+            ++refTotal;
+            auto it = m_idIndex.find(refId);
+            if (it == m_idIndex.end()) {
+                ++refDangling;
+                LOG_ERROR("server.loading",
+                          "[Ollama Chat RAG] Entry '{}' references unknown id '{}'",
+                          entry.id, refId);
+            } else if (it->second->short_description.empty()) {
+                LOG_WARN("server.loading",
+                         "[Ollama Chat RAG] Reference target '{}' has no short_description; "
+                         "will render title only", refId);
+            }
+        }
+    }
+    LOG_INFO("server.loading", "[Ollama Chat RAG] References checked: {}, dangling: {}",
+             refTotal, refDangling);
 
     m_initialized = true;
     LOG_INFO("server.loading", "[Ollama Chat RAG] Initialized with {} entries and {} vocabulary terms",
@@ -108,6 +137,7 @@ bool OllamaRAGSystem::LoadRAGDataFromFile(const std::string& filePath)
                 RAGEntry entry;
                 entry.id = item.value("id", "");
                 entry.title = item.value("title", "");
+                entry.short_description = item.value("short_description", "");
                 entry.content = item.value("content", "");
 
                 if (entry.id.empty() || entry.content.empty()) {
@@ -126,6 +156,13 @@ bool OllamaRAGSystem::LoadRAGDataFromFile(const std::string& filePath)
                 if (item.contains("tags") && item["tags"].is_array()) {
                     for (const auto& tag : item["tags"]) {
                         entry.tags.push_back(tag.get<std::string>());
+                    }
+                }
+
+                // Load references array (ids of related entries)
+                if (item.contains("references") && item["references"].is_array()) {
+                    for (const auto& ref : item["references"]) {
+                        entry.references.push_back(ref.get<std::string>());
                     }
                 }
 
@@ -172,6 +209,41 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
         results.resize(maxResults);
     }
 
+    // Expand one hop along references (outgoing only), deduped and capped.
+    if (g_RAGExpandReferences && g_RAGMaxReferences > 0) {
+        std::unordered_set<std::string> present;
+        for (const auto& r : results) {
+            present.insert(r.entry->id);
+        }
+
+        std::vector<RAGResult> refResults;
+        for (const auto& r : results) {
+            if (refResults.size() >= static_cast<size_t>(g_RAGMaxReferences)) {
+                break;
+            }
+            for (const auto& refId : r.entry->references) {
+                if (refResults.size() >= static_cast<size_t>(g_RAGMaxReferences)) {
+                    break;
+                }
+                if (present.count(refId)) {
+                    continue;
+                }
+                auto it = m_idIndex.find(refId);
+                if (it == m_idIndex.end()) {
+                    continue;
+                }
+                present.insert(refId);
+                RAGResult rr;
+                rr.entry = it->second;
+                rr.similarity = 0.0f;
+                rr.isReference = true;
+                refResults.push_back(rr);
+            }
+        }
+
+        results.insert(results.end(), refResults.begin(), refResults.end());
+    }
+
     return results;
 }
 
@@ -182,11 +254,36 @@ std::string OllamaRAGSystem::GetFormattedRAGInfo(const std::vector<RAGResult>& r
     }
 
     std::stringstream ss;
-    for (size_t i = 0; i < results.size(); ++i) {
-        const auto& result = results[i];
-        ss << "- " << result.entry->title << ": " << result.entry->content;
-        if (i < results.size() - 1) {
+    bool hasContent = false;
+    std::vector<const RAGEntry*> refs;
+
+    // Direct hits: full content, one per line. References collected for a trailing line.
+    for (const auto& result : results) {
+        if (result.isReference) {
+            refs.push_back(result.entry);
+            continue;
+        }
+        if (hasContent) {
             ss << "\n";
+        }
+        ss << "- " << result.entry->title << ": " << result.entry->content;
+        hasContent = true;
+    }
+
+    // References: a single "Related:" line, title + short_description (title only if missing).
+    if (!refs.empty()) {
+        if (hasContent) {
+            ss << "\n";
+        }
+        ss << "Related: ";
+        for (size_t i = 0; i < refs.size(); ++i) {
+            ss << refs[i]->title;
+            if (!refs[i]->short_description.empty()) {
+                ss << ", " << refs[i]->short_description;
+            }
+            if (i + 1 < refs.size()) {
+                ss << "; ";
+            }
         }
     }
 

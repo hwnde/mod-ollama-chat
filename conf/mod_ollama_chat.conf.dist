@@ -968,3 +968,18 @@ OllamaChat.RAGSimilarityThreshold = 0.3
 #     Description: Template for including RAG information in bot prompts.
 #     Placeholders (named): {rag_info}
 OllamaChat.RAGPromptTemplate = "RELEVANT INFORMATION:\n{rag_info}\nUse this information to provide accurate and detailed responses when applicable."
+
+
+# OllamaChat.RAGExpandReferences
+#     Description: When enabled, after retrieving the top matches, also pull in the entries they
+#                  link to via their "references" field (one hop, deduped, capped). Rendered as a
+#                  short "Related: <name>, <short description>" line appended to the RAG info.
+#     Default:     1 (enabled)
+OllamaChat.RAGExpandReferences = 1
+
+
+
+# OllamaChat.RAGMaxReferences
+#     Description: Maximum number of referenced entries injected per query. Caps prompt growth.
+#     Default:     5
+OllamaChat.RAGMaxReferences = 5

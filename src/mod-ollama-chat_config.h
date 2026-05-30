@@ -269,6 +269,8 @@ extern std::string g_RAGDataPath;                        // Path to RAG data fil
 extern uint32_t    g_RAGMaxRetrievedItems;               // Max items to retrieve
 extern float       g_RAGSimilarityThreshold;             // Similarity threshold for retrieval
 extern std::string g_RAGPromptTemplate;                  // Template for RAG info in prompts
+extern bool        g_RAGExpandReferences;                // Follow entry references one hop
+extern uint32_t    g_RAGMaxReferences;                   // Max references injected per query
 
 class OllamaRAGSystem;
 extern OllamaRAGSystem* g_RAGSystem;                     // Global RAG system instance
