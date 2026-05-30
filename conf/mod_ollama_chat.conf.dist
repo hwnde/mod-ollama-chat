@@ -888,7 +888,7 @@ OllamaChat.GuildEventTypeRareGear_Chance = 65
 #                  Welcomes new members to the guild community.
 #     Example:     "Welcome to the guild!"
 #     Default:     member joined guild
-OllamaChat.GuildEventTypeGuildJoin = member joined guild
+OllamaChat.GuildEventTypeGuildJoin = has been sworn into
 OllamaChat.GuildEventTypeGuildJoin_Chance = 12
 
 # OllamaChat.GuildEventTypeGuildLogin
@@ -897,7 +897,7 @@ OllamaChat.GuildEventTypeGuildJoin_Chance = 12
 #                  Welcomes returning members to the guild.
 #     Example:     "{actor_name} has logged in to the guild!"
 #     Default:     member logged in
-OllamaChat.GuildEventTypeGuildLogin = member logged in
+OllamaChat.GuildEventTypeGuildLogin = rejoins the company of
 OllamaChat.GuildEventTypeGuildLogin_Chance = 85
 
 # OllamaChat.GuildEventTypeGuildLeave
@@ -906,7 +906,7 @@ OllamaChat.GuildEventTypeGuildLogin_Chance = 85
 #                  Acknowledges departing members.
 #     Example:     "Sad to see them go."
 #     Default:     member left guild
-OllamaChat.GuildEventTypeGuildLeave = member left guild
+OllamaChat.GuildEventTypeGuildLeave = has parted ways with
 OllamaChat.GuildEventTypeGuildLeave_Chance = 85
 
 # OllamaChat.GuildEventTypeGuildPromotion
@@ -915,7 +915,7 @@ OllamaChat.GuildEventTypeGuildLeave_Chance = 85
 #                  Celebrates advancement within the guild hierarchy.
 #     Example:     "Congrats on the promotion!"
 #     Default:     member got promoted
-OllamaChat.GuildEventTypeGuildPromotion = member got promoted
+OllamaChat.GuildEventTypeGuildPromotion = has risen in the ranks of
 OllamaChat.GuildEventTypeGuildPromotion_Chance = 25
 
 # OllamaChat.GuildEventTypeGuildDemotion
@@ -924,7 +924,7 @@ OllamaChat.GuildEventTypeGuildPromotion_Chance = 25
 #                  Handles rank changes sensitively.
 #     Example:     "Rank changes happen."
 #     Default:     member got demoted
-OllamaChat.GuildEventTypeGuildDemotion = member got demoted
+OllamaChat.GuildEventTypeGuildDemotion = has been lowered in rank within
 OllamaChat.GuildEventTypeGuildDemotion_Chance = 5
 
 # OllamaChat.GuildEventTypeGuildAchievement
