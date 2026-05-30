@@ -430,6 +430,93 @@ void LogCrossBotRepetition(Player* speaker, const std::string& emittedLine)
     }
 }
 
+std::string ComputeChannelKey(ChatChannelSourceLocal sourceLocal, Channel* channel, Player* sender)
+{
+    if (!sender)
+        return "";
+    switch (sourceLocal)
+    {
+        case SRC_PARTY_LOCAL:
+        case SRC_RAID_LOCAL:
+            if (Group* g = sender->GetGroup())
+                return "P:" + std::to_string(g->GetGUID().GetRawValue());
+            return "";
+        case SRC_GUILD_LOCAL:
+        case SRC_OFFICER_LOCAL:
+            if (uint32 gid = sender->GetGuildId())
+                return "G:" + std::to_string(gid);
+            return "";
+        case SRC_GENERAL_LOCAL:
+            if (channel)
+                return "C:" + channel->GetName();
+            return "";
+        default:
+            return "";
+    }
+}
+
+void AppendChannelMessage(const std::string& key, const std::string& sender, const std::string& text)
+{
+    if (key.empty() || text.empty())
+        return;
+    time_t now = time(nullptr);
+    std::lock_guard<std::mutex> lock(g_ChannelThreadsMutex);
+    ChannelThread& ct = g_ChannelThreads[key];
+    ct.messages.push_back({ sender, text, now });
+    ct.lastTouch = now;
+    while (ct.messages.size() > g_ConversationThreadWindow)
+        ct.messages.pop_front();
+    // LRU backstop: cap the number of channel keys (never evict the key just touched).
+    while (g_ChannelThreads.size() > g_ConversationThreadMaxChannels)
+    {
+        auto oldest = g_ChannelThreads.begin();
+        for (auto it = g_ChannelThreads.begin(); it != g_ChannelThreads.end(); ++it)
+            if (it->second.lastTouch < oldest->second.lastTouch)
+                oldest = it;
+        if (oldest->first == key)
+            break;
+        g_ChannelThreads.erase(oldest);
+    }
+}
+
+std::string GetChannelThreadPrompt(const std::string& key)
+{
+    if (!g_EnableConversationThreading || key.empty())
+        return "";
+    time_t now = time(nullptr);
+    time_t ttl = (time_t)g_ConversationThreadTTLMinutes * 60;
+    std::lock_guard<std::mutex> lock(g_ChannelThreadsMutex);
+    auto it = g_ChannelThreads.find(key);
+    if (it == g_ChannelThreads.end())
+        return "";
+    std::string thread;
+    for (const auto& m : it->second.messages)
+    {
+        if (now - m.ts > ttl)
+            continue; // freshness filter: never mix in stale lines
+        if (!thread.empty())
+            thread += "\n";
+        thread += m.sender + ": " + m.text;
+    }
+    if (thread.empty())
+        return "";
+    return SafeFormat(g_ConversationThreadTemplate, fmt::arg("thread", thread));
+}
+
+void CleanupChannelThreads()
+{
+    time_t now = time(nullptr);
+    time_t ttl = (time_t)g_ConversationThreadTTLMinutes * 60;
+    std::lock_guard<std::mutex> lock(g_ChannelThreadsMutex);
+    for (auto it = g_ChannelThreads.begin(); it != g_ChannelThreads.end(); )
+    {
+        if (now - it->second.lastTouch > ttl)
+            it = g_ChannelThreads.erase(it);
+        else
+            ++it;
+    }
+}
+
 void SaveBotConversationHistoryToDB()
 {
     std::lock_guard<std::mutex> lock(g_ConversationHistoryMutex);

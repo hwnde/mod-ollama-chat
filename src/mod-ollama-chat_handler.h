@@ -24,6 +24,7 @@ ChatChannelSourceLocal GetChannelSourceLocal(uint32_t type);
 void ProcessBotChatMessage(Player* bot, const std::string& msg, ChatChannelSourceLocal sourceLocal, Channel* channel);
 
 void SaveBotConversationHistoryToDB();
+void CleanupChannelThreads();
 
 class PlayerBotChatHandler : public PlayerScript
 {
