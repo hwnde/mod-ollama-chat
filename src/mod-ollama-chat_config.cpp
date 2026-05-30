@@ -143,6 +143,14 @@ uint32_t    g_CrossBotAntiRepetitionMaxLines = 6;
 std::string g_CrossBotAntiRepetitionTemplate;
 std::unordered_map<uint64_t, std::deque<std::string>> g_BotRecentReplies;
 std::mutex  g_RecentRepliesMutex;
+
+bool        g_EnableConversationThreading = true;
+uint32_t    g_ConversationThreadWindow = 8;
+uint32_t    g_ConversationThreadTTLMinutes = 30;
+uint32_t    g_ConversationThreadMaxChannels = 64;
+std::string g_ConversationThreadTemplate;
+std::unordered_map<std::string, ChannelThread> g_ChannelThreads;
+std::mutex  g_ChannelThreadsMutex;
 time_t g_LastHistorySaveTime = 0;
 
 // --------------------------------------------
@@ -534,6 +542,13 @@ void LoadOllamaChatConfig()
     g_CrossBotAntiRepetitionTemplate = sConfigMgr->GetOption<std::string>("OllamaChat.CrossBotAntiRepetitionTemplate", " [Others near you recently said these - say something different, do not echo them: {nearby_replies}]");
     g_AntiRepetitionTemplate = sConfigMgr->GetOption<std::string>("OllamaChat.AntiRepetitionTemplate",
         " [You recently said these - do not repeat them; say something clearly different and fresh: {recent_replies}]");
+
+    g_EnableConversationThreading   = sConfigMgr->GetOption<bool>("OllamaChat.ConversationThreading.Enable", true);
+    g_ConversationThreadWindow      = sConfigMgr->GetOption<uint32_t>("OllamaChat.ConversationThreadWindow", 8);
+    g_ConversationThreadTTLMinutes  = sConfigMgr->GetOption<uint32_t>("OllamaChat.ConversationThreadTTLMinutes", 30);
+    g_ConversationThreadMaxChannels = sConfigMgr->GetOption<uint32_t>("OllamaChat.ConversationThreadMaxChannels", 64);
+    g_ConversationThreadTemplate    = sConfigMgr->GetOption<std::string>("OllamaChat.ConversationThreadTemplate",
+        " [Recent talk in this channel - join in, reply to the latest naturally, do not just repeat others: {thread}]");
 
     g_EnableChatHistory               = sConfigMgr->GetOption<bool>("OllamaChat.EnableChatHistory", true);
 

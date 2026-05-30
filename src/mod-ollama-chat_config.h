@@ -143,6 +143,19 @@ extern uint32_t    g_CrossBotAntiRepetitionMaxLines; // hard cap on total inject
 extern std::string g_CrossBotAntiRepetitionTemplate;
 extern std::unordered_map<uint64_t, std::deque<std::string>> g_BotRecentReplies;
 extern std::mutex  g_RecentRepliesMutex;
+
+// --------------------------------------------
+// Conversation threading (per-channel recent-message buffer)
+// --------------------------------------------
+struct ThreadMsg     { std::string sender; std::string text; time_t ts; };
+struct ChannelThread { std::deque<ThreadMsg> messages; time_t lastTouch; };
+extern bool        g_EnableConversationThreading;
+extern uint32_t    g_ConversationThreadWindow;
+extern uint32_t    g_ConversationThreadTTLMinutes;
+extern uint32_t    g_ConversationThreadMaxChannels;
+extern std::string g_ConversationThreadTemplate;
+extern std::unordered_map<std::string, ChannelThread> g_ChannelThreads;
+extern std::mutex  g_ChannelThreadsMutex;
 extern time_t       g_LastHistorySaveTime;
 
 // --------------------------------------------
