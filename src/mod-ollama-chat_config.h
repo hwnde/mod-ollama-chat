@@ -130,6 +130,15 @@ extern uint32_t    g_SnapshotMaxSpells;
 // --------------------------------------------
 extern std::unordered_map<uint64_t, std::unordered_map<uint64_t, std::deque<std::pair<std::string, std::string>>>> g_BotConversationHistory;
 extern std::mutex   g_ConversationHistoryMutex;
+
+// --------------------------------------------
+// Anti-repetition memory (per-bot recent replies)
+// --------------------------------------------
+extern bool        g_EnableAntiRepetition;
+extern uint32_t    g_AntiRepetitionWindow;
+extern std::string g_AntiRepetitionTemplate;
+extern std::unordered_map<uint64_t, std::deque<std::string>> g_BotRecentReplies;
+extern std::mutex  g_RecentRepliesMutex;
 extern time_t       g_LastHistorySaveTime;
 
 // --------------------------------------------

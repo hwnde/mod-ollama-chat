@@ -610,6 +610,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
 
                 if (g_EnableChatBotSnapshotTemplate)
                     prompt += GenerateBotGameStateSnapshot(bot);
+                if (g_EnableAntiRepetition)
+                    prompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
 
                 return prompt;
 
@@ -723,7 +725,9 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                             LOG_INFO("server.loading", "[OllamaChat] Bot skipped random chatter due to API error");
                         return;
                     }
-                    
+
+                    AppendBotRecentReply(botGuid, response);
+
                     botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
                     if (!botPtr) return;
                     PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);

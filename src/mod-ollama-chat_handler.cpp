@@ -261,6 +261,37 @@ void AppendBotConversation(uint64_t botGuid, uint64_t playerGuid, const std::str
 
 }
 
+void AppendBotRecentReply(uint64_t botGuid, const std::string& reply)
+{
+    if (reply.empty())
+        return;
+    std::lock_guard<std::mutex> lock(g_RecentRepliesMutex);
+    auto& recents = g_BotRecentReplies[botGuid];
+    recents.push_back(reply);
+    while (recents.size() > g_AntiRepetitionWindow)
+        recents.pop_front();
+}
+
+std::string GetAntiRepetitionPrompt(uint64_t botGuid)
+{
+    if (!g_EnableAntiRepetition)
+        return "";
+    std::lock_guard<std::mutex> lock(g_RecentRepliesMutex);
+    auto it = g_BotRecentReplies.find(botGuid);
+    if (it == g_BotRecentReplies.end() || it->second.empty())
+        return "";
+    std::string list;
+    bool first = true;
+    for (const auto& r : it->second)
+    {
+        if (!first)
+            list += " | ";
+        list += "\"" + r + "\"";
+        first = false;
+    }
+    return SafeFormat(g_AntiRepetitionTemplate, fmt::arg("recent_replies", list));
+}
+
 void SaveBotConversationHistoryToDB()
 {
     std::lock_guard<std::mutex> lock(g_ConversationHistoryMutex);
@@ -1560,6 +1591,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                 UpdateBotPlayerSentiment(botPtr, senderPtr, msg);
                 
                 AppendBotConversation(botGuid, senderGuid, msg, response);
+                AppendBotRecentReply(botGuid, response);
                 if (botPtr->IsInWorld() && senderPtr->IsInWorld())
                 {
                     float respDistance = senderPtr->GetDistance(botPtr);
@@ -1834,6 +1866,8 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
     if(g_EnableChatBotSnapshotTemplate)
     {
         prompt += GenerateBotGameStateSnapshot(bot);
+        if (g_EnableAntiRepetition)
+            prompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
     }
 
     // Debug logging for full prompt including RAG information

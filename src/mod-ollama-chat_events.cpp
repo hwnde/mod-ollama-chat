@@ -342,6 +342,8 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                 return;
             }
 
+            AppendBotRecentReply(botGuid, response);
+
             // reacquire pointers before use
             botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
             if (!botPtr) return;
@@ -506,6 +508,9 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
 
     if (g_EnableChatBotSnapshotTemplate)
         builtPrompt += GenerateBotGameStateSnapshot(bot);
+
+    if (g_EnableAntiRepetition)
+        builtPrompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
 
     return builtPrompt;
 }

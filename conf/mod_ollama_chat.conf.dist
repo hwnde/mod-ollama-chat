@@ -464,6 +464,9 @@ OllamaChat.SnapshotMaxGroup     = 4
 OllamaChat.SnapshotMaxCreatures = 2
 OllamaChat.SnapshotMaxPlayers   = 2
 OllamaChat.SnapshotMaxSpells    = 2
+OllamaChat.AntiRepetition.Enable = 1
+OllamaChat.AntiRepetition.Window = 6
+OllamaChat.AntiRepetitionTemplate = " [You recently said these - do not repeat them; say something clearly different and fresh: {recent_replies}]"
 
 # ----------------------------------------------
 # SENTIMENT TRACKING SYSTEM
