@@ -46,6 +46,10 @@ uint32_t    g_OllamaNumPredict = 40;
 float       g_OllamaTemperature = 0.8f;
 float       g_OllamaTopP = 0.95f;
 float       g_OllamaRepeatPenalty = 1.1f;
+uint32_t    g_OllamaTopK = 0;
+float       g_OllamaMinP = 0.0f;
+float       g_OllamaPresencePenalty = 0.0f;
+float       g_OllamaFrequencyPenalty = 0.0f;
 uint32_t    g_OllamaNumCtx = 0;
 uint32_t    g_OllamaNumThreads = 0;
 std::string g_OllamaStop = "";
@@ -215,6 +219,27 @@ std::string g_GuildEventTypeGuildPromotion = "";
 std::string g_GuildEventTypeGuildDemotion = "";
 std::string g_GuildEventTypeGuildLogin = "";
 std::string g_GuildEventTypeGuildAchievement = "";
+
+// additional event-chatter hook type strings and chances
+std::string g_EventTypeEnteredZone;
+std::string g_EventTypeKilledByCreature;
+std::string g_EventTypeReputationRank;
+std::string g_EventTypeResurrected;
+std::string g_EventTypeEnteredCombat;
+std::string g_EventTypeLeftCombat;
+
+uint32_t g_PlayerEventChance_EnteredZone = 0;
+uint32_t g_BotEventChance_EnteredZone = 0;
+uint32_t g_PlayerEventChance_KilledByCreature = 0;
+uint32_t g_BotEventChance_KilledByCreature = 0;
+uint32_t g_PlayerEventChance_ReputationRank = 0;
+uint32_t g_BotEventChance_ReputationRank = 0;
+uint32_t g_PlayerEventChance_Resurrected = 0;
+uint32_t g_BotEventChance_Resurrected = 0;
+uint32_t g_PlayerEventChance_EnteredCombat = 0;
+uint32_t g_BotEventChance_EnteredCombat = 0;
+uint32_t g_PlayerEventChance_LeftCombat = 0;
+uint32_t g_BotEventChance_LeftCombat = 0;
 
 // --------------------------------------------
 // Event Chatter Templates
@@ -390,6 +415,10 @@ void LoadOllamaChatConfig()
     g_OllamaTemperature               = sConfigMgr->GetOption<float>("OllamaChat.Temperature", 0.8f);
     g_OllamaTopP                      = sConfigMgr->GetOption<float>("OllamaChat.TopP", 0.95f);
     g_OllamaRepeatPenalty             = sConfigMgr->GetOption<float>("OllamaChat.RepeatPenalty", 1.1f);
+    g_OllamaTopK                      = sConfigMgr->GetOption<uint32_t>("OllamaChat.TopK", 0);
+    g_OllamaMinP                      = sConfigMgr->GetOption<float>("OllamaChat.MinP", 0.0f);
+    g_OllamaPresencePenalty           = sConfigMgr->GetOption<float>("OllamaChat.PresencePenalty", 0.0f);
+    g_OllamaFrequencyPenalty          = sConfigMgr->GetOption<float>("OllamaChat.FrequencyPenalty", 0.0f);
     g_OllamaNumCtx                    = sConfigMgr->GetOption<uint32_t>("OllamaChat.NumCtx", 0);
     g_OllamaNumThreads                = sConfigMgr->GetOption<uint32_t>("OllamaChat.NumThreads", 0);
     g_OllamaStop                      = sConfigMgr->GetOption<std::string>("OllamaChat.Stop", "");
@@ -513,6 +542,27 @@ void LoadOllamaChatConfig()
     g_EventTypeAchievement        = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeAchievement", "");
     g_EventTypeUsedObject         = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeUsedObject", "");
 
+    // additional event-chatter hook type strings
+    g_EventTypeEnteredZone      = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeEnteredZone", "entered zone");
+    g_EventTypeKilledByCreature = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeKilledByCreature", "killed by creature");
+    g_EventTypeReputationRank   = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeReputationRank", "reputation rank");
+    g_EventTypeResurrected      = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeResurrected", "resurrected");
+    g_EventTypeEnteredCombat    = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeEnteredCombat", "entered combat");
+    g_EventTypeLeftCombat       = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeLeftCombat", "left combat");
+
+    // per-event player/bot chances (default 0 = off)
+    g_PlayerEventChance_EnteredZone      = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.EnteredZone", 0);
+    g_BotEventChance_EnteredZone         = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.EnteredZone", 0);
+    g_PlayerEventChance_KilledByCreature = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.KilledByCreature", 0);
+    g_BotEventChance_KilledByCreature    = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.KilledByCreature", 0);
+    g_PlayerEventChance_ReputationRank   = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.ReputationRank", 0);
+    g_BotEventChance_ReputationRank      = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.ReputationRank", 0);
+    g_PlayerEventChance_Resurrected      = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.Resurrected", 0);
+    g_BotEventChance_Resurrected         = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.Resurrected", 0);
+    g_PlayerEventChance_EnteredCombat    = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.EnteredCombat", 0);
+    g_BotEventChance_EnteredCombat       = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.EnteredCombat", 0);
+    g_PlayerEventChance_LeftCombat       = sConfigMgr->GetOption<uint32_t>("OllamaChat.PlayerEventChance.LeftCombat", 0);
+    g_BotEventChance_LeftCombat          = sConfigMgr->GetOption<uint32_t>("OllamaChat.BotEventChance.LeftCombat", 0);
 
     // Load extra blacklist commands from config (comma-separated list)
     std::string extraBlacklist = sConfigMgr->GetOption<std::string>("OllamaChat.BlacklistCommands", "");

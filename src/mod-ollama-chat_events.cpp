@@ -10,12 +10,17 @@
 #include "Guild.h"
 #include "PlayerbotAI.h"
 #include "PlayerbotMgr.h"
+#include "RandomPlayerbotMgr.h"
 #include "ChannelMgr.h"
 #include "Channel.h"
 #include "AiFactory.h"
 #include "SpellMgr.h"
 #include "AchievementMgr.h"
 #include "GameObject.h"
+#include "Creature.h"
+#include "DBCStores.h"
+#include "World.h"
+#include "SharedDefines.h"
 #include <vector>
 #include <thread>
 #include <random>
@@ -26,22 +31,25 @@
 static OllamaBotEventChatter eventChatter;
 static std::unordered_map<Player*, std::chrono::steady_clock::time_point> botEventCooldowns;
 
-void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, std::string detail)
+void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, std::string detail, Guild* guildOverride)
 {
     if (!g_Enable || !g_EnableEventChatter)
         return;
-    
+
     if (!source)
     {
        return;
     }
+
+    // Guild hooks pass the guild explicitly; everyone else derives it from the source.
+    Guild* eventGuild = guildOverride ? guildOverride : source->GetGuild();
 
     bool isSourceBot = PlayerbotsMgr::instance().GetPlayerbotAI(source) != nullptr;
     bool hasNearbyRealPlayer = false;
     bool isGuildEvent = false;
 
     // Only set isGuildEvent for specific event types
-    if (source->GetGuild() && g_EnableGuildEventChatter) {
+    if (eventGuild && g_EnableGuildEventChatter) {
         // List of event types that are considered guild events
         if (
             type == g_GuildEventTypeGuildJoin ||
@@ -56,7 +64,7 @@ void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, 
             type == g_GuildEventTypeGuildLogin
         ) {
             // Check if there are real players in the guild
-            Guild* guild = source->GetGuild();
+            Guild* guild = eventGuild;
             for (auto const& pair : ObjectAccessor::GetPlayers()) {
                 Player* player = pair.second;
                 if (!player || !player->IsInWorld())
@@ -105,7 +113,7 @@ void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, 
     if (isGuildEvent)
     {
         // For guild events, get guild bots
-        Guild* guild = source->GetGuild();
+        Guild* guild = eventGuild;
         for (auto const& pair : ObjectAccessor::GetPlayers())
         {
             Player* player = pair.second;
@@ -197,6 +205,30 @@ void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, 
         eventChance = g_EventTypeAchievement_Chance;
     } else if (type == g_EventTypeUsedObject) {
         eventChance = g_EventTypeUsedObject_Chance;
+    }
+    else if (type == g_EventTypeEnteredZone)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_EnteredZone : g_PlayerEventChance_EnteredZone;
+    }
+    else if (type == g_EventTypeKilledByCreature)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_KilledByCreature : g_PlayerEventChance_KilledByCreature;
+    }
+    else if (type == g_EventTypeReputationRank)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_ReputationRank : g_PlayerEventChance_ReputationRank;
+    }
+    else if (type == g_EventTypeResurrected)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_Resurrected : g_PlayerEventChance_Resurrected;
+    }
+    else if (type == g_EventTypeEnteredCombat)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_EnteredCombat : g_PlayerEventChance_EnteredCombat;
+    }
+    else if (type == g_EventTypeLeftCombat)
+    {
+        eventChance = isSourceBot ? g_BotEventChance_LeftCombat : g_PlayerEventChance_LeftCombat;
     }
 
     // Add chance checks for all GuildEventType entries
@@ -663,53 +695,138 @@ void ChatOnGameObjectUse::OnGameObjectUse(Player* player, GameObject* go)
     eventChatter.DispatchGameEvent(player, g_EventTypeUsedObject, go->GetGOInfo()->name);
 }
 
-ChatOnGuildMemberChange::ChatOnGuildMemberChange() : PlayerScript("ChatOnGuildMemberChange") {}
+// additional event-chatter hooks
 
-void ChatOnGuildMemberChange::OnGuildMemberJoin(Player* player, Guild* /*guild*/)
+ChatOnZone::ChatOnZone() : PlayerScript("ChatOnZone") {}
+
+void ChatOnZone::OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 /*newArea*/)
 {
-    if (!player || !player->GetGuild() || !g_EnableGuildEventChatter)
+    if (!player)
         return;
-        
+    std::string zoneName;
+    if (AreaTableEntry const* zone = sAreaTableStore.LookupEntry(newZone))
+    {
+        zoneName = zone->area_name[sWorld->GetDefaultDbcLocale()];
+        if (zoneName.empty())
+            zoneName = zone->area_name[LOCALE_enUS];
+    }
+    eventChatter.DispatchGameEvent(player, g_EventTypeEnteredZone, zoneName);
+}
+
+ChatOnKilledByCreature::ChatOnKilledByCreature() : PlayerScript("ChatOnKilledByCreature") {}
+
+void ChatOnKilledByCreature::OnPlayerKilledByCreature(Creature* killer, Player* killed)
+{
+    if (!killer || !killed)
+        return;
+    eventChatter.DispatchGameEvent(killed, g_EventTypeKilledByCreature, killer->GetName());
+}
+
+ChatOnReputationRank::ChatOnReputationRank() : PlayerScript("ChatOnReputationRank") {}
+
+void ChatOnReputationRank::OnPlayerReputationRankChange(Player* player, uint32 factionID,
+                                                        ReputationRank /*newRank*/,
+                                                        ReputationRank /*oldRank*/, bool increased)
+{
+    if (!player || !increased) // only celebrate rank-ups, not losses
+        return;
+    std::string factionName;
+    if (FactionEntry const* faction = sFactionStore.LookupEntry(factionID))
+    {
+        factionName = faction->name[sWorld->GetDefaultDbcLocale()];
+        if (factionName.empty())
+            factionName = faction->name[LOCALE_enUS];
+    }
+    eventChatter.DispatchGameEvent(player, g_EventTypeReputationRank, factionName);
+}
+
+ChatOnResurrect::ChatOnResurrect() : PlayerScript("ChatOnResurrect") {}
+
+void ChatOnResurrect::OnPlayerResurrect(Player* player, float /*restorePercent*/, bool& /*applySickness*/)
+{
+    if (!player)
+        return;
+    eventChatter.DispatchGameEvent(player, g_EventTypeResurrected, "");
+}
+
+ChatOnCombat::ChatOnCombat() : PlayerScript("ChatOnCombat") {}
+
+void ChatOnCombat::OnPlayerEnterCombat(Player* player, Unit* enemy)
+{
+    if (!player)
+        return;
+    std::string enemyName = enemy ? enemy->GetName() : "";
+    eventChatter.DispatchGameEvent(player, g_EventTypeEnteredCombat, enemyName);
+}
+
+void ChatOnCombat::OnPlayerLeaveCombat(Player* player)
+{
+    if (!player)
+        return;
+    eventChatter.DispatchGameEvent(player, g_EventTypeLeftCombat, "");
+}
+
+ChatOnGuildEvent::ChatOnGuildEvent() : GuildScript("ChatOnGuildEvent") {}
+
+void ChatOnGuildEvent::OnAddMember(Guild* guild, Player* player, uint8& /*plRank*/)
+{
+    if (!player || !guild || !g_EnableGuildEventChatter)
+        return;
+
     if (!g_GuildEventTypeGuildJoin.empty())
-        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildJoin, player->GetGuild()->GetName());
+        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildJoin, guild->GetName(), guild);
 }
 
-void ChatOnGuildMemberChange::OnGuildMemberLeave(Player* player, Guild* guild)
+void ChatOnGuildEvent::OnRemoveMember(Guild* guild, Player* player, bool /*isDisbanding*/, bool /*isKicked*/)
 {
     if (!player || !guild || !g_EnableGuildEventChatter)
         return;
-        
+
+    // player->GetGuild() may already be cleared at this point, so pass the guild explicitly.
     if (!g_GuildEventTypeGuildLeave.empty())
-        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildLeave, guild->GetName());
+        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildLeave, guild->GetName(), guild);
 }
 
-void ChatOnGuildMemberChange::OnGuildMemberRankChange(Player* player, Guild* /*guild*/, uint8 /*oldRank*/, uint8 newRank)
+void ChatOnGuildEvent::OnEvent(Guild* guild, uint8 eventType, ObjectGuid::LowType /*playerGuid1*/,
+                               ObjectGuid::LowType playerGuid2, uint8 /*newRank*/)
 {
-    if (!player || !player->GetGuild() || !g_EnableGuildEventChatter)
+    if (!guild || !g_EnableGuildEventChatter)
         return;
-        
-    if (newRank < player->GetGuild()->GetMember(player->GetGUID())->GetRankId())
-    {
-        // Promotion
-        if (!g_GuildEventTypeGuildPromotion.empty())
-            eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildPromotion, std::to_string(newRank));
-    }
-    else
-    {
-        // Demotion
-        if (!g_GuildEventTypeGuildDemotion.empty())
-            eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildDemotion, std::to_string(newRank));
-    }
+
+    // Only promote/demote are handled here; join/leave come from OnAddMember/OnRemoveMember.
+    bool isPromotion = (eventType == GUILD_EVENT_LOG_PROMOTE_PLAYER);
+    bool isDemotion = (eventType == GUILD_EVENT_LOG_DEMOTE_PLAYER);
+    if (!isPromotion && !isDemotion)
+        return;
+
+    // For promote/demote, playerGuid2 is the affected member.
+    Player* target = ObjectAccessor::FindPlayer(ObjectGuid::Create<HighGuid::Player>(playerGuid2));
+    if (!target)
+        return;
+
+    std::string const& eventName = isPromotion ? g_GuildEventTypeGuildPromotion : g_GuildEventTypeGuildDemotion;
+    if (eventName.empty())
+        return;
+
+    eventChatter.DispatchGameEvent(target, eventName, guild->GetName(), guild);
 }
 
-// Add new event for non-bot guild member login
-void ChatOnGuildMemberChange::OnGuildMemberLogin(Player* player, Guild* guild)
+ChatOnLogin::ChatOnLogin() : PlayerScript("ChatOnLogin") {}
+
+void ChatOnLogin::OnPlayerLogin(Player* player)
 {
-    if (!player || !guild || !g_EnableGuildEventChatter)
+    if (!player || !g_EnableGuildEventChatter)
         return;
-    if (PlayerbotsMgr::instance().GetPlayerbotAI(player))
-        return; // Only real players
+    // Only real players trigger guild-login chatter. GetPlayerbotAI() is unreliable here because
+    // mod-playerbots attaches the bot AI in its own OnPlayerLogin, which can run after this hook;
+    // sRandomPlayerbotMgr.IsRandomBot() reads a registry populated before any bot logs in, so it
+    // catches the mass bot login at server startup that would otherwise flood the event queue.
+    if (PlayerbotsMgr::instance().GetPlayerbotAI(player) || sRandomPlayerbotMgr.IsRandomBot(player))
+        return;
+    Guild* guild = player->GetGuild();
+    if (!guild)
+        return;
     if (!g_GuildEventTypeGuildLogin.empty())
-        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildLogin, guild->GetName());
+        eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildLogin, guild->GetName(), guild);
 }
 

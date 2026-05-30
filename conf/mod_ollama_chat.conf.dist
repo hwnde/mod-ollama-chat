@@ -84,6 +84,34 @@ OllamaChat.TopP = 0.95
 #     Default:     1.1
 OllamaChat.RepeatPenalty = 1.1
 
+# OllamaChat.TopK
+#     Description: Limits sampling to the top K most likely tokens. Higher = more diverse.
+#                  0 = unset (uses the model default, typically 40). Typical: 40.
+#     Example:     OllamaChat.TopK = 40
+#     Default:     0
+OllamaChat.TopK = 0
+
+# OllamaChat.MinP
+#     Description: Min-p sampling: keep tokens with probability >= MinP * (top token prob).
+#                  An alternative to TopP. 0.0 = unset (model default). Typical: 0.05.
+#     Example:     OllamaChat.MinP = 0.05
+#     Default:     0.0
+OllamaChat.MinP = 0.0
+
+# OllamaChat.PresencePenalty
+#     Description: Penalizes tokens that have already appeared, encouraging new topics.
+#                  0.0 = unset (model default / no penalty). Typical: 0.1-0.5.
+#     Example:     OllamaChat.PresencePenalty = 0.2
+#     Default:     0.0
+OllamaChat.PresencePenalty = 0.0
+
+# OllamaChat.FrequencyPenalty
+#     Description: Penalizes tokens proportionally to how often they have appeared,
+#                  reducing repetition. 0.0 = unset (model default / no penalty). Typical: 0.1-0.5.
+#     Example:     OllamaChat.FrequencyPenalty = 0.2
+#     Default:     0.0
+OllamaChat.FrequencyPenalty = 0.0
+
 # OllamaChat.NumCtx
 #     Description: Maximum context length (in tokens) sent to the model.
 #                  0 = model default. Use a value only if you want to restrict or expand context.
@@ -639,6 +667,37 @@ OllamaChat.EventTypeAchievement_Chance = 75
 #     Default:     used object
 OllamaChat.EventTypeUsedObject = used object
 OllamaChat.EventTypeUsedObject_Chance = 10
+
+# --------------------------------------------
+# ADDITIONAL EVENT HOOKS — all default 0 (off / opt-in)
+# Each event has a type string (the prompt label) and split chances:
+#   PlayerEventChance.<Event> = chance (0-100) when the actor is a real player
+#   BotEventChance.<Event>    = chance (0-100) when the actor is a bot
+# --------------------------------------------
+
+OllamaChat.EventTypeEnteredZone      = entered zone
+OllamaChat.PlayerEventChance.EnteredZone = 0
+OllamaChat.BotEventChance.EnteredZone    = 0
+
+OllamaChat.EventTypeKilledByCreature = killed by creature
+OllamaChat.PlayerEventChance.KilledByCreature = 0
+OllamaChat.BotEventChance.KilledByCreature    = 0
+
+OllamaChat.EventTypeReputationRank   = reputation rank
+OllamaChat.PlayerEventChance.ReputationRank = 0
+OllamaChat.BotEventChance.ReputationRank    = 0
+
+OllamaChat.EventTypeResurrected      = resurrected
+OllamaChat.PlayerEventChance.Resurrected = 0
+OllamaChat.BotEventChance.Resurrected    = 0
+
+OllamaChat.EventTypeEnteredCombat    = entered combat
+OllamaChat.PlayerEventChance.EnteredCombat = 0
+OllamaChat.BotEventChance.EnteredCombat    = 0
+
+OllamaChat.EventTypeLeftCombat       = left combat
+OllamaChat.PlayerEventChance.LeftCombat = 0
+OllamaChat.BotEventChance.LeftCombat    = 0
 
 # OllamaChat.EventCooldownTime
 #     Description: The cooldown time (in seconds) for bots to respond to an event.

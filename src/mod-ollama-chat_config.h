@@ -47,6 +47,11 @@ extern uint32_t    g_OllamaNumPredict;
 extern float       g_OllamaTemperature;
 extern float       g_OllamaTopP;
 extern float       g_OllamaRepeatPenalty;
+// additional Ollama sampling parameters (0 / 0.0 = unset, not sent -> model default)
+extern uint32_t    g_OllamaTopK;
+extern float       g_OllamaMinP;
+extern float       g_OllamaPresencePenalty;
+extern float       g_OllamaFrequencyPenalty;
 extern uint32_t    g_OllamaNumCtx;
 extern uint32_t    g_OllamaNumThreads;
 extern std::string g_OllamaStop;
@@ -186,6 +191,28 @@ extern std::string g_GuildEventTypeGuildPromotion;
 extern std::string g_GuildEventTypeGuildDemotion;
 extern std::string g_GuildEventTypeGuildLogin;
 extern std::string g_GuildEventTypeGuildAchievement;
+
+// additional event-chatter hook type strings
+extern std::string g_EventTypeEnteredZone;
+extern std::string g_EventTypeKilledByCreature;
+extern std::string g_EventTypeReputationRank;
+extern std::string g_EventTypeResurrected;
+extern std::string g_EventTypeEnteredCombat;
+extern std::string g_EventTypeLeftCombat;
+
+// per-event player/bot chances (0-100); all default 0 (opt-in)
+extern uint32_t g_PlayerEventChance_EnteredZone;
+extern uint32_t g_BotEventChance_EnteredZone;
+extern uint32_t g_PlayerEventChance_KilledByCreature;
+extern uint32_t g_BotEventChance_KilledByCreature;
+extern uint32_t g_PlayerEventChance_ReputationRank;
+extern uint32_t g_BotEventChance_ReputationRank;
+extern uint32_t g_PlayerEventChance_Resurrected;
+extern uint32_t g_BotEventChance_Resurrected;
+extern uint32_t g_PlayerEventChance_EnteredCombat;
+extern uint32_t g_BotEventChance_EnteredCombat;
+extern uint32_t g_PlayerEventChance_LeftCombat;
+extern uint32_t g_BotEventChance_LeftCombat;
 
 // Chance variables for normal events
 extern int g_EventTypeDefeated_Chance;

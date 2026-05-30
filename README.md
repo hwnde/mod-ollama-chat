@@ -54,7 +54,7 @@
   Reload the module’s config and personality packs in-game or from the server console, without restarting.
 
 - **Event-Based Chatter:**  
-  Player bots now comment on key in-game events such as quest completion, rare loot, deaths, PvP kills, leveling up, duels, learning spells, and achievements. Remarks are context-aware, immersive, and personality-driven, making the world feel much more alive.
+  Player bots now comment on key in-game events such as quest completion, rare loot, deaths, PvP kills, leveling up, duels, learning spells, and achievements. Remarks are context-aware, immersive, and personality-driven, making the world feel much more alive. Additional opt-in events include entering zones, being slain by creatures, reputation rank-ups, resurrecting, and entering or leaving combat. Each of these new events supports separate player-vs-bot trigger chances (`PlayerEventChance.<Event>` / `BotEventChance.<Event>`) and defaults to off (0) to avoid spam.
 
 - **Party-Only Bot Responses:**  
   When enabled, bots will only respond to real player messages and events when they are in the same non-raid party. This helps reduce chat spam while maintaining full bot-to-bot communication within parties for immersive group interactions.
@@ -193,6 +193,23 @@ This should return a JSON response listing available models. If you get a connec
 ## Configuration Options
 
 > For a complete list of all available configuration options with comments and defaults, see `mod-ollama-chat.conf.dist` included in this repository.
+
+### Key Inference / Sampling Parameters
+
+These options control how the Ollama model generates text. All are set in `mod-ollama-chat.conf`:
+
+| Option | Default | Description |
+|---|---|---|
+| `OllamaChat.NumPredict` | `40` | Max tokens to generate. `0` = unlimited. |
+| `OllamaChat.Temperature` | `0.8` | Output randomness. Lower = more focused; higher = more creative. |
+| `OllamaChat.TopP` | `0.95` | Nucleus sampling threshold. |
+| `OllamaChat.RepeatPenalty` | `1.1` | Penalizes repeated tokens. `1.0` = no penalty. |
+| `OllamaChat.TopK` | `0` | Limits sampling to the top K tokens. `0` = unset (model default, typically 40). |
+| `OllamaChat.MinP` | `0.0` | Min-p sampling: keeps tokens with prob >= MinP × top-token prob. `0.0` = unset (model default). Alternative to TopP. |
+| `OllamaChat.PresencePenalty` | `0.0` | Penalizes tokens that have already appeared, encouraging new topics. `0.0` = unset (model default / no penalty). |
+| `OllamaChat.FrequencyPenalty` | `0.0` | Penalizes tokens proportionally to how often they have appeared, reducing repetition. `0.0` = unset (model default / no penalty). |
+
+These four parameters (`TopK`, `MinP`, `PresencePenalty`, `FrequencyPenalty`) default to `0` / `0.0`, which means they are **not sent** to Ollama and the model uses its own defaults. Behavior is unchanged unless an operator explicitly sets a non-zero value.
 
 ## Text Commands
 
