@@ -997,6 +997,9 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
         return;
     }
     if (lang == LANG_ADDON) return;
+
+    if (g_EnableConversationThreading)
+        AppendChannelMessage(ComputeChannelKey(sourceLocal, channel, player), player->GetName(), msg);
     std::string chanName = (channel != nullptr) ? channel->GetName() : "Unknown";
     uint32_t channelId = (channel != nullptr) ? channel->GetChannelId() : 0;
     std::string receiverName = (receiver != nullptr) ? receiver->GetName() : "None";
@@ -1582,6 +1585,8 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
             continue;
         }
         std::string prompt = GenerateBotPrompt(bot, msg, player);
+        if (g_EnableConversationThreading)
+            prompt += GetChannelThreadPrompt(ComputeChannelKey(sourceLocal, channel, player));
         uint64_t botGuid = bot->GetGUID().GetRawValue();
         
         std::thread([botGuid, senderGuid, prompt, sourceLocal, channelId = (channel ? channel->GetChannelId() : 0), channelName = (channel ? channel->GetName() : ""), msg]() {
