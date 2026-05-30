@@ -47,5 +47,7 @@ public:
 std::string GenerateBotGameStateSnapshot(Player* bot);
 void AppendBotRecentReply(uint64_t botGuid, const std::string& reply);
 std::string GetAntiRepetitionPrompt(uint64_t botGuid);
+std::string GetNearbyBotsRecentReplies(Player* speaker);
+void LogCrossBotRepetition(Player* speaker, const std::string& emittedLine);
 
 #endif // MOD_OLLAMA_CHAT_HANDLER_H

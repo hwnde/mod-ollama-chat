@@ -15,6 +15,7 @@
 #include "ChannelMgr.h"
 #include <sstream>
 #include <vector>
+#include <unordered_set>
 #include <fmt/core.h>
 #include <nlohmann/json.hpp>
 #include <thread>
@@ -290,6 +291,143 @@ std::string GetAntiRepetitionPrompt(uint64_t botGuid)
         first = false;
     }
     return SafeFormat(g_AntiRepetitionTemplate, fmt::arg("recent_replies", list));
+}
+
+// Build a prompt fragment listing recent lines spoken by OTHER bots within Say range of the
+// speaker, so co-located bots can be told not to echo each other. Reads the existing per-bot
+// buffer only (no new recording). Critical section is a pure copy-out; formatting is done
+// outside the lock.
+std::string GetNearbyBotsRecentReplies(Player* speaker)
+{
+    if (!g_EnableCrossBotAntiRepetition || !speaker || !speaker->IsInWorld())
+        return "";
+
+    // Snapshot the speaker's own recent lines so we don't re-list what the per-bot prompt covers.
+    std::unordered_set<std::string> ownLines;
+    {
+        std::lock_guard<std::mutex> lock(g_RecentRepliesMutex);
+        auto it = g_BotRecentReplies.find(speaker->GetGUID().GetRawValue());
+        if (it != g_BotRecentReplies.end())
+            for (const auto& r : it->second)
+                ownLines.insert(r);
+    }
+
+    // Find nearby bots (same proximity test as random-chatter Say gating).
+    std::vector<Player*> nearbyBots;
+    for (auto const& pair : ObjectAccessor::GetPlayers())
+    {
+        Player* p = pair.second;
+        if (!p || !p->IsInWorld() || p == speaker)
+            continue;
+        if (p->GetMap() != speaker->GetMap())
+            continue;
+        if (!PlayerbotsMgr::instance().GetPlayerbotAI(p))
+            continue;
+        if (speaker->GetDistance(p) <= g_SayDistance)
+            nearbyBots.push_back(p);
+    }
+    if (nearbyBots.empty())
+        return "";
+
+    // Copy out each nearby bot's most-recent Window lines under the lock; format later.
+    std::vector<std::string> collected;
+    {
+        std::lock_guard<std::mutex> lock(g_RecentRepliesMutex);
+        for (Player* b : nearbyBots)
+        {
+            auto it = g_BotRecentReplies.find(b->GetGUID().GetRawValue());
+            if (it == g_BotRecentReplies.end() || it->second.empty())
+                continue;
+            const auto& dq = it->second;
+            uint32_t n = 0;
+            for (auto rit = dq.rbegin(); rit != dq.rend() && n < g_CrossBotAntiRepetitionWindow; ++rit, ++n)
+                collected.push_back(*rit);
+        }
+    }
+
+    // Dedup verbatim, drop anything the speaker itself recently said, cap total.
+    std::vector<std::string> finalLines;
+    std::unordered_set<std::string> seen;
+    for (const auto& line : collected)
+    {
+        if (line.empty() || ownLines.count(line) || seen.count(line))
+            continue;
+        seen.insert(line);
+        finalLines.push_back(line);
+        if (finalLines.size() >= static_cast<size_t>(g_CrossBotAntiRepetitionMaxLines))
+            break;
+    }
+    if (finalLines.empty())
+        return "";
+
+    std::string list;
+    bool first = true;
+    for (const auto& r : finalLines)
+    {
+        if (!first)
+            list += " | ";
+        list += "\"" + r + "\"";
+        first = false;
+    }
+    return SafeFormat(g_CrossBotAntiRepetitionTemplate, fmt::arg("nearby_replies", list));
+}
+
+// Token-set Jaccard similarity of two lines (whitespace tokens). Used only by the CROSSREP
+// measurement detector below.
+static double CrossRepTokenJaccard(const std::string& a, const std::string& b)
+{
+    std::unordered_set<std::string> ta, tb;
+    {
+        std::stringstream ss(a);
+        std::string t;
+        while (ss >> t) ta.insert(t);
+    }
+    {
+        std::stringstream ss(b);
+        std::string t;
+        while (ss >> t) tb.insert(t);
+    }
+    if (ta.empty() || tb.empty())
+        return 0.0;
+    size_t inter = 0;
+    for (const auto& t : ta)
+        if (tb.count(t))
+            ++inter;
+    size_t uni = ta.size() + tb.size() - inter;
+    return uni ? static_cast<double>(inter) / static_cast<double>(uni) : 0.0;
+}
+
+// Measurement detector (DebugEnabled-gated, independent of the Enable toggle): logs when the
+// speaker's just-emitted line verbatim- or high-overlap-matches a nearby bot's last line.
+void LogCrossBotRepetition(Player* speaker, const std::string& emittedLine)
+{
+    if (!g_DebugEnabled || !speaker || !speaker->IsInWorld() || emittedLine.empty())
+        return;
+    for (auto const& pair : ObjectAccessor::GetPlayers())
+    {
+        Player* p = pair.second;
+        if (!p || !p->IsInWorld() || p == speaker)
+            continue;
+        if (p->GetMap() != speaker->GetMap())
+            continue;
+        if (!PlayerbotsMgr::instance().GetPlayerbotAI(p))
+            continue;
+        if (speaker->GetDistance(p) > g_SayDistance)
+            continue;
+        std::string otherLast;
+        {
+            std::lock_guard<std::mutex> lock(g_RecentRepliesMutex);
+            auto it = g_BotRecentReplies.find(p->GetGUID().GetRawValue());
+            if (it != g_BotRecentReplies.end() && !it->second.empty())
+                otherLast = it->second.back();
+        }
+        if (otherLast.empty())
+            continue;
+        if (otherLast == emittedLine || CrossRepTokenJaccard(emittedLine, otherLast) >= 0.8)
+            LOG_INFO("server.loading",
+                "[Ollama Chat] CROSSREP hit: {} echoed {} within {}y :: \"{}\"",
+                speaker->GetName(), p->GetName(), speaker->GetDistance(p), emittedLine);
+    }
 }
 
 void SaveBotConversationHistoryToDB()
@@ -1592,6 +1730,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                 
                 AppendBotConversation(botGuid, senderGuid, msg, response);
                 AppendBotRecentReply(botGuid, response);
+                LogCrossBotRepetition(botPtr, response);
                 if (botPtr->IsInWorld() && senderPtr->IsInWorld())
                 {
                     float respDistance = senderPtr->GetDistance(botPtr);
@@ -1869,6 +2008,9 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
         if (g_EnableAntiRepetition)
             prompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
     }
+
+    if (g_EnableCrossBotAntiRepetition)
+        prompt += GetNearbyBotsRecentReplies(bot);
 
     // Debug logging for full prompt including RAG information
     if (g_DebugEnabled && g_DebugShowFullPrompt) {

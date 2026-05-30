@@ -137,6 +137,10 @@ extern std::mutex   g_ConversationHistoryMutex;
 extern bool        g_EnableAntiRepetition;
 extern uint32_t    g_AntiRepetitionWindow;
 extern std::string g_AntiRepetitionTemplate;
+extern bool        g_EnableCrossBotAntiRepetition;
+extern uint32_t    g_CrossBotAntiRepetitionWindow;   // lines per nearby bot
+extern uint32_t    g_CrossBotAntiRepetitionMaxLines; // hard cap on total injected
+extern std::string g_CrossBotAntiRepetitionTemplate;
 extern std::unordered_map<uint64_t, std::deque<std::string>> g_BotRecentReplies;
 extern std::mutex  g_RecentRepliesMutex;
 extern time_t       g_LastHistorySaveTime;

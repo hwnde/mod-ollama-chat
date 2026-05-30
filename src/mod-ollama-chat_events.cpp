@@ -344,9 +344,10 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
 
             AppendBotRecentReply(botGuid, response);
 
-            // reacquire pointers before use
+            // reacquire pointers before use (the API call may have outlived the bot)
             botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
             if (!botPtr) return;
+            LogCrossBotRepetition(botPtr, response);
             PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);
             if (!botAI) return;
 
@@ -511,6 +512,8 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
 
     if (g_EnableAntiRepetition)
         builtPrompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
+    if (g_EnableCrossBotAntiRepetition)
+        builtPrompt += GetNearbyBotsRecentReplies(bot);
 
     return builtPrompt;
 }

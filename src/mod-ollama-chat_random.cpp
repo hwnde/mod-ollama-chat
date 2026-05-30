@@ -612,6 +612,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     prompt += GenerateBotGameStateSnapshot(bot);
                 if (g_EnableAntiRepetition)
                     prompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
+                if (g_EnableCrossBotAntiRepetition)
+                    prompt += GetNearbyBotsRecentReplies(bot);
 
                 return prompt;
 
@@ -730,6 +732,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
 
                     botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
                     if (!botPtr) return;
+                    LogCrossBotRepetition(botPtr, response);
                     PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);
                     if (!botAI) return;
                     

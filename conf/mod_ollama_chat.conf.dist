@@ -469,6 +469,29 @@ OllamaChat.AntiRepetition.Window = 6
 OllamaChat.AntiRepetitionTemplate = " [You recently said these - do not repeat them; say something clearly different and fresh: {recent_replies}]"
 
 # ----------------------------------------------
+# CROSS-BOT ANTI-REPETITION (Say-range awareness)
+# ----------------------------------------------
+# Optionally lets a bot see the recent lines spoken by OTHER bots within Say range and be told
+# not to echo them, so co-located bots diversify. Additive to the per-bot guard above; reuses the
+# same recent-reply buffer (no new recording). Ships DISABLED: run a measurement pass first with
+# OllamaChat.DebugEnabled = 1 and grep the log for "CROSSREP hit" to see if echoing actually
+# happens on your server before enabling.
+# Default: 0 (disabled)
+OllamaChat.CrossBotAntiRepetition.Enable = 0
+
+# Recent lines pulled from EACH nearby bot.
+# Default: 2
+OllamaChat.CrossBotAntiRepetition.Window = 2
+
+# Hard cap on the total number of nearby lines injected into one prompt (bounds prompt growth).
+# Default: 6
+OllamaChat.CrossBotAntiRepetition.MaxLines = 6
+
+# Instruction wrapper. Use {nearby_replies} for the (quoted, " | "-joined) nearby lines.
+# Default: " [Others near you recently said these - say something different, do not echo them: {nearby_replies}]"
+OllamaChat.CrossBotAntiRepetitionTemplate = " [Others near you recently said these - say something different, do not echo them: {nearby_replies}]"
+
+# ----------------------------------------------
 # SENTIMENT TRACKING SYSTEM
 # ----------------------------------------------
 

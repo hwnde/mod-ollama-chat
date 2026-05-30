@@ -137,6 +137,10 @@ std::mutex g_ConversationHistoryMutex;
 bool        g_EnableAntiRepetition = true;
 uint32_t    g_AntiRepetitionWindow = 6;
 std::string g_AntiRepetitionTemplate;
+bool        g_EnableCrossBotAntiRepetition   = false;  // opt-in
+uint32_t    g_CrossBotAntiRepetitionWindow   = 2;
+uint32_t    g_CrossBotAntiRepetitionMaxLines = 6;
+std::string g_CrossBotAntiRepetitionTemplate;
 std::unordered_map<uint64_t, std::deque<std::string>> g_BotRecentReplies;
 std::mutex  g_RecentRepliesMutex;
 time_t g_LastHistorySaveTime = 0;
@@ -524,6 +528,10 @@ void LoadOllamaChatConfig()
 
     g_EnableAntiRepetition   = sConfigMgr->GetOption<bool>("OllamaChat.AntiRepetition.Enable", true);
     g_AntiRepetitionWindow   = sConfigMgr->GetOption<uint32_t>("OllamaChat.AntiRepetition.Window", 6);
+    g_EnableCrossBotAntiRepetition   = sConfigMgr->GetOption<bool>("OllamaChat.CrossBotAntiRepetition.Enable", false);
+    g_CrossBotAntiRepetitionWindow   = sConfigMgr->GetOption<uint32_t>("OllamaChat.CrossBotAntiRepetition.Window", 2);
+    g_CrossBotAntiRepetitionMaxLines = sConfigMgr->GetOption<uint32_t>("OllamaChat.CrossBotAntiRepetition.MaxLines", 6);
+    g_CrossBotAntiRepetitionTemplate = sConfigMgr->GetOption<std::string>("OllamaChat.CrossBotAntiRepetitionTemplate", " [Others near you recently said these - say something different, do not echo them: {nearby_replies}]");
     g_AntiRepetitionTemplate = sConfigMgr->GetOption<std::string>("OllamaChat.AntiRepetitionTemplate",
         " [You recently said these - do not repeat them; say something clearly different and fresh: {recent_replies}]");
 
