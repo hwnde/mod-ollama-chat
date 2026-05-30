@@ -467,6 +467,11 @@ OllamaChat.SnapshotMaxSpells    = 2
 OllamaChat.AntiRepetition.Enable = 1
 OllamaChat.AntiRepetition.Window = 6
 OllamaChat.AntiRepetitionTemplate = " [You recently said these - do not repeat them; say something clearly different and fresh: {recent_replies}]"
+OllamaChat.ConversationThreading.Enable = 1
+OllamaChat.ConversationThreadWindow = 8
+OllamaChat.ConversationThreadTTLMinutes = 30
+OllamaChat.ConversationThreadMaxChannels = 64
+OllamaChat.ConversationThreadTemplate = " [Recent talk in this channel - join in, reply to the latest naturally, do not just repeat others: {thread}]"
 
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)
