@@ -119,6 +119,11 @@ extern std::string g_ChatHistoryFooterTemplate;
 // --------------------------------------------
 extern bool        g_EnableChatBotSnapshotTemplate;
 extern std::string g_ChatBotSnapshotTemplate;
+extern uint32_t    g_SnapshotMaxQuests;
+extern uint32_t    g_SnapshotMaxGroup;
+extern uint32_t    g_SnapshotMaxCreatures;
+extern uint32_t    g_SnapshotMaxPlayers;
+extern uint32_t    g_SnapshotMaxSpells;
 
 // --------------------------------------------
 // Conversation History Store and Mutex

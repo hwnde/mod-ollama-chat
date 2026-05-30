@@ -608,6 +608,9 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     prompt += " " + g_RandomChatterQuestionVariations[qIdx];
                 }
 
+                if (g_EnableChatBotSnapshotTemplate)
+                    prompt += GenerateBotGameStateSnapshot(bot);
+
                 return prompt;
 
             }();

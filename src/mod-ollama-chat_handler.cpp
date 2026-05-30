@@ -501,121 +501,89 @@ std::string GetBotHistoryPrompt(uint64_t botGuid, uint64_t playerGuid, std::stri
 // --- Helper: Spells ---
 std::string ChatHandler_GetBotSpellInfo(Player* bot)
 {
-    // Map to store highest rank of each spell: spell name -> (spellId, rank, costText)
-    std::map<std::string, std::tuple<uint32, uint32, std::string>> uniqueSpells;
-    
+    if (!bot) return "";
+
+    // Unique by spell name, keep the highest rank seen.
+    std::map<std::string, uint32> bestRank;
     for (const auto& spellPair : bot->GetSpellMap())
     {
         uint32 spellId = spellPair.first;
         const SpellInfo* spellInfo = sSpellMgr->GetSpellInfo(spellId);
-        if (!spellInfo || spellInfo->Attributes & SPELL_ATTR0_PASSIVE)
-            continue;
-        if (spellInfo->SpellFamilyName == SPELLFAMILY_GENERIC)
-            continue;
-        if (bot->HasSpellCooldown(spellId))
-            continue;
-        
+        if (!spellInfo || (spellInfo->Attributes & SPELL_ATTR0_PASSIVE)) continue;
+        if (spellInfo->SpellFamilyName == SPELLFAMILY_GENERIC) continue;
+        if (bot->HasSpellCooldown(spellId)) continue;
         const char* name = spellInfo->SpellName[0];
-        if (!name || !*name)
-            continue;
-        
-        std::string costText;
-        if (spellInfo->ManaCost || spellInfo->ManaCostPercentage)
-        {
-            switch (spellInfo->PowerType)
-            {
-                case POWER_MANA: costText = std::to_string(spellInfo->ManaCost) + " mana"; break;
-                case POWER_RAGE: costText = std::to_string(spellInfo->ManaCost) + " rage"; break;
-                case POWER_FOCUS: costText = std::to_string(spellInfo->ManaCost) + " focus"; break;
-                case POWER_ENERGY: costText = std::to_string(spellInfo->ManaCost) + " energy"; break;
-                case POWER_RUNIC_POWER: costText = std::to_string(spellInfo->ManaCost) + " runic power"; break;
-                default: costText = std::to_string(spellInfo->ManaCost) + " unknown resource"; break;
-            }
-        }
-        else
-        {
-            costText = "no cost";
-        }
-        
-        // Get base spell name (without rank)
-        std::string spellName = name;
+        if (!name || !*name) continue;
+
         uint32 rank = spellInfo->GetRank();
-        
-        // Check if we already have this spell, and if so, only keep the highest rank
-        auto it = uniqueSpells.find(spellName);
-        if (it == uniqueSpells.end())
-        {
-            // First time seeing this spell
-            uniqueSpells[spellName] = std::make_tuple(spellId, rank, costText);
-        }
-        else
-        {
-            // We've seen this spell before, check if this is a higher rank
-            uint32 existingRank = std::get<1>(it->second);
-            if (rank > existingRank)
-            {
-                // Replace with higher rank
-                uniqueSpells[spellName] = std::make_tuple(spellId, rank, costText);
-            }
-        }
+        auto it = bestRank.find(name);
+        if (it == bestRank.end() || rank > it->second)
+            bestRank[name] = rank;
     }
-    
-    // Build the output string from unique spells
-    std::ostringstream spellSummary;
-    for (const auto& [spellName, spellData] : uniqueSpells)
+    if (bestRank.empty()) return "";
+
+    // Take the N highest-rank spells as a "signature" proxy.
+    std::vector<std::pair<uint32, std::string>> byRank;
+    for (auto const& kv : bestRank) byRank.emplace_back(kv.second, kv.first);
+    std::sort(byRank.begin(), byRank.end(),
+        [](auto const& a, auto const& b) { return a.first > b.first; });
+
+    std::string out = "You can call on ";
+    uint32_t n = 0;
+    for (auto const& s : byRank)
     {
-        uint32 rank = std::get<1>(spellData);
-        const std::string& costText = std::get<2>(spellData);
-        
-        spellSummary << "**" << spellName << "**";
-        if (rank > 0)
-        {
-            spellSummary << " (Rank " << rank << ")";
-        }
-        spellSummary << " - Costs " << costText << "\n";
+        if (n >= g_SnapshotMaxSpells) break;
+        if (n) out += ", ";
+        out += s.second;
+        ++n;
     }
-    return spellSummary.str();
+    out += ".";
+    return out;
 }
 
 // --- Helper: Group info ---
-std::vector<std::string> ChatHandler_GetGroupStatus(Player* bot)
+std::string ChatHandler_GetGroupStatus(Player* bot)
 {
-    std::vector<std::string> info;
-    if (!bot || !bot->GetGroup()) return info;
+    if (!bot || !bot->GetGroup()) return "";
     Group* group = bot->GetGroup();
+
+    std::vector<std::pair<float, std::string>> members;
     for (GroupReference* ref = group->GetFirstMember(); ref; ref = ref->next())
     {
         Player* member = ref->GetSource();
-        if (!member || !member->GetMap()) continue;
-        if(bot == member) continue;
-        float dist = bot->GetDistance(member);
-        std::string beingAttacked = "";
-        if (Unit* attacker = member->GetVictim())
-        {
-            beingAttacked = " [Under Attack by " + attacker->GetName() +
-                            ", Level: " + std::to_string(attacker->GetLevel()) + ", HP: " + std::to_string(attacker->GetHealth()) +
-                            "/" + std::to_string(attacker->GetMaxHealth()) + ")]";
-        }
-        std::string className = FormatPlayerClass(member->getClass());
-        std::string raceName = FormatPlayerRace(member->getRace());
-        info.push_back(
-            member->GetName() +
-            " (Level: " + std::to_string(member->GetLevel()) +
-            ", Class: " + className +
-            ", Race: " + raceName +
-            ", HP: " + std::to_string(member->GetHealth()) + "/" + std::to_string(member->GetMaxHealth()) +
-            ", Dist: " + std::to_string(dist) + ")" + beingAttacked
-        );
+        if (!member || !member->GetMap() || member == bot) continue;
 
+        std::string entry = member->GetName() + ", a " +
+            FormatPlayerRace(member->getRace()) + " " + FormatPlayerClass(member->getClass());
+        if (Unit* foe = member->GetVictim())
+            entry += " battling a " + foe->GetName();
+
+        members.emplace_back(bot->GetDistance(member), entry);
     }
-    return info;
+    if (members.empty()) return "";
+
+    std::sort(members.begin(), members.end(),
+        [](auto const& a, auto const& b) { return a.first < b.first; });
+
+    std::string out = "With you: ";
+    uint32_t n = 0;
+    for (auto const& m : members)
+    {
+        if (n >= g_SnapshotMaxGroup) break;
+        if (n) out += "; ";
+        out += m.second;
+        ++n;
+    }
+    out += ".";
+    return out;
 }
 
 // --- Helper: Visible players ---
-std::vector<std::string> ChatHandler_GetVisiblePlayers(Player* bot, float radius = 40.0f)
+std::string ChatHandler_GetVisiblePlayers(Player* bot, float radius = 40.0f)
 {
-    std::vector<std::string> players;
-    if (!bot || !bot->GetMap()) return players;
+    if (!bot || !bot->GetMap()) return "";
+
+    std::vector<std::pair<float, std::string>> seen;
     for (auto const& pair : ObjectAccessor::GetPlayers())
     {
         Player* player = pair.second;
@@ -624,185 +592,129 @@ std::vector<std::string> ChatHandler_GetVisiblePlayers(Player* bot, float radius
         if (player->GetMap() != bot->GetMap()) continue;
         if (!bot->IsWithinDistInMap(player, radius)) continue;
         if (!bot->IsWithinLOS(player->GetPositionX(), player->GetPositionY(), player->GetPositionZ())) continue;
-        float dist = bot->GetDistance(player);
-        std::string faction = (player->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde");
-        std::string className = FormatPlayerClass(player->getClass());
-        std::string raceName = FormatPlayerRace(player->getRace());
-        players.push_back(
-            "Player: " + player->GetName() +
-            " (Level: " + std::to_string(player->GetLevel()) +
-            ", Class: " + className +
-            ", Race: " + raceName +
-            ", Faction: " + faction +
-            ", Distance: " + std::to_string(dist) + ")"
-        );
 
+        std::string faction = (player->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde");
+        seen.emplace_back(bot->GetDistance(player), player->GetName() + " the " + faction);
     }
-    return players;
+    if (seen.empty()) return "";
+
+    std::sort(seen.begin(), seen.end(),
+        [](auto const& a, auto const& b) { return a.first < b.first; });
+
+    std::string out = "Nearby: ";
+    uint32_t n = 0;
+    for (auto const& s : seen)
+    {
+        if (n >= g_SnapshotMaxPlayers) break;
+        if (n) out += ", ";
+        out += s.second;
+        ++n;
+    }
+    out += ".";
+    return out;
 }
 
-// --- Helper: Visible locations/objects (creatures and gameobjects) ---
-std::vector<std::string> ChatHandler_GetVisibleLocations(Player* bot, float radius = 40.0f)
+// --- Helper: Visible locations/objects (creatures only) ---
+std::string ChatHandler_GetVisibleLocations(Player* bot, float radius = 40.0f)
 {
-    std::vector<std::string> visible;
-    if (!bot || !bot->GetMap()) return visible;
+    if (!bot || !bot->GetMap()) return "";
     Map* map = bot->GetMap();
+
+    std::vector<std::pair<float, std::string>> seen;
     for (auto const& pair : map->GetCreatureBySpawnIdStore())
     {
         Creature* c = pair.second;
-        if (!c) continue;
+        if (!c || c->isDead()) continue;
         if (c->GetGUID() == bot->GetGUID()) continue;
+        if (c->IsPet() || c->IsTotem()) continue;
         if (!bot->IsWithinDistInMap(c, radius)) continue;
         if (!bot->IsWithinLOS(c->GetPositionX(), c->GetPositionY(), c->GetPositionZ())) continue;
-        if (c->IsPet() || c->IsTotem()) continue;
-        std::string type;
-        if (c->isDead()) type = "DEAD";
-        else if (c->IsHostileTo(bot)) type = "ENEMY";
-        else if (c->IsFriendlyTo(bot)) type = "FRIENDLY";
-        else type = "NEUTRAL";
-        float dist = bot->GetDistance(c);
-        visible.push_back(
-            type + ": " + c->GetName() +
-            ", Level: " + std::to_string(c->GetLevel()) +
-            ", HP: " + std::to_string(c->GetHealth()) + "/" + std::to_string(c->GetMaxHealth()) +
-            ", Distance: " + std::to_string(dist) + ")"
-        );
+        if (c->GetName().empty()) continue;
+
+        std::string entry = (c->IsHostileTo(bot) ? "a hostile " : "a ") + c->GetName();
+        seen.emplace_back(bot->GetDistance(c), entry);
     }
-    for (auto const& pair : map->GetGameObjectBySpawnIdStore())
+    if (seen.empty()) return "";
+
+    std::sort(seen.begin(), seen.end(),
+        [](auto const& a, auto const& b) { return a.first < b.first; });
+
+    std::string out = "You see ";
+    uint32_t n = 0;
+    for (auto const& s : seen)
     {
-        GameObject* go = pair.second;
-        if (!go) continue;
-        if (!bot->IsWithinDistInMap(go, radius)) continue;
-        if (!bot->IsWithinLOS(go->GetPositionX(), go->GetPositionY(), go->GetPositionZ())) continue;
-        float dist = bot->GetDistance(go);
-        visible.push_back(
-            go->GetName() +
-            ", Type: " + std::to_string(go->GetGoType()) +
-            ", Distance: " + std::to_string(dist) + ")"
-        );
+        if (n >= g_SnapshotMaxCreatures) break;
+        if (n) out += ", ";
+        out += s.second;
+        ++n;
     }
-    return visible;
+    out += " nearby.";
+    return out;
 }
 
 // --- Helper: Combat summary ---
 std::string ChatHandler_GetCombatSummary(Player* bot)
 {
-    std::ostringstream oss;
-    bool inCombat = bot->IsInCombat();
-    Unit* victim = bot->GetVictim();
+    if (!bot) return "";
 
-    // Class-specific resource reporting
-    auto classId = bot->getClass();
+    float pct = bot->GetMaxHealth() > 0 ? bot->GetHealthPct() : 100.0f;
+    std::string band;
+    if (pct >= 85.0f)      band = "hale";
+    else if (pct >= 40.0f) band = "wounded";
+    else if (pct >= 15.0f) band = "badly wounded";
+    else                   band = "near death";
 
-    auto printResource = [&](std::ostringstream& oss) {
-        switch (classId)
-        {
-            case CLASS_WARRIOR:
-                oss << ", Rage: " << bot->GetPower(POWER_RAGE) << "/" << bot->GetMaxPower(POWER_RAGE);
-                break;
-            case CLASS_ROGUE:
-                oss << ", Energy: " << bot->GetPower(POWER_ENERGY) << "/" << bot->GetMaxPower(POWER_ENERGY);
-                break;
-            case CLASS_DEATH_KNIGHT:
-                oss << ", Runic Power: " << bot->GetPower(POWER_RUNIC_POWER) << "/" << bot->GetMaxPower(POWER_RUNIC_POWER);
-                break;
-            case CLASS_HUNTER:
-                oss << ", Focus: " << bot->GetPower(POWER_FOCUS) << "/" << bot->GetMaxPower(POWER_FOCUS);
-                break;
-            default: // Mana classes
-                if (bot->GetMaxPower(POWER_MANA) > 0)
-                    oss << ", Mana: " << bot->GetPower(POWER_MANA) << "/" << bot->GetMaxPower(POWER_MANA);
-                break;
-        }
-    };
-
-    if (inCombat)
+    if (bot->IsInCombat())
     {
-        oss << "IN COMBAT: ";
-        if (victim)
-        {
-            oss << "Target: " << victim->GetName()
-                << ", Level: " << victim->GetLevel()
-                << ", HP: " << victim->GetHealth() << "/" << victim->GetMaxHealth();
-        }
-        else
-        {
-            oss << "No current target";
-        }
-        oss << ". ";
-        printResource(oss);
+        if (Unit* victim = bot->GetVictim())
+            return "You are " + band + ", fighting a " + victim->GetName() + ".";
+        return "You are " + band + " and under attack.";
     }
-    else
-    {
-        oss << "NOT IN COMBAT. ";
-        printResource(oss);
-    }
-    return oss.str();
+    return "You are " + band + " and at rest.";
 }
 
 
-static std::string GenerateBotGameStateSnapshot(Player* bot)
+std::string GenerateBotGameStateSnapshot(Player* bot)
 {
-    // Prepare each section
-    std::string combat = ChatHandler_GetCombatSummary(bot);
+    if (!bot) return "";
 
-    std::string group;
-    std::vector<std::string> groupInfo = ChatHandler_GetGroupStatus(bot);
-    if (!groupInfo.empty()) {
-        group += "Group members:\n";
-        for (const auto& entry : groupInfo) group += " - " + entry + "\n";
-    }
+    std::string combat  = ChatHandler_GetCombatSummary(bot);
+    std::string group   = ChatHandler_GetGroupStatus(bot);
+    std::string spells  = ChatHandler_GetBotSpellInfo(bot);
+    std::string los     = ChatHandler_GetVisibleLocations(bot);
+    std::string players = ChatHandler_GetVisiblePlayers(bot);
 
-    std::string spells = ChatHandler_GetBotSpellInfo(bot);
-
+    // Active quests only (in progress / ready to turn in), titles kept, capped.
     std::string quests;
+    uint32_t qn = 0;
     for (auto const& [questId, qsd] : bot->getQuestStatusMap())
     {
-        // look up the template
+        if (qn >= g_SnapshotMaxQuests) break;
+
+        std::string phrase;
+        if (qsd.Status == QUEST_STATUS_INCOMPLETE)    phrase = "seeking to finish";
+        else if (qsd.Status == QUEST_STATUS_COMPLETE) phrase = "ready to report";
+        else continue;
+
         Quest const* quest = sObjectMgr->GetQuestTemplate(questId);
-        if (!quest)
-            continue;
-
-        // get the English title as a fallback
+        if (!quest) continue;
         std::string title = quest->GetTitle();
-
-        // then, if we have a locale record, overwrite it
         if (auto const* locale = sObjectMgr->GetQuestLocale(questId))
         {
             int locIdx = bot->GetSession()->GetSessionDbLocaleIndex();
             if (locIdx >= 0)
                 ObjectMgr::GetLocaleString(locale->Title, locIdx, title);
         }
+        if (title.empty()) continue;
 
-        // Convert quest status to readable string
-        std::string statusText;
-        switch (qsd.Status)
-        {
-            case QUEST_STATUS_NONE:       statusText = "not started"; break;
-            case QUEST_STATUS_COMPLETE:   statusText = "complete (ready to turn in)"; break;
-            case QUEST_STATUS_INCOMPLETE: statusText = "in progress"; break;
-            case QUEST_STATUS_FAILED:     statusText = "failed"; break;
-            case QUEST_STATUS_REWARDED:   statusText = "completed and rewarded"; break;
-            default:                      statusText = "unknown"; break;
-        }
-
-        quests += "Quest \"" + title + "\" is " + statusText + "\n";
+        if (qn) quests += " ";
+        quests += "You are " + phrase + " \"" + title + "\"";
+        if (qsd.Status == QUEST_STATUS_COMPLETE) quests += " done";
+        quests += ".";
+        ++qn;
     }
 
-    std::string los;
-    std::vector<std::string> losLocs = ChatHandler_GetVisibleLocations(bot);
-    if (!losLocs.empty()) {
-        for (const auto& entry : losLocs) los += " - " + entry + "\n";
-    }
-
-    std::string players;
-    std::vector<std::string> nearbyPlayers = ChatHandler_GetVisiblePlayers(bot);
-    if (!nearbyPlayers.empty()) {
-        for (const auto& entry : nearbyPlayers) players += " - " + entry + "\n";
-    }
-
-    // Use template
-    return SafeFormat(
+    std::string snapshot = SafeFormat(
         g_ChatBotSnapshotTemplate,
         fmt::arg("combat", combat),
         fmt::arg("group", group),
@@ -811,6 +723,11 @@ static std::string GenerateBotGameStateSnapshot(Player* bot)
         fmt::arg("los", los),
         fmt::arg("players", players)
     );
+
+    if (g_DebugEnabled)
+        LOG_INFO("server.loading", "[Ollama Chat] Snapshot for {}: {}", bot->GetName(), snapshot);
+
+    return snapshot;
 }
 
 

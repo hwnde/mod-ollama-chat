@@ -5,6 +5,7 @@
 #include "mod-ollama-chat-utilities.h"
 #include "mod-ollama-chat_personality.h"
 #include "mod-ollama-chat_sentiment.h"
+#include "mod-ollama-chat_handler.h"
 #include "Player.h"
 #include "ObjectAccessor.h"
 #include "Guild.h"
@@ -483,7 +484,7 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
         }
     }
 
-    return SafeFormat(
+    std::string builtPrompt = SafeFormat(
         promptTemplate,
         fmt::arg("bot_name", botName),
         fmt::arg("bot_level", botLevel),
@@ -502,6 +503,11 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
         fmt::arg("actor_name", actorName),
         fmt::arg("sentiment_info", sentimentInfo)
     );
+
+    if (g_EnableChatBotSnapshotTemplate)
+        builtPrompt += GenerateBotGameStateSnapshot(bot);
+
+    return builtPrompt;
 }
 
 // === Script Hooks ===

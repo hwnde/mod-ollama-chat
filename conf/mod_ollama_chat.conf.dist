@@ -438,7 +438,7 @@ OllamaChat.ConversationHistorySaveInterval = 10
 #                  This is useful for bots that need to be aware of their environment and current status.
 #                  Enabling this may increase the response time and token usage of the API calls.
 #     Default:     0 (false)
-OllamaChat.EnableChatBotSnapshotTemplate = 0
+OllamaChat.EnableChatBotSnapshotTemplate = 1
 
 # OllamaChat.ChatHistoryHeaderTemplate
 #   Description: Format for header in conversation history context.
@@ -458,7 +458,12 @@ OllamaChat.ChatHistoryFooterTemplate = "NEW MESSAGE from {player_name}: {player_
 # OllamaChat.ChatBotSnapshotTemplate
 #   Description: The template string for the context snapshot of the bot's surroundings and status.
 #   Placeholders (named): {combat} {group} {spells} {quests} {los} {players}
-OllamaChat.ChatBotSnapshotTemplate = "CURRENT CONTEXT:\n{combat}\n{group}\nSpells:\n{spells}\nQuests:\n{quests}\nVisible Objects:\n{los}\nNearby Players:\n{players}"
+OllamaChat.ChatBotSnapshotTemplate = " [Your present circumstance (true things): weave any that fit naturally and briefly into your reply as a person would, never as a list, never quoting numbers, levels, ranks, or game terms.] {combat} {quests} {group} {los} {players} {spells}"
+OllamaChat.SnapshotMaxQuests    = 3
+OllamaChat.SnapshotMaxGroup     = 4
+OllamaChat.SnapshotMaxCreatures = 2
+OllamaChat.SnapshotMaxPlayers   = 2
+OllamaChat.SnapshotMaxSpells    = 2
 
 # ----------------------------------------------
 # SENTIMENT TRACKING SYSTEM
@@ -507,7 +512,7 @@ OllamaChat.ChatPromptTemplate = "You are {bot_name}, a {bot_class}. Personality:
 # OllamaChat.ChatExtraInfoTemplate
 #   Description: The context/details string about the bot and player, injected into the chat prompt as the last parameter.
 #   Placeholders (named): {bot_race} {bot_gender} {bot_role} {bot_faction} {bot_guild} {bot_group_status} {bot_gold} {player_race} {player_gender} {player_role} {player_faction} {player_guild} {player_group_status} {player_gold} {player_distance} {bot_area} {bot_zone} {bot_map}
-OllamaChat.ChatExtraInfoTemplate = "Your Info: {bot_race} {bot_gender}, Spec: {bot_role}, Faction: {bot_faction}, Guild: {bot_guild}, Group: {bot_group_status}, Gold: {bot_gold}. Player Info: {player_race} {player_gender}, Spec: {player_role}, Faction: {player_faction}, Guild: {player_guild}, Group: {player_group_status}, Gold: {player_gold}, Distance: {player_distance} yards. Location: {bot_area}, Zone: {bot_zone}, Map: {bot_map}. Only respond to the new message. No commentary, no meta-talk, no prefix—just the reply."
+OllamaChat.ChatExtraInfoTemplate = "Your Info: {bot_race} {bot_gender}, Spec: {bot_role}, Faction: {bot_faction}, Guild: {bot_guild}, Group: {bot_group_status}, Gold: {bot_gold}. Player Info: {player_race} {player_gender}, Spec: {player_role}, Faction: {player_faction}, Guild: {player_guild}, Group: {player_group_status}, Gold: {player_gold}, Distance: {player_distance} yards. You stand in {bot_area}, in the wider land of {bot_zone}. Only respond to the new message. No commentary, no meta-talk, no prefix—just the reply."
 
 # --------------------------------------------
 # ENVIRONMENTAL/CONTEXTUAL TEMPLATES

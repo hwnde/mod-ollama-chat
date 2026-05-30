@@ -44,4 +44,6 @@ public:
     static void ProcessChat(Player* player, uint32_t type, uint32_t lang, std::string& msg, ChatChannelSourceLocal sourceLocal, Channel* channel = nullptr, Player* receiver = nullptr);
 };
 
+std::string GenerateBotGameStateSnapshot(Player* bot);
+
 #endif // MOD_OLLAMA_CHAT_HANDLER_H

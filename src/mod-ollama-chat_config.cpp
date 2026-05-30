@@ -122,6 +122,11 @@ std::string g_ChatHistoryFooterTemplate;
 // --------------------------------------------
 bool        g_EnableChatBotSnapshotTemplate  = false;
 std::string g_ChatBotSnapshotTemplate;
+uint32_t    g_SnapshotMaxQuests    = 3;
+uint32_t    g_SnapshotMaxGroup     = 4;
+uint32_t    g_SnapshotMaxCreatures = 2;
+uint32_t    g_SnapshotMaxPlayers   = 2;
+uint32_t    g_SnapshotMaxSpells    = 2;
 
 // --------------------------------------------
 // Conversation History Store and Mutex
@@ -503,6 +508,11 @@ void LoadOllamaChatConfig()
 
     g_EnableChatBotSnapshotTemplate   = sConfigMgr->GetOption<bool>("OllamaChat.EnableChatBotSnapshotTemplate", false);
     g_ChatBotSnapshotTemplate         = sConfigMgr->GetOption<std::string>("OllamaChat.ChatBotSnapshotTemplate", "");
+    g_SnapshotMaxQuests    = sConfigMgr->GetOption<uint32_t>("OllamaChat.SnapshotMaxQuests", 3);
+    g_SnapshotMaxGroup     = sConfigMgr->GetOption<uint32_t>("OllamaChat.SnapshotMaxGroup", 4);
+    g_SnapshotMaxCreatures = sConfigMgr->GetOption<uint32_t>("OllamaChat.SnapshotMaxCreatures", 2);
+    g_SnapshotMaxPlayers   = sConfigMgr->GetOption<uint32_t>("OllamaChat.SnapshotMaxPlayers", 2);
+    g_SnapshotMaxSpells    = sConfigMgr->GetOption<uint32_t>("OllamaChat.SnapshotMaxSpells", 2);
 
     g_EnableChatHistory               = sConfigMgr->GetOption<bool>("OllamaChat.EnableChatHistory", true);
 
