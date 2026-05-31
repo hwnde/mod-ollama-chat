@@ -2,6 +2,8 @@
   {
     "id": "quest_class_stories",
     "title": "Class-Specific Storylines",
+    "short_description": "the distinct trials and burdens each calling must face alone",
+    "references": [],
     "content": "Every calling in Azeroth carries its own burdens and tests. The Knights of the Silver Hand still measure their initiates against Tirion Fordring's example, sending them to vigils and trials that prove devotion before the Light. Warlocks bind themselves to demons through pacts written in their own blood, and the price is rarely what the binding first seems. Hunters wander Kalimdor and the Eastern Kingdoms seeking beasts worthy of their bond, learning patience from elders and scars from prey. Such trials shape who walks back out of them, and what they carry home.",
     "keywords": [
       "class stories",
@@ -34,6 +36,8 @@
   {
     "id": "quest_zone_storylines",
     "title": "Zone Story Arcs",
+    "short_description": "each land's slow-burning wars woven into a single thread",
+    "references": [],
     "content": "Each corner of the world carries its own slow-burning war. In Westfall the Defias Brotherhood still strangle the farmsteads, masked and bitter, hunted by Stormwind patrols that never seem to catch them. The Plaguelands lie under the Scourge's pall, where the Argent Crusade and the Ebon Blade trade ground with the dead. Far south in Silithus the silithid pour from the dunes, and the Cenarion Circle's druids hold the line against an old, insect intelligence stirring beneath the sand. The threads of these struggles knot together — Westfall's bandits feed on the same hunger that drove half of Lordaeron's refugees south, Silithus's silithid woke as Ahn'Qiraj's gate opened, and the Plaguelands have not been quiet since Arthas marched on Stratholme.",
     "keywords": [
       "zone storylines",
@@ -66,6 +70,8 @@
   {
     "id": "quest_reputation_grinds",
     "title": "Reputation Quest Hubs",
+    "short_description": "earning the trust of ancient orders through patient and faithful service",
+    "references": [],
     "content": "Trust is earned slowly among the orders of Azeroth. The Cenarion Circle, encamped in Silithus, weighs a newcomer's worth in silithid carapaces and patient labour at Cenarion Hold. The Argent Dawn, now risen into the Argent Crusade under Tirion Fordring, measures faith by the quiet work of cleansing the Plaguelands one acre at a time. Deep in the Searing Gorge the Thorium Brotherhood judges by craftsmanship, ore, and a willingness to stand against the Dark Iron. Only after long service do these factions open their armouries and their inner counsels.",
     "keywords": [
       "reputation quests",
@@ -95,6 +101,8 @@
   {
     "id": "quest_dungeon_quests",
     "title": "Dungeon and Raid Quests",
+    "short_description": "errands into ruined halls where kings and crusaders need answers",
+    "references": [],
     "content": "The great delvings and ruined cities of Azeroth all have their own unfinished business. Beneath Blackrock Mountain the Dark Iron dwarves still scheme in their forge-halls, bound to the imprisoned lord Ragnaros and feuding endlessly with the Thorium Brotherhood above. Stratholme is a wound that has not closed since Arthas culled it; the Scourge holds the eastern districts, the Argent Crusade presses from without, and the dead far outnumber the living. Those sent into such places carry orders from kings, archmages, and crusaders, and what they bring back changes the shape of the war.",
     "keywords": [
       "dungeon quests",
@@ -125,6 +133,8 @@
   {
     "id": "quest_world_events",
     "title": "World Event Quests",
+    "short_description": "world-spanning struggles that demand every able hand and heart",
+    "references": [],
     "content": "Some struggles are too large for any single regiment. The Ahn'Qiraj War Effort demanded grain from Westfall, bandages from Stormwind's clerics, copper bars from Ironforge's smelters, all heaped at the gates of the scarab wall while the silithid massed within. The Scourge Invasion that preceded the march on Northrend saw necropolises blot out the sun above Stormwind and Orgrimmar, and every able hand turned to defending the boneyards in the streets. These were not skirmishes; they were the kind of days bards still sing about by tavern fires from Booty Bay to Brill.",
     "keywords": [
       "world event quests",
@@ -154,6 +164,8 @@
   {
     "id": "quest_epic_questlines",
     "title": "Epic Quest Chains",
+    "short_description": "consuming multi-zone undertakings that mark those who see them through",
+    "references": [],
     "content": "Certain undertakings consume years rather than days. Warlocks who covet the dreadsteed or the felsteed must hunt scattered tomes and bargain with infernal powers across half the world. A paladin's charger is no mere mount but the culmination of pilgrimage, trial, and combat against demonic pretenders within the Scarlet Monastery itself. Hunters seeking Rhok'delar walk from the Hinterlands to Winterspring tracking dragonkin and ancients older than the Sundering. Such pursuits leave a mark on those who finish them, and a longer one on those who do not.",
     "keywords": [
       "epic questlines",
@@ -185,6 +197,8 @@
   {
     "id": "quest_profession_quests",
     "title": "Profession Quest Lines",
+    "short_description": "the craft trials and hard-won secrets passed down through each trade",
+    "references": [],
     "content": "Every craft in Azeroth has its masters and its trials. Smiths who would forge the black anvil's secrets must first earn the grudging respect of the Thorium Brotherhood and brave the Dark Iron forges of Blackrock Depths. Alchemists chase the Elixir of Vigor through old recipes and rarer reagents. Nat Pagle on Dustwallow's shores tests aspiring anglers with lures and patience, sending them after Mudskunk and the Lurker before he speaks of deeper secrets. The knowledge passed down in such apprenticeships rarely comes cheap, and is seldom written in any book a stranger might find.",
     "keywords": [
       "profession quests",
@@ -215,6 +229,8 @@
   {
     "id": "quest_faction_conflicts",
     "title": "Faction Conflict Quests",
+    "short_description": "the border wars and bitter seasons of strife between Alliance and Horde",
+    "references": ["wow_factions_alliance", "wow_factions_horde"],
     "content": "The truce between Stormwind and Orgrimmar grows thinner with each season of the war in the north. In Ashenvale the night elves and the Warsong loggers tear at one another over every felled tree, and Sylvanas's Forsaken push against the last Alliance holdouts in the Plaguelands and Hillsbrad. Stromgarde's ruin remains a knife-edge between the Syndicate, the Forsaken, and the Stromic remnant. Captains on both sides speak of distant fronts, but the older borders bleed easier — the Barrens crossings that the Horde took after the Third War, the Arathi Highlands that Stromgarde never fully ceded, the Hillsbrad hamlets the Forsaken claimed acre by acre — and Garrosh and Varian both have generals eager to spill fresh blood over old maps.",
     "keywords": [
       "faction_conflicts",
@@ -234,6 +250,8 @@
   {
     "id": "quest_lore_quests",
     "title": "Lore-Revealing Quests",
+    "short_description": "scattered history of Medivh, Arthas, and the burdens Thrall still carries",
+    "references": ["person_arthas_menethil", "person_thrall", "person_lor_themar_theron"],
     "content": "The world's deeper history is not kept in any single library. The truth of Medivh, last Guardian of Tirisfal, lies scattered across Karazhan's haunted halls and the broken stones of the Dark Portal he opened in Deadwind. The fall of Quel'Thalas, where Arthas drove his runeblade through the Sunwell, is mourned still by Lor'themar Theron's blood elves and by the high elves of Quel'Lithien. The orcs' old corruption by Mannoroth's blood, broken at last by Grom Hellscream at Demon Fall Canyon, is a wound Thrall remembers in every council he holds.",
     "keywords": [
       "lore_quests",
@@ -253,6 +271,8 @@
   {
     "id": "quest_escort_quests",
     "title": "Escort and Protection Quests",
+    "short_description": "guarding the wounded and the weary who cannot travel the road alone",
+    "references": [],
     "content": "Some travellers cannot make their journeys alone. A wounded druid limping back to Moonglade through the high passes is easy prey for furbolg gone savage or satyr lying in wait. The goblin caravans crossing Thousand Needles draw centaur raiders the moment their wheels grind into the dust. Stormwind couriers, Argent messengers, prisoners walked out of bandit camps, refugees fleeing the Plaguelands — all need a sword at their shoulder. Such work is dangerous in ways open battle is not, for the charge dies the moment attention wanders, and a single arrow can undo days of careful escort.",
     "keywords": [
       "escort quests",
@@ -284,6 +304,8 @@
   {
     "id": "quest_collection_quests",
     "title": "Collection and Gathering Quests",
+    "short_description": "gathering the small things in great number that armies and healers need",
+    "references": [],
     "content": "Armies and apothecaries alike run on small things gathered in great number. Cenarion herbalists send acolytes into Un'Goro's steaming basin for sungrass and bloodvine, and into the high glades of Felwood for the rarer fronds touched by Emerald sleep. Hunters take pelts and tusks to fletchers in Booty Bay; cooks demand crawler meat from Auberdine's tide pools. The old Ahn'Qiraj War Effort taught every quartermaster from Stormwind to Thunder Bluff that wars are won as much by bandage-rollers and grain-counters as by warriors. A traveller who reads the land well can earn coin and favour at every hearth between Westfall and the Eastern Plaguelands simply by paying attention.",
     "keywords": [
       "collection quests",
@@ -314,6 +336,8 @@
   {
     "id": "quest_timed_quests",
     "title": "Timed and Race Quests",
+    "short_description": "tasks bound to the turning of a glass where hesitation costs all",
+    "references": [],
     "content": "Some tasks are bound to the turning of a glass. A Theramore courier must reach Northwatch before the tide cuts the road. The Stormwind harbour masters time their gryphon runs against the weather rolling in off the Veiled Sea. When the Scourge crashed against the city gates the defenders had only minutes between waves to shore up the barricades before the necropolises loosed another tide of ghouls. Such moments forgive nothing — a hesitation costs the runner, the caravan, or the whole street, and the survivors remember who arrived in time and who did not.",
     "keywords": [
       "timed quests",
@@ -344,6 +368,8 @@
   {
     "id": "quest_group_quests",
     "title": "Group and Raid Quests",
+    "short_description": "walls that only break when many banners stand and press together",
+    "references": [],
     "content": "Certain enemies cannot be answered by any lone blade. The march into Molten Core required attunement by Lothos Riftwaker and the cooperation of a full warband, for Ragnaros is no mortal foe. The opening of the scarab gate at Ahn'Qiraj asked the same of the assembled clans of Kalimdor — Cenarion druids, Brood of Nozdormu, sword and spell side by side beneath the dunes. Karazhan's haunted floors still test those who would set Medivh's ghost to rest, and Naxxramas drifted once over the Plaguelands before it was thrown back. Such walls are broken by a hundred banners together or not at all.",
     "keywords": [
       "group quests",
@@ -374,6 +400,8 @@
   {
     "id": "quest_repeatable_quests",
     "title": "Repeatable and Daily Quests",
+    "short_description": "the daily labours that keep kingdoms fed and standing armies sharp",
+    "references": [],
     "content": "The war does not end at sundown, and neither does the work behind it. The Cenarion Circle's emissaries in Silithus send the same patrols out each dawn against the silithid that boil up from the dunes. Nat Pagle in Dustwallow still wagers a coin daily on whatever rare fish stirs his curiosity. The Thorium Brotherhood in the Searing Gorge takes ore and steel from any smith who would earn their notice, and the Argent emissaries at Light's Hope have not stopped cleansing the Plaguelands one acre at a time since the day Tirion raised their banner. Such daily labours are how kingdoms stay fed and standing armies stay sharp.",
     "keywords": [
       "repeatable quests",
@@ -403,6 +431,8 @@
   {
     "id": "quest_hidden_quests",
     "title": "Hidden and Secret Quests",
+    "short_description": "tasks never pinned to noticeboards, found only by the patient and curious",
+    "references": [],
     "content": "Not all of Azeroth's tasks are pinned to noticeboards in town squares. The torn pages of Hemet Nesingwary's Green Hills of Stranglethorn lie scattered through the jungle, gathered only by those who notice them among the leaf litter. In Blackrock Mountain certain Dark Iron prisoners will speak only to a stranger who knows the right name to ask after. Old hermits in Loch Modan, half-mad bog wanderers in Dustwallow, drunkards in the Slaughtered Lamb — each holds a thread, if a traveller has the patience to listen and the wit to pull.",
     "keywords": [
       "hidden quests",

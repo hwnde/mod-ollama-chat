@@ -2,6 +2,8 @@
   {
     "id": "wow_classes_warrior",
     "title": "Warrior Class",
+    "short_description": "front-line soldiers who bear sword and shield or swing greataxes in battle",
+    "references": [],
     "content": "Warriors are the front-line soldiers of every army of Azeroth — Stormwind footmen, Orgrimmar grunts, Ironforge mountaineers, Forsaken deathguards, Sen'jin headhunters. Some bear shield and arming-sword as bulwarks and protectors, throwing themselves between their fellows and the enemy line. Others swing greataxes or two-handed blades, channeling battlefield fury into strokes that split helm and ribcage alike. They are common, hardy folk: village smiths and farmers' sons as often as veteran sergeants. They train where they can — under a master-at-arms in Stormwind's Old Town barracks, in Orgrimmar's Valley of Honor, in the snow above Ironforge — and the eldest of them still tell of Lothar's banner in the Second War, of the long bleed at Blackrock Spire, and of Stratholme before Arthas's blade fell on it.",
     "keywords": [
       "warrior",
@@ -40,6 +42,8 @@
   {
     "id": "wow_classes_paladin",
     "title": "Paladin Class",
+    "short_description": "knights of the Light who mend the wounded, bear warhammers, and stand between their charges and the dark",
+    "references": [],
     "content": "Paladins are those sworn to the Light — knights whose oath binds steel to faith. Their order rose from the old Knights of the Silver Hand, broken in the Third War and now scattered between the Argent Crusade under Highlord Tirion Fordring at Light's Hope Chapel, the Scarlet remnants gone fanatic, and the Blood Knights of Silvermoon who bent the Light to their need after Quel'Thalas burned. They mend the wounded with a touch, raise warhammers in righteous fury, and stand between their charges and the dark. They keep their vigils at chapels and field shrines alike, and the test of a paladin's oath is not the warhammer but whether the touch still mends when the day is long and the prayers wear thin.",
     "keywords": [
       "paladin",
@@ -62,6 +66,8 @@
   {
     "id": "wow_classes_hunter",
     "title": "Hunter Class",
+    "short_description": "rangers and trackers who read sign in snow and ash, bringing down quarry with bow or longrifle alongside a bonded beast",
+    "references": [],
     "content": "Hunters are the rangers and trackers of Azeroth — Night Elf sentinels of Teldrassil, dwarven gryphon-riders out of Aerie Peak, troll headhunters of the Echo Isles, tauren of the Mulgore plains who learned the hunt from their fathers. They live at the edge of wild country, reading sign in snow and ash, and they bring down their quarry with bow, longrifle, or crossbow before it knows it has been seen. A hunter walks with a beast at heel — wolf, cat, bear, or worse — bound by long patience rather than any spell. Most of them keep to the edge of settled lands, taking pay-work as caravan guards and trapper-leaders. The elder hunters of Aerie Peak still speak of the gryphon-rider sweeps over Alterac in the Second War, and the kaldorei sentinels measure their veterans against those who held the line at Hyjal when Archimonde climbed.",
     "keywords": [
       "hunter",
@@ -83,6 +89,8 @@
   {
     "id": "wow_classes_rogue",
     "title": "Rogue Class",
+    "short_description": "shadowed killers and cutpurses who move where armies cannot, using poisons, smoke, and the dagger in the dark",
+    "references": [],
     "content": "Rogues are the shadowed killers — cutpurses of Stormwind's back alleys, SI:7 agents on the king's quiet errands, Forsaken deathstalkers slipping through Plaguelands fog, Ravenholdt assassins-for-hire in the Hillsbrad hills. They move where armies cannot, picking locks the engineers can't break and putting a dagger between the ribs of a captain before his guards have turned their heads. Poisons, smoke, and a willingness to do what knights will not are their tools. Most cities have a quarter where rogues are known and not asked too many questions — the Dwarven District's quieter corners, the Cleft of Shadow, the alleys behind Murder Row — and most cities prefer it that way.",
     "keywords": [
       "rogue",
@@ -120,6 +128,8 @@
   {
     "id": "wow_classes_priest",
     "title": "Priest Class",
+    "short_description": "healers and keepers of faith who mend broken bones in the field and speak comfort to the dying",
+    "references": [],
     "content": "Priests are the healers of the wounded and the keepers of faith. Human priests serve the Light out of the Cathedral in Stormwind, dwarven clerics tend the halls of Ironforge, draenei followers of the Prophet Velen carry the Naaru's word, while Forsaken shadow priests of the Cult of Forgotten Shadow turn that same discipline inward and call upon Old Gods' whispers and the void. Blood elves and trolls keep their own rites. They mend broken bones in a field tent at midnight, speak comfort to the dying, and on darker days bend mind and fear against the enemy. A village without a priest tends its own dead and its own sick; a village with one counts itself lucky, and treats him accordingly.",
     "keywords": [
       "priest",
@@ -141,6 +151,8 @@
   {
     "id": "wow_classes_shaman",
     "title": "Shaman Class",
+    "short_description": "those who hear the voice of the elements and speak with stone, flame, wind, and water as equals, not masters",
+    "references": [],
     "content": "Shamans are those who hear the voice of the elements — orcs who carry their ancestors' shamanic tradition back from the brink it nearly fell to under fel corruption, tauren wise-ones of Thunder Bluff, troll witch doctors of the Darkspear, draenei broken-then-mended on Outland's ruin. They speak with stone, flame, wind, and water as equals, not masters, and ask favours that are sometimes granted. Their totems steady a battle line where it would otherwise break. Thrall himself was their teacher and exemplar, and the Earthen Ring still gathers the wisest of their kind at the World Tree's roots and at the Maelstrom's edge.",
     "keywords": [
       "shaman",
@@ -162,6 +174,8 @@
   {
     "id": "wow_classes_mage",
     "title": "Mage Class",
+    "short_description": "scribes of the arcane who call fire from nothing, freeze a charging beast mid-stride, and open portals between distant capitals",
+    "references": [],
     "content": "Mages are the scribes of the arcane — those who have spent years over tomes most folk would not dare to open. Jaina Proudmoore of Theramore is their foremost, taught at Dalaran in the days when Antonidas still lived; Rhonin and the Council of Six now rule the Kirin Tor's flying city above Crystalsong. A mage calls fire from nothing, freezes a charging beast mid-stride, conjures bread and water for a hungry company, or opens a portal between two distant capitals in the time it takes to draw breath. Their robes are thin and their bodies frail, but few enemies survive long enough to close on them.",
     "keywords": [
       "mage",
@@ -184,6 +198,8 @@
   {
     "id": "wow_classes_warlock",
     "title": "Warlock Class",
+    "short_description": "wielders of fel who bind imps and voidwalkers with binding-words and draw the life from their enemies",
+    "references": [],
     "content": "Warlocks are wielders of fel — those who struck bargains with demons in exchange for power most magi would refuse to touch. They keep imps, succubi, voidwalkers, and felhunters on chains of binding-words, draw the life out of an enemy to feed their own, and lay curses that rot a man over days. Stormwind tolerates them only barely, in cellars beneath the Slaughtered Lamb; the Forsaken and the sin'dorei welcome them openly. Some say a warlock who fights the Burning Legion fights fire with fire, and that may be true. Others say a hand burnt once burns easier the second time.",
     "keywords": [
       "warlock",
@@ -205,6 +221,8 @@
   {
     "id": "wow_classes_druid",
     "title": "Druid Class",
+    "short_description": "warriors of the wild who take the shape of bear or cat, mend battlefields with growing roots, and hurl moonfire from the deep night sky",
+    "references": [],
     "content": "Druids are the warriors of the wild — Cenarius's heirs through Malfurion Stormrage, who long slept in the Emerald Dream and is now woken. They take the shape of bear, cat, seal, or stormcrow as the moment calls, mend a torn battlefield with the slow patience of growing roots, or hurl moonfire from the deep night sky. Night elves still form their elder ranks; tauren of the Cenarion Circle take the same oaths under different stars, mentored by the late Cairne and the wise of Moonglade. Their work is the long mending — coaxing the burnt thickets of Ashenvale and the Felwood's poisoned glens back toward green — and they reckon time by seasons, not by years.",
     "keywords": [
       "druid",
@@ -226,6 +244,8 @@
   {
     "id": "wow_classes_death_knight",
     "title": "Death Knight Class",
+    "short_description": "deathless servants of the Ebon Blade, freed from the Lich King's hand at Light's Hope, who wield runeblades drinking cold and raise ghouls from the fallen",
+    "references": [],
     "content": "Death knights are the deathless servants of the Ebon Blade — once living heroes raised by Arthas as his butchers at Acherus, then broken from his service at Light's Hope Chapel when the Light itself laid them low. Highlord Darion Mograine took up his father's runeblade and led the survivors out from under the Lich King's hand; they now hold the Ebon Hold above the Plaguelands as a free order. They wield runeblades that drink the cold, raise ghouls from corpses, and bear plague and frost as their twin gifts. The Alliance and the Horde suffer them uneasily, and a death knight learns quickly which inns will pour him a drink and which guard captains will move him on by nightfall.",
     "keywords": [
       "death knight",
@@ -262,6 +282,8 @@
   {
     "id": "wow_factions_alliance",
     "title": "Alliance Faction",
+    "short_description": "covenant of kingdoms bound by treaty and the memory of common foes, answering to Varian's lion banner when it is raised",
+    "references": ["person_varian_wrynn"],
     "content": "The Alliance stands as it has since the Second War — a covenant of kingdoms held together by treaty, kinship, and the memory of common foes. Stormwind under King Varian Wrynn, returned from exile and harder than the city remembers; Ironforge under Magni Bronzebeard, whose throne now sits empty in stone since his transmutation; Darnassus under Tyrande and Malfurion atop Teldrassil; the Exodar of the draenei on Azuremyst; Gnomeregan's exiles still plotting their reclamation from Tinker Town. Banners and grievances vary, but each kingdom answers to Varian's call when the lion is raised. The peace between the factions is one the kings of older days would not have called peace at all.",
     "keywords": [
       "alliance",
@@ -284,6 +306,8 @@
   {
     "id": "wow_factions_horde",
     "title": "Horde Faction",
+    "short_description": "coalition of broken peoples bound by oaths more than affection, ruled from Grommash Hold in Orgrimmar by the Warchief",
+    "references": ["person_thrall"],
     "content": "The Horde Thrall built out of broken peoples is showing its strains. The Warchief still rules from Grommash Hold in Orgrimmar, but Garrosh Hellscream's hungry shadow grows behind him. Sylvanas's Forsaken keep their own counsel in the Undercity; Lor'themar Theron's sin'dorei tend Silvermoon's slow rebuilding; Cairne Bloodhoof's tauren of Thunder Bluff counsel patience; Vol'jin's Darkspear hold their islands. They are bound by oaths more than affection. They share a banner more than a hearth, and most of them know it; what holds the Horde together is necessity and the memory of Thrall's hand.",
     "keywords": [
       "horde",
@@ -320,6 +344,8 @@
   {
     "id": "wow_races_humans",
     "title": "Human Race",
+    "short_description": "shortest-lived and most numerous of the Alliance peoples, stubborn and adaptable, scattered from Stormwind to Theramore",
+    "references": ["person_varian_wrynn"],
     "content": "Humans are the shortest-lived and most numerous of the Alliance peoples — Stormwind's farmers, Westfall's dispossessed, Theramore's exiles, Kul Tiras sailors, the orphaned children of fallen Lordaeron and broken Stratholme. They are stubborn, adaptable, and quick to make alliance with any folk who will treat with them. Their king is Varian Wrynn, returned out of long captivity and ruling now with little patience for the Horde; his son Anduin grows up at court under Bolvar Fordragon's hand. Tirion Fordring, the last paladin of the Silver Hand, leads the Argent Crusade in the north. The greater part of Stormwind's grown sons serve at arms somewhere; few houses are not missing a brother or two.",
     "keywords": [
       "human",
@@ -354,6 +380,8 @@
   {
     "id": "wow_races_orcs",
     "title": "Orc Race",
+    "short_description": "people Thrall led out of demon-thrall and the internment camps to a new home in Durotar's red dust, keeping old shamanic ways",
+    "references": ["person_thrall", "person_grom_hellscream"],
     "content": "Orcs are the people Thrall led out of demon-thrall and the internment camps, brought across the sea to a new home in Durotar's red dust. They keep the old shamanic ways their grandfathers nearly lost when Mannoroth's blood ran in them, and they keep also the memory of Draenor that was. Their hold-of-holds is Orgrimmar beneath Grommash Hold. Thrall remains their Warchief, son of Durotan; Garrosh Hellscream, son of Grommash, walks beside him with old grievances and a sharper temper. An orc earns his name in combat, his scars in service, and his grave on his feet if he can manage it; the proverbs of Durotar are blunt about all three.",
     "keywords": [
       "orc",
@@ -388,6 +416,8 @@
   {
     "id": "wow_races_dwarves",
     "title": "Dwarf Race",
+    "short_description": "stout folk of the mountains, foremost miners and smiths, whose king Magni sits turned to living diamond on his throne",
+    "references": ["person_magni_bronzebeard", "person_muradin_bronzebeard"],
     "content": "Dwarves are the stout folk of the mountains — Bronzebeard kin out of Ironforge under Dun Morogh's snows, with the Wildhammer riding gryphons out of Aerie Peak and the Dark Iron still half-hostile in their Blackrock holdings. They are miners, smiths, and gunsmiths foremost, and their excavations across Kalimdor have raised more troubling questions than answers about the Titans who made them. King Magni Bronzebeard sits no more on his throne — turned to living diamond in a working that went strange, and his daughter Moira contested in Shadowforge. Muradin Bronzebeard, thought dead at Stratholme, has returned to his clan; the politics of Ironforge have grown the harder for it.",
     "keywords": [
       "dwarf",
@@ -422,6 +452,8 @@
   {
     "id": "wow_races_night_elves",
     "title": "Night Elf Race",
+    "short_description": "ancient kaldorei who keep their watches at Darnassus atop Teldrassil and tend elder shrines held for ten thousand years",
+    "references": ["person_tyrande_whisperwind", "person_malfurion_stormrage"],
     "content": "Night elves are the ancient kaldorei — once immortal, that immortality lost at the breaking of Nordrassil when Archimonde fell at Mount Hyjal. They keep their watches at Darnassus atop the world-tree Teldrassil, and tend their elder shrines in Moonglade, Ashenvale, and Feralas. Tyrande Whisperwind speaks for Elune as High Priestess; her husband Malfurion Stormrage, woken at last from the Emerald Dream, leads the druids again. They distrust the Horde for the felling of Ashenvale's trees, and the Forsaken for what they are. Their sentinels keep the woods of Ashenvale and Felwood as they have for ten thousand years, and their druids walk the dreamways that no map records.",
     "keywords": [
       "night elf",
@@ -455,6 +487,8 @@
   {
     "id": "wow_races_tauren",
     "title": "Tauren Race",
+    "short_description": "broad-shouldered folk of Mulgore's plains, people of long oral memory and careful speech, who take up arms reluctantly but thoroughly",
+    "references": ["person_cairne_bloodhoof"],
     "content": "Tauren are the broad-shouldered folk of Mulgore's plains, a people of long oral memory, careful speech, and a deep listening to the spirits of the land. They run with the herd, they tend the great kodo, and they take up arms reluctantly but with a thoroughness that surprises those who underestimate them. Their high chief Cairne Bloodhoof rules at Thunder Bluff with the gravity of an old oak, his son Baine grown to a captain's age beside him. Their shamans walk with the Earthen Ring; their druids walk with the Cenarion Circle. Few outside Mulgore know how much both orders owe to the tauren teachers who steadied them.",
     "keywords": [
       "tauren",
@@ -488,6 +522,8 @@
   {
     "id": "wow_races_trolls",
     "title": "Troll Race",
+    "short_description": "long and bitter people once masters of world-spanning empires, now scattered into tribes that hold their loa close and heal fast from wounds",
+    "references": ["person_voljin"],
     "content": "Trolls are a long and bitter people — once masters of empires that ringed the world before the night elves rose, now scattered into tribes that nurse old grudges and old loa-faith. The Darkspear under Vol'jin took Thrall's offered hand when no one else would shelter them, and from the Echo Isles they fight as the Horde's most agile skirmishers. The Amani under Zul'aman remember Quel'Thalas as theft; the Gurubashi keep their jungle. A troll heals fast from wounds that would lay a man cold, holds his loa close as kin, and feasts seriously when there is meat to be had. The hunters and witch doctors of the Darkspear keep their loa close, their nets full, and their gratitude to Vol'jin quietly intact.",
     "keywords": [
       "troll",
@@ -522,6 +558,8 @@
   {
     "id": "wow_races_gnomes",
     "title": "Gnome Race",
+    "short_description": "small and brilliant tinkers whose home of Gnomeregan was lost to troggs and treachery, now planning its reclamation from Tinker Town under Ironforge",
+    "references": ["person_mekkatorque"],
     "content": "Gnomes are the small, brilliant tinkers whose home of Gnomeregan was lost to their own desperate measure against troggs and Sicco Thermaplugg's treachery, irradiated and overrun in the days of the Third War's aftermath. They live now in Tinker Town under Ironforge's protection, planning the reclamation of their city under High Tinker Mekkatorque. They build flying machines, mechano-striders, gyrocopters, and the occasional thing that explodes. Wherever something needs guns mounted, sapper-charges set, or a flying machine kept aloft, you will likely find a gnome at the wrench, and few who have hired one ever regret it.",
     "keywords": [
       "gnome",
@@ -554,6 +592,8 @@
   {
     "id": "wow_races_forsaken",
     "title": "Forsaken (Undead) Race",
+    "short_description": "dead of Lordaeron who tore themselves free of the Lich King's chain when Sylvanas broke his hold and led them into the Undercity",
+    "references": ["person_sylvanas_windrunner"],
     "content": "The Forsaken are the dead of Lordaeron who tore themselves free of the Lich King's chain when Sylvanas Windrunner broke his hold and led them down into Capital City's catacombs. They are corpses still — rotting, hollow-cheeked, holding to a self that the Scourge would erase. Their queen, the Banshee, rules from the Undercity beneath the ruined throne of Terenas, and she keeps her own counsel as often as Thrall's. Her Royal Apothecary Society works at plagues whose purpose she has not shared with the rest of the Horde. They keep faith with Sylvanas first, with the Horde second, and with the living only when it serves both.",
     "keywords": [
       "forsaken",
@@ -585,6 +625,8 @@
   {
     "id": "wow_races_blood_elves",
     "title": "Blood Elf Race",
+    "short_description": "sin'dorei who bear mourning-name and magic-hunger since Arthas's death march cut the Sunwell and butchered most of their kin at Silvermoon",
+    "references": ["person_lor_themar_theron"],
     "content": "The blood elves are what is left of the high elves of Quel'Thalas after Arthas's death march cut the Sunwell in two and butchered most of their people on the way to Silvermoon. They took the name sin'dorei — children of the blood — in mourning of their dead. Kael'thas Sunstrider, their prince, led part of their number into Outland and there fell to fel addiction and worse betrayal; Lor'themar Theron now governs Silvermoon as Regent Lord, with Halduron Brightwing's rangers patrolling the Eversong borders. Their addiction to arcane has eased somewhat since the Sunwell's rekindling on the Isle of Quel'Danas, but the hunger does not entirely leave.",
     "keywords": [
       "blood elf",
@@ -616,6 +658,8 @@
   {
     "id": "wow_races_draenei",
     "title": "Draenei Race",
+    "short_description": "exiles many times over who follow the Prophet Velen still, speaking for the Naaru and lending their priests and crystals to the Alliance war",
+    "references": ["person_velen"],
     "content": "The draenei are exiles many times over — fled from Argus when the eredar gave themselves to Sargeras, scattered across the void on the dimensional ship Tempest Keep, broken on Draenor by the orcs the Legion had turned, and at last crashed on Azeroth when the stolen Exodar fell from the sky onto Azuremyst Isle. The Prophet Velen, who has led them since Argus burned, walks among them still — older than any throne now standing on Azeroth. They speak for the Naaru, the Light's own beings, and lend their crystals and their priests to the Alliance war. Most draenei alive remember Outland's wounds firsthand, and they take the long view that comes of having outlived three homeworlds.",
     "keywords": [
       "draenei",

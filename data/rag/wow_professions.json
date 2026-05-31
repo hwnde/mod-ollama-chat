@@ -2,6 +2,8 @@
   {
     "id": "profession_alchemy",
     "title": "Alchemy Profession",
+    "short_description": "the brewing of draughts and elixirs from herbs gathered in the wild",
+    "references": ["profession_herbalism", "item_consumables"],
     "content": "The alchemists' art is the brewing of draughts and elixirs from the herbs the wilds give up. In every army's baggage train ride flasks of strength and swiftness, vials of healing red as garnets, draughts to steady a trembling hand before battle. The apothecaries of the Undercity practice a darker branch, distilling blights and plagues for the Royal Apothecary Society. In Dalaran the masters speak of transmutation — coaxing one metal or essence into another. With Northrend's campaign grinding on, no flask leaves a cauldron that is not already promised to someone marching north.",
     "keywords": [
       "alchemy",
@@ -24,6 +26,8 @@
   {
     "id": "profession_blacksmithing",
     "title": "Blacksmithing Profession",
+    "short_description": "the hammering of ore into plate, blade, and shield at the anvil",
+    "references": ["profession_mining"],
     "content": "The smiths' trade is the oldest of the metal-arts: ore drawn from the deep places, hammered at the anvil into sword, axe, mace, plate and shield. The dwarven anvil-clans of Ironforge are reckoned the finest in the world, though Orgrimmar's forges have grown thunderous since the war began. Some smiths bend their craft wholly to weapons, others to armor; a few learn both. Every campaign south or north devours blades and harness faster than the masters can replace them, and the apprentice halls in both capitals are crowded from dawn until the embers cool.",
     "keywords": [
       "blacksmithing",
@@ -49,6 +53,8 @@
   {
     "id": "profession_enchanting",
     "title": "Enchanting Profession",
+    "short_description": "the weaving of lasting magics into arms and armor through dust and essence",
+    "references": ["item_enchants"],
     "content": "Enchanting is a quiet, scholarly art — the weaving of permanent magics into worn arms and armor so that a blade bites truer, a robe holds back fire, a cloak quickens its wearer's step. The enchanter unmakes lesser magical things to draw out their dust, their essence, their shards of power, and binds those into something better. The high masters keep workshops in Dalaran and in the great cities, where the air smells faintly of ozone and old parchment. A well-enchanted blade has saved more soldiers in Northrend than most would admit.",
     "keywords": [
       "enchanting",
@@ -70,6 +76,8 @@
   {
     "id": "profession_engineering",
     "title": "Engineering Profession",
+    "short_description": "the gnomish and goblin craft of gears, gunpowder, and improbable contraptions",
+    "references": ["profession_mining"],
     "content": "Engineering is the curious and reckless art of the gnomes and the goblins — gears, gunpowder, springs, and copper wire bound together into things that should not work and very often do. Engineers build long-barreled guns, sighting scopes, explosive charges, mechanical repair-spiders, and contraptions that lift a soul briefly into the sky. The gnomes favor precision; the goblins favor scale and noise. Both factions' field armies have learned, sometimes the hard way, that an engineer in a tight spot is worth a dozen swords — provided one does not stand too close when the work is being tested.",
     "keywords": [
       "engineering",
@@ -91,6 +99,8 @@
   {
     "id": "profession_herbalism",
     "title": "Herbalism Profession",
+    "short_description": "the gathering of wild herbs from meadow, marsh, and frozen tundra",
+    "references": ["profession_alchemy", "profession_inscription"],
     "content": "The herbalists are gatherers, walkers of meadow and marsh and frozen tundra. They know peacebloom from silverleaf at a glance, where briarthorn shelters from the wind, which slope of the Hinterlands yields the best sungrass. In Outland they learned felweed and netherbloom; in Northrend they learn tiger lily and icethorn. The apothecaries and brewers of flasks could not work a day without them. A good herbalist is paid in coin and in respect both, for the wilds these days are not what they were, and few are willing to wander them with only a satchel and a small knife.",
     "keywords": [
       "herbalism",
@@ -113,6 +123,8 @@
   {
     "id": "profession_inscription",
     "title": "Inscription Profession",
+    "short_description": "the scribe's art of grinding herbs into ink and copying power-bearing glyphs",
+    "references": ["profession_herbalism"],
     "content": "Inscription is the scribes' craft, the newest of the great arts. The scribe grinds herbs into colored pigments, inks them onto vellum and parchment, and copies ancient glyphs and runes that lend power to spell and stroke alike. A glyph properly inscribed can sharpen a mage's frostbolt, steady a priest's prayer, lengthen the bite of a paladin's seal. The masters keep their workshops dim and their inkpots covered; a single drop spilled on the wrong page can ruin a week's labor. Many scribes also bind small books of lore that travelers carry into the cold lands north.",
     "keywords": [
       "inscription",
@@ -134,6 +146,8 @@
   {
     "id": "profession_jewelcrafting",
     "title": "Jewelcrafting Profession",
+    "short_description": "the cutting and setting of raw gems into rings, pendants, and armor sockets",
+    "references": ["profession_mining", "item_gems"],
     "content": "Jewelcrafting is a newer trade, brought into wider practice when the draenei landed on Azeroth and shared what they knew of cutting stones. The jeweler polishes raw gems hewn from Outland and Northrend — rubies, sapphires, autumn-stones, dragon's eyes — and sets them into rings, pendants, and the sockets cut into the finest armor. The draenei keep the deepest secrets of the craft, but the dwarves and blood elves have caught up quickly. A well-cut stone can mean the difference between a healer's last spell reaching its mark and a soldier dying in the snow.",
     "keywords": [
       "jewelcrafting",
@@ -156,6 +170,8 @@
   {
     "id": "profession_leatherworking",
     "title": "Leatherworking Profession",
+    "short_description": "the stitching of beast hides into harness, armor, and drums for those who shun plate",
+    "references": ["profession_skinning"],
     "content": "The leatherworkers stitch the hides the skinners bring them into the harness a fighter needs who cannot bear the weight of plate. They cut and bind leather for rogues and druids and hunters, ring mail for shamans, drum-skins that beat out battle-rhythms, satchels and quivers for the road. Some specialize: the dragonscale-workers, the elementalists who stitch in essences of earth and fire, the tribal makers of the Horde camps. Northrend's beasts — its wolves, its great rhinos, its skinned worms — give a heavier, colder leather than the trade has ever worked before.",
     "keywords": [
       "leatherworking",
@@ -182,6 +198,8 @@
   {
     "id": "profession_mining",
     "title": "Mining Profession",
+    "short_description": "the drawing of ore and stone from deep seams to feed smiths and engineers",
+    "references": ["profession_blacksmithing", "profession_engineering"],
     "content": "The miners go down into the dark and bring up what the smiths and engineers and jewelers need: copper and tin from the shallow seams, iron and gold deeper, mithril and thorium deeper still. In Outland they learned to cut adamantite and fel iron from veins that hissed against the pick. In Northrend it is cobalt and saronite — and there are whispers that saronite weeps, that it remembers something. The dwarves of Ironforge are born to the work, but every army on campaign needs miners, and the tunnel-clans send their younger sons up into the world to learn the trade afresh.",
     "keywords": [
       "mining",
@@ -208,6 +226,8 @@
   {
     "id": "profession_skinning",
     "title": "Skinning Profession",
+    "short_description": "the taking of hide and leather from slain beasts with a curved blade",
+    "references": ["profession_leatherworking"],
     "content": "The skinners walk the battlefields of beasts. With a curved knife and a steady hand they take the hide from wolf, bear, raptor, kodo, and the stranger creatures of Outland and Northrend — clefthoof, rhino, the great worms that move beneath the snow. Light leather for an apprentice's first vest, heavy leather for a hunter's coat, rugged and thick hides for the field-armor of the Northrend campaign. The trade is quiet, often solitary, often bloody. The leatherworkers' halls would stand empty without them, and every campaign quartermaster keeps a list of skinners on retainer.",
     "keywords": [
       "skinning",
@@ -228,6 +248,8 @@
   {
     "id": "profession_tailoring",
     "title": "Tailoring Profession",
+    "short_description": "the weaving of cloth into robes, vestments, and cloaks for those who wear no plate",
+    "references": ["item_containers"],
     "content": "The tailors weave cloth into vestments, robes, hooded cloaks, and the soft armor of those who would not wear leather or steel. Linen and wool for the young apprentices; silk, mageweave, runecloth, mooncloth, spellcloth, frostweave for the masters. The high schools of the craft are followed quietly: the mooncloth-weavers who work only by the right phase of the moon, the shadoweave makers in the dim corners of the Forsaken halls, the spellfire tailors of Dalaran. Mages, priests, and warlocks lean on this trade for everything they put on their backs before walking into the cold.",
     "keywords": [
       "tailoring",
@@ -254,6 +276,8 @@
   {
     "id": "profession_cooking",
     "title": "Cooking Profession",
+    "short_description": "the camp cook's art of turning raw fish and beast-meat into strength-giving meals",
+    "references": ["profession_fishing"],
     "content": "Cooking is the everyday art of the road, and every soldier on a long march learns at least a little of it. The camp cooks know how to coax a meal from spinefin trout or worg meat or whatever ration the quartermaster grudges, and a hearty stew before a hard morning is worth more than most folk credit. The great feast-cooks of Dalaran and Shattrath set long tables that strengthen a whole warband for the day's fighting. In Northrend, where the cold leaches strength out of bone, a hot meal is sometimes the difference between marching and not.",
     "keywords": [
       "cooking",
@@ -276,6 +300,8 @@
   {
     "id": "profession_fishing",
     "title": "Fishing Profession",
+    "short_description": "the patient drawing of fish and strange catches from every still water in the world",
+    "references": ["profession_cooking"],
     "content": "The fishers stand at the edge of every still water in the world — Stranglethorn's coast, Loch Modan, the cold black lakes of Dragonblight — pole bent, line whispering. They bring up trout, salmon, the stranger fish of Outland, the icy catches of Northrend, and now and again something altogether older snagged from the deep. Specialist lures and well-made poles mean better fortune, and the masters know which bait calls which fish from the silt. The cooks would have little to work with without them, and many a soldier on furlough sits a riverbank simply for the quiet of it.",
     "keywords": [
       "fishing",
@@ -298,6 +324,8 @@
   {
     "id": "profession_first_aid",
     "title": "First Aid Profession",
+    "short_description": "the field-medic's binding of wounds with cloth when no healer stands near",
+    "references": [],
     "content": "First aid is the field-medic's craft, the binding of wounds with strips of clean cloth when no priest or shaman is at hand. Every soldier on a long campaign learns it, fumbling at first, then quick as breathing. Linen for shallow cuts, wool for deeper ones, silk and mageweave for the kind of wounds that argue with stitching. The great field surgeons of the Argent Crusade and the Kirin Tor train apprentices in the harder lessons: how to set a broken arm in the snow, how to hold a man together long enough to reach a healer. In Northrend the trade saves lives daily.",
     "keywords": [
       "first aid",
@@ -318,6 +346,8 @@
   {
     "id": "mage_professions_guide",
     "title": "Best Professions for Mages",
+    "short_description": "crafts suited to the arcane scholar: cloth-work, enchantment, and the cauldron",
+    "references": ["profession_tailoring", "profession_enchanting"],
     "content": "Mages lean naturally toward the cloth-trades and the quieter arts. A tailor-mage stitches her own robes from silk and mooncloth, sparing herself the auction halls. An enchanter draws power from broken magical things and binds it into staff and cloak — useful work for one who already lives among such forces. An alchemist keeps her own mana-draughts and flasks at hand, and learns the patience of the cauldron. These three crafts sit easily beside the study of arcane and frost; many a Dalaran apprentice keeps a workshop alongside her study desk.",
     "keywords": [
       "mage",
@@ -340,6 +370,8 @@
   {
     "id": "warrior_professions_guide",
     "title": "Best Professions for Warriors",
+    "short_description": "the soldier's trades of anvil and ore, forging one's own blade and plate",
+    "references": ["profession_blacksmithing", "profession_mining"],
     "content": "Warriors learn well at the anvil. A smith-warrior forges his own plate, hammers his own blade, and knows the temper of every piece he wears into the line. Mining sits beside the trade as naturally as breath sits beside the lung — a warrior who can swing a pick can keep his own forge fed. Some take to engineering instead, for the repair-spiders and the small explosive surprises that buy a moment when a moment is everything. The dwarves of Ironforge raise nearly every soldier-son to know at least the rudiments of the smith's craft.",
     "keywords": [
       "warrior",
@@ -362,6 +394,8 @@
   {
     "id": "paladin_professions_guide",
     "title": "Best Professions for Paladins",
+    "short_description": "the knight's crafts of smithing, gem-setting, and the sanctifying of blades",
+    "references": ["profession_blacksmithing", "profession_jewelcrafting"],
     "content": "Paladins gravitate toward the smith's craft, as warriors do — there is something fitting in a knight of the Light who hammers out his own breastplate before a vigil. Mining feeds the forge. The newer trade of jewelcrafting suits them well: a paladin who sets a stone into his ring or his hammer is binding the Light into something tangible, and the healer-paladins prize the trade above most others. Enchanting too has its place, for the sanctifying of a blade. The Argent Crusade's smithies in Northrend ring day and night with such work.",
     "keywords": [
       "paladin",
@@ -386,6 +420,8 @@
   {
     "id": "hunter_professions_guide",
     "title": "Best Professions for Hunters",
+    "short_description": "the ranger's self-sufficient trades of hide, leather, and field engineering",
+    "references": ["profession_leatherworking", "profession_skinning"],
     "content": "Hunters live closer to the wilds than most, and their crafts reflect it. A skinner-hunter takes the hide from the beast she has just felled; a leatherworker stitches it into her own coat by the next campfire. Engineering pairs well, for a hunter's long gun and its scope are the engineer's work, and so are the more interesting kinds of trap. Many hunters add a little mining for the ore the engineers need. It is a self-sufficient set of trades, suited to those who spend more nights under stars than under roof.",
     "keywords": [
       "hunter",
@@ -409,6 +445,8 @@
   {
     "id": "rogue_professions_guide",
     "title": "Best Professions for Rogues",
+    "short_description": "the thief's crafts of supple leather, clever gadgets, and sharpened enchantments",
+    "references": ["profession_leatherworking", "profession_engineering"],
     "content": "Rogues choose crafts that keep their hands busy and their pockets full. Leatherworking fits them well — soft, dark, supple leathers, hoods and cloaks that move without sound. Skinning feeds the trade. Engineering is much loved among the bolder rogues for the small contrivances it makes possible: smoke bombs, lock-spikes, distracting noises in the wrong corridor. Enchanting threads a quiet edge of magic onto a dagger that already cuts well. The thieves' guilds of Stormwind and the Undercity each keep workshops where apprentices learn all four together.",
     "keywords": [
       "rogue",
@@ -433,6 +471,8 @@
   {
     "id": "priest_professions_guide",
     "title": "Best Professions for Priests",
+    "short_description": "the cleric's gentle crafts of woven vestments, bound magic, and healing draughts",
+    "references": ["profession_tailoring", "profession_enchanting"],
     "content": "Priests favor the gentler crafts. A tailor-priest stitches her own vestments in moonlight or candlelight, plain or richly worked depending on the order. Enchanting suits the cloistered temperament — long evenings binding small magics into fabric and wood. Alchemy gives her a steady supply of mana-draughts for the long vigils. The scribe's art of inscription is a natural fit too, for a priest already lives among words and prayers, and a glyph well-cut can sharpen a healing spell when the temple infirmary is full and the wounded keep coming in.",
     "keywords": [
       "priest",
@@ -457,6 +497,8 @@
   {
     "id": "shaman_professions_guide",
     "title": "Best Professions for Shamans",
+    "short_description": "the spirit-walker's practical trades of hide-work, earthen ore, and woven enchantment",
+    "references": ["profession_leatherworking", "profession_enchanting"],
     "content": "Shamans walk between worlds — the spirits' and the living — and their crafts reflect a certain rugged practicality. Leatherworking gives them their own leather or mail; skinning feeds it. Mining draws them down into the earth, where the stone-spirits speak in a slower tongue. Enchanting suits the elemental shamans well, for the weaving of fire or lightning or frost into a haft is half a conversation with the elements themselves. The tauren and orc shamans of the Horde have long traditions of these crafts, passed mother to daughter, father to son, around the camp fires.",
     "keywords": [
       "shaman",
@@ -482,6 +524,8 @@
   {
     "id": "warlock_professions_guide",
     "title": "Best Professions for Warlocks",
+    "short_description": "the fell-caster's crafts of shadowweave cloth, bound magic, and dark draughts",
+    "references": ["profession_tailoring", "profession_enchanting"],
     "content": "Warlocks deal in darker draughts than most, but their crafts are not so different from a priest's. Tailoring stitches their robes — often shadoweave, for those who can stomach the work. Enchanting binds shadow-magic into rod and blade. Alchemy keeps them supplied with the health and mana draughts their unsavory pact-magic burns through. Jewelcrafting too has its uses, for the small soul-stones and binding-trinkets a warlock keeps about her person. The warlock quarters of the Undercity smell of burnt sulfur and inkpots in roughly equal measure.",
     "keywords": [
       "warlock",
@@ -505,6 +549,8 @@
   {
     "id": "druid_professions_guide",
     "title": "Best Professions for Druids",
+    "short_description": "the wild-keeper's crafts of gathered herb, beast hide, and alchemical moondraughts",
+    "references": ["profession_herbalism", "profession_alchemy"],
     "content": "Druids are wild folk, and their crafts come from the wild. A leatherworker-druid stitches her own bearskin or stagskin coat; a skinner takes the hide herself when the hunt is done. Herbalism follows naturally — a druid already knows peacebloom from silverleaf, talandra's rose from icethorn. Alchemy turns that knowledge into draughts of moonglow and strength, useful in any of the shapes a druid wears. The Cenarion Circle's enclaves teach all four together, considering them facets of one larger vocation: the keeping of the wilds, and the keeping of oneself within them.",
     "keywords": [
       "druid",

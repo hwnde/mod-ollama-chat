@@ -2,6 +2,8 @@
   {
     "id": "dungeon_ragefire_chasm",
     "title": "Ragefire Chasm",
+    "short_description": "a magma-lit cultist den burrowed beneath the orc capital of Orgrimmar",
+    "references": [],
     "content": "A magma-lit warren burrowed beneath the Cleft of Shadow in Orgrimmar, reached through a fissure the orcs leave unguarded only because most who descend never return. Troggs claw at the lower tunnels, but it is the Searing Blade cultists who concern Thrall's warchiefs — Taragaman the Hungerer and the satyr-priest Bazzalan plot demon-worship a stone's throw from his throne. Young Horde warriors are sent down to scour them out, and the smoke that drifts up through the cracks carries the smell of burned cultist robes back into the Valley of Spirits.",
     "keywords": [
       "ragefire",
@@ -35,6 +37,8 @@
   {
     "id": "dungeon_deadmines",
     "title": "The Deadmines",
+    "short_description": "a Defias stronghold carved into the cliffs of Westfall, ruled by a masked kingpin",
+    "references": [],
     "content": "Cut deep into the cliffs of western Westfall, the old gold-mine the Stonemasons abandoned has become Edwin VanCleef's private kingdom. Cheated of payment for rebuilding Stormwind after the orc wars, VanCleef raised the Defias Brotherhood and pulled his bandits underground to build a juggernaut in the cavern's drowned harbor. Sneed's shredder rattles among the felled lumber, Rhahk'Zor cracks heads in the upper galleries, and at the heart of the workings VanCleef himself waits with his daughter Vanessa. Stormwind sends warbands south, but the Defias hold the tunnels still.",
     "keywords": [
       "deadmines",
@@ -68,6 +72,8 @@
   {
     "id": "dungeon_wailing_caverns",
     "title": "Wailing Caverns",
+    "short_description": "damp grottos beneath the Northern Barrens where a druid's nightmare turned his disciples into serpent-things",
+    "references": [],
     "content": "Hidden beneath the dry hills of the Northern Barrens, a network of damp grottos where the druid Naralex sought to dream the land green again. His meditation in the Emerald Dream went wrong; the nightmare leaked out, and his disciples — Lady Anacondra, Lord Cobrahn, Lord Pythas, Lord Serpentis — twisted into serpent-things that prowl the moss-slick passages. Mutanus the Devourer haunts the deepest pool. The druid Ebru sends warbands of Horde adventurers down to wake Naralex without killing him, before the nightmare rises through the roots and reaches Mulgore.",
     "keywords": [
       "wailing",
@@ -103,6 +109,8 @@
   {
     "id": "dungeon_shadowfang_keep",
     "title": "Shadowfang Keep",
+    "short_description": "a moonlit Silverpine fortress overrun by worgen called forth by an archmage who lost control of his summons",
+    "references": [],
     "content": "The Greymane fortress on the Silverpine bluffs, once seat of Baron Silverlaine, now a moonlit ruin loud with howling. Archmage Arugal called the worgen out of another world to defend Gilneas; instead they devoured the keep's lord and made the halls their den. The Forsaken creep up from Tarren Mill to root them out, while in the cellars Rethilgore tears at chained prisoners and Wolf Master Nandos leads packs through the moonlit courtyards. Sylvanas wants the keep secured; the worgen have other plans, and so do the ghosts of the old Silverlaine line.",
     "keywords": [
       "shadowfang",
@@ -138,6 +146,8 @@
   {
     "id": "dungeon_blackfathom_deeps",
     "title": "Blackfathom Deeps",
+    "short_description": "a drowned night elf temple in Ashenvale, cracked open by Twilight's Hammer and crawling with naga and cultists",
+    "references": [],
     "content": "A drowned night elf temple beneath the still pool at the head of Ashenvale's coast, sunk during the Sundering and only now broken open by the Twilight's Hammer. Old Gods' cultists wade its flooded shrines beside naga raiders from Lady Vashj's broods, all hunting for what the elves once sealed there. Ghamoo-ra the giant turtle haunts the entry pool; Lady Sarevess commands the naga; Aku'mai, an ancient spawn of the deep, coils in the inner sanctum. The Cenarion Circle is desperate to see the temple cleansed before its sleeper wakes.",
     "keywords": [
       "blackfathom",
@@ -172,6 +182,8 @@
   {
     "id": "dungeon_lower_blackrock_spire",
     "title": "Lower Blackrock Spire",
+    "short_description": "the smoke-choked lower halls of Blackrock Spire, held by Blackrock and Spirestone orc clans",
+    "references": [],
     "content": "The smoke-choked lower halls of the great spire that splits the Burning Steppes, held by the orcs of the Blackrock and Spirestone clans under warlord Rend Blackhand's lieutenants. Highlord Omokk drills his troops in the entry chamber, the shadow hunter Vosh'gajin reads bones for the dragon-lords above, and War Master Voone marshals raiding parties to strike at Redridge and Loch Modan. Beyond them the spire climbs into Nefarian's domain. Stormwind has sent warbands here for years; every assault batters the lower keep, and every time the orcs rebuild.",
     "keywords": [
       "blackrock",
@@ -206,6 +218,8 @@
   {
     "id": "dungeon_scholomance",
     "title": "Scholomance",
+    "short_description": "a plague-era necromancer academy in the Western Plaguelands crypts, where every dead student rises to teach the next lesson",
+    "references": [],
     "content": "Beneath Caer Darrow in the Western Plaguelands, in the crypts of House Barov, Kel'Thuzad once trained his first necromancers. Though the lich has flown north to Naxxramas, his pupils still teach in those vaulted classrooms. Darkmaster Gandling lectures behind locked doors; Jandice Barov works illusions in her gallery; Ras Frostwhisper, Kel'Thuzad's frostbound apprentice, presides over the great hall. The Argent Dawn pays well for the heads of the masters and the burning of their grimoires. Every dead student rises again; the school never quite empties.",
     "keywords": [
       "scholomance",
@@ -240,6 +254,8 @@
   {
     "id": "dungeon_stratholme",
     "title": "Stratholme",
+    "short_description": "the culled city of the Eastern Plaguelands, split between Scourge undead and Scarlet Crusade fanatics",
+    "references": ["person_arthas_menethil", "person_darion_mograine", "person_tirion_fordring"],
     "content": "The city Arthas culled before he sailed for Northrend, still burning quietly in the Eastern Plaguelands a decade later. Its eastern half belongs to the Scourge, where Baron Rivendare commands his deathchargers and the dreadlord Balnazzar wears stolen flesh; its western half is held by the Scarlet Crusade, who burn the dead and the dying with equal zeal. The Mograine son walks these streets in mourning for his father's family — slaughtered here. The Argent Dawn watches both wings, and Tirion Fordring's name is spoken at the gates by those who remember Mograine the Ashbringer.",
     "keywords": [
       "stratholme",
@@ -273,6 +289,8 @@
   {
     "id": "raid_onyxias_lair",
     "title": "Onyxia's Lair",
+    "short_description": "a sulfurous cavern in Dustwallow Marsh where Deathwing's daughter broods above her clutch of unborn wyrms",
+    "references": ["person_varian_wrynn", "person_bolvar_fordragon"],
     "content": "A cavern of slow, sulfurous air opening off the Dragonmurk in Dustwallow Marsh, where the black brood-mother Onyxia coils above clutches of her unborn. Daughter of Deathwing, she wore human skin in Stormwind for years as Lady Katrana Prestor, whispering ruin into Bolvar Fordragon's ear before Varian Wrynn returned and her mask broke. Driven from the throne city, she has retreated here to mother new wyrms. War parties from both the Alliance and Horde descend the marsh-paths to slay her — none who succeed forget the sound of her wings beneath the stone.",
     "keywords": [
       "onyxia",
@@ -306,6 +324,8 @@
   {
     "id": "raid_molten_core",
     "title": "Molten Core",
+    "short_description": "the fiery elemental heart beneath Blackrock Mountain where Ragnaros the Firelord was bound by his own power",
+    "references": [],
     "content": "Down beneath Blackrock Mountain, past Blackrock Depths and through the Dark Iron summoning chamber, lies the burning heart where Ragnaros the Firelord was bound when the Dark Iron emperor Thaurissan summoned him from the Elemental Plane. The Firelord rose, smashed Thaurissan to ash, and now reigns in fire, served by his lieutenants Lucifron, Magmadar, Gehennas, Garr, Sulfuron Harbinger, and Majordomo Executus. The Hydraxian Waterlords of Azshara fund any war party willing to descend, knowing that if Ragnaros breaks free again no shore will be safe.",
     "keywords": [
       "molten",
@@ -341,6 +361,8 @@
   {
     "id": "raid_blackwing_lair",
     "title": "Blackwing Lair",
+    "short_description": "the crown of Blackrock Spire, where Deathwing's son Nefarian tortures dragonflights into chromatic abominations",
+    "references": [],
     "content": "At the very crown of Blackrock Spire, above the orc-held lower halls, Nefarian — son of Deathwing, brother to Onyxia — runs the black brood's foulest experiments. He chains red, blue, green, and bronze drakes to his laboratory benches and tortures their blood into chromatic wyrms. Razorgore the Untamed broods over a stolen clutch of dragon eggs; Vaelastrasz the Red lies enslaved, begging to be killed; Nefarian himself paces the upper terrace, where the dragonflights' four leaders all want him dead. Few war parties ever reach his hall, fewer return.",
     "keywords": [
       "blackwing",
@@ -376,6 +398,8 @@
   {
     "id": "raid_naxxramas",
     "title": "Naxxramas",
+    "short_description": "the Lich King's flying necropolis drifting over Dragonblight, crewed by undead champions across four plague-steeped wings",
+    "references": ["person_lich_king"],
     "content": "Kel'Thuzad's flying necropolis — a black ziggurat that once hung above Stratholme as the Scourge plague was loosed on Lordaeron, now drifting over Dragonblight as the lich-prince marshals his strength for the Lich King. Its four wings each answer to a champion of the dead: Anub'Rekhan and Maexxna in the spider quarter; Noth and Heigan in the plague vats; Instructor Razuvious and the Four Horsemen in the death knight halls; Patchwerk and Thaddius among the construct-pens. Sapphiron coils in the frostwyrm lair below Kel'Thuzad's throne. The Argent Crusade has marked it for fall.",
     "keywords": [
       "naxxramas",
@@ -410,6 +434,8 @@
   {
     "id": "raid_ulduar",
     "title": "Ulduar",
+    "short_description": "an ancient titan-citadel in the Storm Peaks built to imprison the Old God Yogg-Saron beneath its foundations",
+    "references": ["person_brann_bronzebeard"],
     "content": "High in the Storm Peaks, a titan-citadel older than recorded memory, raised to bind the Old God Yogg-Saron beneath its foundations. Its watchers — Hodir of the storm-halls, Thorim of the thunder-throne, Freya of the green wilds, Mimiron of the forge-vaults — once stood vigil together. Loken's betrayal poisoned them; the prisoner whispers up through the floor and the keepers have turned against one another. Algalon the Observer waits in the chamber above to call down the makers' judgement if the prison falls. Brann Bronzebeard begs every warband he meets to march on Ulduar before the Old God wakes fully.",
     "keywords": [
       "ulduar",
@@ -443,6 +469,8 @@
   {
     "id": "dungeon_blackrock_depths",
     "title": "Blackrock Depths",
+    "short_description": "the buried Dark Iron dwarven capital beneath Blackrock Mountain, seat of Emperor Dagran Thaurissan's forges and prisons",
+    "references": [],
     "content": "The Dark Iron city under the mountain, a buried capital of forges, prison cells, arenas, and beer halls answering to Emperor Dagran Thaurissan in his Throne of Thaurissan. His consort Moira Bronzebeard — daughter of Magni, whom Ironforge mourns and seeks — sits beside him, by some accounts willingly. Lord Incendius hammers blades in the forge, Bael'Gar boils molten iron from the runeforge, and the Grim Guzzler tavern serves both Dark Iron and the occasional dwarven spy. Ironforge has wanted Dagran's head since before the Second War; few of its agents return.",
     "keywords": [
       "blackrock",
@@ -475,6 +503,8 @@
   {
     "id": "dungeon_dire_maul",
     "title": "Dire Maul",
+    "short_description": "the shattered Highborne ruin of Eldre'Thalas in Feralas, divided among Gordok ogres, corrupted treants, and spectral elven courts",
+    "references": [],
     "content": "The night elf ruin Eldre'Thalas, now called Dire Maul, sprawls across central Feralas in three broken wings. Once a seat of Highborne sorcery before the Sundering, its libraries and palaces are now infested by Gordok ogres who crown their strongest as king — currently King Gordok in the western commons. The eastern Warpwood quarter rots with corrupted treants under the satyr Immol'thar; the northern Capital Gardens hold the spectral courts of the long-dead Highborne, Prince Tortheldrin among them, still feeding on demonic essence to keep their immortal lives going. Cenarion druids pick through what they can save.",
     "keywords": [
       "dire",
@@ -509,6 +539,8 @@
   {
     "id": "dungeon_maraudon",
     "title": "Maraudon",
+    "short_description": "the burial grottos of Desolace's centaur tribes, prison of Princess Theradras and haunt of the demigod Zaetar's ghost",
+    "references": [],
     "content": "Hidden in the Valley of Spears in central Desolace, the burial grottos of the centaur tribes — and the prison of Princess Theradras, daughter of the earth-mother Therazane. Long ago she lured the demigod Zaetar, son of Cenarius, into love; their misshapen children became the centaur, and Theradras strangled Zaetar in grief and shame. His ghost still haunts the caverns. Noxxion seeps from the poisoned pools, Razorlash tears at intruders in the green corridor, and Theradras herself rages in the crystal heart of the mountain. The centaur consider the place holy; outsiders consider it cursed.",
     "keywords": [
       "maraudon",
@@ -541,6 +573,8 @@
   {
     "id": "dungeon_sunken_temple",
     "title": "Sunken Temple",
+    "short_description": "a drowned troll temple in the Swamp of Sorrows where exiled Atal'ai cultists labor to raise their blood god",
+    "references": [],
     "content": "The drowned temple of Atal'Hakkar, sunk by the green dragonflight into the Swamp of Sorrows ages ago to keep what was bound there from rising. The Atal'ai trolls, exiled when Zul'Gurub cast out the Hakkari cult, found it and have been digging ever since to wake their blood god. Jammal'an the Prophet leads the rites; the green dragon Eranikus, once warden of the place, lies twisted into a nightmare-shade in its inner sanctum. If the Avatar of Hakkar manifests fully here, the swamp will not hold him. The Emerald Dragonflight watches, grieving, from above.",
     "keywords": [
       "sunken",
@@ -572,6 +606,8 @@
   {
     "id": "dungeon_zul_farrak",
     "title": "Zul'Farrak",
+    "short_description": "an ancient Sandfury troll city baking in the Tanaris desert, ruled by witch doctors and their captive hydra",
+    "references": [],
     "content": "An ancient Sandfury troll city baking under the Tanaris sun, its step-pyramids and dry fountains held by Chief Ukorz Sandscalp and his witch doctors. The trolls call up the hydra Gahz'rilla from the deep well in their gladiatorial pit, and Theka the Martyr leads scarab swarms across the open plaza in numbers that have overrun more than one war party. A captive party of Sandfury rebels chained near the pyramid steps will fight beside whoever frees them. The Steamwheedle Cartel pays bounties for Sandfury scalps to keep Gadgetzan's caravans alive.",
     "keywords": [
       "zul farrak",
@@ -601,6 +637,8 @@
   {
     "id": "raid_zul_gurub",
     "title": "Zul'Gurub",
+    "short_description": "the ruined Gurubashi capital deep in Stranglethorn Vale, where high priests labor to call back a blood god who once devoured them",
+    "references": [],
     "content": "The capital of the Gurubashi troll empire, ruined since the time the empire shattered but still beating like a sick heart in the depths of Stranglethorn Vale. The high priests of the old animal gods — Jeklik the bat, Venoxis the serpent, Marli the spider, Thekal the tiger, Arlokk the panther — labor to call back Hakkar the Soulflayer, the blood god the Gurubashi worshipped before he devoured them. Bloodlord Mandokir patrols the terraces with his raptor Ohgan. The Zandalari sail across the South Seas to stop the rite; they hire war parties cheap, and pay only the survivors.",
     "keywords": [
       "zul gurub",
@@ -630,6 +668,8 @@
   {
     "id": "raid_ruins_of_ahn_qiraj",
     "title": "Ruins of Ahn'Qiraj",
+    "short_description": "the outer qiraji city in Silithus, cracked open when the Scarab Wall was broken and swarming with insectoid warriors",
+    "references": [],
     "content": "Beyond the Scarab Wall in southern Silithus, the outer city of the qiraji insectoid empire — sealed since the War of the Shifting Sands by the bronze dragon Anachronos and the night elf general Fandral Staghelm a thousand years ago, broken open again when the great gong was struck. Kurinnaxx the silithid lord rules the dunes; General Rajaxx leads waves of qiraji warriors against the Cenarion outpost; Ossirian the Unscarred, an enslaved tol'vir guardian, paces the outer terraces. The Cenarion Circle and the Brood of Nozdormu wage the war here together, and bury their dead in the same sand.",
     "keywords": [
       "ruins of ahn qiraj",
@@ -658,6 +698,8 @@
   {
     "id": "raid_temple_of_ahn_qiraj",
     "title": "Temple of Ahn'Qiraj",
+    "short_description": "the inner sanctum of the qiraji empire in Silithus, where the Old God C'Thun dreams in the dark beneath twin emperor thrones",
+    "references": [],
     "content": "The inner sanctum past the ruined city, where the Old God C'Thun dreams in the dark and the qiraji emperors do his bidding. The Prophet Skeram preaches at the gate; the twin emperors Vek'lor and Vek'nilash hold council in mirrored thrones; Princess Huhuran swarms with her brood in the hatchery; Viscidus the elemental seethes in the side chamber. Beyond them all, in a vast pit, the great eye of C'Thun opens. Fandral Staghelm has not forgiven the qiraji for his son Valstann, killed in their first war; he wants the temple gutted, whatever the cost.",
     "keywords": [
       "temple of ahn qiraj",

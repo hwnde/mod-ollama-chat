@@ -2,6 +2,8 @@
   {
     "id": "item_tier_sets",
     "title": "Tier Sets",
+    "short_description": "matched regalia forged for those who stormed the great raid citadels",
+    "references": [],
     "content": "Matched regalia, forged or stitched as a single suite, has long marked the great captains of Azeroth. The Lawbringer plate of the paladins of the Silver Hand, the Bloodfang leathers cut for shadowed killers, the Earthfury hides of the Horde's shaman lords, the Frostfire weave of Kirin Tor archmages — each set was wrought in matching pattern for those who fought beneath Ragnaros's mountain or stalked Nefarian's spire. Newer harnesses come now from Naxxramas, dragged screaming from the necropolis floating above the Plaguelands. Such matched arms are not common gear; they are the colors of those who walked into the dark and lived.",
     "keywords": [
       "tier sets",
@@ -32,6 +34,8 @@
   {
     "id": "item_legendary_weapons",
     "title": "Legendary Weapons",
+    "short_description": "storied arms of singular power, pursued through ash and bone across ages",
+    "references": [],
     "content": "A handful of blades and hafts are spoken of in hushed tones across Azeroth. Sulfuras, the Hand of Ragnaros, was wrenched from the Firelord's own grasp in the depths of the Molten Core. Thunderfury, Blessed Blade of the Windseeker, was reforged from the bound shards of Thunderaan's heart, won only by braving Nefarian and the elemental lords. Atiesh, Greatstaff of the Guardian, was Medivh's own staff, shattered and pieced together again from fragments scattered across the lands. Such weapons are not given; they are pursued through bone and ash, and only the worthiest hands close upon their hafts.",
     "keywords": [
       "legendary weapons",
@@ -60,6 +64,8 @@
   {
     "id": "item_profession_tools",
     "title": "Profession Tools",
+    "short_description": "implements of every trade, from hammer and tongs to mortar and skinning knife",
+    "references": [],
     "content": "Every trade keeps its own implements close. The blacksmith leans on hammer and tongs at the anvil, sparks scattering across the forge stone. The leatherworker plies a curved skinning knife and a stitched sewing kit, oiled and worn smooth with use. The alchemist grinds with mortar and pestle, the air sharp with crushed herbs. Mining picks, herbalist's gloves, engineer's goggles, enchanter's rods — each shapes the work that comes from a craftsman's bench. The finest tools, often passed down or sought across continents, mark the difference between a journeyman and a master who can be trusted with rare materials.",
     "keywords": [
       "profession tools",
@@ -90,6 +96,8 @@
   {
     "id": "item_mounts_collection",
     "title": "Mount Collection",
+    "short_description": "rare and storied beasts earned by deeds few dare attempt",
+    "references": [],
     "content": "The stables of Azeroth hold no shortage of strange beasts. The Ashes of Al'ar, plucked from the burning ruin of Tempest Keep, carry their rider on a phoenix's living flame. Zul'Gurub's swift tigers still pad through the jungles, prized by trolls and outsiders alike. The Deathcharger's Reins, torn from Baron Rivendare in the halls of Stratholme, summon a skeletal steed that does not tire. Beyond these, the great drakes of Northrend wheel above icebound peaks, and few have earned the saddles to ride them. A rare mount is a story told without speaking.",
     "keywords": [
       "mounts collection",
@@ -119,6 +127,8 @@
   {
     "id": "item_enchants",
     "title": "Weapon and Armor Enchants",
+    "short_description": "runes of binding traced upon steel and cloth to fix lasting magic within",
+    "references": ["profession_enchanting"],
     "content": "Enchanters trace runes of binding upon steel and cloth, fixing magic into the weave. Crusader, a holy invocation favored by the Silver Hand's paladins, has burned undead since the Scourge first crossed Lordaeron. Fiery Weapon wraps a blade in clinging flame; Soulfrost, called down by the more reckless Kirin Tor adepts, sheaths it in killing cold. Lesser sigils sewn into mail and plate strengthen sinew, sharpen the eye, deepen the well of arcane power. Enchanting demands rare dust ground from disenchanted heirlooms and the patience to learn how a glyph holds — and how it breaks.",
     "keywords": [
       "enchants",
@@ -152,6 +162,8 @@
   {
     "id": "item_gems",
     "title": "Socketed Gems",
+    "short_description": "cut stones set into socketed harness to kindle strength or calm a spellcaster's breath",
+    "references": ["profession_jewelcrafting"],
     "content": "The jewelcrafters of Silvermoon and Ironforge cut stones to be set into the sockets of fine plate and circlets. Rubies kindle a warrior's strength and the keen edge of a killing blow; topaz quickens the eye and the hand; sapphires calm a spellcaster's breath and feed the mana within. Rarer meta-stones, ground and faceted with great care, glimmer with effects scarcely understood — a sudden flash of light, a shielding aura, a quickening of all that surrounds them. A well-cut gem set in a worthy haft is a small lordship in itself.",
     "keywords": [
       "gems",
@@ -186,6 +198,8 @@
   {
     "id": "item_consumables",
     "title": "Consumable Items",
+    "short_description": "food, potions, and flasks prepared by cooks and alchemists before the march",
+    "references": ["profession_alchemy", "profession_cooking"],
     "content": "Before any company marches into Naxxramas or down into Ulduar's depths, the cooks and alchemists are kept busy. Hot meals brace a swordarm against the cold; brewed potions close the worst wounds or steady a panicked heart. Elixirs, sealed with wax and slow to work, sharpen the senses for hours at a stretch. The great flasks of the Cauldron Lords carry a warrior or healer through an entire battle without fading. Some bottles are passed reverently from hand to hand — pressed dragon's breath, distilled fel, things no sober alchemist still brews.",
     "keywords": [
       "consumables",
@@ -219,6 +233,8 @@
   {
     "id": "item_trade_goods",
     "title": "Trade Goods and Materials",
+    "short_description": "cloth, ore, leather, and herb gathered from across the world and traded at market",
+    "references": ["profession_mining", "profession_herbalism", "profession_skinning"],
     "content": "Bolts of linen, wool, silk, and mageweave move along every road from Stranglethorn to the Howling Fjord. Carts of copper, iron, mithril, and now saronite trundle out of the mines. Hunters cure leather from the great beasts of every continent; herbalists fill saddlebags with peacebloom, dreamfoil, icethorn, and lichbloom. The auction halls of Stormwind, Orgrimmar, and Dalaran see prices rise and fall by the rumor of war or famine. A canny trader who knows what the front lines need can make a small fortune between dawn and dusk.",
     "keywords": [
       "trade goods",
@@ -253,6 +269,8 @@
   {
     "id": "item_keys",
     "title": "Dungeon and Raid Keys",
+    "short_description": "tokens earned through long proof, given to unseal the doors of guarded places",
+    "references": [],
     "content": "Some doors in Azeroth do not open to a shoulder. The Master's Key of Karazhan is given only to those who walk Medivh's long road of warding and proof. The Reservoir Key is cut for the few permitted into Serpentshrine Cavern beneath Coilfang. The Medallion of Karabor unseals Auchindoun's haunted vaults. Such tokens are earned through long errands set by wary keepers, who would rather a threshold stay shut than let the wrong hand cross it. Many a warband has stood at a sealed gate, knowing they were not yet trusted to pass.",
     "keywords": [
       "keys",
@@ -272,6 +290,8 @@
   {
     "id": "item_containers",
     "title": "Special Containers",
+    "short_description": "locked chests and stitched satchels hiding spoils behind cloth and iron",
+    "references": ["profession_tailoring"],
     "content": "Locked chests and stitched satchels turn up in odd places across the world. The Cache of the Legion, recovered from Karazhan's upper halls, holds spoils the Burning Legion left behind. The Bag of Fishing Treasures, fished from quiet pools by patient anglers, yields rings and small enchanted things wrapped in damp cloth. The Disgusting Oozeling Jar, sealed by some unwise apothecary, still sloshes faintly when shaken. Such caches are pried open with held breath; what spills out may be a trinket, a coin, or something the finder will wish had stayed shut.",
     "keywords": [
       "containers",
@@ -300,6 +320,8 @@
   {
     "id": "item_tabards",
     "title": "Guild and Faction Tabards",
+    "short_description": "banners worn over breastplate to declare allegiance before a word is spoken",
+    "references": [],
     "content": "A tabard worn over breastplate or robe is a banner carried into every tavern and battlefield. The crimson lion of Stormwind, the black wolfshead of Orgrimmar, the silver hammer of the Argent Crusade — each tells who a warrior fights for before a word is spoken. Free companies stitch their own colors, bright or grim, and wear them as proudly as any banner of the Horde or Alliance. In contested lands the right tabard can earn a nod from a checkpoint guard, or a drawn blade from a stranger across the road.",
     "keywords": [
       "tabards",
@@ -320,6 +342,8 @@
   {
     "id": "item_pvp_gear",
     "title": "PvP Equipment",
+    "short_description": "harness hardened against mortal weapons and worn by champions of the killing field",
+    "references": [],
     "content": "Some harnesses are cut for the killing of one's own kind. The plate of the Grand Marshals of Stormwind and the High Warlords of the Horde, polished and bloodied in equal measure, is given only to those who have led companies into Warsong Gulch, Arathi Basin, and Alterac Valley. The arena masters of Nagrand and Dalaran outfit champions in mail thickened against mortal weapons, woven through with charms of resilience. Such gear is rarely seen far from the front; those who wear it are known by it, and challenges follow them.",
     "keywords": [
       "pvp gear",
@@ -347,6 +371,8 @@
   {
     "id": "item_quest_rewards",
     "title": "Quest Reward Items",
+    "short_description": "blades and trinkets that carry a longer story than the arm that bears them",
+    "references": [],
     "content": "Some blades and trinkets carry a story longer than the arm that bears them. The Corrupted Ashbringer, forged by Magni Bronzebeard and wielded by Highlord Alexandros Mograine before his murder at Naxxramas, still cuts undead even as it weeps shadow — its purification is the fevered hope of his son Darion, who carries it now into Northrend. The tabards of the fallen Scarlet Crusade, the holy symbols of the Silver Hand, the carved sigils handed to a young initiate by a dying master — these are not trinkets to be sold; they are oaths made solid.",
     "keywords": [
       "quest rewards",
@@ -375,6 +401,8 @@
   {
     "id": "item_cosmetic",
     "title": "Cosmetic Items",
+    "short_description": "garments and curious toys worn for appearance rather than the killing field",
+    "references": [],
     "content": "Not every fine garment is meant for the killing field. Tailors in Stormwind and Silvermoon stitch festival gowns and Winter Veil robes; the smiths of Ironforge cut polished helms for parade rather than battle. Carved illusions sleeved over a sword can make plain steel shimmer like elven silver or burn with caged fel. Curious toys — a flickering lantern, a snow globe, a tin soldier that marches across a tavern table — pass from hand to hand in markets and back alleys. Such things hold no edge, but they say much of who wears them.",
     "keywords": [
       "cosmetic",
@@ -394,6 +422,8 @@
   {
     "id": "item_relics",
     "title": "Relics and Artifacts",
+    "short_description": "holy tokens and carved idols carried at the off-hand, humming with faith of those before",
+    "references": [],
     "content": "Certain warriors carry a holy token at the off-hand rather than a shield. The paladins of the Silver Hand bear librams — small bound psalters whose verses sharpen each judgment laid upon the Scourge. Druids carry idols carved of ancient wood, etched with the marks of Cenarius and the Wild Gods. Shaman shoulder bundles of totems cut from windswept oaks of Mulgore or storm-blackened pines of the Stonetalon hills. Each relic hums faintly with the faith of those who came before, and the bearer feels its weight in every spell sent forth.",
     "keywords": [
       "relics",

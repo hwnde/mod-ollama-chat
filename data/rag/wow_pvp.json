@@ -2,6 +2,8 @@
   {
     "id": "pvp_battlegrounds",
     "title": "Battlegrounds",
+    "short_description": "named fronts where Horde and Alliance spill blood for contested ground",
+    "references": [],
     "content": "The war between the Horde and the Alliance is not fought in one place. It is fought wherever the two banners meet. In Ashenvale's western reach, Warsong Outriders fell night-elf timber while Silverwing Sentinels harry their supply lines. In the Arathi Highlands, both sides press farms, mines, lumber mills and forges for the iron and grain that feed armies far away. In Alterac's snowbound pass, the Stormpike Guard digs at old Vrykul ruins while the Frostwolf clan answers from below. Each front bleeds men by the week.",
     "keywords": [
       "battlegrounds",
@@ -36,6 +38,8 @@
   {
     "id": "pvp_world_pvp",
     "title": "World PvP",
+    "short_description": "open war waged at every border where the two banners dare to meet",
+    "references": ["wow_factions_alliance", "wow_factions_horde"],
     "content": "Beyond the named battlefields, blood is shed at every contested border. In the Hillsbrad foothills, Forsaken patrols out of Tarren Mill raid the human village of Southshore, and the Southshore garrison answers in kind across the river. In the Barrens, Horde caravans rolling through the Crossroads run afoul of Alliance scouts probing south from the Bulwark. In Stranglethorn Vale, the cracked stone of the old Gurubashi Arena still draws champions from both banners who would rather settle a grudge with steel than parley.",
     "keywords": [
       "world pvp",
@@ -66,6 +70,8 @@
   {
     "id": "pvp_ranks",
     "title": "PvP Ranks and Titles",
+    "short_description": "titles of honor earned by soldiers who survive and triumph against the enemy",
+    "references": [],
     "content": "Soldiers who survive the front long enough earn rank from their commanders. In Stormwind's muster rolls a recruit may climb through Sergeant and Knight-Captain toward the lofty Grand Marshal, a title carried by only a handful in living memory. The Horde keeps its own ladder: a Grunt who proves himself rises to Blood Guard, and the most savage and disciplined of warriors are named High Warlord. These ranks are not given lightly. They are paid for in dead enemies, ruined banners, and ground held against the odds.",
     "keywords": [
       "pvp ranks",
@@ -102,6 +108,8 @@
   {
     "id": "pvp_faction_conflicts",
     "title": "Faction Conflicts",
+    "short_description": "the unbroken war between Alliance and Horde that no truce has stilled",
+    "references": ["wow_factions_alliance", "wow_factions_horde", "person_varian_wrynn"],
     "content": "The peace forged after the Third War did not hold. King Varian Wrynn, restored to Stormwind's throne and hardened by years in chains, has little patience for Thrall's diplomacy and none at all for Garrosh Hellscream, who openly speaks of grinding the Alliance into dust. Even as both banners sail north to break the Lich King at Icecrown, their forces clash in Northrend itself: the Horde's Warsong Hold against the Alliance's Valiance Keep, and the bitter contest for the Titan relic locked beneath Wintergrasp Fortress. The old war did not pause for the new one.",
     "keywords": [
       "faction conflicts",
@@ -133,6 +141,8 @@
   {
     "id": "pvp_objectives",
     "title": "Battleground Objectives",
+    "short_description": "the specific grounds and standards each side must seize to claim victory",
+    "references": [],
     "content": "Each front has its shape. In Warsong Gulch the fight is for the banners of the Outriders' lumber camp and the Sentinels' grove; a runner who carries an enemy standard back to his own base shames the other side outright. In Arathi Basin five holdings, farm, mine, lumber mill, stables, and blacksmith, change hands by the hour. In Alterac Valley, Vanndar Stormpike and Drek'Thar each command from a stronghold and the towers between them fall and rise. At the Eye of the Storm in Outland's broken sky, a single relic is fought over above the void.",
     "keywords": [
       "battleground objectives",

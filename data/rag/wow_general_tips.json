@@ -2,6 +2,8 @@
   {
     "id": "general_gold_making",
     "title": "Gold Making Methods",
+    "short_description": "the many trades and small cunnings by which a purse is filled with coin",
+    "references": [],
     "content": "Coin flows to those who watch the markets. Smiths who can mend Northrend plate command good silver in Dalaran, and an enchanter's runes never want for buyers. Herbs pulled from the Storm Peaks, ore hauled out of the Sholazar Basin, pelts taken from Grizzly Hills hunts — all fetch a fair price from quartermasters of the Argent Crusade and the Kirin Tor. Wise traders learn what each faction pays well for before they spend the day digging or skinning.",
     "keywords": [
       "gold making",
@@ -32,6 +34,8 @@
   {
     "id": "general_communication",
     "title": "Communication and Community",
+    "short_description": "the plain words and careful trust that bind companions through war",
+    "references": [],
     "content": "Word travels faster than any courier in wartime. A good company speaks plainly before a fight — who guards whom, who falls back if the line breaks. In the camps of Wintergarde and Valiance Keep, soldiers share rumor over campfires; in Dalaran's taverns, mages trade news that has not yet reached the front. Trust is dearly bought in these years. Speak with care to strangers on the road, and never name your business in the open street.",
     "keywords": [
       "communication",
@@ -58,6 +62,8 @@
   {
     "id": "general_inventory_management",
     "title": "Managing Inventory and Bags",
+    "short_description": "the art of keeping a pack light enough to march and stocked enough to survive",
+    "references": ["item_containers"],
     "content": "A traveler's pack should be light enough to run with and full enough to survive a hard night. Sell what the road no longer needs to any innkeeper or quartermaster who will take it; store what you cannot bear to lose in a bank vault back in the cities. Tailors and leatherworkers stitch fine satchels that hold a craftsman's reagents apart from the rest. Carry rations, a waterskin, bandages, and a flint — the rest is weight that slows the legs.",
     "keywords": [
       "inventory management",
@@ -85,6 +91,8 @@
   {
     "id": "general_reputation_grinding",
     "title": "Reputation Grinding Strategies",
+    "short_description": "the long labor of proving worth to the great orders of Azeroth",
+    "references": [],
     "content": "The great orders of Northrend do not throw their trust to strangers. To stand well with the Argent Crusade, ride out from their tournament grounds and answer the Highlord's calls; to win favor with the Kirin Tor, serve Dalaran's purposes against the blue dragonflight. Wear an order's colors openly when you fight for them — it speeds the reckoning. Mounts, fine arms, and audiences with their commanders come only to those who have bled in their cause.",
     "keywords": [
       "reputation grinding",
@@ -115,6 +123,8 @@
   {
     "id": "general_raid_preparation",
     "title": "Preparing for Raids",
+    "short_description": "the readying of arms, draughts, and minds before a warband storms a great keep",
+    "references": ["item_consumables"],
     "content": "No company marches on Naxxramas or Ulduar lightly. Captains study the foe before the assault — which lieutenants stand in the dark one's halls, which traps wait in the long corridors. Each warrior should know their place in the line: who holds the front, who shields the wounded, who looses arrows from the rear. Strong armor, blessed weapons, alchemists' draughts, and bandages enough for a long night. A warband that speaks before the fight survives the fight.",
     "keywords": [
       "raid preparation",
@@ -142,6 +152,8 @@
   {
     "id": "general_pvp_preparation",
     "title": "PvP Preparation Tips",
+    "short_description": "the soldier's craft of knowing the living foe and striking at their weakness",
+    "references": [],
     "content": "The war between the banners did not end when the Lich King rose. Alliance and Horde still bleed each other in the snows of Alterac and the ruins of Warsong Gulch. A soldier who fights the living learns differently than one who hunts the dead — a Horde shaman's totems will not be felled like a ghoul, and an Alliance paladin's shield does not yield to brute force. Know your enemy's kind, strike at the one who mends their wounded first, and never charge alone into a banner you cannot count.",
     "keywords": [
       "pvp preparation",

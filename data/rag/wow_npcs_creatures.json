@@ -2,6 +2,8 @@
   {
     "id": "npc_world_bosses",
     "title": "World Bosses",
+    "short_description": "colossal terrors who walk the open land and demand armies to fell",
+    "references": [],
     "content": "Some creatures are too vast for any cave or keep to hold them. Lord Kazzak still stalks the Tainted Scar in the Blasted Lands, a remnant of the Legion's old wounds. Azuregos, the great blue dragon, broods in Azshara and tolerates no trespass. Doom Lord Kazzak walks the soil of Outland now. Bringing one of these down takes a small army moving as one, and the survivors carry away relics and trophies talked about in taverns for years afterward.",
     "keywords": [
       "world bosses",
@@ -34,6 +36,8 @@
   {
     "id": "npc_rare_elites",
     "title": "Rare Elite Creatures",
+    "short_description": "elusive beasts sighted seldom, spoken of often among hunters and wanderers",
+    "references": [],
     "content": "Some beasts are spoken of more than they are seen. The Bone Witch is glimpsed only now and then among the rotted hills of the Eastern Plaguelands. Snarler, an old devilsaur, prowls Un'Goro's ferns and tramples anything that wanders into his hunting ground. Krellack haunts the deep snows of Winterspring. Hunters and adventurers swap rumors of where they were last sighted; bringing back a tusk or a tooth from one of them is the sort of thing that earns drinks bought for you.",
     "keywords": [
       "rare elites",
@@ -63,6 +67,8 @@
   {
     "id": "npc_quest_givers",
     "title": "Important Quest Givers",
+    "short_description": "figures of great station whose errands set whole warbands marching",
+    "references": ["person_thrall", "person_magni_bronzebeard"],
     "content": "Some figures, when they ask for help, you do not refuse. Thrall holds council in Orgrimmar's Valley of Wisdom, and a word from the Warchief can set warbands marching. King Magni Bronzebeard rules from Ironforge's High Seat, though grief has lately stilled his hand. Archmage Antonidas was once the pride of Dalaran, lost at Stratholme but still named with reverence by those who study the arcane. The errands these names hand out are rarely small, and the stories that follow are long.",
     "keywords": [
       "quest givers",
@@ -93,6 +99,8 @@
   {
     "id": "npc_class_trainers",
     "title": "Class and Profession Trainers",
+    "short_description": "masters of craft and calling who teach their arts within guild-halls and city lodges",
+    "references": [],
     "content": "Every craft has its masters, and most cities hold a few. Uthel'nay teaches the arcane in Orgrimmar's Valley of Spirits, patient with apprentices who singe their own robes. Fenthwick keeps a lodge near Stormwind's Old Town and trains hunters to read a track and breathe through a bowshot. Smiths, herbalists, skinners and tailors all have their teachers as well, often guildhalled, sometimes solitary. Reputation with the right circle opens doors to teachers whose lessons aren't sold in the open market.",
     "keywords": [
       "class trainers",
@@ -124,6 +132,8 @@
   {
     "id": "npc_vendors",
     "title": "Special Vendors",
+    "short_description": "quartermasters who sell consecrated arms and rare wares only to those they trust",
+    "references": [],
     "content": "Some merchants only deal with those they know. The Argent Dawn's quartermasters at Light's Hope Chapel supply consecrated arms and salves to those riding into Stratholme. The Thorium Brotherhood, deep in the foothills above Blackrock, trade rare iron and recipes with anyone who has proven useful against the Dark Iron. The Darkmoon Faire moves between Mulgore and Elwynn and stocks oddities no city stall would carry. Their best wares are kept for those who have done the right favors.",
     "keywords": [
       "special vendors",
@@ -152,6 +162,8 @@
   {
     "id": "npc_flight_masters",
     "title": "Flight Masters",
+    "short_description": "wing-keepers who tend the gryphon and wyvern roads between the holds",
+    "references": [],
     "content": "The Alliance keeps gryphons; the Horde rides wyverns; the tauren of Thunder Bluff favor great hippogryphs. At every flight roost there is a master who knows the wind currents, tends the beasts, and binds the harness for those traveling far. A rider who has earned the trust of enough roosts can cross continents in a day. Some perches sit behind hostile borders and only open to those who have won the favor of the holding faction.",
     "keywords": [
       "flight masters",
@@ -184,6 +196,8 @@
   {
     "id": "npc_innkeepers",
     "title": "Innkeepers and Hearthstones",
+    "short_description": "keepers of hearth and hearthstone who bind weary travelers to a place of return",
+    "references": [],
     "content": "Every town worth the name has an innkeeper, and a traveler who pays the keeper to remember them is never far from a warm bed. The hearthstone, charmed by the keeper's binding, carries its bearer home when need calls. Goldshire's Lion, Brill's stale rooms, Thunder Bluff's lodges in the high tents - each has its own keeper, its own ale, its own letters waiting in the mail rack by the door.",
     "keywords": [
       "innkeepers",
@@ -203,6 +217,8 @@
   {
     "id": "npc_banker",
     "title": "Bankers and Guild Banks",
+    "short_description": "ledger-keepers behind iron bars who hold coin and salvage for those who cannot carry it",
+    "references": [],
     "content": "The banks of Stormwind, Ironforge, Orgrimmar and Thunder Bluff hold what their patrons cannot or will not carry. Goblin and gnomish ledger-keepers count coin behind iron bars; goblin vaults in Booty Bay take fewer questions. Guilds of standing keep their own vaults, with the guildmaster and chosen officers parceling out who may draw from which shelf. A war chest of pooled gold and salvaged steel is a quiet kind of power in these times.",
     "keywords": [
       "bankers",
@@ -231,6 +247,8 @@
   {
     "id": "npc_auctioneers",
     "title": "Auctioneers",
+    "short_description": "brokers who hold goods in trust and settle bids across the counters of the great cities",
+    "references": [],
     "content": "The auction halls of the great cities are loud places, full of brokers calling bids and runners hauling crates to the back rooms. Auctioneers keep the ledgers, hold the goods in trust, and pay out when the gavel falls. Orgrimmar's Drag and Stormwind's Trade District see the heaviest commerce; Booty Bay's neutral hall is where members of both factions speak in low voices over the same crate of ore. Fortunes are made and broken across those counters daily.",
     "keywords": [
       "auctioneers",
@@ -262,6 +280,8 @@
   {
     "id": "npc_stable_masters",
     "title": "Stable Masters",
+    "short_description": "part trainer, part nursemaid to the wolves and cats hunters cannot bring below ground",
+    "references": [],
     "content": "Hunters who travel with beasts know the stable masters by name. The kennels outside every major city take in the wolves, cats, bears and birds of the wilderness when their masters cannot keep them close - whether ducking into a tomb that no beast will follow into, or boarding a ship that won't have a wyvern in the hold. A stable master is part trainer, part nursemaid, and a good one knows each animal's temperament by the second visit.",
     "keywords": [
       "stable_masters",
@@ -281,6 +301,8 @@
   {
     "id": "npc_lore_figures",
     "title": "Important Lore Figures",
+    "short_description": "those whose choices shaped the age the rest of Azeroth now struggles to survive",
+    "references": ["person_medivh", "person_illidan_stormrage", "person_sylvanas_windrunner"],
     "content": "Some names carry the weight of an age. Medivh, the Last Guardian of Tirisfal, opened the Dark Portal and then sought to mend the wound he made, dying for it. Illidan Stormrage was bound beneath Hyjal for ten thousand years and now sits in Outland, named traitor by his own people. Sylvanas Windrunner, once ranger-general of Quel'Thalas, leads the Forsaken from beneath Lordaeron's ruined throne. Their choices shape the world the rest now fight in.",
     "keywords": [
       "lore figures",
@@ -312,6 +334,8 @@
   {
     "id": "npc_faction_leaders",
     "title": "Faction Leaders",
+    "short_description": "warlords and rulers who hold their peoples together while the fronts smolder",
+    "references": ["wow_factions_alliance", "wow_factions_horde"],
     "content": "Cairne Bloodhoof stands at the peak of Thunder Bluff, an old bull whose patience holds the Horde together when Garrosh would set it ablaze. Tyrande Whisperwind, High Priestess of Elune, rules Darnassus while Malfurion remains absent from the waking world. Varian Wrynn sits the throne in Stormwind, hard-edged and slow to forgive after his years of captivity. Each of them sends soldiers north to Northrend, and each bears the strain of doing so while the home fronts smolder.",
     "keywords": [
       "faction leaders",
@@ -342,6 +366,8 @@
   {
     "id": "npc_merchants",
     "title": "Specialized Merchants",
+    "short_description": "bladesmiths and reagent-sellers who stock the tools of war and craft for those who ask",
+    "references": [],
     "content": "Bladesmiths in Ironforge's Great Forge will not look up from the anvil unless you carry coin; the armorers in Orgrimmar's Drag hammer plate by the cartload to outfit warriors bound for Northrend. Reagent shops sell candles, sulfur, ink and powdered herbs to those who work the arcane. Rogues know which back doors in Stormwind's Old Town sell crimson vials, no questions asked. The better goods are kept off the counter for those who already know to ask.",
     "keywords": [
       "specialized merchants",
@@ -373,6 +399,8 @@
   {
     "id": "npc_guards",
     "title": "City Guards and Sentries",
+    "short_description": "footmen and sentinels who direct travelers, run down cutpurses, and answer threats with steel",
+    "references": [],
     "content": "Stormwind's footmen pace the Cathedral Square in tabards of blue and gold. Orgrimmar's Kor'kron, Garrosh's hand-picked, patrol the high passes with axes drawn. Ironforge's Mountaineers carry rifles older than most of the soldiers carrying them. The Sentinels of Darnassus watch from the boughs in near silence. They give directions to lost travelers, run down cutpurses, and answer with steel when an enemy banner crosses the gate. In wartime, their watches have grown longer.",
     "keywords": [
       "city guards",
@@ -405,6 +433,8 @@
   {
     "id": "npc_transport",
     "title": "Transportation NPCs",
+    "short_description": "zeppelin crews and ship captains who shrink the distance between far-flung holds",
+    "references": [],
     "content": "Goblin engineers crew the zeppelins that drone between Orgrimmar, Undercity and the Grom'gol outpost in Stranglethorn. Dwarven and human captains run the deep-keeled ships out of Menethil Harbor and Stormwind. Booty Bay's neutral docks send vessels to Ratchet across the Great Sea, where goblin schedules are loose at best. Mages of Stormwind, Orgrimmar and Dalaran open portals for those they trust, or for those whose coin is worth the spellwork. Distance shrinks for those who know whom to ask.",
     "keywords": [
       "transportation",
