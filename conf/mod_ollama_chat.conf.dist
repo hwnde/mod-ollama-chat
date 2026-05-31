@@ -498,6 +498,11 @@ OllamaChat.ChannelWeight.Raid    = 15
 OllamaChat.ChannelWeight.Guild   = 25
 OllamaChat.ChannelWeight.General = 15
 
+OllamaChat.ChannelTopics.Trade   =
+OllamaChat.ChannelTopics.Others  =
+OllamaChat.ChannelWeight.Trade   = 0
+OllamaChat.ChannelWeight.Others  = 0
+
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)
 # ----------------------------------------------
