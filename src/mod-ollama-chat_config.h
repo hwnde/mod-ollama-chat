@@ -159,6 +159,17 @@ extern std::mutex  g_ChannelThreadsMutex;
 extern time_t       g_LastHistorySaveTime;
 
 // --------------------------------------------
+// Per-channel conversation frames + topic pools + selection weights
+// Index order matches enum ChannelCategory (handler.h):
+//   0 Guild, 1 Party, 2 Raid, 3 Say, 4 Yell, 5 General, 6 Trade, 7 Others
+// --------------------------------------------
+extern bool                     g_EnableChannelFrames;
+extern bool                     g_EnableChannelTopics;
+extern std::string              g_ChannelFrames[8];
+extern std::vector<std::string> g_ChannelTopics[8];
+extern uint32_t                 g_ChannelWeights[8];
+
+// --------------------------------------------
 // Blacklist: Prefixes for Commands (not chat)
 // --------------------------------------------
 extern std::vector<std::string> g_BlacklistCommands;

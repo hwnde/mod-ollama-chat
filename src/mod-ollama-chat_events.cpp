@@ -331,7 +331,8 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
             Player* botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
             if (!botPtr) return;
 
-            std::string prompt = BuildPrompt(botPtr, g_EventChatterPromptTemplate, type, detail, actorName);
+            ChannelCategory eventCat = isGuildEvent ? ChannelCategory::Guild : ChannelCategory::Say;
+            std::string prompt = BuildPrompt(botPtr, g_EventChatterPromptTemplate, type, detail, actorName, eventCat);
             if (prompt.empty()) return;
 
             std::string response = QueryOllamaAPI(prompt);
@@ -452,7 +453,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
 }
 
 
-std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTemplate, std::string eventType, std::string eventDetail, std::string actorName)
+std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTemplate, std::string eventType, std::string eventDetail, std::string actorName, ChannelCategory channelCat)
 {
     if (!bot) return "";
 
@@ -514,6 +515,9 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
         builtPrompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
     if (g_EnableCrossBotAntiRepetition)
         builtPrompt += GetNearbyBotsRecentReplies(bot);
+
+    if (g_EnableChannelFrames)
+        builtPrompt += " [" + GetChannelFrame(channelCat) + "]";
 
     return builtPrompt;
 }

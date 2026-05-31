@@ -472,6 +472,31 @@ OllamaChat.ConversationThreadWindow = 8
 OllamaChat.ConversationThreadTTLMinutes = 30
 OllamaChat.ConversationThreadMaxChannels = 64
 OllamaChat.ConversationThreadTemplate = " [Recent talk in this channel - join in, reply to the latest naturally, do not just repeat others: {thread}]"
+OllamaChat.ChannelFrames.Enable = 1
+OllamaChat.ChannelTopics.Enable = 1
+
+OllamaChat.ChannelFrame.Guild   = "You're chatting in your guild channel, among guildmates who know you well - guild life, shared plans, camaraderie."
+OllamaChat.ChannelFrame.Party   = "You're speaking to your adventuring group - the task at hand, your companions, what's right in front of you."
+OllamaChat.ChannelFrame.Raid    = "You're addressing the whole raid - the fight ahead, coordination, the stakes of a big undertaking."
+OllamaChat.ChannelFrame.Say     = "You speak aloud to whoever stands nearby - remark on your surroundings, passers-by, the moment."
+OllamaChat.ChannelFrame.Yell    = "You raise your voice for all nearby to hear - a call, a warning, an announcement."
+OllamaChat.ChannelFrame.General = "You're posting in the regional General channel - anyone in the area might read it - idle musings, questions, regional happenings."
+OllamaChat.ChannelFrame.Trade   = "You're posting in the Trade channel - goods, services, deals, and the usual rabble of a marketplace."
+OllamaChat.ChannelFrame.Others  = "You're speaking in a public channel to a broad audience."
+
+OllamaChat.ChannelTopics.Guild   = a guild raid being planned|a guildmate's recent deed|recruiting new blood|the state of the guild bank|an upcoming gathering|an old shared story
+OllamaChat.ChannelTopics.Party   = the next pull ahead|loot that just dropped|a narrow escape|where to head next|a companion's gear or skill
+OllamaChat.ChannelTopics.Raid    = the great foe ahead|holding the line together|who stands where|the spoils of victory|steeling nerves before the fight
+OllamaChat.ChannelTopics.Say     = the scenery or weather|a passing stranger|a beast prowling nearby|news of this town|a rumor lately overheard
+OllamaChat.ChannelTopics.Yell    = a call for aid|warning of danger near|seeking companions for a venture|a triumphant boast
+OllamaChat.ChannelTopics.General = idle musings|a question for the region|something seen on the road|local happenings|seeking advice
+
+OllamaChat.ChannelWeight.Say     = 30
+OllamaChat.ChannelWeight.Yell    = 5
+OllamaChat.ChannelWeight.Party   = 20
+OllamaChat.ChannelWeight.Raid    = 15
+OllamaChat.ChannelWeight.Guild   = 25
+OllamaChat.ChannelWeight.General = 15
 
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)

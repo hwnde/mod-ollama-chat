@@ -3,6 +3,7 @@
 
 #include "ScriptMgr.h"
 #include "Player.h"
+#include "mod-ollama-chat_handler.h"
 #include <string>
 
 class OllamaBotEventChatter
@@ -12,7 +13,7 @@ public:
     // source->GetGuild() (which is unreliable while a member is being added/removed).
     void DispatchGameEvent(Player* source, std::string type, std::string detail, Guild* guildOverride = nullptr);
     void QueueEvent(Player* bot, std::string type, std::string detail, std::string actorName, bool isGuildEvent = false);
-    std::string BuildPrompt(Player* bot, std::string promptTemplate, std::string eventType, std::string eventDetail, std::string actorName);
+    std::string BuildPrompt(Player* bot, std::string promptTemplate, std::string eventType, std::string eventDetail, std::string actorName, ChannelCategory channelCat);
 };
 
 class ChatOnKill : public PlayerScript

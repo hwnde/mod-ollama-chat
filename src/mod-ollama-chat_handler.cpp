@@ -53,7 +53,7 @@
 // Forward declarations for internal helper functions.
 static bool IsBotEligibleForChatChannelLocal(Player* bot, Player* player,
                                              ChatChannelSourceLocal source, Channel* channel = nullptr, Player* receiver = nullptr);
-static std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* player);
+static std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* player, ChannelCategory channelCat);
 
 // Helper function to format class name for any player
 static std::string FormatPlayerClass(uint8_t classId)
@@ -462,6 +462,53 @@ std::string ComputeChannelKey(ChatChannelSourceLocal sourceLocal, Channel* chann
         default:
             return "";
     }
+}
+
+ChannelCategory ClassifyChannel(ChatChannelSourceLocal sourceLocal, Channel* channel)
+{
+    switch (sourceLocal)
+    {
+        case SRC_GUILD_LOCAL:
+        case SRC_OFFICER_LOCAL:
+            return ChannelCategory::Guild;
+        case SRC_PARTY_LOCAL:
+            return ChannelCategory::Party;
+        case SRC_RAID_LOCAL:
+            return ChannelCategory::Raid;
+        case SRC_SAY_LOCAL:
+            return ChannelCategory::Say;
+        case SRC_YELL_LOCAL:
+            return ChannelCategory::Yell;
+        case SRC_GENERAL_LOCAL:
+            if (channel)
+            {
+                const std::string& name = channel->GetName();
+                if (name.find("Trade") != std::string::npos)
+                    return ChannelCategory::Trade;
+                if (name.find("General") != std::string::npos)
+                    return ChannelCategory::General;
+            }
+            return ChannelCategory::Others;
+        default:
+            return ChannelCategory::Others;
+    }
+}
+
+std::string GetChannelFrame(ChannelCategory cat)
+{
+    size_t idx = static_cast<size_t>(cat);
+    if (idx < 8 && !g_ChannelFrames[idx].empty())
+        return g_ChannelFrames[idx];
+    return g_ChannelFrames[static_cast<size_t>(ChannelCategory::Others)];
+}
+
+std::string PickChannelTopic(ChannelCategory cat)
+{
+    size_t idx = static_cast<size_t>(cat);
+    if (idx >= 8 || g_ChannelTopics[idx].empty())
+        return "";
+    const std::vector<std::string>& pool = g_ChannelTopics[idx];
+    return pool[pool.size() == 1 ? 0 : urand(0, pool.size() - 1)];
 }
 
 void AppendChannelMessage(const std::string& key, const std::string& sender, const std::string& text)
@@ -1593,7 +1640,8 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
         if (bot == nullptr) {
             continue;
         }
-        std::string prompt = GenerateBotPrompt(bot, msg, player);
+        ChannelCategory channelCat = ClassifyChannel(sourceLocal, channel);
+        std::string prompt = GenerateBotPrompt(bot, msg, player, channelCat);
         if (g_EnableConversationThreading)
             prompt += GetChannelThreadPrompt(ComputeChannelKey(sourceLocal, channel, player));
         uint64_t botGuid = bot->GetGUID().GetRawValue();
@@ -1986,8 +2034,8 @@ static bool IsBotEligibleForChatChannelLocal(Player* bot, Player* player, ChatCh
     }
 }
 
-std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* player)
-{  
+std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* player, ChannelCategory channelCat)
+{
     if (!bot || !player) {
         return "";
     }
@@ -2112,6 +2160,9 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
 
     if (g_EnableCrossBotAntiRepetition)
         prompt += GetNearbyBotsRecentReplies(bot);
+
+    if (g_EnableChannelFrames)
+        prompt += " [" + GetChannelFrame(channelCat) + "]";
 
     // Debug logging for full prompt including RAG information
     if (g_DebugEnabled && g_DebugShowFullPrompt) {

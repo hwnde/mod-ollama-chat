@@ -17,6 +17,21 @@ enum ChatChannelSourceLocal
     SRC_GENERAL_LOCAL    = 17
 };
 
+// --------------------------------------------
+// Per-channel conversation frames
+// Ordinals are an ABI with the config arrays (g_ChannelFrames/Topics/Weights):
+//   Guild=0 Party=1 Raid=2 Say=3 Yell=4 General=5 Trade=6 Others=7
+// --------------------------------------------
+enum class ChannelCategory : uint8_t
+{
+    Guild = 0, Party = 1, Raid = 2, Say = 3,
+    Yell = 4, General = 5, Trade = 6, Others = 7
+};
+
+ChannelCategory ClassifyChannel(ChatChannelSourceLocal sourceLocal, Channel* channel);
+std::string     GetChannelFrame(ChannelCategory cat);
+std::string     PickChannelTopic(ChannelCategory cat);
+
 extern const char* ChatChannelSourceLocalStr[];
 
 std::string rtrim(const std::string& s);

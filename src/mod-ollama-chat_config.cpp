@@ -151,6 +151,13 @@ uint32_t    g_ConversationThreadMaxChannels = 64;
 std::string g_ConversationThreadTemplate;
 std::unordered_map<std::string, ChannelThread> g_ChannelThreads;
 std::mutex  g_ChannelThreadsMutex;
+
+bool                     g_EnableChannelFrames = true;
+bool                     g_EnableChannelTopics = true;
+std::string              g_ChannelFrames[8];
+std::vector<std::string> g_ChannelTopics[8];
+uint32_t                 g_ChannelWeights[8] = { 25, 20, 15, 30, 5, 15, 0, 0 };
+
 time_t g_LastHistorySaveTime = 0;
 
 // --------------------------------------------
@@ -343,6 +350,17 @@ static std::vector<std::string> SplitString(const std::string& str, char delim)
             tokens.push_back(token.substr(start, end - start + 1));
     }
     return tokens;
+}
+
+static std::vector<std::string> ParsePipeList(const std::string& s)
+{
+    std::vector<std::string> out;
+    std::stringstream ss(s);
+    std::string tok;
+    while (std::getline(ss, tok, '|'))
+        if (!tok.empty())
+            out.push_back(tok);
+    return out;
 }
 
 // Load Bot Personalities from Database
@@ -549,6 +567,57 @@ void LoadOllamaChatConfig()
     g_ConversationThreadMaxChannels = sConfigMgr->GetOption<uint32_t>("OllamaChat.ConversationThreadMaxChannels", 64);
     g_ConversationThreadTemplate    = sConfigMgr->GetOption<std::string>("OllamaChat.ConversationThreadTemplate",
         " [Recent talk in this channel - join in, reply to the latest naturally, do not just repeat others: {thread}]");
+
+    g_EnableChannelFrames = sConfigMgr->GetOption<bool>("OllamaChat.ChannelFrames.Enable", true);
+    g_EnableChannelTopics = sConfigMgr->GetOption<bool>("OllamaChat.ChannelTopics.Enable", true);
+
+    static const char* kFrameKeys[8] = {
+        "OllamaChat.ChannelFrame.Guild", "OllamaChat.ChannelFrame.Party",
+        "OllamaChat.ChannelFrame.Raid",  "OllamaChat.ChannelFrame.Say",
+        "OllamaChat.ChannelFrame.Yell",  "OllamaChat.ChannelFrame.General",
+        "OllamaChat.ChannelFrame.Trade", "OllamaChat.ChannelFrame.Others"
+    };
+    static const char* kFrameDef[8] = {
+        "You're chatting in your guild channel, among guildmates who know you well - guild life, shared plans, camaraderie.",
+        "You're speaking to your adventuring group - the task at hand, your companions, what's right in front of you.",
+        "You're addressing the whole raid - the fight ahead, coordination, the stakes of a big undertaking.",
+        "You speak aloud to whoever stands nearby - remark on your surroundings, passers-by, the moment.",
+        "You raise your voice for all nearby to hear - a call, a warning, an announcement.",
+        "You're posting in the regional General channel - anyone in the area might read it - idle musings, questions, regional happenings.",
+        "You're posting in the Trade channel - goods, services, deals, and the usual rabble of a marketplace.",
+        "You're speaking in a public channel to a broad audience."
+    };
+    for (int i = 0; i < 8; ++i)
+        g_ChannelFrames[i] = sConfigMgr->GetOption<std::string>(kFrameKeys[i], kFrameDef[i]);
+
+    static const char* kTopicKeys[8] = {
+        "OllamaChat.ChannelTopics.Guild", "OllamaChat.ChannelTopics.Party",
+        "OllamaChat.ChannelTopics.Raid",  "OllamaChat.ChannelTopics.Say",
+        "OllamaChat.ChannelTopics.Yell",  "OllamaChat.ChannelTopics.General",
+        "OllamaChat.ChannelTopics.Trade", "OllamaChat.ChannelTopics.Others"
+    };
+    static const char* kTopicDef[8] = {
+        "a guild raid being planned|a guildmate's recent deed|recruiting new blood|the state of the guild bank|an upcoming gathering|an old shared story",
+        "the next pull ahead|loot that just dropped|a narrow escape|where to head next|a companion's gear or skill",
+        "the great foe ahead|holding the line together|who stands where|the spoils of victory|steeling nerves before the fight",
+        "the scenery or weather|a passing stranger|a beast prowling nearby|news of this town|a rumor lately overheard",
+        "a call for aid|warning of danger near|seeking companions for a venture|a triumphant boast",
+        "idle musings|a question for the region|something seen on the road|local happenings|seeking advice",
+        "",
+        ""
+    };
+    for (int i = 0; i < 8; ++i)
+        g_ChannelTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(kTopicKeys[i], kTopicDef[i]));
+
+    static const char* kWeightKeys[8] = {
+        "OllamaChat.ChannelWeight.Guild", "OllamaChat.ChannelWeight.Party",
+        "OllamaChat.ChannelWeight.Raid",  "OllamaChat.ChannelWeight.Say",
+        "OllamaChat.ChannelWeight.Yell",  "OllamaChat.ChannelWeight.General",
+        "OllamaChat.ChannelWeight.Trade", "OllamaChat.ChannelWeight.Others"
+    };
+    static const uint32_t kWeightDef[8] = { 25, 20, 15, 30, 5, 15, 0, 0 };
+    for (int i = 0; i < 8; ++i)
+        g_ChannelWeights[i] = sConfigMgr->GetOption<uint32_t>(kWeightKeys[i], kWeightDef[i]);
 
     g_EnableChatHistory               = sConfigMgr->GetOption<bool>("OllamaChat.EnableChatHistory", true);
 
