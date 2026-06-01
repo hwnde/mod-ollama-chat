@@ -185,6 +185,8 @@ float       g_RAGSimilarityThreshold = 0.3f;
 std::string g_RAGPromptTemplate;
 bool        g_RAGExpandReferences = true;
 uint32_t    g_RAGMaxReferences = 5;
+bool        g_RAGRandomizeSelection = true;
+uint32_t    g_RAGSelectionPoolSize = 8;
 
 class OllamaRAGSystem;
 OllamaRAGSystem* g_RAGSystem = nullptr;
@@ -637,6 +639,8 @@ void LoadOllamaChatConfig()
     g_RAGPromptTemplate               = sConfigMgr->GetOption<std::string>("OllamaChat.RAGPromptTemplate", "RELEVANT INFORMATION:\n{rag_info}\nUse this information to provide accurate and detailed responses when applicable.");
     g_RAGExpandReferences             = sConfigMgr->GetOption<bool>("OllamaChat.RAGExpandReferences", true);
     g_RAGMaxReferences                = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGMaxReferences", 5);
+    g_RAGRandomizeSelection           = sConfigMgr->GetOption<bool>("OllamaChat.RAGRandomizeSelection", true);
+    g_RAGSelectionPoolSize            = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGSelectionPoolSize", 8);
 
     g_ThinkModeEnableForModule        = sConfigMgr->GetOption<bool>("OllamaChat.ThinkModeEnableForModule", false);
 
