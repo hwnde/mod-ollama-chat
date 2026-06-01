@@ -10,6 +10,8 @@
 #include <ctime>
 #include "ScriptMgr.h"  // Ensure WorldScript is defined
 
+class Player;
+
 // --------------------------------------------
 // Distance/Range Configuration
 // --------------------------------------------
@@ -350,6 +352,18 @@ extern bool g_DisableForParty;
 extern bool g_EnableTypingSimulation;
 extern uint32_t g_TypingSimulationBaseDelay;      // Base delay in milliseconds
 extern uint32_t g_TypingSimulationDelayPerChar;   // Delay per character in milliseconds
+
+// --------------------------------------------
+// Emote-Augmented Chat
+// --------------------------------------------
+extern bool        g_EmoteChatEnable;
+extern std::string g_EmoteChatVocabularyRaw;        // pipe list of allowed emote names ("" = all built-in)
+extern std::string g_EmoteChatInstructionTemplate;  // uses {emote_list}
+
+// Perform a leading [emote] tag on `text` (visual oneshot), strip it, and return true if consumed.
+bool ApplyChatEmote(Player* bot, std::string& text);
+// Prompt instruction listing allowed emote tags ("" if disabled / empty vocab).
+std::string BuildEmoteChatInstruction();
 
 // --------------------------------------------
 // Loader Functions

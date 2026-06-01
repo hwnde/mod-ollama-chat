@@ -3,10 +3,16 @@
 #include "mod-ollama-chat_rag.h"
 #include "Config.h"
 #include "Log.h"
+#include "Player.h"
+#include "SharedDefines.h"
 #include "mod-ollama-chat_api.h"
 #include <fmt/core.h>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
+#include <cctype>
+#include <set>
+#include <unordered_map>
 
 
 // --------------------------------------------
@@ -337,6 +343,13 @@ bool g_EnableTypingSimulation = false;
 uint32_t g_TypingSimulationBaseDelay = 1000;     // 1000ms base delay
 uint32_t g_TypingSimulationDelayPerChar = 250;   // 250ms per character (4 chars/sec)
 
+// --------------------------------------------
+// Emote-Augmented Chat
+// --------------------------------------------
+bool        g_EmoteChatEnable = true;
+std::string g_EmoteChatVocabularyRaw;
+std::string g_EmoteChatInstructionTemplate;
+
 
 static std::vector<std::string> SplitString(const std::string& str, char delim)
 {
@@ -363,6 +376,118 @@ static std::vector<std::string> ParsePipeList(const std::string& s)
         if (!tok.empty())
             out.push_back(tok);
     return out;
+}
+
+// --------------------------------------------
+// Emote-Augmented Chat helpers
+// --------------------------------------------
+
+// Curated visual oneshots that read well alongside speech.
+static const std::unordered_map<std::string, uint32>& EmoteChatBuiltinMap()
+{
+    static const std::unordered_map<std::string, uint32> m = {
+        {"wave",    EMOTE_ONESHOT_WAVE},    {"laugh",   EMOTE_ONESHOT_LAUGH},
+        {"cheer",   EMOTE_ONESHOT_CHEER},   {"cry",     EMOTE_ONESHOT_CRY},
+        {"point",   EMOTE_ONESHOT_POINT},   {"bow",     EMOTE_ONESHOT_BOW},
+        {"flex",    EMOTE_ONESHOT_FLEX},    {"applaud", EMOTE_ONESHOT_APPLAUD},
+        {"roar",    EMOTE_ONESHOT_ROAR},    {"no",      EMOTE_ONESHOT_NO},
+        {"yes",     EMOTE_ONESHOT_YES},     {"shrug",   EMOTE_ONESHOT_QUESTION},
+        {"salute",  EMOTE_ONESHOT_SALUTE},  {"kneel",   EMOTE_ONESHOT_KNEEL},
+        {"beg",     EMOTE_ONESHOT_BEG},     {"talk",    EMOTE_ONESHOT_TALK},
+        {"rude",    EMOTE_ONESHOT_RUDE}
+    };
+    return m;
+}
+
+static std::set<std::string> EmoteChatAllowed()
+{
+    std::set<std::string> allowed;
+    if (g_EmoteChatVocabularyRaw.empty())
+    {
+        for (auto const& kv : EmoteChatBuiltinMap())
+            allowed.insert(kv.first);
+        return allowed;
+    }
+    for (std::string const& n : ParsePipeList(g_EmoteChatVocabularyRaw))
+    {
+        // Trim surrounding whitespace so "wave | laugh | cheer" parses like "wave|laugh|cheer".
+        size_t s = n.find_first_not_of(" \t");
+        if (s == std::string::npos)
+            continue;
+        size_t e = n.find_last_not_of(" \t");
+        std::string low = n.substr(s, e - s + 1);
+        std::transform(low.begin(), low.end(), low.begin(),
+                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+        if (EmoteChatBuiltinMap().count(low))
+            allowed.insert(low);
+    }
+    return allowed;
+}
+
+bool ApplyChatEmote(Player* bot, std::string& text)
+{
+    size_t start = text.find_first_not_of(" \t\n");
+    if (start == std::string::npos || text[start] != '[')
+        return false;
+    size_t close = text.find(']', start);
+    if (close == std::string::npos)
+        return false;
+    std::string name = text.substr(start + 1, close - start - 1);
+    std::transform(name.begin(), name.end(), name.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    bool singleWord = !name.empty() && name.find(' ') == std::string::npos;
+
+    auto stripLeading = [&]()
+    {
+        size_t after = close + 1;
+        while (after < text.size() && (text[after] == ' ' || text[after] == '\t'))
+            ++after;
+        text.erase(0, after);
+    };
+
+    if (!g_EmoteChatEnable)
+    {
+        if (singleWord && EmoteChatBuiltinMap().count(name))   // defensive: never speak a stray tag
+            stripLeading();
+        return false;
+    }
+
+    auto it = EmoteChatBuiltinMap().find(name);
+    if (it == EmoteChatBuiltinMap().end())
+        return false;   // truly unknown tag -> leave text intact (might be real content)
+    std::set<std::string> allowed = EmoteChatAllowed();
+    if (!allowed.count(name))
+    {
+        // Recognized built-in but filtered out of the active vocabulary: strip it so a
+        // stray "[wave]" is never spoken literally, but perform nothing.
+        if (singleWord)
+            stripLeading();
+        return false;
+    }
+
+    if (bot)
+        bot->HandleEmoteCommand(it->second);
+    stripLeading();
+    return true;
+}
+
+std::string BuildEmoteChatInstruction()
+{
+    if (!g_EmoteChatEnable)
+        return "";
+    std::set<std::string> allowed = EmoteChatAllowed();
+    if (allowed.empty())
+        return "";
+    std::string list;
+    for (std::string const& n : allowed)
+        list += (list.empty() ? "[" : " [") + n + "]";
+    // Substitute the single {emote_list} placeholder manually (avoids pulling in
+    // mod-ollama-chat-utilities.h, whose inline SplitString collides with this file's static one).
+    std::string instr = g_EmoteChatInstructionTemplate;
+    std::string const token = "{emote_list}";
+    if (size_t pos = instr.find(token); pos != std::string::npos)
+        instr.replace(pos, token.length(), list);
+    return instr.empty() ? "" : " " + instr;
 }
 
 // Load Bot Personalities from Database
@@ -648,6 +773,14 @@ void LoadOllamaChatConfig()
     g_EnableTypingSimulation          = sConfigMgr->GetOption<bool>("OllamaChat.EnableTypingSimulation", false);
     g_TypingSimulationBaseDelay       = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationBaseDelay", 1000);
     g_TypingSimulationDelayPerChar    = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationDelayPerChar", 250);
+
+    // Emote-Augmented Chat
+    g_EmoteChatEnable             = sConfigMgr->GetOption<bool>("OllamaChat.EmoteChat.Enable", true);
+    g_EmoteChatVocabularyRaw      = sConfigMgr->GetOption<std::string>("OllamaChat.EmoteChat.Vocabulary", "");
+    g_EmoteChatInstructionTemplate = sConfigMgr->GetOption<std::string>(
+        "OllamaChat.EmoteChat.InstructionTemplate",
+        "You may begin your reply with ONE emote in square brackets from this list, but only if it "
+        "genuinely fits the mood; otherwise omit it entirely. Allowed: {emote_list}. Example: [cheer] We did it!");
 
     g_EventTypeDefeated           = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeated", "");
     g_EventTypeDefeatedPlayer     = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeatedPlayer", "");

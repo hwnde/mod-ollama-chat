@@ -1710,7 +1710,11 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                     senderPtr = ObjectAccessor::FindPlayer(ObjectGuid(senderGuid));
                     if (!senderPtr) return;
                 }
-                
+
+                ApplyChatEmote(botPtr, response);
+                // NOTE: no empty-after-strip guard here (unlike the initiated/event paths) — the
+                // post-send bookkeeping below (sentiment, conversation + recent-reply recording)
+                // must always run, and a tag-only reply that strips to "" is a benign no-op send.
                 // Route the response.
                 if (channelId != 0 && !channelName.empty())
                 {
@@ -2163,6 +2167,8 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
 
     if (g_EnableChannelFrames)
         prompt += " [" + GetChannelFrame(channelCat) + "]";
+
+    prompt += BuildEmoteChatInstruction();
 
     // Debug logging for full prompt including RAG information
     if (g_DebugEnabled && g_DebugShowFullPrompt) {
