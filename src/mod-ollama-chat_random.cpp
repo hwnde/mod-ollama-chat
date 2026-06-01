@@ -749,6 +749,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                         prompt += " [Bring up, in your own words: " + topic + "]";
                 }
 
+                prompt += BuildEmoteChatInstruction();
                 return prompt;
 
             }();
