@@ -1712,6 +1712,9 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                 }
 
                 ApplyChatEmote(botPtr, response);
+                // NOTE: no empty-after-strip guard here (unlike the initiated/event paths) — the
+                // post-send bookkeeping below (sentiment, conversation + recent-reply recording)
+                // must always run, and a tag-only reply that strips to "" is a benign no-op send.
                 // Route the response.
                 if (channelId != 0 && !channelName.empty())
                 {

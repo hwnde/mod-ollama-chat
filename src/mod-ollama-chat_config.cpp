@@ -453,9 +453,17 @@ bool ApplyChatEmote(Player* bot, std::string& text)
     }
 
     auto it = EmoteChatBuiltinMap().find(name);
+    if (it == EmoteChatBuiltinMap().end())
+        return false;   // truly unknown tag -> leave text intact (might be real content)
     std::set<std::string> allowed = EmoteChatAllowed();
-    if (it == EmoteChatBuiltinMap().end() || !allowed.count(name))
-        return false;   // unknown / not allowed -> leave text intact
+    if (!allowed.count(name))
+    {
+        // Recognized built-in but filtered out of the active vocabulary: strip it so a
+        // stray "[wave]" is never spoken literally, but perform nothing.
+        if (singleWord)
+            stripLeading();
+        return false;
+    }
 
     if (bot)
         bot->HandleEmoteCommand(it->second);
