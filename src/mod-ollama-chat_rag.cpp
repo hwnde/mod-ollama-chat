@@ -1,6 +1,7 @@
 #include "mod-ollama-chat_rag.h"
 #include "mod-ollama-chat_config.h"
 #include "Log.h"
+#include "Random.h"
 #include <filesystem>
 #include <fstream>
 #include <algorithm>
@@ -204,9 +205,40 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
                   return a.similarity > b.similarity;
               });
 
-    // Limit results
+    // Limit results: strict top-N, or (default) weighted-by-similarity sampling over a top-K pool
+    // so the surfaced snippets vary across calls without losing relevance.
     if (results.size() > maxResults) {
-        results.resize(maxResults);
+        if (!g_RAGRandomizeSelection) {
+            results.resize(maxResults);  // strict top-N (rollback path; original behavior)
+        } else {
+            // Pool = top-K by similarity (results already sorted desc). Never smaller than maxResults.
+            size_t cap = std::max<uint32_t>(g_RAGSelectionPoolSize, maxResults);
+            size_t poolSize = std::min<size_t>(results.size(), cap);
+            std::vector<RAGResult> pool(results.begin(), results.begin() + poolSize);
+
+            // Draw maxResults without replacement, probability proportional to similarity.
+            std::vector<RAGResult> chosen;
+            chosen.reserve(maxResults);
+            while (chosen.size() < maxResults && !pool.empty()) {
+                float total = 0.0f;
+                for (const auto& r : pool) {
+                    total += r.similarity;
+                }
+                float roll = (total > 0.0f) ? frand(0.0f, total) : 0.0f;
+                size_t pick = 0;
+                float cum = 0.0f;
+                for (size_t i = 0; i < pool.size(); ++i) {
+                    cum += pool[i].similarity;
+                    if (roll <= cum) {
+                        pick = i;
+                        break;
+                    }
+                }
+                chosen.push_back(pool[pick]);
+                pool.erase(pool.begin() + pick);
+            }
+            results = std::move(chosen);
+        }
     }
 
     // Expand one hop along references (outgoing only), deduped and capped.
