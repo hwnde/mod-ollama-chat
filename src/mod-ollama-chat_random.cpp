@@ -162,8 +162,11 @@ static const char* ChannelCategoryName(ChannelCategory c)
     }
 }
 
-static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, const std::string& response, ChannelCategory cat)
+static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string response, ChannelCategory cat)
 {
+    ApplyChatEmote(botPtr, response);
+    if (response.empty())  // a tag-only line: gesture performed, nothing to speak
+        return;
     switch (cat)
     {
         case ChannelCategory::Guild:

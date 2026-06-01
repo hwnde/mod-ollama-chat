@@ -1710,7 +1710,8 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                     senderPtr = ObjectAccessor::FindPlayer(ObjectGuid(senderGuid));
                     if (!senderPtr) return;
                 }
-                
+
+                ApplyChatEmote(botPtr, response);
                 // Route the response.
                 if (channelId != 0 && !channelName.empty())
                 {

@@ -369,6 +369,9 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                 if (!botAI) return;
             }
 
+            ApplyChatEmote(botPtr, response);
+            if (response.empty())  // a tag-only line: gesture performed, nothing to speak
+                return;
             // Route response to random appropriate channel
             if (isGuildEvent && botPtr->GetGuild())
             {
