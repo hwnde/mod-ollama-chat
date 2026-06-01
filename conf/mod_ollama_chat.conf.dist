@@ -1044,3 +1044,16 @@ OllamaChat.RAGExpandReferences = 1
 #     Description: Maximum number of referenced entries injected per query. Caps prompt growth.
 #     Default:     5
 OllamaChat.RAGMaxReferences = 5
+
+# OllamaChat.RAGRandomizeSelection
+#     Description: When enabled (1), direct-hit RAG snippets are sampled (weighted by similarity) from the
+#                  top RAGSelectionPoolSize candidates instead of always taking the strict top RAGMaxRetrievedItems.
+#                  Adds variety while staying on-topic. 0 = strict top-N (original).
+#     Default:     1
+OllamaChat.RAGRandomizeSelection = 1
+
+# OllamaChat.RAGSelectionPoolSize
+#     Description: Top-K candidate window the sampler draws RAGMaxRetrievedItems from (only when
+#                  RAGRandomizeSelection = 1). Set equal to RAGMaxRetrievedItems to neutralize variety.
+#     Default:     8
+OllamaChat.RAGSelectionPoolSize = 8
