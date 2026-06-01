@@ -1057,3 +1057,28 @@ OllamaChat.RAGRandomizeSelection = 1
 #                  RAGRandomizeSelection = 1). Set equal to RAGMaxRetrievedItems to neutralize variety.
 #     Default:     8
 OllamaChat.RAGSelectionPoolSize = 8
+
+# --------------------------------------------
+# EMOTE-AUGMENTED CHAT
+# --------------------------------------------
+
+#
+#    OllamaChat.EmoteChat.Enable
+#        Let bots prefix a chat line with ONE [emote] tag the module performs as a visual gesture.
+#        Default: 1 (enabled)
+#
+OllamaChat.EmoteChat.Enable = 1
+
+#
+#    OllamaChat.EmoteChat.Vocabulary
+#        Pipe-separated list of allowed emote names (empty = all built-in). e.g. "wave|laugh|cheer"
+#        Built-in: wave laugh cheer cry point bow flex applaud roar no yes shrug salute kneel beg talk rude
+#        Default: (empty)
+#
+OllamaChat.EmoteChat.Vocabulary =
+
+#
+#    OllamaChat.EmoteChat.InstructionTemplate
+#        Prompt instruction appended to generated chat. {emote_list} expands to the allowed [tag] list.
+#
+OllamaChat.EmoteChat.InstructionTemplate = "You may begin your reply with ONE emote in square brackets from this list, but only if it genuinely fits the mood; otherwise omit it entirely. Allowed: {emote_list}. Example: [cheer] We did it!"
