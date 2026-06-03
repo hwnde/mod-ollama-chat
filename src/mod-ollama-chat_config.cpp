@@ -13,6 +13,8 @@
 #include <cctype>
 #include <set>
 #include <unordered_map>
+#include <string>
+#include <vector>
 
 
 // --------------------------------------------
@@ -506,6 +508,124 @@ std::string BuildEmoteChatInstruction()
     if (size_t pos = instr.find(token); pos != std::string::npos)
         instr.replace(pos, token.length(), list);
     return instr.empty() ? "" : " " + instr;
+}
+
+// ============================================================================
+// Speech delivery: split a raw LLM reply into ordered, chat-safe lines.
+// ============================================================================
+
+static std::string SpeechTrim(const std::string& s)
+{
+    size_t b = s.find_first_not_of(" \t");
+    if (b == std::string::npos)
+        return "";
+    size_t e = s.find_last_not_of(" \t");
+    return s.substr(b, e - b + 1);
+}
+
+static bool SpeechLooksComplete(const std::string& line)
+{
+    std::string s = SpeechTrim(line);
+    if (s.empty())
+        return false;
+    char last = s.back();
+    if (last == ']' || last == ')')
+        return true;
+    while (!s.empty() && (s.back() == '"' || s.back() == '\'' || s.back() == ' '))
+        s.pop_back();
+    if (s.empty())
+        return false;
+    last = s.back();
+    if (last == '.' || last == '!' || last == '?' || last == ':' || last == '~')
+        return true;
+    if (s.size() >= 3 &&
+        (unsigned char)s[s.size() - 3] == 0xE2 &&
+        (unsigned char)s[s.size() - 2] == 0x80 &&
+        (unsigned char)s[s.size() - 1] == 0xA6)
+        return true;
+    return false;
+}
+
+static void SpeechAppendLengthSplit(std::vector<std::string>& out,
+                                    const std::string& seg, size_t maxLen)
+{
+    std::string s = seg;
+    while (s.size() > maxLen)
+    {
+        size_t cut = std::string::npos;
+        for (char t : {'.', '!', '?'})
+        {
+            size_t p = s.rfind(t, maxLen);
+            if (p != std::string::npos && (cut == std::string::npos || p > cut))
+                cut = p;
+        }
+        size_t cutEnd;
+        if (cut != std::string::npos && cut + 1 >= maxLen / 2)
+            cutEnd = cut + 1;
+        else
+        {
+            size_t sp = s.rfind(' ', maxLen);
+            cutEnd = (sp != std::string::npos && sp > 0) ? sp : maxLen;
+        }
+        std::string piece = SpeechTrim(s.substr(0, cutEnd));
+        if (!piece.empty())
+            out.push_back(piece);
+        s = SpeechTrim(s.substr(cutEnd));
+    }
+    if (!s.empty())
+        out.push_back(s);
+}
+
+std::vector<std::string> SplitChatResponse(const std::string& text)
+{
+    if (!g_SpeechSplitEnable)
+    {
+        std::vector<std::string> one;
+        std::string t = SpeechTrim(text);
+        if (!t.empty())
+            one.push_back(t);
+        return one;
+    }
+
+    std::string norm;
+    norm.reserve(text.size());
+    for (size_t i = 0; i < text.size(); ++i)
+    {
+        char c = text[i];
+        if (c == '\\' && i + 1 < text.size() && (text[i + 1] == 'n' || text[i + 1] == 'r'))
+        {
+            norm.push_back('\n');
+            ++i;
+        }
+        else if (c == '\r')
+        {
+            norm.push_back('\n');
+        }
+        else
+        {
+            norm.push_back(c);
+        }
+    }
+
+    std::vector<std::string> lines;
+    std::stringstream ss(norm);
+    std::string seg;
+    while (std::getline(ss, seg, '\n'))
+    {
+        std::string t = SpeechTrim(seg);
+        if (t.empty())
+            continue;
+        if (g_SpeechSplitMaxLineLength > 0 && t.size() > g_SpeechSplitMaxLineLength)
+            SpeechAppendLengthSplit(lines, t, g_SpeechSplitMaxLineLength);
+        else
+            lines.push_back(t);
+    }
+
+    if (g_SpeechSplitDropTrailingFragment && lines.size() > 1 &&
+        !SpeechLooksComplete(lines.back()))
+        lines.pop_back();
+
+    return lines;
 }
 
 // Load Bot Personalities from Database
