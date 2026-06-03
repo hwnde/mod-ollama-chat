@@ -320,6 +320,7 @@ extern bool        g_RAGExpandReferences;                // Follow entry referen
 extern uint32_t    g_RAGMaxReferences;                   // Max references injected per query
 extern bool        g_RAGRandomizeSelection;              // Sample direct hits weighted, not strict top-N
 extern uint32_t    g_RAGSelectionPoolSize;               // Top-K candidate window the sampler draws from
+extern bool        g_RAGImprovedScoring;                 // IDF/stopword/stem scorer (1) vs legacy raw-TF (0)
 
 class OllamaRAGSystem;
 extern OllamaRAGSystem* g_RAGSystem;                     // Global RAG system instance

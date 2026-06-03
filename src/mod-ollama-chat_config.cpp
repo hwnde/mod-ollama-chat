@@ -201,6 +201,7 @@ bool        g_RAGExpandReferences = true;
 uint32_t    g_RAGMaxReferences = 5;
 bool        g_RAGRandomizeSelection = true;
 uint32_t    g_RAGSelectionPoolSize = 8;
+bool        g_RAGImprovedScoring = true;
 
 class OllamaRAGSystem;
 OllamaRAGSystem* g_RAGSystem = nullptr;
@@ -788,6 +789,7 @@ void LoadOllamaChatConfig()
     g_RAGMaxReferences                = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGMaxReferences", 5);
     g_RAGRandomizeSelection           = sConfigMgr->GetOption<bool>("OllamaChat.RAGRandomizeSelection", true);
     g_RAGSelectionPoolSize            = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGSelectionPoolSize", 8);
+    g_RAGImprovedScoring              = sConfigMgr->GetOption<bool>("OllamaChat.RAGImprovedScoring", true);
 
     g_ThinkModeEnableForModule        = sConfigMgr->GetOption<bool>("OllamaChat.ThinkModeEnableForModule", false);
 
