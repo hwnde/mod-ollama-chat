@@ -173,6 +173,9 @@ bool                     g_EnableChannelFrames = true;
 bool                     g_EnableChannelTopics = true;
 std::string              g_ChannelFrames[8];
 std::vector<std::string> g_ChannelTopics[8];
+bool                     g_PoiChatterEnable = true;
+uint32_t                 g_PoiChatterChance = 40;
+std::vector<std::string> g_PoiTopics[5];
 uint32_t                 g_ChannelWeights[8] = { 25, 20, 15, 30, 5, 15, 0, 0 };
 
 bool                     g_ActivityChatterEnable = true;
@@ -1216,6 +1219,24 @@ void LoadOllamaChatConfig()
         "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"));
     g_ActivityTopicsDuel    = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Duel",
         "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"));
+
+    g_PoiChatterEnable = sConfigMgr->GetOption<bool>("OllamaChat.PoiChatter.Enable", true);
+    g_PoiChatterChance = sConfigMgr->GetOption<uint32_t>("OllamaChat.PoiChatter.Chance", 40);
+
+    static const char* kPoiTopicKeys[5] = {
+        "OllamaChat.PoiTopics.Auctioneer", "OllamaChat.PoiTopics.Banker",
+        "OllamaChat.PoiTopics.Innkeeper",  "OllamaChat.PoiTopics.Trainer",
+        "OllamaChat.PoiTopics.Mailbox"
+    };
+    static const char* kPoiTopicDef[5] = {
+        "the outrageous auction prices|a bargain you just spotted at the auction house|something you are hoping to sell",
+        "needing to clear out your overstuffed bank|your dwindling gold|the valuables you keep stored away",
+        "the comforts of the inn|the food and drink served here|setting your hearthstone",
+        "a new skill you wish to learn|the steep cost of training|mastering your craft",
+        "a letter you have been waiting for|mail from an old friend|a package that still has not arrived"
+    };
+    for (int i = 0; i < 5; ++i)
+        g_PoiTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(kPoiTopicKeys[i], kPoiTopicDef[i]));
 
     static const char* kWeightKeys[8] = {
         "OllamaChat.ChannelWeight.Guild", "OllamaChat.ChannelWeight.Party",

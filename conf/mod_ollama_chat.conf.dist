@@ -557,6 +557,29 @@ OllamaChat.ActivityTopics.Fishing = "the fish finally biting|the big catch you a
 OllamaChat.ActivityTopics.Gather = "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"
 OllamaChat.ActivityTopics.Craft = "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"
 OllamaChat.ActivityTopics.Duel = "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"
+#
+#    OllamaChat.PoiChatter.Enable
+#        1 = while a bot dwells at a city point-of-interest (auctioneer/banker/innkeeper/
+#            trainer/mailbox) it occasionally says a themed line about it, in its own voice.
+#        0 = off (normal initiated chatter unchanged).
+#
+OllamaChat.PoiChatter.Enable = 1
+#
+#    OllamaChat.PoiChatter.Chance
+#        Percent chance (0-100) per eligible initiated-chatter tick to emit a POI line
+#        while dwelling. Default: 40
+#
+OllamaChat.PoiChatter.Chance = 40
+#
+#    OllamaChat.PoiTopics.<Type>
+#        Pipe-separated topic phrases the bot may bring up while dwelling at each POI type.
+#        The LLM rewrites the chosen phrase in its own personality voice (no canned text).
+#
+OllamaChat.PoiTopics.Auctioneer = "the outrageous auction prices|a bargain you just spotted at the auction house|something you are hoping to sell"
+OllamaChat.PoiTopics.Banker = "needing to clear out your overstuffed bank|your dwindling gold|the valuables you keep stored away"
+OllamaChat.PoiTopics.Innkeeper = "the comforts of the inn|the food and drink served here|setting your hearthstone"
+OllamaChat.PoiTopics.Trainer = "a new skill you wish to learn|the steep cost of training|mastering your craft"
+OllamaChat.PoiTopics.Mailbox = "a letter you have been waiting for|mail from an old friend|a package that still has not arrived"
 
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)
