@@ -157,7 +157,7 @@
     "id": "zone_dun_morogh",
     "title": "Dun Morogh",
     "short_description": "snowbound dwarven highlands of Khaz Modan, where Ironforge burns at the mountain's heart",
-    "references": ["person_magni_bronzebeard"],
+    "references": ["person_magni_bronzebeard", "dungeon_gnomeregan"],
     "content": "The snowbound highlands of the dwarves, where Ironforge burns hot at the mountain's heart. Anvilmar in the south is where the youngest Bronzebeards take their first hammer; Kharanos serves a fine ale to travelers crossing the pass. Coldridge Valley shelters its own. The Frostmane trolls still raid from their hidden caves, and the Dark Iron tunneling up from Shadowforge City beneath the Searing Gorge has never truly stopped.",
     "keywords": [
       "dun morogh",
@@ -199,7 +199,7 @@
     "id": "zone_tirisfal_glades",
     "title": "Tirisfal Glades",
     "short_description": "grey sickly woodland north of the Plaguelands, cradle of the Forsaken and the Dark Lady's seat",
-    "references": ["person_sylvanas_windrunner"],
+    "references": ["person_sylvanas_windrunner", "dungeon_scarlet_monastery"],
     "content": "Sickly grey woodland north of the Plaguelands, the cradle of the Forsaken. Deathknell is where the newly raised come back to themselves and pledge to the Dark Lady's cause. Brill stands further east, and beneath Lordaeron's ruined capital sprawls the Undercity itself — Sylvanas's seat, and the apothecaries' workshops. The Scarlet Crusade still festers in Hearthglen and the Monastery and hate the Forsaken with a zealot's purity. The Scourge are quieter here than once, but the dead have not forgotten Lordaeron.",
     "keywords": [
       "tirisfal",
@@ -384,5 +384,95 @@
       "wrath",
       "contested"
     ]
+  },
+  {
+    "id": "zone_westfall",
+    "title": "Westfall",
+    "short_description": "Stormwind's breadbasket gone fallow, where abandoned farms and the Defias Brotherhood trouble the southern road",
+    "references": ["dungeon_deadmines"],
+    "content": "Once the granary that fed Stormwind, Westfall has fallen to ruin and dust, its farmsteads empty and its fields choked with weeds. The displaced laborers who built the city and were never paid turned outlaw, and now the masked Defias Brotherhood holds the broken country as its own. From Sentinel Hill the People's Militia keeps a thin watch over the roads, harried by harvest-golems gone wild and the gnolls of the Dagger Hills. Along the coast, a hidden cove shelters the Brotherhood's greatest secret, a thing of timber and iron that should not exist.",
+    "keywords": ["westfall", "sentinel hill", "defias brotherhood", "people's militia", "moonbrook", "abandoned farms", "stormwind"],
+    "tags": ["zone", "alliance", "dungeon hub"]
+  },
+  {
+    "id": "zone_stormwind_city",
+    "title": "Stormwind City",
+    "short_description": "the Alliance capital of marble towers and canals, where unrest stirs in the prison beneath the streets",
+    "references": ["dungeon_the_stockade"],
+    "content": "Stormwind rises in white marble and blue banners, the proudest of the human kingdoms reborn from the ashes of the First War. Its districts ring out with the work of trade, the forge, the cathedral of the Light, and the magus' quarter, while King Varian Wrynn holds court in the keep above the harbor. Beneath the Canal District lies the city's prison, and word has spread that the Defias and cutthroats locked within have overpowered their jailers and seized the lower halls. The guard musters at the gates, for a riot in the dark below the streets is no small thing in the heart of the Alliance.",
+    "keywords": ["stormwind", "varian wrynn", "canal district", "cathedral of light", "trade district", "alliance capital", "the stockade"],
+    "tags": ["zone", "alliance", "dungeon hub"]
+  },
+  {
+    "id": "zone_silverpine_forest",
+    "title": "Silverpine Forest",
+    "short_description": "a misty Forsaken-held forest between Tirisfal and Hillsbrad, shadowed by the Greymane Wall",
+    "references": ["dungeon_shadowfang_keep"],
+    "content": "Silverpine is a forest of perpetual mist and grey light, claimed by the Forsaken as they press south from Tirisfal toward Hillsbrad. The ruined village of Pyrewood lies cursed, its folk turning to beasts at nightfall, and the great Greymane Wall seals the southwestern road against whatever Gilneas became behind it. The Dark Lady's deathstalkers watch the highways while feral worgen prowl the deeper woods. Above a lonely crag stands a brooding keep where a mad noble's experiments left only ghosts and worgen behind.",
+    "keywords": ["silverpine forest", "the sepulcher", "pyrewood village", "greymane wall", "worgen", "forsaken", "shadowfang keep"],
+    "tags": ["zone", "horde", "dungeon hub"]
+  },
+  {
+    "id": "zone_blackrock_mountain",
+    "title": "Blackrock Mountain",
+    "short_description": "the great volcano between Searing Gorge and the Burning Steppes, riddled with the warrens of dwarf, orc, and dragon",
+    "references": ["dungeon_blackrock_depths", "dungeon_lower_blackrock_spire", "dungeon_upper_blackrock_spire", "raid_molten_core", "raid_blackwing_lair"],
+    "content": "Where Searing Gorge meets the Burning Steppes, a single black volcano hollowed by ages of digging holds more war than any mountain should. The Dark Iron dwarves carved their imperial city into its depths and woke Ragnaros in its molten heart; the remnants of the old Horde hold the high spires under Rend Blackhand; and coiled above them all, the black dragon Nefarian breeds his monstrous brood. Alliance and Horde both send their boldest into the mountain, and most of what goes in stays.",
+    "keywords": ["blackrock mountain", "searing gorge", "burning steppes", "dark iron", "ragnaros", "nefarian", "dark horde", "volcano"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_western_plaguelands",
+    "title": "Western Plaguelands",
+    "short_description": "blighted farmland slowly reclaimed by the Argent Dawn, scarred by Andorhal and the necromancers' school",
+    "references": ["dungeon_scholomance"],
+    "content": "The Western Plaguelands were once the fertile fields of Lordaeron, and now the Argent Dawn fights field by field to cleanse the blight that the Scourge sowed here. Andorhal lies contested between the living and the dead, while the Scarlet Crusade clings to Hearthglen and burns anything it deems tainted. On the island of Caer Darrow, across a haunted causeway, a school of necromancy festers in the cellars of a drowned manor, teaching the dark arts to those who would raise the dead. The Sons of Lothar and the cenarion druids labor to call life back to the poisoned earth.",
+    "keywords": ["western plaguelands", "andorhal", "hearthglen", "caer darrow", "argent dawn", "scarlet crusade", "scholomance"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_eastern_plaguelands",
+    "title": "Eastern Plaguelands",
+    "short_description": "the deepest blight of Lordaeron, where ruined Stratholme and the Scourge's strongholds still fester",
+    "references": ["dungeon_stratholme"],
+    "content": "Here the blight runs deepest, a red and rotting land where the very sky hangs sick over the bones of Lordaeron. The ruined city of Stratholme, where Arthas first turned to darkness, remains divided between the Scourge undead and the fanatic Scarlet Crusade who hold the bastion of Tyr's Hand. The Argent Dawn keeps a defiant outpost at Light's Hope Chapel, a single candle against the dark. Plaguebats, abominations, and the restless dead roam the ash-grey hills, and the four towers of the old kingdom now serve the Scourge as beacons of corruption.",
+    "keywords": ["eastern plaguelands", "stratholme", "tyr's hand", "light's hope chapel", "scarlet crusade", "scourge", "argent dawn"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_swamp_of_sorrows",
+    "title": "Swamp of Sorrows",
+    "short_description": "a fetid mire east of the Blasted Lands, hiding the sunken temple of a dragon and a troll god's cult",
+    "references": ["dungeon_sunken_temple"],
+    "content": "The Swamp of Sorrows is a drowned and fetid country east of the Blasted Lands, its air thick with rot and the croak of unseen things. The Stonard outpost gives the Horde a foothold among the muck, while the broken Stonard road runs toward the dark fortress of the Dark Portal beyond. At the swamp's heart, in the murky depths of a flooded lake, lies a sunken temple where the green dragon Eranikus lies trapped and the Atal'ai cultists of the blood-god still chant for the return of their fallen master. Crocolisks, slimes, and the cult's fanatics make the mire no place for the careless.",
+    "keywords": ["swamp of sorrows", "stonard", "atal'hakkar", "sunken temple", "eranikus", "atal'ai", "blasted lands"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_stranglethorn_vale",
+    "title": "Stranglethorn Vale",
+    "short_description": "a vast steaming jungle of trolls and pirates, where the ruins of the Gurubashi empire choke beneath the vines",
+    "references": ["raid_zul_gurub"],
+    "content": "Stranglethorn is a vast and steaming jungle at the southern reach of the Eastern Kingdoms, alive with panthers, raptors, and the great tigers the trolls revere. The ruins of the old Gurubashi empire lie scattered beneath the canopy, half-swallowed by root and vine, while the goblins of Booty Bay broker neutral trade on the southern coast and bloodsail pirates raid the waters. Deep in the vines stands the troll city where the priests of the blood-god Hakkar work to call their devourer back into the world. Adventurers come for the hunt, the gold, and the old treasures the jungle has not yet claimed.",
+    "keywords": ["stranglethorn vale", "booty bay", "gurubashi", "hakkar", "zul'gurub", "trolls", "jungle", "bloodsail"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_badlands",
+    "title": "Badlands",
+    "short_description": "a cracked red canyon land of Dark Iron diggers and Stonevault troggs over a buried titan vault",
+    "references": ["dungeon_uldaman"],
+    "content": "The Badlands are a harsh expanse of cracked red stone and dust, a canyon country south of Loch Modan where little grows and the wind never rests. The Dark Iron dwarves dig here for something buried deep, and the Stonevault troggs swarm up from below to fight them for it. At Kargath the Horde keeps a grim outpost, while dragonkin and rock elementals stalk the broken hills. Beneath it all lies a sealed vault of the titans, a place of stone guardians and old secrets that both the dwarves and darker powers would give much to unseal.",
+    "keywords": ["badlands", "kargath", "dark iron", "stonevault troggs", "uldaman", "titan vault", "canyon"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_deadwind_pass",
+    "title": "Deadwind Pass",
+    "short_description": "a dead, fog-choked canyon between Duskwood and the Swamp, brooded over by Medivh's silent tower",
+    "references": ["raid_karazhan"],
+    "content": "Deadwind Pass is a narrow, fog-choked canyon linking Duskwood to the Swamp of Sorrows, and nothing living thrives there. Ogres of the Deadwind clan haunt its ruined camps, and ravens wheel over the dead trees as though waiting. Above it all looms a great dark tower, the abandoned seat of the last Guardian Medivh, where the Burning Legion once whispered through a corrupted mind and opened the way for the orcish horde. The tower stands silent now, but the curse upon it has never lifted, and ghostly echoes of revelry still drift down from its halls.",
+    "keywords": ["deadwind pass", "karazhan", "medivh", "ogres", "tower", "duskwood", "fog"],
+    "tags": ["zone", "contested", "dungeon hub"]
   }
 ]
