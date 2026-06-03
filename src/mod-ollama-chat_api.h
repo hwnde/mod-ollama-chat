@@ -7,6 +7,9 @@
 
 std::string QueryOllamaAPI(const std::string& prompt);
 
+// Debug-only sanity check of the streaming soft-stop accumulator (no network).
+void SoftStopSelfTest();
+
 // Checks if an API response is valid (not an error message)
 bool IsValidAPIResponse(const std::string& response);
 

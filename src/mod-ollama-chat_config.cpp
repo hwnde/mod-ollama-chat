@@ -647,6 +647,9 @@ void LoadOllamaChatConfig()
              g_OllamaUrl, g_OllamaModel, g_MaxConcurrentQueries,
              g_EnableRandomChatter, g_MinRandomInterval, g_MaxRandomInterval, g_RandomChatterRealPlayerDistance,
              g_RandomChatterBotCommentChance, g_MaxConcurrentQueries, extraBlacklist);
+
+    if (g_DebugEnabled)
+        SoftStopSelfTest();
 }
 
 void LoadPersonalityTemplatesFromDB()
