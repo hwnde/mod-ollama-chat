@@ -58,6 +58,14 @@ OllamaChat.Model = llama3.2:1b
 #     |    100+    |   70–80+      | Multi-paragraph (not typical)    |
 OllamaChat.NumPredict = 100
 
+# OllamaChat.SoftStopEnable
+#     When enabled (1), the Ollama request streams and stops at the first complete-sentence
+#     boundary once NumPredict tokens have been generated, so replies end on a finished sentence
+#     instead of being cut mid-word. NumPredict is the soft target (small token headroom past it to
+#     finish the sentence). No effect when NumPredict = 0 or ThinkModeEnableForModule = 1. 0 = legacy non-streaming.
+#     Default: 1
+OllamaChat.SoftStopEnable = 1
+
 # OllamaChat.Temperature
 #     Description: Controls the "creativity" or randomness of the model’s output.
 #                  Lower values (e.g., 0.2) = more focused, repetitive, and predictable.

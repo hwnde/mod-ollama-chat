@@ -10,6 +10,7 @@
 #include <mutex>
 #include <queue>
 #include <future>
+#include <algorithm>
 
 std::string ExtractTextBetweenDoubleQuotes(const std::string& response)
 {
@@ -19,6 +20,140 @@ std::string ExtractTextBetweenDoubleQuotes(const std::string& response)
         return response.substr(first + 1, second - first - 1);
     }
     return response;
+}
+
+static const uint32_t SOFT_STOP_HEADROOM = 32;
+
+static bool EndsOnSentenceBoundary(const std::string& s)
+{
+    size_t e = s.size();
+    while (e > 0)
+    {
+        unsigned char c = (unsigned char)s[e - 1];
+        if (c == ' ' || c == '\t' || c == '\n' || c == '\r' ||
+            c == '"' || c == '\'' || c == ')' || c == ']' || c == '*')
+        { --e; continue; }
+        break;
+    }
+    if (e == 0)
+        return false;
+    char c = s[e - 1];
+    if (c == '.' || c == '!' || c == '?')
+        return true;
+    if (e >= 3 &&
+        (unsigned char)s[e - 3] == 0xE2 &&
+        (unsigned char)s[e - 2] == 0x80 &&
+        (unsigned char)s[e - 1] == 0xA6)
+        return true;
+    return false;
+}
+
+struct OllamaStreamAccumulator
+{
+    std::string lineBuf;
+    std::string text;
+    uint32_t    tokens = 0;
+    uint32_t    softTarget = 0;
+    bool        done = false;
+
+    explicit OllamaStreamAccumulator(uint32_t target) : softTarget(target) {}
+
+    bool ConsumeLine(const std::string& raw)
+    {
+        size_t b = raw.find_first_not_of(" \t\r\n");
+        if (b == std::string::npos)
+            return false;
+        size_t e = raw.find_last_not_of(" \t\r\n");
+        std::string line = raw.substr(b, e - b + 1);
+        try
+        {
+            nlohmann::json j = nlohmann::json::parse(line);
+            if (j.contains("response"))
+            {
+                std::string piece = j["response"].get<std::string>();
+                if (!piece.empty())
+                {
+                    text += piece;
+                    ++tokens;
+                }
+            }
+            if (j.contains("done") && j["done"].is_boolean() && j["done"].get<bool>())
+                done = true;
+        }
+        catch (const std::exception&)
+        {
+        }
+        if (done)
+            return true;
+        if (softTarget > 0 && tokens >= softTarget && EndsOnSentenceBoundary(text))
+            return true;
+        return false;
+    }
+
+    bool Feed(const char* data, size_t len)
+    {
+        lineBuf.append(data, len);
+        size_t nl;
+        while ((nl = lineBuf.find('\n')) != std::string::npos)
+        {
+            std::string line = lineBuf.substr(0, nl);
+            lineBuf.erase(0, nl + 1);
+            if (ConsumeLine(line))
+                return true;
+        }
+        return false;
+    }
+};
+
+void SoftStopSelfTest()
+{
+    int passed = 0, total = 0;
+
+    auto feedAll = [](OllamaStreamAccumulator& acc, const std::string& stream) -> bool {
+        return acc.Feed(stream.data(), stream.size());
+    };
+
+    {
+        ++total;
+        OllamaStreamAccumulator acc(2);
+        std::string s =
+            "{\"response\":\"Hello\"}\n{\"response\":\" world\"}\n{\"response\":\".\"}\n{\"response\":\" extra\"}\n";
+        bool stopped = feedAll(acc, s);
+        if (stopped && acc.text == "Hello world.") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (stop-at-period) -> stopped={} text=[{}]", stopped, acc.text);
+    }
+
+    {
+        ++total;
+        OllamaStreamAccumulator acc(2);
+        std::string s =
+            "{\"response\":\"Hello\"}\n{\"response\":\" world\"}\n{\"response\":\" today\"}\n{\"response\":\"!\"}\n";
+        bool stopped = feedAll(acc, s);
+        if (stopped && acc.text == "Hello world today!") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (wait-for-boundary) -> stopped={} text=[{}]", stopped, acc.text);
+    }
+
+    {
+        ++total;
+        OllamaStreamAccumulator acc(1);
+        std::string p1 = "{\"respo";
+        std::string p2 = "nse\":\"Hi.\"}\n";
+        bool s1 = acc.Feed(p1.data(), p1.size());
+        bool s2 = acc.Feed(p2.data(), p2.size());
+        if (!s1 && s2 && acc.text == "Hi.") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (chunk-split) -> s1={} s2={} text=[{}]", s1, s2, acc.text);
+    }
+
+    {
+        ++total;
+        OllamaStreamAccumulator acc(10);
+        std::string s = "{\"response\":\"Hi\",\"done\":false}\n{\"response\":\" bye\",\"done\":true}\n";
+        bool stopped = feedAll(acc, s);
+        if (stopped && acc.text == "Hi bye") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (done-flag) -> stopped={} text=[{}]", stopped, acc.text);
+    }
+
+    LOG_INFO("server.loading", "[Ollama Chat] SoftStop self-test: {}/{} passed", passed, total);
 }
 
 // Function to perform the API call.
@@ -148,51 +283,80 @@ std::string QueryOllamaAPI(const std::string& prompt)
         requestData["hidethinking"] = true;
     }
 
-    std::string requestDataStr = requestData.dump();
+    std::string botReply;
 
-    // Make HTTP POST request using our custom client
-    std::string responseBuffer = httpClient.Post(url, requestDataStr);
+    bool useStreaming = (g_SoftStopEnable && g_OllamaNumPredict > 0 && !g_ThinkModeEnableForModule);
 
-    if (responseBuffer.empty())
+    if (useStreaming)
     {
-        LOG_ERROR("server.loading", "[OllamaChat] ERROR: Failed to reach Ollama API at {}. Check URL configuration and network connectivity.", url);
-        if(g_DebugEnabled)
+        requestData["stream"] = true;
+        requestData["options"]["num_predict"] = g_OllamaNumPredict + SOFT_STOP_HEADROOM;
+
+        std::string requestDataStr = requestData.dump();
+
+        OllamaStreamAccumulator acc(g_OllamaNumPredict);
+        bool ok = httpClient.PostStreaming(url, requestDataStr,
+            [&](const char* data, size_t len) -> bool {
+                return !acc.Feed(data, len);
+            });
+
+        if (!ok && acc.text.empty())
         {
-            LOG_INFO("server.loading", "[OllamaChat] Debug: Empty response buffer from HTTP client. Model: {}", model);
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: Streaming request to {} produced no output.", url);
+            return "";
         }
-        return "";
+        botReply = acc.text;
+
+        if (g_DebugEnabled)
+            LOG_INFO("server.loading", "[Ollama Chat] SoftStop streamed {} tokens (soft target {}).", acc.tokens, g_OllamaNumPredict);
     }
-
-    std::stringstream ss(responseBuffer);
-    std::string line;
-    std::ostringstream extractedResponse;
-
-    try
+    else
     {
-        while (std::getline(ss, line))
+        std::string requestDataStr = requestData.dump();
+
+        // Make HTTP POST request using our custom client
+        std::string responseBuffer = httpClient.Post(url, requestDataStr);
+
+        if (responseBuffer.empty())
         {
-            if (line.empty() || std::all_of(line.begin(), line.end(), isspace))
-                continue;
-
-            nlohmann::json jsonResponse = nlohmann::json::parse(line);
-
-            if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: Failed to reach Ollama API at {}. Check URL configuration and network connectivity.", url);
+            if(g_DebugEnabled)
             {
-                extractedResponse << jsonResponse["response"].get<std::string>();
+                LOG_INFO("server.loading", "[OllamaChat] Debug: Empty response buffer from HTTP client. Model: {}", model);
+            }
+            return "";
+        }
+
+        std::stringstream ss(responseBuffer);
+        std::string line;
+        std::ostringstream extractedResponse;
+
+        try
+        {
+            while (std::getline(ss, line))
+            {
+                if (line.empty() || std::all_of(line.begin(), line.end(), isspace))
+                    continue;
+
+                nlohmann::json jsonResponse = nlohmann::json::parse(line);
+
+                if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+                {
+                    extractedResponse << jsonResponse["response"].get<std::string>();
+                }
             }
         }
-    }
-    catch (const std::exception& e)
-    {
-        LOG_ERROR("server.loading", "[OllamaChat] ERROR: JSON parsing failed. Exception: {}", e.what());
-        if(g_DebugEnabled)
+        catch (const std::exception& e)
         {
-            LOG_INFO("server.loading", "[OllamaChat] Debug: Response buffer content: {}", responseBuffer);
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: JSON parsing failed. Exception: {}", e.what());
+            if(g_DebugEnabled)
+            {
+                LOG_INFO("server.loading", "[OllamaChat] Debug: Response buffer content: {}", responseBuffer);
+            }
+            return "";
         }
-        return "";
+        botReply = extractedResponse.str();
     }
-
-    std::string botReply = extractedResponse.str();
 
     botReply = ExtractTextBetweenDoubleQuotes(botReply);
 

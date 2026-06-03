@@ -2,6 +2,7 @@
 #define OLLAMA_HTTP_CLIENT_H
 
 #include <string>
+#include <functional>
 
 class OllamaHttpClient
 {
@@ -11,7 +12,14 @@ public:
 
     // Make HTTP POST request to Ollama API
     std::string Post(const std::string& url, const std::string& jsonData);
-    
+
+    // Streaming POST: invokes onChunk(data, len) for each received body chunk.
+    // onChunk returns true to keep receiving, false to abort the transfer.
+    // Returns true if the request completed or was deliberately aborted by onChunk;
+    // false on a connection/HTTP error.
+    bool PostStreaming(const std::string& url, const std::string& jsonData,
+                       const std::function<bool(const char*, size_t)>& onChunk);
+
     // Set timeout for requests (in seconds)
     void SetTimeout(int seconds);
     
