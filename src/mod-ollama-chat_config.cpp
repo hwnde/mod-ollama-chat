@@ -1293,8 +1293,9 @@ void LoadOllamaChatConfig()
     g_EmoteActionRouting = sConfigMgr->GetOption<bool>("OllamaChat.EmoteActionRouting", true);
     g_EmoteChatInstructionTemplate = sConfigMgr->GetOption<std::string>(
         "OllamaChat.EmoteChat.InstructionTemplate",
-        "You may begin your reply with ONE emote in square brackets from this list, but only if it "
-        "genuinely fits the mood; otherwise omit it entirely. Allowed: {emote_list}. Example: [cheer] We did it!");
+        "Always speak in words - never reply with only an emote. You may prefix your spoken line "
+        "with ONE emote in square brackets from this list if it truly fits, then say your line. "
+        "Allowed: {emote_list}. Example: [cheer] We did it!");
 
     g_EventTypeDefeated           = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeated", "");
     g_EventTypeDefeatedPlayer     = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeatedPlayer", "");
