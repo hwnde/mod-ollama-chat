@@ -343,9 +343,13 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
                     if (present.count(refId)) {
                         continue;                        // cross-hit dedup
                     }
+                    auto it = m_idIndex.find(refId);
+                    if (it == m_idIndex.end()) {
+                        continue;                        // defensive; key was validated at cand-build
+                    }
                     present.insert(refId);
                     RAGResult rr;
-                    rr.entry = m_idIndex[refId];
+                    rr.entry = it->second;
                     rr.similarity = 0.0f;
                     rr.isReference = true;
                     refResults.push_back(rr);
