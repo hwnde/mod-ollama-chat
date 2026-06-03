@@ -162,6 +162,24 @@ static const char* ChannelCategoryName(ChannelCategory c)
     }
 }
 
+static std::string PickActivityTopic(BotActivity activity)
+{
+    std::vector<std::string> const* topics = nullptr;
+    switch (activity)
+    {
+        case ACTIVITY_SOCIAL: topics = &g_ActivityTopicsSocial;  break;
+        case ACTIVITY_FISH:   topics = &g_ActivityTopicsFishing; break;
+        case ACTIVITY_GATHER: topics = &g_ActivityTopicsGather;  break;
+        case ACTIVITY_CRAFT:  topics = &g_ActivityTopicsCraft;   break;
+        case ACTIVITY_DUEL:   topics = &g_ActivityTopicsDuel;    break;
+        // ACTIVITY_LOITER is intentionally NOT mapped -- poi-flavor-chatter owns loitering.
+        default: return "";   // ACTIVITY_NONE / ACTIVITY_LOITER / any future unmapped activity
+    }
+    if (!topics || topics->empty())
+        return "";
+    return (*topics)[topics->size() == 1 ? 0 : urand(0, topics->size() - 1)];
+}
+
 static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string response, ChannelCategory cat)
 {
     ApplyChatEmote(botPtr, response);
@@ -294,6 +312,22 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                 continue;
             }
             ChannelCategory chosenChannel = PickWeightedChannel(eligibleChannels);
+
+            std::string activityTopic;
+            if (g_ActivityChatterEnable)
+            {
+                if (PlayerbotAI* actBotAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot))
+                {
+                    BotActivity activity = actBotAI->GetCurrentActivity();
+                    if (activity != ACTIVITY_NONE && activity != ACTIVITY_LOITER &&
+                        urand(0, 99) < g_ActivityChatterChance)
+                    {
+                        activityTopic = PickActivityTopic(activity);
+                        if (!activityTopic.empty())
+                            chosenChannel = ChannelCategory::Say;   // overheard locally
+                    }
+                }
+            }
 
             std::string environmentInfo;
             std::vector<std::string> candidateComments;
@@ -666,7 +700,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
             }
 
 
-            auto prompt = [bot, &environmentInfo, chosenChannel]()
+            auto prompt = [bot, &environmentInfo, chosenChannel, activityTopic]()
             {
                 PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot);
                 if (!botAI)
@@ -751,6 +785,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     if (!topic.empty())
                         prompt += " [Bring up, in your own words: " + topic + "]";
                 }
+                if (!activityTopic.empty())
+                    prompt += " [Bring up, in your own words: " + activityTopic + "]";
 
                 prompt += BuildEmoteChatInstruction();
                 return prompt;
