@@ -258,7 +258,7 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
             if (pool.empty())
                 continue;
 
-            std::string templ = pool.size() == 1 ? pool[0] : pool[urand(0, pool.size() - 1)];
+            std::string templ = pool.size() == 1 ? pool[0] : pool[urand(0, static_cast<uint32>(pool.size() - 1))];
             std::string line = FillPhrase(templ, c->GetName(),
                                           RaceName(player->getRace()), ClassName(player->getClass()),
                                           zone, player->GetName());
