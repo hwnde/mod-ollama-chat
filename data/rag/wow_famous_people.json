@@ -331,5 +331,50 @@
     "content": "Behind every demon banner that has burned a city, a few names recur. Sargeras was the first of them — the Titan who turned — and the host he raised marches at his word, though he has not walked the lower planes himself in an age. Kil'jaeden the Deceiver, eredar, is the architect; he shaped the orcish Horde into the Legion's spear before Thrall's time, and was Velen's closest brother before the world as it now stands began. Archimonde the Defiler led the Legion's third coming and was undone at Hyjal by the Sentinels, the Horde, and the kaldorei together, with the Well of Eternity's twin doom upon him. Mannoroth, the pit lord, dragged the orcs into the blood-pact and was slain by Grommash Hellscream in Ashenvale. Magtheridon, dread lord of Outland, is chained in the Hellfire Citadel beneath the ground; he is not dead.",
     "keywords": ["burning legion", "kil'jaeden", "archimonde", "mannoroth", "magtheridon", "sargeras", "eredar", "outland"],
     "tags": ["people", "legion", "legendary"]
+  },
+  {
+    "id": "person_shandris_feathermoon",
+    "title": "Shandris Feathermoon, General of the Sentinels",
+    "short_description": "general of the Sentinels, who commands from Feathermoon Stronghold in Feralas",
+    "references": ["zone_feralas", "wow_factions_alliance"],
+    "content": "Shandris Feathermoon holds Feathermoon Stronghold on the island shelf off Feralas's western shore, where the Sentinels maintain their oldest outpost south of Darnassus. She was orphaned at the fall of Suramar in the War of the Ancients and Tyrande took her into the Sentinels' discipline when she was still a child; she has answered to no mother but Tyrande since. She rose faster than any Sentinel before her and now carries the General's rank, the second seat of the army's command. Her archers know the jungle margins of Feralas the way a shepherd knows his own hillside — the Gordunni ogres and the satyr warrens have tested her perimeter for years without gaining a pace. She corresponds with Tyrande in cipher when the post runs south, and Sentinel commanders on every continent defer to her dispatch.",
+    "keywords": ["shandris", "shandris feathermoon", "sentinel general", "feathermoon stronghold", "feralas", "kaldorei", "night elf", "sentinels", "tyrande"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_rexxar",
+    "title": "Rexxar, Champion of the Horde",
+    "short_description": "the half-orc, half-ogre beastmaster who roams the wild in service to the Horde",
+    "references": ["zone_blades_edge_mountains", "wow_factions_horde"],
+    "content": "Rexxar carries his axes through the wild places of the world, never staying long in any city he helps defend. He is half orc, half ogre, born of the Mok'Nathal clan in the Blade's Edge peaks where the Thunderlord held territory before the second sundering of Draenor. He rode with the Horde when Thrall crossed the sea and was among those who held the new Kalimdor holdings against the sea-captain Daelin Proudmoore's assault. His companion is the bear Misha, who goes where he goes and sleeps where he sleeps; the other beasts that travel in his wake are less permanent but no less obedient. He speaks little of the Mok'Nathal and less of Draenor; the Blade's Edge Mountains he calls home in the same tone a man uses for a place that no longer exists in the shape he left it.",
+    "keywords": ["rexxar", "champion of the horde", "beastmaster", "mok'nathal", "misha", "blade's edge", "thunderlord", "half-orc", "half-ogre"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_krasus",
+    "title": "Krasus, Mage of the Kirin Tor",
+    "short_description": "an elven mage of the Kirin Tor whose counsel runs older and deeper than his face suggests",
+    "references": ["zone_dalaran"],
+    "content": "Krasus holds a seat on the Kirin Tor's inner council in Dalaran, where Rhonin counts him among his closest advisors. He presents himself as an elf of indeterminate age, courteous and precise, and those who have worked beside him long enough come away with the sense that the years behind his eyes span rather more than any elf's proper portion. He speaks of Wyrmrest Temple and the Dragonblight with the familiarity of a man who has stood in those halls when they were young. His counsel on dragon-kind is sought by the Kirin Tor and given carefully; it lands with a weight that carries more than scholarship. Those of the Accord who have reason to know what he is do not speak of it, and he does not invite the question.",
+    "keywords": ["krasus", "korialstrasz", "kirin tor", "dalaran", "red dragon", "elf mage", "wyrmrest", "dragonblight"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_victor_nefarius",
+    "title": "Lord Victor Nefarius of Blackrock Spire",
+    "short_description": "the shadowy lord of Blackrock Spire, who few have seen and fewer have dealt with safely",
+    "references": ["zone_blackrock_mountain"],
+    "content": "Lord Victor Nefarius holds the upper spire of Blackrock Mountain, the seat above the old Blackrock clan grounds that the Black Dragonflight has claimed since the Second War's aftermath. He is spoken of as a nobleman — cultured, deliberate, with an interest in the dark sciences practiced in the mountain's deeper halls — though records of where he came from and under whose seal he holds his titles are vague at best. The Blackrock orcs below answer to him, and the dragonkin of the upper spire more so. Visitors who have been received by him describe a man of immense presence and unsettling patience. No one who has pressed too close to the experiments in the upper hall has returned to describe them. The Thorium Brotherhood, who forge below, keep their dealings with the spire short and their questions shorter.",
+    "keywords": ["victor nefarius", "lord nefarius", "nefarian", "blackrock spire", "blackrock mountain", "black dragonflight", "deathwing", "black dragon"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_alexstrasza",
+    "title": "Alexstrasza the Life-Binder, Queen of Life",
+    "short_description": "the red Dragon Aspect and Queen of Life, who stands vigil at Wyrmrest Temple in Dragonblight",
+    "references": ["zone_dragonblight"],
+    "content": "Alexstrasza the Life-Binder holds Wyrmrest Temple at the center of Dragonblight, where all five flights once gathered at the world's most sacred meeting ground. She is the eldest of the Aspects chosen by the Titans — keeper of all life, whose breath sustains the green and growing things where the cold would otherwise take them. She bore a captivity under the Dragonmaw clan that the red flight does not speak of easily; she was kept in chains at Grim Batol and her clutches were used as weapons of war before she was freed. That wound does not show on her face, but those who have served at Wyrmrest long enough see it in the way she watches captive creatures brought before the temple's steps. She stands at the center of the Wyrmrest Accord now because the Nexus War and the Lich King's assault on Northrend leave no room for old grievances between flights.",
+    "keywords": ["alexstrasza", "life-binder", "red dragon aspect", "queen of life", "wyrmrest temple", "dragonblight", "wyrmrest accord", "grim batol"],
+    "tags": ["people", "neutral", "living"]
   }
 ]
