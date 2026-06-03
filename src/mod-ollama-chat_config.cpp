@@ -15,6 +15,9 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
+#include <thread>
+#include <chrono>
+#include <functional>
 
 
 // --------------------------------------------
@@ -658,6 +661,26 @@ static void SpeechSplitSelfTest()
     }
     LOG_INFO("server.loading",
              "[Ollama Chat] SpeechSplit self-test: {}/{} passed", passed, (int)cases.size());
+}
+
+std::string EmitBotLines(const std::string& response,
+                         const std::function<void(const std::string&)>& sendLine)
+{
+    std::vector<std::string> lines = SplitChatResponse(response);
+    if (lines.empty())
+        return "";
+
+    std::string joined;
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+        if (i > 0 && g_SpeechSplitLineDelayMs > 0)
+            std::this_thread::sleep_for(std::chrono::milliseconds(g_SpeechSplitLineDelayMs));
+        sendLine(lines[i]);
+        if (i > 0)
+            joined += ' ';
+        joined += lines[i];
+    }
+    return joined;
 }
 
 // Load Bot Personalities from Database
