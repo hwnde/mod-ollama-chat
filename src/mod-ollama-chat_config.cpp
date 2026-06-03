@@ -564,6 +564,46 @@ ChatLinePlan PlanChatLine(const std::string& line, bool proximity)
     return plan;
 }
 
+static void EmoteActionRoutingSelfTest()
+{
+    bool savedEnable  = g_EmoteChatEnable;
+    bool savedRouting = g_EmoteActionRouting;
+    std::string savedVocab = g_EmoteChatVocabularyRaw;
+    g_EmoteChatEnable    = true;
+    g_EmoteActionRouting = true;
+    g_EmoteChatVocabularyRaw = "";
+
+    int passed = 0, total = 0;
+    auto check = [&](const char* nm, bool ok) {
+        ++total;
+        if (ok) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] EmoteActionRouting self-test FAIL ({})", nm);
+    };
+
+    check("fuzzy-waving",    FuzzyResolveEmote("waving")    == (uint32_t)EMOTE_ONESHOT_WAVE);
+    check("fuzzy-shrugging", FuzzyResolveEmote("shrugging") == (uint32_t)EMOTE_ONESHOT_QUESTION);
+    check("fuzzy-nod",       FuzzyResolveEmote("nod")       == (uint32_t)EMOTE_ONESHOT_YES);
+    check("fuzzy-unknown",   FuzzyResolveEmote("smile")     == 0);
+
+    { ChatLinePlan p = PlanChatLine("[shrug] hi there", true);
+      check("perform+speak", p.kind == ChatLinePlan::PerformAndSpeak && p.emote == (uint32_t)EMOTE_ONESHOT_QUESTION && p.text == "hi there"); }
+    { ChatLinePlan p = PlanChatLine("[Waving]", false);
+      check("fuzzy-perform", p.kind == ChatLinePlan::Perform && p.emote == (uint32_t)EMOTE_ONESHOT_WAVE); }
+    { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", true);
+      check("freeform-prox", p.kind == ChatLinePlan::ActionEmote && p.text == "smoke blows out slowly" && p.tail.empty()); }
+    { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", false);
+      check("freeform-nonprox", p.kind == ChatLinePlan::ActionText && p.text == "*smoke blows out slowly*"); }
+    { ChatLinePlan p = PlanChatLine("[smile]", false);
+      check("unknown-single", p.kind == ChatLinePlan::ActionText && p.text == "*smile*"); }
+    { ChatLinePlan p = PlanChatLine("Just a plain line.", true);
+      check("plain", p.kind == ChatLinePlan::Speak && p.text == "Just a plain line."); }
+
+    g_EmoteChatEnable    = savedEnable;
+    g_EmoteActionRouting = savedRouting;
+    g_EmoteChatVocabularyRaw = savedVocab;
+    LOG_INFO("server.loading", "[Ollama Chat] EmoteActionRouting self-test: {}/{} passed", passed, total);
+}
+
 bool ApplyChatEmote(Player* bot, std::string& text)
 {
     size_t start = text.find_first_not_of(" \t\n");
@@ -1290,6 +1330,7 @@ void LoadOllamaChatConfig()
     {
         SpeechSplitSelfTest();
         SoftStopSelfTest();
+        EmoteActionRoutingSelfTest();
     }
 }
 
