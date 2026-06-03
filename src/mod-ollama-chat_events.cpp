@@ -369,9 +369,6 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                 if (!botAI) return;
             }
 
-            ApplyChatEmote(botPtr, response);
-            if (response.empty())  // a tag-only line: gesture performed, nothing to speak
-                return;
             // Route response to random appropriate channel
             if (isGuildEvent && botPtr->GetGuild())
             {
@@ -382,8 +379,8 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                         LOG_INFO("server.loading", "[Ollama Chat] Guild event chatter skipped (guild channels disabled)");
                     return;
                 }
-                
-                EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+
+                EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToGuild(l); });
             }
             else if (botPtr->GetGroup())
             {
@@ -395,7 +392,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                     return;
                 }
                 
-                EmitBotLines(response, [&](const std::string& l){ botAI->SayToParty(l); });
+                EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToParty(l); });
             }
             else
             {
@@ -431,7 +428,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                 {
                     if (g_DebugEnabled)
                         LOG_INFO("server.loading", "[Ollama Chat] Bot Event Chatter Say: {}", response);
-                    EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                    EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
                 }
                 else if (selectedChannel == "General")
                 {
@@ -440,14 +437,14 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                     
                     // Use playerbots' SayToChannel method if available, otherwise use direct channel access
                     bool anySent = false;
-                    EmitBotLines(response, [&](const std::string& l){
+                    EmitBotLines(botPtr, false, response, [&](const std::string& l){
                         if (botAI->SayToChannel(l, ChatChannelId::GENERAL)) anySent = true; });
                     if (!anySent)
                     {
                         // Fallback to Say if no channel line was sent
                         if (g_DebugEnabled)
                             LOG_INFO("server.loading", "[Ollama Chat] Failed to send to General channel, falling back to Say");
-                        EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                        EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
                     }
                 }
             }

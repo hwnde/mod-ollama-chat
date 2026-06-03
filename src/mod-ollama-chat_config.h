@@ -404,9 +404,11 @@ struct ChatLinePlan
 // Classify one already-split line. `proximity` = the destination channel is local (Say/Yell).
 ChatLinePlan PlanChatLine(const std::string& line, bool proximity);
 
-// Send `response` as one-or-more lines via `sendLine` (short delay between lines);
-// returns the joined spoken text (single-space separated), or "" if nothing was sent.
-std::string EmitBotLines(const std::string& response,
+// Splits `response` into chat lines and delivers each per its ChatLinePlan: curated emotes
+// perform (HandleEmoteCommand), freeform brackets become a TextEmote (proximity) or "*action*"
+// text (non-proximity), everything else is sent via `sendLine`. `proximity` = local channel
+// (Say/Yell). Returns the joined spoken/channel text for one-shot bookkeeping ("" if nothing).
+std::string EmitBotLines(Player* bot, bool proximity, const std::string& response,
                          const std::function<void(const std::string&)>& sendLine);
 
 // --------------------------------------------

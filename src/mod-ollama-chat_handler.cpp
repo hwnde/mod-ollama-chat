@@ -1730,7 +1730,6 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                     if (!senderPtr) return;
                 }
 
-                ApplyChatEmote(botPtr, response);
                 // NOTE: no empty-after-strip guard here (unlike the initiated/event paths) — the
                 // post-send bookkeeping below (sentiment, conversation + recent-reply recording)
                 // must always run, and a tag-only reply that strips to "" is a benign no-op send.
@@ -1746,18 +1745,18 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                         {
                             if(g_DebugEnabled)
                             {
-                                LOG_INFO("server.loading", "[Ollama Chat] Bot {} found channel '{}' (ID: {}), checking membership...", 
+                                LOG_INFO("server.loading", "[Ollama Chat] Bot {} found channel '{}' (ID: {}), checking membership...",
                                         botPtr->GetName(), channelName, targetChannel->GetChannelId());
                             }
-                            
+
                             if (botPtr->IsInChannel(targetChannel))
                             {
                                 if(g_DebugEnabled)
                                 {
-                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} is confirmed in channel '{}', sending message...", 
+                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} is confirmed in channel '{}', sending message...",
                                             botPtr->GetName(), channelName);
                                 }
-                                std::string spoken = EmitBotLines(response, [&](const std::string& l){
+                                std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){
                                     targetChannel->Say(botPtr->GetGUID(), l, LANG_UNIVERSAL); });
                                 if (!spoken.empty())
                                     ProcessBotChatMessage(botPtr, spoken, SRC_GENERAL_LOCAL, targetChannel);
@@ -1794,25 +1793,25 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                     {
                         case SRC_GUILD_LOCAL:
                         {
-                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+                            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToGuild(l); });
                             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_GUILD_LOCAL, nullptr);
                             break;
                         }
                         case SRC_OFFICER_LOCAL:
                         {
-                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+                            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToGuild(l); });
                             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_OFFICER_LOCAL, nullptr);
                             break;
                         }
                         case SRC_PARTY_LOCAL:
                         {
-                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToParty(l); });
+                            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToParty(l); });
                             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_PARTY_LOCAL, nullptr);
                             break;
                         }
                         case SRC_RAID_LOCAL:
                         {
-                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToRaid(l); });
+                            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToRaid(l); });
                             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_RAID_LOCAL, nullptr);
                             break;
                         }
@@ -1838,7 +1837,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                 
                                 if (someoneCanHear)
                                 {
-                                    std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                                    std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
                                     if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
                                 }
                                 else if (g_DebugEnabled)
@@ -1870,7 +1869,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                 
                                 if (someoneCanHear)
                                 {
-                                    std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Yell(l); });
+                                    std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Yell(l); });
                                     if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_YELL_LOCAL, nullptr);
                                 }
                                 else if (g_DebugEnabled)
@@ -1891,7 +1890,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                         LOG_INFO("server.loading", "[Ollama Chat] Bot {} whispering response '{}' to {}", 
                                                 botPtr->GetName(), response, originalSender->GetName());
                                     }
-                                    EmitBotLines(response, [&](const std::string& l){ botAI->Whisper(l, originalSender->GetName()); });
+                                    EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->Whisper(l, originalSender->GetName()); });
                                     // Don't trigger ProcessBotChatMessage for whispers - they're private
                                 }
                                 else if(g_DebugEnabled)
@@ -1902,7 +1901,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                             break;
                         default:
                         {
-                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                            std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
                             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
                             break;
                         }
