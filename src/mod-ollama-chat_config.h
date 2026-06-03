@@ -171,6 +171,9 @@ extern bool                     g_EnableChannelFrames;
 extern bool                     g_EnableChannelTopics;
 extern std::string              g_ChannelFrames[8];
 extern std::vector<std::string> g_ChannelTopics[8];
+extern bool                     g_PoiChatterEnable;
+extern uint32_t                 g_PoiChatterChance;     // 0-100
+extern std::vector<std::string> g_PoiTopics[5];         // indexed by BotCityPoi - 1 (AUCTIONEER..MAILBOX)
 extern uint32_t                 g_ChannelWeights[8];
 
 extern bool                     g_ActivityChatterEnable;
