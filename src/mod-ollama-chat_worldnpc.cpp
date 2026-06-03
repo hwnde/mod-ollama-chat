@@ -229,6 +229,11 @@ namespace
     // guid raw value -> last-bark msTime
     std::unordered_map<uint64_t, uint32> s_npcCooldown;
     std::unordered_map<uint64_t, uint32> s_playerCooldown;
+
+    // Curated NPC cooldown: stores both dispatch time AND the per-character duration so
+    // neither the generic floor (npcCdMs) nor the generic eviction prune can truncate it.
+    struct NpcCharCd { uint32 startMs; uint32 cdMs; };
+    std::unordered_map<uint64_t, NpcCharCd> s_npcCharCooldown;
 }
 
 void OllamaWorldNpcChatter::HandleNpcProximityChatter()
@@ -295,10 +300,10 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
                 if (cit != g_WorldNpcCharacters.end())
                 {
                     uint32 cdSec = cit->second.cooldownSec ? cit->second.cooldownSec : g_WorldNpcCharacterCooldownSec;
-                    auto nit2 = s_npcCooldown.find(cguid);
-                    if (nit2 != s_npcCooldown.end() && GetMSTimeDiffToNow(nit2->second) < cdSec * 1000u)
+                    auto ccit = s_npcCharCooldown.find(cguid);
+                    if (ccit != s_npcCharCooldown.end() && GetMSTimeDiffToNow(ccit->second.startMs) < ccit->second.cdMs)
                     {
-                        continue;   // on cooldown -> stay silent (do NOT fall to role bark)
+                        continue;   // curated on cooldown -> stay silent (never role-bark)
                     }
                     if (!ConsumeNpcLlmBudget())
                     {
@@ -339,7 +344,7 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
                             if (!cr || !cr->IsInWorld() || !cr->IsAlive())
                                 return;
                             if (p->GetDistance(cr) > range + 10.0f)
-                                return;   // player wandered off
+                                return;   // allow slack: player may drift during the HTTP round-trip
                             std::vector<std::string> lines = SplitChatResponse(response);
                             for (size_t i = 0; i < lines.size(); ++i)
                             {
@@ -352,8 +357,8 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
                         } catch (...) {}
                     }).detach();
 
-                    s_npcCooldown[cguid]    = nowMs;
-                    s_playerCooldown[pguid] = nowMs;
+                    s_npcCharCooldown[cguid] = { nowMs, cdSec * 1000u };
+                    s_playerCooldown[pguid]  = nowMs;
                     ++emitted;
                     if (g_DebugEnabled)
                         LOG_INFO("server.loading", "[Ollama Chat] WorldNpc character {} addressed {} (LLM dispatched).",
@@ -397,4 +402,6 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
         it = (GetMSTimeDiffToNow(it->second) >= npcCdMs) ? s_npcCooldown.erase(it) : std::next(it);
     for (auto it = s_playerCooldown.begin(); it != s_playerCooldown.end(); )
         it = (GetMSTimeDiffToNow(it->second) >= playerCdMs) ? s_playerCooldown.erase(it) : std::next(it);
+    for (auto it = s_npcCharCooldown.begin(); it != s_npcCharCooldown.end(); )
+        it = (GetMSTimeDiffToNow(it->second.startMs) >= it->second.cdMs) ? s_npcCharCooldown.erase(it) : std::next(it);
 }
