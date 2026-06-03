@@ -496,6 +496,74 @@ static uint32_t FuzzyResolveEmote(const std::string& lowerName)
     return (uint32_t)it->second;
 }
 
+ChatLinePlan PlanChatLine(const std::string& line, bool proximity)
+{
+    ChatLinePlan plan;
+
+    size_t startPos = line.find_first_not_of(" \t");
+    if (startPos == std::string::npos || line[startPos] != '[')
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+    size_t close = line.find(']', startPos);
+    if (close == std::string::npos)
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+
+    std::string inside = line.substr(startPos + 1, close - startPos - 1);
+    size_t after = close + 1;
+    while (after < line.size() && (line[after] == ' ' || line[after] == '\t'))
+        ++after;
+    std::string rest = (after < line.size()) ? line.substr(after) : "";
+
+    std::string lname = SpeechTrim(inside);
+    std::transform(lname.begin(), lname.end(), lname.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    bool singleWord = !lname.empty() && lname.find(' ') == std::string::npos;
+
+    if (g_EmoteChatEnable && singleWord)
+    {
+        uint32_t id = FuzzyResolveEmote(lname);
+        if (id != 0)
+        {
+            if (rest.empty()) { plan.kind = ChatLinePlan::Perform; plan.emote = id; }
+            else { plan.kind = ChatLinePlan::PerformAndSpeak; plan.emote = id; plan.text = rest; }
+            return plan;
+        }
+    }
+    if (!g_EmoteChatEnable && singleWord && EmoteChatBuiltinMap().count(lname))
+    {
+        if (rest.empty()) { plan.kind = ChatLinePlan::Perform; plan.emote = 0; }
+        else { plan.kind = ChatLinePlan::Speak; plan.text = rest; }
+        return plan;
+    }
+
+    if (!g_EmoteActionRouting)
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+
+    std::string action = SpeechTrim(inside);
+    if (action.empty())
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = rest; return plan;
+    }
+
+    if (proximity)
+    {
+        plan.kind = ChatLinePlan::ActionEmote;
+        plan.text = action;
+        plan.tail = rest;
+    }
+    else
+    {
+        plan.kind = ChatLinePlan::ActionText;
+        plan.text = "*" + action + "*" + (rest.empty() ? "" : " " + rest);
+    }
+    return plan;
+}
+
 bool ApplyChatEmote(Player* bot, std::string& text)
 {
     size_t start = text.find_first_not_of(" \t\n");

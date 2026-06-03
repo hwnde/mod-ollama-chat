@@ -392,6 +392,18 @@ extern uint32_t    g_SpeechSplitLineDelayMs;            // delay between consecu
 // Split a raw LLM reply into ordered, chat-safe lines (never an empty line).
 std::vector<std::string> SplitChatResponse(const std::string& text);
 
+// How a single (already split) chat line should be delivered.
+struct ChatLinePlan
+{
+    enum Kind { Speak, Perform, PerformAndSpeak, ActionEmote, ActionText } kind = Speak;
+    uint32_t    emote = 0;
+    std::string text;
+    std::string tail;
+};
+
+// Classify one already-split line. `proximity` = the destination channel is local (Say/Yell).
+ChatLinePlan PlanChatLine(const std::string& line, bool proximity);
+
 // Send `response` as one-or-more lines via `sendLine` (short delay between lines);
 // returns the joined spoken text (single-space separated), or "" if nothing was sent.
 std::string EmitBotLines(const std::string& response,
