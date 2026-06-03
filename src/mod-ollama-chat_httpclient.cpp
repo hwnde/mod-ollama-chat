@@ -185,11 +185,23 @@ bool OllamaHttpClient::PostStreaming(const std::string& url, const std::string& 
         if (host.find("ngrok") != std::string::npos)
             headers.emplace("ngrok-skip-browser-warning", "true");
 
-        httplib::ContentReceiver receiver = [&](const char* data, size_t len) -> bool {
-            return onChunk(data, len);
-        };
+        // Stream the RESPONSE body via a low-level Request + content_receiver. The buffered
+        // Post(..., ContentReceiver) overload is not present in every bundled httplib version,
+        // but send() + Request::content_receiver is; a generic-lambda receiver adapts to either
+        // ContentReceiverWithProgress signature (uint64_t vs size_t offsets) across versions.
+        httplib::Request req;
+        req.method  = "POST";
+        req.path    = path;
+        req.headers = headers;
+        req.body    = jsonData;
+        req.content_receiver =
+            [&](const char* data, size_t len, auto /*offset*/, auto /*total*/) -> bool {
+                return onChunk(data, len);
+            };
 
-        httplib::Result res;
+        httplib::Response resp;
+        httplib::Error err = httplib::Error::Success;
+        bool ok = false;
         if (protocol == "https")
         {
 #ifdef CPPHTTPLIB_OPENSSL_SUPPORT
@@ -198,7 +210,7 @@ bool OllamaHttpClient::PostStreaming(const std::string& url, const std::string& 
             sslClient.set_connection_timeout(m_timeout);
             sslClient.set_read_timeout(m_timeout);
             sslClient.set_write_timeout(m_timeout);
-            res = sslClient.Post(path, headers, jsonData, "application/json", receiver);
+            ok = sslClient.send(req, resp, err);
 #else
             LOG_ERROR("server.loading", "[Ollama Chat] HTTPS requested but SSL support not available.");
             return false;
@@ -210,19 +222,21 @@ bool OllamaHttpClient::PostStreaming(const std::string& url, const std::string& 
             client.set_connection_timeout(m_timeout);
             client.set_read_timeout(m_timeout);
             client.set_write_timeout(m_timeout);
-            res = client.Post(path, headers, jsonData, "application/json", receiver);
+            ok = client.send(req, resp, err);
         }
 
-        if (!res)
+        // A deliberate abort by content_receiver surfaces as Error::Canceled -- that is success
+        // for our purposes (we got the prefix we wanted and stopped generation).
+        if (!ok)
         {
-            if (res.error() == httplib::Error::Canceled)
+            if (err == httplib::Error::Canceled)
                 return true;
-            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request failed: {}:{}{}", host, port, path);
+            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request failed (err {}): {}:{}{}", (int)err, host, port, path);
             return false;
         }
-        if (res->status != 200)
+        if (resp.status != 200)
         {
-            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request HTTP {} for {}:{}{}", res->status, host, port, path);
+            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request HTTP {} for {}:{}{}", resp.status, host, port, path);
             return false;
         }
         return true;
