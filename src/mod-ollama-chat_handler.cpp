@@ -2118,6 +2118,23 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
     std::string ragInfo;
     if (g_EnableRAG && g_RAGSystem) {
         auto ragResults = g_RAGSystem->RetrieveRelevantInfo(playerMessage, g_RAGMaxRetrievedItems, g_RAGSimilarityThreshold);
+        if (g_EnableRAGReplyContext && g_RAGReplyContextItems > 0)
+        {
+            std::string ctxQuery = BuildBotContextQuery(bot);
+            if (!ctxQuery.empty())
+            {
+                auto ctx = g_RAGSystem->RetrieveRelevantInfo(
+                    ctxQuery, g_RAGReplyContextItems, g_RAGSimilarityThreshold);
+                for (const auto& c : ctx)
+                {
+                    bool dup = false;
+                    for (const auto& r : ragResults)
+                        if (r.entry->id == c.entry->id) { dup = true; break; }
+                    if (!dup)
+                        ragResults.push_back(c);
+                }
+            }
+        }
         std::string ragContent = g_RAGSystem->GetFormattedRAGInfo(ragResults);
         if (!ragContent.empty()) {
             ragInfo = SafeFormat(g_RAGPromptTemplate, fmt::arg("rag_info", ragContent));
