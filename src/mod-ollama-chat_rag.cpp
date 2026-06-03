@@ -461,3 +461,56 @@ std::vector<std::string> OllamaRAGSystem::NormalizeTokens(const std::string& tex
     }
     return out;
 }
+
+void OllamaRAGSystem::BuildIdf()
+{
+    m_idf.clear();
+    const float N = static_cast<float>(m_ragEntries.size());
+    std::unordered_map<std::string, uint32_t> df;
+    for (const auto& entry : m_ragEntries)
+    {
+        std::string text = entry.title + " " + entry.content;
+        for (const auto& kw : entry.keywords)
+            text += " " + kw;
+        std::unordered_set<std::string> seen;
+        for (const auto& t : NormalizeTokens(text))
+            seen.insert(t);                 // count each term once per entry
+        for (const auto& t : seen)
+            df[t]++;
+    }
+    for (const auto& kv : df)
+        m_idf[kv.first] = std::log((N + 1.0f) / (static_cast<float>(kv.second) + 1.0f)) + 1.0f;
+}
+
+void OllamaRAGSystem::BuildEntryVectors()
+{
+    m_entryVectors.assign(m_ragEntries.size(), {});
+    for (size_t i = 0; i < m_ragEntries.size(); ++i)
+    {
+        const auto& entry = m_ragEntries[i];
+        std::string text = entry.title + " " + entry.content;
+        for (const auto& kw : entry.keywords)
+            text += " " + kw;
+
+        std::unordered_map<std::string, float> tf;
+        for (const auto& t : NormalizeTokens(text))
+            tf[t] += 1.0f;
+
+        auto& vec = m_entryVectors[i];
+        float norm = 0.0f;
+        for (const auto& kv : tf)
+        {
+            auto it = m_idf.find(kv.first);
+            float w = kv.second * (it != m_idf.end() ? it->second : 0.0f);
+            if (w != 0.0f)
+            {
+                vec[kv.first] = w;
+                norm += w * w;
+            }
+        }
+        norm = std::sqrt(norm);
+        if (norm > 0.0f)
+            for (auto& kv : vec)
+                kv.second /= norm;
+    }
+}

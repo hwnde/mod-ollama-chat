@@ -62,11 +62,15 @@ private:
     bool IsStopword(const std::string& token) const;
     std::string Stem(const std::string& token) const;             // light suffix-stripping
     std::vector<std::string> NormalizeTokens(const std::string& text) const;  // preprocess->tokenize->drop stopwords->stem
+    void BuildIdf();           // fill m_idf from m_ragEntries via NormalizeTokens
+    void BuildEntryVectors();  // fill m_entryVectors (sparse, L2-normalized)
 
 private:
     std::vector<RAGEntry> m_ragEntries;
     std::unordered_map<std::string, const RAGEntry*> m_idIndex;
     std::vector<std::string> m_vocabulary;
+    std::unordered_map<std::string, float> m_idf;                       // term -> idf weight
+    std::vector<std::unordered_map<std::string, float>> m_entryVectors; // parallel to m_ragEntries; sparse, L2-normalized TF-IDF
     bool m_initialized;
 };
 
