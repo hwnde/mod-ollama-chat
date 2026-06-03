@@ -308,7 +308,7 @@
     "id": "zone_borean_tundra",
     "title": "Borean Tundra",
     "short_description": "wind-stripped tundra on Northrend's western coast, contested by both Alliance and Horde beachheads",
-    "references": ["person_lich_king"],
+    "references": ["person_lich_king", "dungeon_the_nexus", "dungeon_the_oculus", "raid_the_eye_of_eternity"],
     "content": "The western coast of Northrend — wind-stripped tundra, steaming geothermal vents, and the ruined halls of the nerubian dead. Valiance Keep flies the lion of Stormwind on the southern shore; Warsong Hold the wolf of Orgrimmar to its east. The Riplash Ruins still smoke from the long war between the nerubians and the blue dragonflight, whose Coldarra holds Malygos's frozen seat. The Scourge stir from beneath the ice. Newcomers learn the cold the hard way, or not at all.",
     "keywords": [
       "borean",
@@ -349,7 +349,7 @@
     "id": "zone_howling_fjord",
     "title": "Howling Fjord",
     "short_description": "dark clifftop fjords on Northrend's eastern coast, haunted by vrykul raiders from Utgarde Keep",
-    "references": ["person_lich_king"],
+    "references": ["person_lich_king", "dungeon_utgarde_keep", "dungeon_utgarde_pinnacle"],
     "content": "The eastern coast of Northrend — dark cliffs, deep fjords, and the longhouses of the vrykul who serve the Lich King as half-giant raiders. Valgarde harbors the Alliance landing; Camp Winterhoof shelters the Horde's. Utgarde Keep, the vrykul fortress on the heights, has not fallen — and below it the Dragonflayer clan still raise their dead to fight again. The bay-eels and proto-dragons of the coast care nothing for either banner.",
     "keywords": [
       "howling",
@@ -618,5 +618,68 @@
     "content": "South of Eversong's golden woods the trees turn grey and dead, for the Ghostlands mark where Arthas and his Scourge carved their path of ruin into Quel'Thalas. The Dead Scar still runs black through the land, a road of corruption the undead yet walk, and the blood elf Farstriders hold Tranquillien against the Scourge and the trolls alike. For to the east the Amani trolls have stirred again under their warlord Zul'jin, raising up their ancient beast-gods within the walls of their warcity Zul'Aman, hungry to reclaim the forests the elves took from them long ago. The dead and the vengeful both crowd this narrow, haunted strip of land.",
     "keywords": ["ghostlands", "dead scar", "farstriders", "tranquillien", "amani", "zul'aman", "zul'jin", "quel'thalas"],
     "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_dragonblight",
+    "title": "Dragonblight",
+    "short_description": "the dragons' icy graveyard at Northrend's heart, watched over by Wyrmrest Temple and shadowed by the floating necropolis of Naxxramas",
+    "references": ["dungeon_azjol_nerub", "dungeon_ahnkahet_the_old_kingdom", "raid_naxxramas", "raid_the_obsidian_sanctum"],
+    "content": "At the cold heart of Northrend lies Dragonblight, the place where the great dragons come to die, their vast bones half-buried in the snow across the frozen plain. Wyrmrest Temple rises at its center, the seat of the red dragonflight and the meeting ground of all five flights, while below the ice the ancient nerubian kingdom of Azjol-Nerub still festers with spider-lords and the Scourge that conquered them. The Alliance and Horde press inland from their coastal holds, and over the wastes hangs the floating necropolis of Naxxramas, dragged here by the lich Kel'Thuzad to loose new plagues upon the living. Even the Obsidian Sanctum beneath the temple stirs, where the black dragon Sartharion guards a clutch of twilight eggs.",
+    "keywords": ["dragonblight", "wyrmrest temple", "azjol-nerub", "naxxramas", "kel'thuzad", "obsidian sanctum", "dragonflight", "northrend"],
+    "tags": ["zone", "northrend", "dungeon hub"]
+  },
+  {
+    "id": "zone_grizzly_hills",
+    "title": "Grizzly Hills",
+    "short_description": "a great evergreen forest of logging camps and furbolg, where the Drakkari fortress of Drak'Tharon broods on the northern edge",
+    "references": ["dungeon_drak_tharon_keep"],
+    "content": "The Grizzly Hills roll green and ancient across eastern Northrend, a vast evergreen forest of towering pines where the air smells of sap and woodsmoke. The Alliance work the timber at Amberpine Lodge while the Horde's Conquest Hold drives its own logging deeper into the wood, and between them the furbolg tribes struggle, some friendly and some fallen to corruption. The Venture Company strips the forest for profit, and old voodoo stirs among the trees. On the forest's northern edge looms Drak'Tharon Keep, a crumbling Drakkari troll fortress now overrun by the Scourge, its gates a wound in the green wall of the hills.",
+    "keywords": ["grizzly hills", "amberpine lodge", "conquest hold", "furbolg", "drak'tharon keep", "drakkari", "forest", "northrend"],
+    "tags": ["zone", "northrend", "dungeon hub"]
+  },
+  {
+    "id": "zone_zul_drak",
+    "title": "Zul'Drak",
+    "short_description": "a frozen plateau of toppled troll gods, where the Drakkari ice trolls slaughter their own deities to fight the Scourge",
+    "references": ["dungeon_gundrak"],
+    "content": "Zul'Drak is a high frozen plateau in northeastern Northrend, the bleak homeland of the Drakkari ice trolls, lined with the colossal statues and altars of their animal gods. Desperate before the advancing Scourge, the Drakkari have turned upon their own deities, slaughtering the very gods they once worshipped to drink their power and turn it against the undead tide. The result is a land of fallen idols and spilled divine blood, where the Argent Crusade and the Knights of the Ebon Blade fight to hold the line. At Gundrak the last of the troll gods are being butchered upon their thrones, and the madness of the Drakkari runs unchecked.",
+    "keywords": ["zul'drak", "drakkari", "ice trolls", "gundrak", "troll gods", "argent crusade", "scourge", "northrend"],
+    "tags": ["zone", "northrend", "dungeon hub"]
+  },
+  {
+    "id": "zone_dalaran",
+    "title": "Dalaran",
+    "short_description": "the Kirin Tor's floating city raised above Northrend, its neutral streets crowned by the mage quarters and the arcane prison of the Violet Hold",
+    "references": ["dungeon_the_violet_hold"],
+    "content": "Dalaran floats high above the wastes of Northrend, the great city of mages lifted whole from the ruins of its old foundations and carried north by the Kirin Tor to oversee the war against the Lich King. Its streets are neutral ground where Alliance and Horde walk side by side under truce, lined with shops, sanctums, and the spires of the magi. The Violet Citadel houses the ruling Council of Six, and beneath the city the Violet Hold serves as a prison for the most dangerous beings the Kirin Tor have captured. When that prison's wards begin to fail and its inmates strain against their bonds, the whole floating city holds its breath.",
+    "keywords": ["dalaran", "kirin tor", "violet hold", "violet citadel", "council of six", "mages", "floating city", "northrend"],
+    "tags": ["zone", "northrend", "dungeon hub"]
+  },
+  {
+    "id": "zone_the_storm_peaks",
+    "title": "The Storm Peaks",
+    "short_description": "the titans' frozen roof of the world, home to the Sons of Hodir and the prison-vault of Ulduar where Yogg-Saron stirs",
+    "references": ["dungeon_halls_of_stone", "dungeon_halls_of_lightning", "raid_ulduar"],
+    "content": "The Storm Peaks are the highest and coldest reach of Northrend, a range of titan-built halls and wind-scoured glaciers where the makers of the world left their mightiest works. The frost giant Sons of Hodir keep their lonely vigil among the peaks, the last of their kind willing to aid the living, while the iron dwarves and iron giants of Loken's rebellion war against all who climb the heights. Brann Bronzebeard delves the titan ruins in search of the world's oldest secrets, and the Halls of Stone and Lightning guard the makers' archives and forges. Above it all stands Ulduar, the great titan prison-vault where the old god Yogg-Saron strains against its chains, whispering madness into the minds of its keepers.",
+    "keywords": ["the storm peaks", "sons of hodir", "ulduar", "yogg-saron", "loken", "iron dwarves", "titans", "northrend"],
+    "tags": ["zone", "northrend", "dungeon hub"]
+  },
+  {
+    "id": "zone_icecrown",
+    "title": "Icecrown",
+    "short_description": "the Lich King's glacier at the top of the world, crowned by the black citadel over the Frozen Throne",
+    "references": ["dungeon_trial_of_the_champion", "dungeon_the_forge_of_souls", "dungeon_pit_of_saron", "dungeon_halls_of_reflection", "raid_trial_of_the_crusader", "raid_icecrown_citadel"],
+    "content": "The northern cap of Northrend is the Lich King's own ground, a wind-flayed glacier where the Scourge raise necropolis after necropolis under the shadow of the citadel. Yet even here the living have planted banners: the Argent Crusade's tournament grounds test champions on the ice, the Ebon Blade and Argent host bind themselves into the Ashen Verdict, and airships of both the Alliance and Horde dare the frozen sky. Every road on this glacier leads, in the end, toward the spire and the throne atop it.",
+    "keywords": ["icecrown", "lich king", "frozen throne", "argent tournament", "ashen verdict", "scourge", "glacier", "northrend"],
+    "tags": ["zone", "contested", "dungeon hub", "endgame"]
+  },
+  {
+    "id": "zone_wintergrasp",
+    "title": "Wintergrasp",
+    "short_description": "a frozen warfront fortress contested endlessly by Alliance and Horde, with a titan vault that opens to the victor",
+    "references": ["raid_vault_of_archavon"],
+    "content": "Wintergrasp is a frozen peninsula dominated by a single great fortress, fought over without end by the Alliance and the Horde in open battle across its snow and ice. Siege engines roll against the keep's walls, towers rise and fall, and the banners change hands as one army storms what the other defends. The prize is more than glory: beneath the fortress lies the Vault of Archavon, a titan stronghold sealed since the makers' age, whose doors open only to whichever side holds the surface above. Within wait ancient titan-forged guardians and the spoils they keep, and so the war for Wintergrasp never truly ends.",
+    "keywords": ["wintergrasp", "vault of archavon", "archavon", "titan vault", "alliance", "horde", "warfront", "northrend"],
+    "tags": ["zone", "contested", "dungeon hub"]
   }
 ]
