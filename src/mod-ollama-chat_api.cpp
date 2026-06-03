@@ -267,51 +267,80 @@ std::string QueryOllamaAPI(const std::string& prompt)
         requestData["hidethinking"] = true;
     }
 
-    std::string requestDataStr = requestData.dump();
+    std::string botReply;
 
-    // Make HTTP POST request using our custom client
-    std::string responseBuffer = httpClient.Post(url, requestDataStr);
+    bool useStreaming = (g_SoftStopEnable && g_OllamaNumPredict > 0 && !g_ThinkModeEnableForModule);
 
-    if (responseBuffer.empty())
+    if (useStreaming)
     {
-        LOG_ERROR("server.loading", "[OllamaChat] ERROR: Failed to reach Ollama API at {}. Check URL configuration and network connectivity.", url);
-        if(g_DebugEnabled)
+        requestData["stream"] = true;
+        requestData["options"]["num_predict"] = g_OllamaNumPredict + SOFT_STOP_HEADROOM;
+
+        std::string requestDataStr = requestData.dump();
+
+        OllamaStreamAccumulator acc(g_OllamaNumPredict);
+        bool ok = httpClient.PostStreaming(url, requestDataStr,
+            [&](const char* data, size_t len) -> bool {
+                return !acc.Feed(data, len);
+            });
+
+        if (!ok && acc.text.empty())
         {
-            LOG_INFO("server.loading", "[OllamaChat] Debug: Empty response buffer from HTTP client. Model: {}", model);
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: Streaming request to {} produced no output.", url);
+            return "";
         }
-        return "";
+        botReply = acc.text;
+
+        if (g_DebugEnabled)
+            LOG_INFO("server.loading", "[Ollama Chat] SoftStop streamed {} tokens (soft target {}).", acc.tokens, g_OllamaNumPredict);
     }
-
-    std::stringstream ss(responseBuffer);
-    std::string line;
-    std::ostringstream extractedResponse;
-
-    try
+    else
     {
-        while (std::getline(ss, line))
+        std::string requestDataStr = requestData.dump();
+
+        // Make HTTP POST request using our custom client
+        std::string responseBuffer = httpClient.Post(url, requestDataStr);
+
+        if (responseBuffer.empty())
         {
-            if (line.empty() || std::all_of(line.begin(), line.end(), isspace))
-                continue;
-
-            nlohmann::json jsonResponse = nlohmann::json::parse(line);
-
-            if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: Failed to reach Ollama API at {}. Check URL configuration and network connectivity.", url);
+            if(g_DebugEnabled)
             {
-                extractedResponse << jsonResponse["response"].get<std::string>();
+                LOG_INFO("server.loading", "[OllamaChat] Debug: Empty response buffer from HTTP client. Model: {}", model);
+            }
+            return "";
+        }
+
+        std::stringstream ss(responseBuffer);
+        std::string line;
+        std::ostringstream extractedResponse;
+
+        try
+        {
+            while (std::getline(ss, line))
+            {
+                if (line.empty() || std::all_of(line.begin(), line.end(), isspace))
+                    continue;
+
+                nlohmann::json jsonResponse = nlohmann::json::parse(line);
+
+                if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+                {
+                    extractedResponse << jsonResponse["response"].get<std::string>();
+                }
             }
         }
-    }
-    catch (const std::exception& e)
-    {
-        LOG_ERROR("server.loading", "[OllamaChat] ERROR: JSON parsing failed. Exception: {}", e.what());
-        if(g_DebugEnabled)
+        catch (const std::exception& e)
         {
-            LOG_INFO("server.loading", "[OllamaChat] Debug: Response buffer content: {}", responseBuffer);
+            LOG_ERROR("server.loading", "[OllamaChat] ERROR: JSON parsing failed. Exception: {}", e.what());
+            if(g_DebugEnabled)
+            {
+                LOG_INFO("server.loading", "[OllamaChat] Debug: Response buffer content: {}", responseBuffer);
+            }
+            return "";
         }
-        return "";
+        botReply = extractedResponse.str();
     }
-
-    std::string botReply = extractedResponse.str();
 
     botReply = ExtractTextBetweenDoubleQuotes(botReply);
 
