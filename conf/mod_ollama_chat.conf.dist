@@ -1229,13 +1229,13 @@ OllamaChat.WorldNpcChatMaxPerTick = 1
 
 # Per-role phrase pools (| separated). An empty pool disables that role.
 # Placeholders: {name} {race} {class} {zone} {player}
-OllamaChat.WorldNpcInnkeeperPhrases = Rest your feet, {race} — a warm bed and a hot meal await.|Welcome, traveler. The fire's lit and the ale's cold.
-OllamaChat.WorldNpcVendorPhrases = Finest wares in {zone}, {race}. Care to browse?|Coin for goods, {race} — what'll it be?
-OllamaChat.WorldNpcQuestgiverPhrases = You there, {race}! I've work that needs doing.|A capable {class}, just what I need. Have a moment?
-OllamaChat.WorldNpcQuestTurninPhrases = You've returned, {race}! Let's see what you've brought me.|Back at last — I trust the task is done?
-OllamaChat.WorldNpcFlightmasterPhrases = Need wings, {race}? My gryphons are rested and ready.|Where to, traveler? The skies over {zone} are clear.
-OllamaChat.WorldNpcTrainerPhrases = Sharpen your craft, {class}. I've much to teach.|A {class} should never stop learning, {race}.
-OllamaChat.WorldNpcBankerPhrases = Your valuables are safe with us, {race}.|Need to stow your gold? Step right up.
+OllamaChat.WorldNpcInnkeeperPhrases = Rest your feet, {race} - a warm bed and a hot meal await.|Welcome, traveler. The fire's lit and the ale's cold.|A room's always ready for a weary {race}, friend.|You look road-worn, {class}. Sit, eat, and stay a while.|Mind the hearth, traveler - finest rest in all {zone}.|Hungry, {race}? The stew's hot and the beds are soft.
+OllamaChat.WorldNpcVendorPhrases = Finest wares in {zone}, {race}. Care to browse?|Coin for goods, {race} - what'll it be?|Goods aplenty, {race} - take a look at my stock.|A discerning {class} knows quality when they see it.|Fresh stock today, traveler. What catches your eye?|Step up, {race} - best goods this side of {zone}.
+OllamaChat.WorldNpcQuestgiverPhrases = You there, {race}! I've work that needs doing.|A capable {class}, just what I need. Have a moment?|Ah, a {class}! Perhaps you can lend me a hand.|You look capable, {race}. There's a task at hand.|Stranger! There's trouble hereabouts - have you a moment?|Just the {race} I was hoping to see. Care to help?
+OllamaChat.WorldNpcQuestTurninPhrases = You've returned, {race}! Let's see what you've brought me.|Back at last - I trust the task is done?|Well done, {race}! I knew I could count on you.|You've come through, {class}. Let me see the results.|Returned in one piece! Show me what you found.|Good to see you back, {race}. The deed is done, I hope?
+OllamaChat.WorldNpcFlightmasterPhrases = Need wings, {race}? My gryphons are rested and ready.|Where to, traveler? The skies over {zone} are clear.|Off to distant lands, {race}? My beasts are ready.|A {class} in a hurry? I'll get you there swiftly.|Fair skies over {zone} today - where shall I send you?|Need to travel, traveler? Climb aboard.
+OllamaChat.WorldNpcTrainerPhrases = Sharpen your craft, {class}. I've much to teach.|A {class} should never stop learning, {race}.|There's always more to learn, {race}. Shall we begin?|A skilled {class} is a force to behold. Train with me.|Hone your talents here, {race} - I'll show you how.|Discipline makes the {class}, friend. Ready to study?
+OllamaChat.WorldNpcBankerPhrases = Your valuables are safe with us, {race}.|Need to stow your gold? Step right up.|Your gold rests secure in our vaults, {race}.|Storing your treasures, {class}? Right this way.|We guard your valuables well, traveler.|Deposits or withdrawals, {race}? All handled here.
 
 # OllamaChat.WorldNpcCharactersEnable
 #     Description: When enabled (1), curated 'character' NPCs (mod_ollama_chat_npc table) speak
