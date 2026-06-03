@@ -384,6 +384,23 @@ std::string g_EmoteChatVocabularyRaw;
 std::string g_EmoteChatInstructionTemplate;
 bool        g_EmoteActionRouting = true;
 
+// --------------------------------------------
+// World-NPC proximity chat (P1: role barks)
+// --------------------------------------------
+bool        g_WorldNpcChatEnable            = true;
+uint32_t    g_WorldNpcChatTickMs            = 5000;
+float       g_WorldNpcChatRange             = 15.0f;
+uint32_t    g_WorldNpcChatNpcCooldownSec    = 120;
+uint32_t    g_WorldNpcChatPlayerCooldownSec = 20;
+uint32_t    g_WorldNpcChatMaxPerTick        = 1;
+std::vector<std::string> g_WorldNpcPhrasesInnkeeper;
+std::vector<std::string> g_WorldNpcPhrasesVendor;
+std::vector<std::string> g_WorldNpcPhrasesQuestgiver;
+std::vector<std::string> g_WorldNpcPhrasesQuestTurnin;
+std::vector<std::string> g_WorldNpcPhrasesFlightmaster;
+std::vector<std::string> g_WorldNpcPhrasesTrainer;
+std::vector<std::string> g_WorldNpcPhrasesBanker;
+
 
 static std::vector<std::string> SplitString(const std::string& str, char delim)
 {
@@ -1296,6 +1313,21 @@ void LoadOllamaChatConfig()
         "Always speak in words - never reply with only an emote. You may prefix your spoken line "
         "with ONE emote in square brackets from this list if it truly fits, then say your line. "
         "Allowed: {emote_list}. Example: [cheer] We did it!");
+
+    // World-NPC proximity chat (P1: role barks)
+    g_WorldNpcChatEnable            = sConfigMgr->GetOption<bool>("OllamaChat.WorldNpcChatEnable", true);
+    g_WorldNpcChatTickMs            = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcChatTickMs", 5000);
+    g_WorldNpcChatRange             = sConfigMgr->GetOption<float>("OllamaChat.WorldNpcChatRange", 15.0f);
+    g_WorldNpcChatNpcCooldownSec    = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcChatNpcCooldownSec", 120);
+    g_WorldNpcChatPlayerCooldownSec = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcChatPlayerCooldownSec", 20);
+    g_WorldNpcChatMaxPerTick        = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcChatMaxPerTick", 1);
+    g_WorldNpcPhrasesInnkeeper    = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcInnkeeperPhrases", ""));
+    g_WorldNpcPhrasesVendor       = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcVendorPhrases", ""));
+    g_WorldNpcPhrasesQuestgiver   = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcQuestgiverPhrases", ""));
+    g_WorldNpcPhrasesQuestTurnin  = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcQuestTurninPhrases", ""));
+    g_WorldNpcPhrasesFlightmaster = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcFlightmasterPhrases", ""));
+    g_WorldNpcPhrasesTrainer      = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcTrainerPhrases", ""));
+    g_WorldNpcPhrasesBanker       = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcBankerPhrases", ""));
 
     g_EventTypeDefeated           = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeated", "");
     g_EventTypeDefeatedPlayer     = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeatedPlayer", "");

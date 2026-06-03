@@ -417,6 +417,25 @@ std::string EmitBotLines(Player* bot, bool proximity, const std::string& respons
                          const std::function<void(const std::string&)>& sendLine);
 
 // --------------------------------------------
+// World-NPC proximity chat (P1: role barks)
+// --------------------------------------------
+extern bool        g_WorldNpcChatEnable;
+extern uint32_t    g_WorldNpcChatTickMs;          // scan cadence (ms)
+extern float       g_WorldNpcChatRange;           // yards
+extern uint32_t    g_WorldNpcChatNpcCooldownSec;  // per-NPC quiet period
+extern uint32_t    g_WorldNpcChatPlayerCooldownSec; // per-player quiet period
+extern uint32_t    g_WorldNpcChatMaxPerTick;      // max NPCs that bark per player per tick
+extern std::vector<std::string> g_WorldNpcPhrasesInnkeeper;
+extern std::vector<std::string> g_WorldNpcPhrasesVendor;
+extern std::vector<std::string> g_WorldNpcPhrasesQuestgiver;   // a quest is available
+extern std::vector<std::string> g_WorldNpcPhrasesQuestTurnin;  // quest ready to hand in
+extern std::vector<std::string> g_WorldNpcPhrasesFlightmaster;
+extern std::vector<std::string> g_WorldNpcPhrasesTrainer;
+extern std::vector<std::string> g_WorldNpcPhrasesBanker;
+
+void WorldNpcChatSelfTest();   // debug-gated boot self-test (defined in _worldnpc.cpp)
+
+// --------------------------------------------
 // Loader Functions
 // --------------------------------------------
 void LoadOllamaChatConfig();

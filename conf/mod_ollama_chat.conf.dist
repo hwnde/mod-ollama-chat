@@ -1205,3 +1205,34 @@ OllamaChat.EmoteChat.InstructionTemplate = "Always speak in words - never reply 
 #     emotes perform; unknown brackets are spoken verbatim (legacy).
 #     Default: 1
 OllamaChat.EmoteActionRouting = 1
+
+# --------------------------------------------
+# WORLD-NPC PROXIMITY CHAT (P1: ROLE BARKS)
+# --------------------------------------------
+
+# OllamaChat.WorldNpcChatEnable
+#     Description: When enabled (1), friendly service NPCs occasionally greet a nearby player
+#                  with a role-appropriate line (innkeeper/vendor/questgiver/etc). GPU-free.
+#     Default:     1 (true)
+OllamaChat.WorldNpcChatEnable = 1
+
+# OllamaChat.WorldNpcChatTickMs   - scan cadence in ms. Default 5000.
+OllamaChat.WorldNpcChatTickMs = 5000
+# OllamaChat.WorldNpcChatRange   - greet radius in yards. Default 15.
+OllamaChat.WorldNpcChatRange = 15
+# OllamaChat.WorldNpcChatNpcCooldownSec - per-NPC quiet period. Default 120.
+OllamaChat.WorldNpcChatNpcCooldownSec = 120
+# OllamaChat.WorldNpcChatPlayerCooldownSec - per-player quiet period. Default 20.
+OllamaChat.WorldNpcChatPlayerCooldownSec = 20
+# OllamaChat.WorldNpcChatMaxPerTick - max NPCs that greet one player per tick. Default 1.
+OllamaChat.WorldNpcChatMaxPerTick = 1
+
+# Per-role phrase pools (| separated). An empty pool disables that role.
+# Placeholders: {name} {race} {class} {zone} {player}
+OllamaChat.WorldNpcInnkeeperPhrases = Rest your feet, {race} — a warm bed and a hot meal await.|Welcome, traveler. The fire's lit and the ale's cold.
+OllamaChat.WorldNpcVendorPhrases = Finest wares in {zone}, {race}. Care to browse?|Coin for goods, {race} — what'll it be?
+OllamaChat.WorldNpcQuestgiverPhrases = You there, {race}! I've work that needs doing.|A capable {class}, just what I need. Have a moment?
+OllamaChat.WorldNpcQuestTurninPhrases = You've returned, {race}! Let's see what you've brought me.|Back at last — I trust the task is done?
+OllamaChat.WorldNpcFlightmasterPhrases = Need wings, {race}? My gryphons are rested and ready.|Where to, traveler? The skies over {zone} are clear.
+OllamaChat.WorldNpcTrainerPhrases = Sharpen your craft, {class}. I've much to teach.|A {class} should never stop learning, {race}.
+OllamaChat.WorldNpcBankerPhrases = Your valuables are safe with us, {race}.|Need to stow your gold? Step right up.
