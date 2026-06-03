@@ -374,6 +374,7 @@ extern uint32_t g_TypingSimulationDelayPerChar;   // Delay per character in mill
 extern bool        g_EmoteChatEnable;
 extern std::string g_EmoteChatVocabularyRaw;        // pipe list of allowed emote names ("" = all built-in)
 extern std::string g_EmoteChatInstructionTemplate;  // uses {emote_list}
+extern bool        g_EmoteActionRouting;   // route freeform/unmatched brackets to an action render + fuzzy-match curated inflections
 
 // Perform a leading [emote] tag on `text` (visual oneshot), strip it, and return true if consumed.
 bool ApplyChatEmote(Player* bot, std::string& text);

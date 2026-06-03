@@ -373,6 +373,7 @@ uint32_t    g_SpeechSplitLineDelayMs          = 700;
 bool        g_EmoteChatEnable = true;
 std::string g_EmoteChatVocabularyRaw;
 std::string g_EmoteChatInstructionTemplate;
+bool        g_EmoteActionRouting = true;
 
 
 static std::vector<std::string> SplitString(const std::string& str, char delim)
@@ -996,6 +997,7 @@ void LoadOllamaChatConfig()
     // Emote-Augmented Chat
     g_EmoteChatEnable             = sConfigMgr->GetOption<bool>("OllamaChat.EmoteChat.Enable", true);
     g_EmoteChatVocabularyRaw      = sConfigMgr->GetOption<std::string>("OllamaChat.EmoteChat.Vocabulary", "");
+    g_EmoteActionRouting = sConfigMgr->GetOption<bool>("OllamaChat.EmoteActionRouting", true);
     g_EmoteChatInstructionTemplate = sConfigMgr->GetOption<std::string>(
         "OllamaChat.EmoteChat.InstructionTemplate",
         "You may begin your reply with ONE emote in square brackets from this list, but only if it "
