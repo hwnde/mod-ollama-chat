@@ -484,5 +484,50 @@
     "content": "Koltira Deathweaver rides the margins of the Eastern Plaguelands in service to the Ebon Blade, a blood elf raised into death by the Lich King's hand and freed at Light's Hope when Mograine broke the chain. He carries the cold of undeath with the controlled bearing of a man who has made terms with what he has become. He works alongside Thassarian, a human death knight, in ways that would have been unimaginable in his living years; the two have ridden into the Plaguelands together on Acherus's orders and neither has found a reason to stop. In the Undercity's shadows, Sylvanas watches a Horde-blooded death knight who no longer answers her call with displeasure she has not yet acted on. The Ebon Blade's charter is the shield between them for now.",
     "keywords": ["koltira", "koltira deathweaver", "deathweaver", "ebon blade", "death knight", "blood elf", "eastern plaguelands", "thassarian"],
     "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_anduin_wrynn",
+    "title": "Anduin Wrynn, Prince of Stormwind",
+    "short_description": "young prince of Stormwind, son of King Varian, devout in the Light",
+    "references": ["zone_stormwind_city", "wow_factions_alliance"],
+    "content": "Anduin Wrynn holds no military command but carries a weight all the same — he is the sole heir to the Lion's Throne in Stormwind Keep, still young enough that advisors speak over him but old enough to notice. His father Varian rules hard from the keep's high seat, and the prince has turned inward toward the Light where the king turned outward toward the sword. High Priest Benedictus and the Cathedral's clergy have shaped him more than any swordmaster has. He walked Ironforge's halls during a season of his father's absence and sat at Magni Bronzebeard's table long enough to understand that rulership is heavier than any crown. Those who have spoken with him say he listens longer than most princes do and remembers what he hears.",
+    "keywords": ["anduin", "anduin wrynn", "prince", "stormwind", "varian", "light", "cathedral", "human", "wrynn"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_falstad_wildhammer",
+    "title": "Falstad Wildhammer, High Thane of the Wildhammer Clan",
+    "short_description": "High Thane of the Wildhammer dwarves, gryphon-rider of Aerie Peak",
+    "references": ["wow_factions_alliance"],
+    "content": "Falstad Wildhammer rules Aerie Peak in the Hinterlands as High Thane of the Wildhammer clan, the dwarf kindred who chose the open sky over the deep stone when the three clans parted ways long ago. He rides a gryphon the way the Bronzebeards ride siege engines — as a weapon and a declaration both. The Wildhammers breed and train their gryphons in the rocky heights around Aerie Peak, and their riders have scouted the Hinterlands for generations, tangling with forest trolls and Syndicate remnants both. Falstad's axe has seen more open air than most dwarven axes see stone, and his clan's unease with the Ironforge throne runs old and deep. He speaks plainly and expects the same in return.",
+    "keywords": ["falstad", "falstad wildhammer", "wildhammer", "high thane", "aerie peak", "hinterlands", "gryphon", "dwarf"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_vereesa_windrunner",
+    "title": "Vereesa Windrunner, Ranger-General of the Silver Covenant",
+    "short_description": "high elf Ranger-General of the Silver Covenant, Dalaran",
+    "references": ["zone_dalaran", "wow_factions_alliance"],
+    "content": "Vereesa Windrunner commands the Silver Covenant from Dalaran's streets, leading the high elves who refused Aethas Sunreaver's accommodation with the Horde and planted their loyalty firmly with the Alliance. She is the youngest of the three Windrunner sisters — Alleria sailed beyond the Dark Portal, Sylvanas died at Quel'Thalas and rose as something else — and she carries both absences. Her rangers patrol Dalaran's wards and keep an adversarial watch on the Sunreavers who share the city's neutral face. She is married to the archmage Rhonin and raises twin sons inside Dalaran's walls, which gives her something beyond duty to defend. The Silver Covenant answers to her voice alone.",
+    "keywords": ["vereesa", "vereesa windrunner", "windrunner", "silver covenant", "ranger-general", "high elf", "dalaran", "rhonin"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_moira_bronzebeard",
+    "title": "Moira Bronzebeard, Princess of Ironforge and Dark Iron Heir",
+    "short_description": "daughter of Magni, Dark Iron princess, of Ironforge in Dun Morogh",
+    "references": ["zone_dun_morogh", "wow_factions_alliance"],
+    "content": "Moira Bronzebeard is Magni's only child, which makes her heir to the Bronzebeard seat in Ironforge, though the road to that inheritance has run through the Blackrock Depths and back. She was taken — or went — to Shadowforge City and wed the Dark Iron Emperor Dagran Thaurissan before his death, bearing a son who carries both clan bloodlines. She returned to Ironforge carrying that child and that history, arriving at a moment when Magni's throne stood empty and contested. The Bronzebeard clan watches her with suspicion; the Dark Iron dwarves in the depths call her queen. What she intends with the leverage she carries between both peoples is a question Ironforge's council would very much like answered.",
+    "keywords": ["moira", "moira bronzebeard", "moira thaurissan", "bronzebeard", "dark iron", "ironforge", "dun morogh", "magni", "thaurissan", "dwarf"],
+    "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_thassarian",
+    "title": "Thassarian, Death Knight of the Ebon Blade",
+    "short_description": "human death knight of the Ebon Blade, Alliance-aligned, serves in the Borean Tundra",
+    "references": ["zone_borean_tundra", "wow_factions_alliance"],
+    "content": "Thassarian serves the Ebon Blade in the Borean Tundra, operating out of the Alliance's forward positions near Valiance Keep with a chain of authority that runs through Acherus rather than through any living marshal. He was a human soldier before the Lich King's forces took him; he woke at Light's Hope with the rest of the freed death knights and chose the Alliance when the Ebon Blade granted its knights that choice. He works in close company with the blood elf Koltira Deathweaver, a pairing that raises eyebrows at Valiance Keep but has proven worth more than the discomfort it costs. Thassarian does not discuss what the Scourge did with his body between his death and his freedom; those who have pressed the question have not pressed it twice.",
+    "keywords": ["thassarian", "ebon blade", "death knight", "human", "borean tundra", "valiance keep", "koltira", "alliance"],
+    "tags": ["people", "alliance", "living"]
   }
 ]
