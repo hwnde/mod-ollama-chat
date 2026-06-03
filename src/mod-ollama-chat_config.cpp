@@ -449,6 +449,53 @@ static std::set<std::string> EmoteChatAllowed()
     return allowed;
 }
 
+// Inflections / synonyms -> canonical curated emote name (single words only).
+static std::map<std::string, std::string> const& EmoteInflectionMap()
+{
+    static const std::map<std::string, std::string> m = {
+        {"waving","wave"},{"waved","wave"},{"waves","wave"},
+        {"laughing","laugh"},{"laughs","laugh"},{"laughed","laugh"},
+        {"cheering","cheer"},{"cheers","cheer"},{"cheered","cheer"},
+        {"crying","cry"},{"cries","cry"},{"cried","cry"},
+        {"pointing","point"},{"points","point"},{"pointed","point"},
+        {"bowing","bow"},{"bows","bow"},{"bowed","bow"},
+        {"flexing","flex"},{"flexes","flex"},{"flexed","flex"},
+        {"applauding","applaud"},{"applauds","applaud"},{"applauded","applaud"},
+        {"clapping","applaud"},{"claps","applaud"},{"clap","applaud"},
+        {"roaring","roar"},{"roars","roar"},{"roared","roar"},
+        {"nodding","yes"},{"nods","yes"},{"nod","yes"},{"agreeing","yes"},{"agrees","yes"},{"agree","yes"},
+        {"disagreeing","no"},{"disagrees","no"},{"disagree","no"},
+        {"shrugging","shrug"},{"shrugs","shrug"},{"shrugged","shrug"},
+        {"saluting","salute"},{"salutes","salute"},{"saluted","salute"},
+        {"kneeling","kneel"},{"kneels","kneel"},{"knelt","kneel"},
+        {"begging","beg"},{"begs","beg"},{"begged","beg"},
+        {"talking","talk"},{"talks","talk"},{"talked","talk"}
+    };
+    return m;
+}
+
+// Resolve a single lowercased tag name to an allowed curated emote id, or 0 if none.
+// Tries exact, then an inflection/synonym; respects the active vocabulary (EmoteChatAllowed()).
+static uint32_t FuzzyResolveEmote(const std::string& lowerName)
+{
+    std::string canon = lowerName;
+    auto const& bm = EmoteChatBuiltinMap();
+    if (!bm.count(canon))
+    {
+        auto inf = EmoteInflectionMap().find(lowerName);
+        if (inf == EmoteInflectionMap().end())
+            return 0;
+        canon = inf->second;
+    }
+    auto it = bm.find(canon);
+    if (it == bm.end())
+        return 0;
+    std::set<std::string> allowed = EmoteChatAllowed();
+    if (!allowed.count(canon))
+        return 0;
+    return (uint32_t)it->second;
+}
+
 bool ApplyChatEmote(Player* bot, std::string& text)
 {
     size_t start = text.find_first_not_of(" \t\n");
