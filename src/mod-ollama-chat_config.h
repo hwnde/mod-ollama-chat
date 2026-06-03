@@ -397,6 +397,7 @@ struct ChatLinePlan
 {
     enum Kind { Speak, Perform, PerformAndSpeak, ActionEmote, ActionText } kind = Speak;
     uint32_t    emote = 0;
+    uint32_t    textEmote = 0;   // Perform/PerformAndSpeak: a TEXT_EMOTE_* id (real /roar-style emote); 0 = use `emote` animation
     std::string text;
     std::string tail;
 };

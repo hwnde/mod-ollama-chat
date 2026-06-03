@@ -5,6 +5,10 @@
 #include "Log.h"
 #include "Player.h"
 #include "SharedDefines.h"
+#include "DBCStores.h"
+#include "World.h"
+#include "WorldPacket.h"
+#include "Opcodes.h"
 #include "mod-ollama-chat_api.h"
 #include <fmt/core.h>
 #include <sstream>
@@ -501,6 +505,75 @@ static uint32_t FuzzyResolveEmote(const std::string& lowerName)
     return (uint32_t)it->second;
 }
 
+// Canonical curated emote name -> TEXT_EMOTE_* id (the real /roar-style text emote: animation + flavor text).
+static std::unordered_map<std::string, uint32> const& EmoteTextEmoteMap()
+{
+    static const std::unordered_map<std::string, uint32> m = {
+        {"wave", TEXT_EMOTE_WAVE}, {"roar", TEXT_EMOTE_ROAR}, {"bow", TEXT_EMOTE_BOW},
+        {"cheer", TEXT_EMOTE_CHEER}, {"laugh", TEXT_EMOTE_LAUGH}, {"cry", TEXT_EMOTE_CRY},
+        {"point", TEXT_EMOTE_POINT}, {"salute", TEXT_EMOTE_SALUTE}, {"kneel", TEXT_EMOTE_KNEEL},
+        {"beg", TEXT_EMOTE_BEG}, {"flex", TEXT_EMOTE_FLEX}, {"applaud", TEXT_EMOTE_APPLAUD},
+        {"shrug", TEXT_EMOTE_SHRUG}, {"talk", TEXT_EMOTE_TALK},
+        {"yes", TEXT_EMOTE_NOD}, {"no", TEXT_EMOTE_NO}
+    };
+    return m;
+}
+
+// Resolve a single lowercased tag to a TEXT_EMOTE_* id (exact builtin name OR an inflection), respecting
+// the active vocabulary, or 0 if none. Mirrors FuzzyResolveEmote's canonicalization.
+static uint32 FuzzyResolveTextEmote(const std::string& lowerName)
+{
+    std::string canon = lowerName;
+    if (!EmoteChatBuiltinMap().count(canon))
+    {
+        auto inf = EmoteInflectionMap().find(lowerName);
+        if (inf == EmoteInflectionMap().end())
+            return 0;
+        canon = inf->second;
+    }
+    std::set<std::string> allowed = EmoteChatAllowed();
+    if (!allowed.count(canon))
+        return 0;
+    auto it = EmoteTextEmoteMap().find(canon);
+    return it != EmoteTextEmoteMap().end() ? it->second : 0;
+}
+
+// Perform a real /roar-style text emote for a bot: play the animation (from EmotesText.dbc) and broadcast
+// SMSG_TEXT_EMOTE to nearby players so the flavor text ("X roars with bestial vigor...") renders.
+// Replicates WorldSession::HandleTextEmoteOpcode (minus target/achievement/script hooks).
+static void SendBotTextEmote(Player* bot, uint32 textEmote)
+{
+    if (!bot)
+        return;
+    EmotesTextEntry const* em = sEmotesTextStore.LookupEntry(textEmote);
+    if (!em)
+        return;
+
+    uint32 anim = em->textid;
+    switch (anim)
+    {
+        case EMOTE_STATE_SLEEP:
+        case EMOTE_STATE_SIT:
+        case EMOTE_STATE_KNEEL:
+        case EMOTE_ONESHOT_NONE:
+            break;
+        case EMOTE_STATE_DANCE:
+            bot->SetUInt32Value(UNIT_NPC_EMOTESTATE, anim);
+            break;
+        default:
+            bot->HandleEmoteCommand(anim);
+            break;
+    }
+
+    WorldPacket data(SMSG_TEXT_EMOTE, 20);
+    data << bot->GetGUID();
+    data << uint32(textEmote);
+    data << uint32(0);            // emote_num (default variation)
+    data << uint32(0);            // target name length
+    data << uint8(0x00);          // no target
+    bot->SendMessageToSetInRange(&data, sWorld->getFloatConfig(CONFIG_LISTEN_RANGE_TEXTEMOTE), true);
+}
+
 ChatLinePlan PlanChatLine(const std::string& line, bool proximity)
 {
     ChatLinePlan plan;
@@ -534,6 +607,7 @@ ChatLinePlan PlanChatLine(const std::string& line, bool proximity)
         {
             if (rest.empty()) { plan.kind = ChatLinePlan::Perform; plan.emote = id; }
             else { plan.kind = ChatLinePlan::PerformAndSpeak; plan.emote = id; plan.text = rest; }
+            plan.textEmote = FuzzyResolveTextEmote(lname);
             return plan;
         }
     }
@@ -591,9 +665,13 @@ static void EmoteActionRoutingSelfTest()
     check("fuzzy-unknown",   FuzzyResolveEmote("smile")     == 0);
 
     { ChatLinePlan p = PlanChatLine("[shrug] hi there", true);
-      check("perform+speak", p.kind == ChatLinePlan::PerformAndSpeak && p.emote == (uint32_t)EMOTE_ONESHOT_QUESTION && p.text == "hi there"); }
+      check("perform+speak", p.kind == ChatLinePlan::PerformAndSpeak && p.emote == (uint32_t)EMOTE_ONESHOT_QUESTION && p.textEmote == (uint32_t)TEXT_EMOTE_SHRUG && p.text == "hi there"); }
     { ChatLinePlan p = PlanChatLine("[Waving]", false);
-      check("fuzzy-perform", p.kind == ChatLinePlan::Perform && p.emote == (uint32_t)EMOTE_ONESHOT_WAVE); }
+      check("fuzzy-perform", p.kind == ChatLinePlan::Perform && p.emote == (uint32_t)EMOTE_ONESHOT_WAVE && p.textEmote == (uint32_t)TEXT_EMOTE_WAVE); }
+    { ChatLinePlan p = PlanChatLine("[roar]", false);
+      check("textemote-roar", p.kind == ChatLinePlan::Perform && p.textEmote == (uint32_t)TEXT_EMOTE_ROAR); }
+    { ChatLinePlan p = PlanChatLine("[nodding] aye", true);
+      check("textemote-nod-inflect", p.kind == ChatLinePlan::PerformAndSpeak && p.textEmote == (uint32_t)TEXT_EMOTE_NOD && p.text == "aye"); }
     { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", true);
       check("freeform-prox", p.kind == ChatLinePlan::ActionEmote && p.text == "smoke blows out slowly" && p.tail.empty()); }
     { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", false);
@@ -851,10 +929,18 @@ std::string EmitBotLines(Player* bot, bool proximity, const std::string& respons
                 if (!plan.text.empty()) { sendLine(plan.text); addJoined(plan.text); }
                 break;
             case ChatLinePlan::Perform:
-                if (bot && plan.emote) bot->HandleEmoteCommand(plan.emote);
+                if (bot)
+                {
+                    if (plan.textEmote) SendBotTextEmote(bot, plan.textEmote);
+                    else if (plan.emote) bot->HandleEmoteCommand(plan.emote);
+                }
                 break;
             case ChatLinePlan::PerformAndSpeak:
-                if (bot && plan.emote) bot->HandleEmoteCommand(plan.emote);
+                if (bot)
+                {
+                    if (plan.textEmote) SendBotTextEmote(bot, plan.textEmote);
+                    else if (plan.emote) bot->HandleEmoteCommand(plan.emote);
+                }
                 if (!plan.text.empty()) { sendLine(plan.text); addJoined(plan.text); }
                 break;
             case ChatLinePlan::ActionEmote:
