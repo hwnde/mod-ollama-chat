@@ -1501,5 +1501,50 @@
     "content": "Deep under the Icecrown glacier lies a hall of mirrored ice where the runeblade Frostmourne once waited on its dais. Those who come seeking the secret of the Lich King's undoing find instead the echoes of every soul the blade has devoured, and a frozen throne's worth of patience: the Lich King lets them wake the memory they need, then looses an endless tide of Scourge to chase them back out across the ice while a wall of his will closes behind. Few escapes from Northrend have been so narrow.",
     "keywords": ["halls of reflection", "icecrown", "frostmourne", "lich king", "jaina", "sylvanas", "frozen halls", "level 80", "northrend"],
     "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "raid_vault_of_archavon",
+    "title": "Vault of Archavon",
+    "short_description": "a titan vault under the Wintergrasp battlefield, opened only by whichever faction holds the keep",
+    "references": [],
+    "content": "Beneath the frozen battlefield of Wintergrasp, where Horde and Alliance grind against one another without end, the titans left a sealed vault and set a stone watcher named Archavon to guard it. Its great doors answer only to victory — whichever side holds the fortress above may descend to challenge what waits within. The colossal sentinel and his kin have slept since the world's shaping, and they do not take kindly to being roused from their long and patient watch.",
+    "keywords": ["vault of archavon", "wintergrasp", "titans", "archavon", "horde", "alliance", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "raid_the_obsidian_sanctum",
+    "title": "The Obsidian Sanctum",
+    "short_description": "the black dragonflight's clutch beneath Wyrmrest, where Sartharion and his consorts guard the eggs",
+    "references": [],
+    "content": "Deep beneath the Wyrmrest Temple in Dragonblight lies the Obsidian Sanctum, a smoldering cavern where the remnants of the black dragonflight have hidden their precious clutch of eggs. The drake Sartharion stands watch over the nest, and with him three fierce consorts coiled and waiting, ready to wake the unhatched horrors should any threaten the brood. To strike at the black flight's future, intruders must brave the heat and the wings that defend it.",
+    "keywords": ["the obsidian sanctum", "dragonblight", "wyrmrest", "black dragonflight", "sartharion", "eggs", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "dragons"]
+  },
+  {
+    "id": "raid_the_eye_of_eternity",
+    "title": "The Eye of Eternity",
+    "short_description": "Malygos's innermost arena above the Nexus, where the Aspect of Magic makes his stand amid the void",
+    "references": [],
+    "content": "Crowning the spire of the Nexus in the Borean Tundra floats the Eye of Eternity, the innermost sanctum of Malygos, the Aspect of Magic driven to madness over the world's misuse of the arcane. Here, upon a shattered platform suspended in a churning void of raw power, the great blue dragon makes his stand against those who would stop his war upon mortal spellcasters. The very ground falls away beneath the combatants as the Aspect unleashes the full fury of the magic he was charged to protect.",
+    "keywords": ["the eye of eternity", "borean tundra", "the nexus", "malygos", "blue dragonflight", "aspect of magic", "arcane", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "raid_trial_of_the_crusader",
+    "title": "Trial of the Crusader",
+    "short_description": "the Argent Crusade's grand coliseum in Icecrown, a gauntlet that ends when the Scourge erupt through the floor",
+    "references": [],
+    "content": "Upon the ice of Icecrown the Argent Crusade has raised a grand coliseum, the proving ground where champions earn the right to march on the Lich King's gates. Within its ring the bravest of the Horde and Alliance face a gauntlet of fierce beasts, rival warriors, and creatures dragged up from Northrend's depths. But the contest is no safe pageant — for the Scourge have tunneled beneath the arena, and when the floor splits open the trial becomes a desperate fight for survival against the very enemy it was meant to prepare them for.",
+    "keywords": ["trial of the crusader", "icecrown", "argent crusade", "coliseum", "champions", "scourge", "lich king", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "argent"]
+  },
+  {
+    "id": "raid_icecrown_citadel",
+    "title": "Icecrown Citadel",
+    "short_description": "the Lich King's fortress crowning the Icecrown glacier, the Frozen Throne's final approach",
+    "references": [],
+    "content": "Above the frozen waste of Icecrown the Lich King's citadel claws at the sky, a black spire raised by the Scourge as their unbreachable heart. Behind its gates wait the death knights of the Ebon Blade turned jailers, the abominations of the great laboratories, and the rotting court that serves the throne. The Ashen Verdict — Argent and Ebon, old enemies bound by one purpose — batters at the doors so that a chosen few might climb to the summit where Arthas keeps his vigil over a dying world.",
+    "keywords": ["icecrown citadel", "icecrown", "lich king", "arthas", "frozen throne", "ashen verdict", "scourge", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "scourge", "endgame"]
   }
 ]
