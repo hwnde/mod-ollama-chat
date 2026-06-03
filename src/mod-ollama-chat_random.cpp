@@ -813,6 +813,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                 if (g_EnableCrossBotAntiRepetition)
                     prompt += GetNearbyBotsRecentReplies(bot);
 
+                prompt += BuildEmoteChatInstruction();
+
                 if (g_EnableChannelFrames)
                     prompt += " [" + GetChannelFrame(chosenChannel) + "]";
                 if (g_EnableChannelTopics)
@@ -839,7 +841,6 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     }
                 }
 
-                prompt += BuildEmoteChatInstruction();
                 return prompt;
 
             }();

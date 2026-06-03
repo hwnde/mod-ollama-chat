@@ -1195,7 +1195,7 @@ OllamaChat.EmoteChat.Vocabulary =
 #    OllamaChat.EmoteChat.InstructionTemplate
 #        Prompt instruction appended to generated chat. {emote_list} expands to the allowed [tag] list.
 #
-OllamaChat.EmoteChat.InstructionTemplate = "You may begin your reply with ONE emote in square brackets from this list, but only if it genuinely fits the mood; otherwise omit it entirely. Allowed: {emote_list}. Example: [cheer] We did it!"
+OllamaChat.EmoteChat.InstructionTemplate = "Always speak in words - never reply with only an emote. You may prefix your spoken line with ONE emote in square brackets from this list if it truly fits, then say your line. Allowed: {emote_list}. Example: [cheer] We did it!"
 
 # OllamaChat.EmoteActionRouting
 #     When enabled (1), a bracketed segment becomes an action instead of being spoken verbatim:
