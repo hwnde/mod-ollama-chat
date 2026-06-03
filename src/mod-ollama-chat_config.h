@@ -171,6 +171,14 @@ extern std::string              g_ChannelFrames[8];
 extern std::vector<std::string> g_ChannelTopics[8];
 extern uint32_t                 g_ChannelWeights[8];
 
+extern bool                     g_ActivityChatterEnable;
+extern uint32_t                 g_ActivityChatterChance;     // 0-100
+extern std::vector<std::string> g_ActivityTopicsSocial;
+extern std::vector<std::string> g_ActivityTopicsFishing;
+extern std::vector<std::string> g_ActivityTopicsGather;
+extern std::vector<std::string> g_ActivityTopicsCraft;
+extern std::vector<std::string> g_ActivityTopicsDuel;
+
 // --------------------------------------------
 // Blacklist: Prefixes for Commands (not chat)
 // --------------------------------------------

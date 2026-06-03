@@ -164,6 +164,14 @@ std::string              g_ChannelFrames[8];
 std::vector<std::string> g_ChannelTopics[8];
 uint32_t                 g_ChannelWeights[8] = { 25, 20, 15, 30, 5, 15, 0, 0 };
 
+bool                     g_ActivityChatterEnable = true;
+uint32_t                 g_ActivityChatterChance = 40;
+std::vector<std::string> g_ActivityTopicsSocial;
+std::vector<std::string> g_ActivityTopicsFishing;
+std::vector<std::string> g_ActivityTopicsGather;
+std::vector<std::string> g_ActivityTopicsCraft;
+std::vector<std::string> g_ActivityTopicsDuel;
+
 time_t g_LastHistorySaveTime = 0;
 
 // --------------------------------------------
@@ -735,6 +743,20 @@ void LoadOllamaChatConfig()
     };
     for (int i = 0; i < 8; ++i)
         g_ChannelTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(kTopicKeys[i], kTopicDef[i]));
+
+    g_ActivityChatterEnable = sConfigMgr->GetOption<bool>("OllamaChat.ActivityChatter.Enable", true);
+    g_ActivityChatterChance = sConfigMgr->GetOption<uint32_t>("OllamaChat.ActivityChatter.Chance", 40);
+
+    g_ActivityTopicsSocial  = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Social",
+        "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here"));
+    g_ActivityTopicsFishing = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Fishing",
+        "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away"));
+    g_ActivityTopicsGather  = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Gather",
+        "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"));
+    g_ActivityTopicsCraft   = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Craft",
+        "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"));
+    g_ActivityTopicsDuel    = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Duel",
+        "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"));
 
     static const char* kWeightKeys[8] = {
         "OllamaChat.ChannelWeight.Guild", "OllamaChat.ChannelWeight.Party",

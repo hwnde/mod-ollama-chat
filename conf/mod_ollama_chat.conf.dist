@@ -502,6 +502,30 @@ OllamaChat.ChannelTopics.Trade   =
 OllamaChat.ChannelTopics.Others  =
 OllamaChat.ChannelWeight.Trade   = 0
 OllamaChat.ChannelWeight.Others  = 0
+#
+#    OllamaChat.ActivityChatter.Enable
+#        While a bot is performing a NewRpg pastime activity (fishing, gathering,
+#        crafting, dueling, socializing), occasionally inject an activity-themed
+#        topic into its initiated chatter and force it to a local Say line.
+#        Default: 1 (enabled)
+#
+OllamaChat.ActivityChatter.Enable = 1
+#
+#    OllamaChat.ActivityChatter.Chance
+#        Percent chance (0-100), per eligible initiated message while performing an
+#        activity, to inject the activity topic. Default: 40
+#
+OllamaChat.ActivityChatter.Chance = 40
+#
+#    OllamaChat.ActivityTopics.<Activity>
+#        Pipe-delimited ( | ) list of topics the bot may bring up for each activity,
+#        written in its own personality voice by the LLM. One list per activity.
+#
+OllamaChat.ActivityTopics.Social = "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here"
+OllamaChat.ActivityTopics.Fishing = "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away"
+OllamaChat.ActivityTopics.Gather = "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"
+OllamaChat.ActivityTopics.Craft = "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"
+OllamaChat.ActivityTopics.Duel = "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"
 
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)
