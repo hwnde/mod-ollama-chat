@@ -410,3 +410,54 @@ std::vector<float> OllamaRAGSystem::TextToTFVector(const std::string& text, cons
 
     return vector;
 }
+
+bool OllamaRAGSystem::IsStopword(const std::string& token) const
+{
+    static const std::unordered_set<std::string> kStop = {
+        "a","an","the","of","to","and","or","in","on","at","is","are","was","were",
+        "be","been","being","it","its","this","that","these","those","for","with",
+        "as","by","from","into","but","not","no","do","does","did","has","have","had",
+        "you","your","we","our","they","them","their","he","she","his","her","him",
+        "i","me","my","what","which","who","whom","when","where","why","how","there",
+        "here","then","than","so","if","up","out","about","over","also","can","will",
+        "would","should","could","just","very","too","more","most"
+    };
+    return kStop.count(token) > 0;
+}
+
+std::string OllamaRAGSystem::Stem(const std::string& token) const
+{
+    if (token.size() < 4)
+        return token;
+
+    auto endsWith = [&](const char* suf, size_t n) {
+        return token.size() >= n && token.compare(token.size() - n, n, suf) == 0;
+    };
+    auto tryStrip = [&](size_t n, const std::string& add) -> std::string {
+        if (token.size() - n + add.size() >= 3)
+            return token.substr(0, token.size() - n) + add;
+        return token;
+    };
+
+    if (endsWith("ies", 3)) return tryStrip(3, "y");   // berries -> berry
+    if (endsWith("es", 2))  return tryStrip(2, "");     // blades  -> blade(s) handled; horses -> hors? guard keeps len>=3
+    if (endsWith("ed", 2))  return tryStrip(2, "");     // raided  -> raid
+    if (endsWith("ing", 3)) return tryStrip(3, "");     // raiding -> raid
+    if (endsWith("er", 2))  return tryStrip(2, "");     // miner   -> min? -> guard
+    if (endsWith("s", 1))   return tryStrip(1, "");     // raids   -> raid
+    return token;
+}
+
+std::vector<std::string> OllamaRAGSystem::NormalizeTokens(const std::string& text) const
+{
+    std::vector<std::string> out;
+    for (const auto& raw : TokenizeText(PreprocessText(text)))
+    {
+        if (raw.empty() || IsStopword(raw))
+            continue;
+        std::string s = Stem(raw);
+        if (!s.empty())
+            out.push_back(s);
+    }
+    return out;
+}

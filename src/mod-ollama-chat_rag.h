@@ -58,6 +58,11 @@ private:
     // Convert text to simple TF vector (term frequency)
     std::vector<float> TextToTFVector(const std::string& text, const std::vector<std::string>& vocabulary) const;
 
+    // --- improved-scoring normalization ---
+    bool IsStopword(const std::string& token) const;
+    std::string Stem(const std::string& token) const;             // light suffix-stripping
+    std::vector<std::string> NormalizeTokens(const std::string& text) const;  // preprocess->tokenize->drop stopwords->stem
+
 private:
     std::vector<RAGEntry> m_ragEntries;
     std::unordered_map<std::string, const RAGEntry*> m_idIndex;
