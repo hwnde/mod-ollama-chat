@@ -8,6 +8,7 @@
 #include <cmath>
 #include <sstream>
 #include <unordered_set>
+#include <utility>
 
 namespace fs = std::filesystem;
 
@@ -281,7 +282,7 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
         }
     }
 
-    // Expand one hop along references (outgoing only), deduped and capped.
+    // Expand one hop along references. ON (default) = per-direct-hit random sampling; OFF = legacy global FCFS.
     if (g_RAGExpandReferences && g_RAGMaxReferences > 0) {
         std::unordered_set<std::string> present;
         for (const auto& r : results) {
@@ -289,27 +290,66 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
         }
 
         std::vector<RAGResult> refResults;
-        for (const auto& r : results) {
-            if (refResults.size() >= static_cast<size_t>(g_RAGMaxReferences)) {
-                break;
-            }
-            for (const auto& refId : r.entry->references) {
+
+        if (!g_RAGRandomizeReferences) {
+            // ---- legacy global FCFS pool (unchanged behavior; instant revert) ----
+            for (const auto& r : results) {
                 if (refResults.size() >= static_cast<size_t>(g_RAGMaxReferences)) {
                     break;
                 }
-                if (present.count(refId)) {
+                for (const auto& refId : r.entry->references) {
+                    if (refResults.size() >= static_cast<size_t>(g_RAGMaxReferences)) {
+                        break;
+                    }
+                    if (present.count(refId)) {
+                        continue;
+                    }
+                    auto it = m_idIndex.find(refId);
+                    if (it == m_idIndex.end()) {
+                        continue;
+                    }
+                    present.insert(refId);
+                    RAGResult rr;
+                    rr.entry = it->second;
+                    rr.similarity = 0.0f;
+                    rr.isReference = true;
+                    refResults.push_back(rr);
+                }
+            }
+        } else {
+            // ---- per-direct-hit random sampling (variety, no crowding) ----
+            for (const auto& r : results) {
+                std::vector<const std::string*> cand;
+                for (const auto& refId : r.entry->references) {
+                    if (present.count(refId)) {
+                        continue;
+                    }
+                    if (m_idIndex.find(refId) == m_idIndex.end()) {
+                        continue;   // skip dangling
+                    }
+                    cand.push_back(&refId);
+                }
+                if (cand.empty()) {
                     continue;
                 }
-                auto it = m_idIndex.find(refId);
-                if (it == m_idIndex.end()) {
-                    continue;
+
+                uint32_t take = std::min<uint32_t>(g_RAGMaxReferences, static_cast<uint32_t>(cand.size()));
+                for (uint32_t i = 0; i < take; ++i) {                          // partial Fisher-Yates
+                    uint32_t j = i + urand(0, static_cast<uint32_t>(cand.size()) - 1 - i);
+                    std::swap(cand[i], cand[j]);
                 }
-                present.insert(refId);
-                RAGResult rr;
-                rr.entry = it->second;
-                rr.similarity = 0.0f;
-                rr.isReference = true;
-                refResults.push_back(rr);
+                for (uint32_t i = 0; i < take; ++i) {
+                    const std::string& refId = *cand[i];
+                    if (present.count(refId)) {
+                        continue;                        // cross-hit dedup
+                    }
+                    present.insert(refId);
+                    RAGResult rr;
+                    rr.entry = m_idIndex[refId];
+                    rr.similarity = 0.0f;
+                    rr.isReference = true;
+                    refResults.push_back(rr);
+                }
             }
         }
 
