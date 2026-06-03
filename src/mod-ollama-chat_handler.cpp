@@ -1757,8 +1757,10 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                     LOG_INFO("server.loading", "[Ollama Chat] Bot {} is confirmed in channel '{}', sending message...", 
                                             botPtr->GetName(), channelName);
                                 }
-                                targetChannel->Say(botPtr->GetGUID(), response, LANG_UNIVERSAL);
-                                ProcessBotChatMessage(botPtr, response, SRC_GENERAL_LOCAL, targetChannel);
+                                std::string spoken = EmitBotLines(response, [&](const std::string& l){
+                                    targetChannel->Say(botPtr->GetGUID(), l, LANG_UNIVERSAL); });
+                                if (!spoken.empty())
+                                    ProcessBotChatMessage(botPtr, spoken, SRC_GENERAL_LOCAL, targetChannel);
                                 if(g_DebugEnabled)
                                 {
                                     LOG_INFO("server.loading", "[Ollama Chat] Bot {} responded in channel {}: {}", 
@@ -1790,22 +1792,30 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                 {
                     switch (sourceLocal)
                     {
-                        case SRC_GUILD_LOCAL: 
-                            botAI->SayToGuild(response);
-                            ProcessBotChatMessage(botPtr, response, SRC_GUILD_LOCAL, nullptr);
+                        case SRC_GUILD_LOCAL:
+                        {
+                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+                            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_GUILD_LOCAL, nullptr);
                             break;
-                        case SRC_OFFICER_LOCAL: 
-                            botAI->SayToGuild(response);
-                            ProcessBotChatMessage(botPtr, response, SRC_OFFICER_LOCAL, nullptr);
+                        }
+                        case SRC_OFFICER_LOCAL:
+                        {
+                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+                            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_OFFICER_LOCAL, nullptr);
                             break;
-                        case SRC_PARTY_LOCAL: 
-                            botAI->SayToParty(response);
-                            ProcessBotChatMessage(botPtr, response, SRC_PARTY_LOCAL, nullptr);
+                        }
+                        case SRC_PARTY_LOCAL:
+                        {
+                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToParty(l); });
+                            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_PARTY_LOCAL, nullptr);
                             break;
-                        case SRC_RAID_LOCAL:  
-                            botAI->SayToRaid(response);
-                            ProcessBotChatMessage(botPtr, response, SRC_RAID_LOCAL, nullptr);
+                        }
+                        case SRC_RAID_LOCAL:
+                        {
+                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToRaid(l); });
+                            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_RAID_LOCAL, nullptr);
                             break;
+                        }
                         case SRC_SAY_LOCAL:
                             // Only send Say if someone (real player or bot) is within say distance
                             {
@@ -1828,12 +1838,12 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                 
                                 if (someoneCanHear)
                                 {
-                                    botAI->Say(response);
-                                    ProcessBotChatMessage(botPtr, response, SRC_SAY_LOCAL, nullptr);
+                                    std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                                    if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
                                 }
                                 else if (g_DebugEnabled)
                                 {
-                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} skipping Say reply - no one within {} yards to hear it", 
+                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} skipping Say reply - no one within {} yards to hear it",
                                             botPtr->GetName(), g_SayDistance);
                                 }
                             }
@@ -1860,12 +1870,12 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                 
                                 if (someoneCanHear)
                                 {
-                                    botAI->Yell(response);
-                                    ProcessBotChatMessage(botPtr, response, SRC_YELL_LOCAL, nullptr);
+                                    std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Yell(l); });
+                                    if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_YELL_LOCAL, nullptr);
                                 }
                                 else if (g_DebugEnabled)
                                 {
-                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} skipping Yell reply - no one within {} yards to hear it", 
+                                    LOG_INFO("server.loading", "[Ollama Chat] Bot {} skipping Yell reply - no one within {} yards to hear it",
                                             botPtr->GetName(), g_YellDistance);
                                 }
                             }
@@ -1881,7 +1891,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                         LOG_INFO("server.loading", "[Ollama Chat] Bot {} whispering response '{}' to {}", 
                                                 botPtr->GetName(), response, originalSender->GetName());
                                     }
-                                    botAI->Whisper(response, originalSender->GetName());
+                                    EmitBotLines(response, [&](const std::string& l){ botAI->Whisper(l, originalSender->GetName()); });
                                     // Don't trigger ProcessBotChatMessage for whispers - they're private
                                 }
                                 else if(g_DebugEnabled)
@@ -1890,10 +1900,12 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                 }
                             }
                             break;
-                        default:              
-                            botAI->Say(response);
-                            ProcessBotChatMessage(botPtr, response, SRC_SAY_LOCAL, nullptr);
+                        default:
+                        {
+                            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+                            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
                             break;
+                        }
                     }
                 }
                 

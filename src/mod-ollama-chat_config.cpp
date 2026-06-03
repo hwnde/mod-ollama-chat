@@ -13,6 +13,11 @@
 #include <cctype>
 #include <set>
 #include <unordered_map>
+#include <string>
+#include <vector>
+#include <thread>
+#include <chrono>
+#include <functional>
 
 
 // --------------------------------------------
@@ -356,6 +361,11 @@ bool g_EnableTypingSimulation = false;
 uint32_t g_TypingSimulationBaseDelay = 1000;     // 1000ms base delay
 uint32_t g_TypingSimulationDelayPerChar = 250;   // 250ms per character (4 chars/sec)
 
+bool        g_SpeechSplitEnable               = true;
+uint32_t    g_SpeechSplitMaxLineLength        = 230;
+bool        g_SpeechSplitDropTrailingFragment = true;
+uint32_t    g_SpeechSplitLineDelayMs          = 700;
+
 // --------------------------------------------
 // Emote-Augmented Chat
 // --------------------------------------------
@@ -501,6 +511,176 @@ std::string BuildEmoteChatInstruction()
     if (size_t pos = instr.find(token); pos != std::string::npos)
         instr.replace(pos, token.length(), list);
     return instr.empty() ? "" : " " + instr;
+}
+
+// ============================================================================
+// Speech delivery: split a raw LLM reply into ordered, chat-safe lines.
+// ============================================================================
+
+static std::string SpeechTrim(const std::string& s)
+{
+    size_t b = s.find_first_not_of(" \t");
+    if (b == std::string::npos)
+        return "";
+    size_t e = s.find_last_not_of(" \t");
+    return s.substr(b, e - b + 1);
+}
+
+static bool SpeechLooksComplete(const std::string& line)
+{
+    std::string s = SpeechTrim(line);
+    if (s.empty())
+        return false;
+    char last = s.back();
+    if (last == ']' || last == ')')
+        return true;
+    while (!s.empty() && (s.back() == '"' || s.back() == '\'' || s.back() == ' '))
+        s.pop_back();
+    if (s.empty())
+        return false;
+    last = s.back();
+    if (last == '.' || last == '!' || last == '?' || last == ':' || last == '~')
+        return true;
+    if (s.size() >= 3 &&
+        (unsigned char)s[s.size() - 3] == 0xE2 &&
+        (unsigned char)s[s.size() - 2] == 0x80 &&
+        (unsigned char)s[s.size() - 1] == 0xA6)
+        return true;
+    return false;
+}
+
+static void SpeechAppendLengthSplit(std::vector<std::string>& out,
+                                    const std::string& seg, size_t maxLen)
+{
+    std::string s = seg;
+    while (s.size() > maxLen)
+    {
+        size_t cut = std::string::npos;
+        for (char t : {'.', '!', '?'})
+        {
+            size_t p = s.rfind(t, maxLen);
+            if (p != std::string::npos && (cut == std::string::npos || p > cut))
+                cut = p;
+        }
+        size_t cutEnd;
+        if (cut != std::string::npos && cut + 1 >= maxLen / 2)
+            cutEnd = cut + 1;
+        else
+        {
+            size_t sp = s.rfind(' ', maxLen);
+            cutEnd = (sp != std::string::npos && sp > 0) ? sp : maxLen;
+        }
+        std::string piece = SpeechTrim(s.substr(0, cutEnd));
+        if (!piece.empty())
+            out.push_back(piece);
+        s = SpeechTrim(s.substr(cutEnd));
+    }
+    if (!s.empty())
+        out.push_back(s);
+}
+
+std::vector<std::string> SplitChatResponse(const std::string& text)
+{
+    if (!g_SpeechSplitEnable)
+    {
+        std::vector<std::string> one;
+        std::string t = SpeechTrim(text);
+        if (!t.empty())
+            one.push_back(t);
+        return one;
+    }
+
+    std::string norm;
+    norm.reserve(text.size());
+    for (size_t i = 0; i < text.size(); ++i)
+    {
+        char c = text[i];
+        if (c == '\\' && i + 1 < text.size() && (text[i + 1] == 'n' || text[i + 1] == 'r'))
+        {
+            norm.push_back('\n');
+            ++i;
+        }
+        else if (c == '\r')
+        {
+            norm.push_back('\n');
+        }
+        else
+        {
+            norm.push_back(c);
+        }
+    }
+
+    std::vector<std::string> lines;
+    std::stringstream ss(norm);
+    std::string seg;
+    while (std::getline(ss, seg, '\n'))
+    {
+        std::string t = SpeechTrim(seg);
+        if (t.empty())
+            continue;
+        if (g_SpeechSplitMaxLineLength > 0 && t.size() > g_SpeechSplitMaxLineLength)
+            SpeechAppendLengthSplit(lines, t, g_SpeechSplitMaxLineLength);
+        else
+            lines.push_back(t);
+    }
+
+    if (g_SpeechSplitDropTrailingFragment && lines.size() > 1 &&
+        !SpeechLooksComplete(lines.back()))
+        lines.pop_back();
+
+    return lines;
+}
+
+static void SpeechSplitSelfTest()
+{
+    struct Case { const char* name; std::string in; std::vector<std::string> out; };
+    const std::vector<Case> cases = {
+        { "plain",          "Hello there.",                         { "Hello there." } },
+        { "two-lines",      "Line one.\nLine two.",                 { "Line one.", "Line two." } },
+        { "double-newline", "Para one.\n\nPara two.",               { "Para one.", "Para two." } },
+        { "literal-esc",    "Literal break.\\nSecond part.",        { "Literal break.", "Second part." } },
+        { "frag-dropped",   "First thought.\nOh man, I'm",          { "First thought." } },
+        { "bracket-kept",   "Looks good.\n[grins broadly]",         { "Looks good.", "[grins broadly]" } },
+        { "single-frag",    "Oh man, I'm",                          { "Oh man, I'm" } },
+    };
+
+    int passed = 0;
+    for (const Case& c : cases)
+    {
+        std::vector<std::string> got = SplitChatResponse(c.in);
+        bool ok = (got == c.out);
+        if (ok)
+            ++passed;
+        else
+        {
+            std::string g;
+            for (const std::string& l : got) { g += "[" + l + "]"; }
+            LOG_ERROR("server.loading",
+                      "[Ollama Chat] SpeechSplit self-test FAIL ({}) -> {}", c.name, g);
+        }
+    }
+    LOG_INFO("server.loading",
+             "[Ollama Chat] SpeechSplit self-test: {}/{} passed", passed, (int)cases.size());
+}
+
+std::string EmitBotLines(const std::string& response,
+                         const std::function<void(const std::string&)>& sendLine)
+{
+    std::vector<std::string> lines = SplitChatResponse(response);
+    if (lines.empty())
+        return "";
+
+    std::string joined;
+    for (size_t i = 0; i < lines.size(); ++i)
+    {
+        if (i > 0 && g_SpeechSplitLineDelayMs > 0)
+            std::this_thread::sleep_for(std::chrono::milliseconds(g_SpeechSplitLineDelayMs));
+        sendLine(lines[i]);
+        if (i > 0)
+            joined += ' ';
+        joined += lines[i];
+    }
+    return joined;
 }
 
 // Load Bot Personalities from Database
@@ -806,6 +986,11 @@ void LoadOllamaChatConfig()
     g_TypingSimulationBaseDelay       = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationBaseDelay", 1000);
     g_TypingSimulationDelayPerChar    = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationDelayPerChar", 250);
 
+    g_SpeechSplitEnable               = sConfigMgr->GetOption<bool>("OllamaChat.SpeechSplitEnable", true);
+    g_SpeechSplitMaxLineLength        = sConfigMgr->GetOption<uint32_t>("OllamaChat.SpeechSplitMaxLineLength", 230);
+    g_SpeechSplitDropTrailingFragment = sConfigMgr->GetOption<bool>("OllamaChat.SpeechSplitDropTrailingFragment", true);
+    g_SpeechSplitLineDelayMs          = sConfigMgr->GetOption<uint32_t>("OllamaChat.SpeechSplitLineDelayMs", 700);
+
     // Emote-Augmented Chat
     g_EmoteChatEnable             = sConfigMgr->GetOption<bool>("OllamaChat.EmoteChat.Enable", true);
     g_EmoteChatVocabularyRaw      = sConfigMgr->GetOption<std::string>("OllamaChat.EmoteChat.Vocabulary", "");
@@ -981,6 +1166,9 @@ void LoadOllamaChatConfig()
              g_OllamaUrl, g_OllamaModel, g_MaxConcurrentQueries,
              g_EnableRandomChatter, g_MinRandomInterval, g_MaxRandomInterval, g_RandomChatterRealPlayerDistance,
              g_RandomChatterBotCommentChance, g_MaxConcurrentQueries, extraBlacklist);
+
+    if (g_DebugEnabled)
+        SpeechSplitSelfTest();
 }
 
 void LoadPersonalityTemplatesFromDB()

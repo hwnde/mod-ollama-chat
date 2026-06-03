@@ -383,7 +383,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                     return;
                 }
                 
-                botAI->SayToGuild(response);
+                EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
             }
             else if (botPtr->GetGroup())
             {
@@ -395,7 +395,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                     return;
                 }
                 
-                botAI->SayToParty(response);
+                EmitBotLines(response, [&](const std::string& l){ botAI->SayToParty(l); });
             }
             else
             {
@@ -431,7 +431,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                 {
                     if (g_DebugEnabled)
                         LOG_INFO("server.loading", "[Ollama Chat] Bot Event Chatter Say: {}", response);
-                    botAI->Say(response);
+                    EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
                 }
                 else if (selectedChannel == "General")
                 {
@@ -439,12 +439,15 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                         LOG_INFO("server.loading", "[Ollama Chat] Bot Event Chatter General: {}", response);
                     
                     // Use playerbots' SayToChannel method if available, otherwise use direct channel access
-                    if (!botAI->SayToChannel(response, ChatChannelId::GENERAL))
+                    bool anySent = false;
+                    EmitBotLines(response, [&](const std::string& l){
+                        if (botAI->SayToChannel(l, ChatChannelId::GENERAL)) anySent = true; });
+                    if (!anySent)
                     {
-                        // Fallback to Say if channel message failed
+                        // Fallback to Say if no channel line was sent
                         if (g_DebugEnabled)
                             LOG_INFO("server.loading", "[Ollama Chat] Failed to send to General channel, falling back to Say");
-                        botAI->Say(response);
+                        EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
                     }
                 }
             }

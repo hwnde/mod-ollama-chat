@@ -393,6 +393,29 @@ OllamaChat.TypingSimulationBaseDelay = 1000
 #     Default:     250
 OllamaChat.TypingSimulationDelayPerChar = 250
 
+# OllamaChat.SpeechSplitEnable
+#     When enabled (1), a bot reply is delivered as one-or-more chat lines: newlines split
+#     into separate /say lines and over-long lines split at sentence boundaries. 0 = legacy single message.
+#     Default: 1
+OllamaChat.SpeechSplitEnable = 1
+
+# OllamaChat.SpeechSplitMaxLineLength
+#     Byte length above which a single line is further split at the last sentence terminator (or space)
+#     before the limit. 0 disables length splitting.
+#     Default: 230
+OllamaChat.SpeechSplitMaxLineLength = 230
+
+# OllamaChat.SpeechSplitDropTrailingFragment
+#     When 1, if a multi-line reply ends with a cut-off prose fragment (no terminal punctuation, not a
+#     bracketed action), that last fragment is dropped. Never empties a reply.
+#     Default: 1
+OllamaChat.SpeechSplitDropTrailingFragment = 1
+
+# OllamaChat.SpeechSplitLineDelayMs
+#     Delay in ms between consecutive lines of one bot utterance.
+#     Default: 700
+OllamaChat.SpeechSplitLineDelayMs = 700
+
 # --------------------------------------------
 # RP PERSONALITIES SYSTEM
 # --------------------------------------------
