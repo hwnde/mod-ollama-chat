@@ -474,5 +474,77 @@
     "content": "Deadwind Pass is a narrow, fog-choked canyon linking Duskwood to the Swamp of Sorrows, and nothing living thrives there. Ogres of the Deadwind clan haunt its ruined camps, and ravens wheel over the dead trees as though waiting. Above it all looms a great dark tower, the abandoned seat of the last Guardian Medivh, where the Burning Legion once whispered through a corrupted mind and opened the way for the orcish horde. The tower stands silent now, but the curse upon it has never lifted, and ghostly echoes of revelry still drift down from its halls.",
     "keywords": ["deadwind pass", "karazhan", "medivh", "ogres", "tower", "duskwood", "fog"],
     "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_orgrimmar",
+    "title": "Orgrimmar",
+    "short_description": "the Horde capital carved into Durotar's red cliffs, with the fissure of Ragefire smoldering beneath",
+    "references": ["dungeon_ragefire_chasm"],
+    "content": "Orgrimmar stands as the mighty heart of the Horde, its walls of timber and iron carved into the red canyons of Durotar by Thrall's own hand. The Valley of Honor rings with the work of warriors and smiths, the Valley of Wisdom holds the Warchief's seat, and the drums of the orcs and the chants of the trolls and tauren echo through its streets. Beneath the city, however, a volcanic fissure called Ragefire smolders, and the Burning Blade cult has crept into its caverns to work dark rituals in the shadow of the capital. Thrall's guards watch the depths with unease, for no Horde city should harbor such a wound beneath its floor.",
+    "keywords": ["orgrimmar", "thrall", "valley of honor", "valley of wisdom", "ragefire chasm", "burning blade", "horde capital", "durotar"],
+    "tags": ["zone", "horde", "dungeon hub"]
+  },
+  {
+    "id": "zone_the_barrens",
+    "title": "The Barrens",
+    "short_description": "the vast tawny savanna of central Kalimdor, crossed by Horde caravans and threatened by quillboar warrens",
+    "references": ["dungeon_wailing_caverns", "dungeon_razorfen_kraul", "dungeon_razorfen_downs"],
+    "content": "The Barrens sprawl across the center of Kalimdor in endless tawny grass and scattered acacia, the great overland road of the Horde from Orgrimmar in the north to the lands beyond. The Crossroads serves as its beating heart, a caravan town forever harried by raiders, while tauren herders, orc outriders, and goblin prospectors share the savanna with lions, zhevra, and roaming kodo. The quillboar dig their thorny warrens at Razorfen, where the great barrow of brambles hides their barbed priests and the bones of an ancient demigod. Below the cliffs of the Wailing Caverns, corrupted druids dream a poisoned dream that bleeds into the waking world.",
+    "keywords": ["the barrens", "crossroads", "wailing caverns", "razorfen kraul", "razorfen downs", "quillboar", "savanna", "kalimdor"],
+    "tags": ["zone", "horde", "dungeon hub"]
+  },
+  {
+    "id": "zone_ashenvale",
+    "title": "Ashenvale",
+    "short_description": "an ancient night elf forest scarred by Horde logging, where Sentinels and Warsong clash beneath the canopy",
+    "references": ["dungeon_blackfathom_deeps"],
+    "content": "Ashenvale is a forest of ancient shadowed groves, sacred to the night elves and watched over by the Sentinels who patrol from Astranaar. The Warsong orcs have driven their lumber camps deep into its trees, and the screech of saws now mingles with the song of the wild, kindling open war along the wooded hills. Satyrs, furbolgs corrupted by demonic taint, and the spirits of the forest contest every glade. On the western coast, the sea has swallowed an ancient temple of the moon, and dark things stir in its drowned halls beneath the waves.",
+    "keywords": ["ashenvale", "astranaar", "warsong", "sentinels", "blackfathom deeps", "night elf", "satyr", "forest"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_feralas",
+    "title": "Feralas",
+    "short_description": "a lush southern jungle of ogres and the ruined night elf city of Eldre'Thalas, where old hungers linger",
+    "references": ["dungeon_dire_maul"],
+    "content": "Feralas is a lush and humid jungle in the south of Kalimdor, green with towering trees and tangled with vine, where the Alliance and the Horde keep wary outposts at the forest's edges. Gordunni ogres rule much of the wood, and the gentle furbolgs of the deeper groves struggle against corruption. At the jungle's heart lie the broken walls of Eldre'Thalas, once a proud city of the highborne, where the spoiled magic-hungry nobles of old still cling to existence amid the ruins. Their ancient library, their demon-haunted courtyards, and their feral beast-pens remain, jealously guarded by what the city has become.",
+    "keywords": ["feralas", "eldre'thalas", "dire maul", "gordunni ogres", "highborne", "night elf ruins", "jungle"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_desolace",
+    "title": "Desolace",
+    "short_description": "a blasted grey waste of warring centaur clans, hiding the cursed canyon temple of Maraudon",
+    "references": ["dungeon_maraudon"],
+    "content": "Desolace earns its name, a grey and broken waste where the wind drives dust over the bones of the dead and little grows but thornscrub. The centaur clans war endlessly across these wastes, and the Cenarion Circle keeps a lonely hold at Nijel's Point and Ghost Walker Post to tend what life remains. Demonic ruins, kodo graveyards, and the skeletal remnants of old battles litter the land. In a hidden canyon lies a temple grown thick with poisoned vine and crystal, where the demigod Zaetar's monstrous brood and the spirit of the betrayed earth-mother's daughter still hold their cursed court.",
+    "keywords": ["desolace", "maraudon", "centaur", "cenarion circle", "zaetar", "nijel's point", "wasteland"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_tanaris",
+    "title": "Tanaris",
+    "short_description": "a southern desert of goblin traders and Sandfury trolls, where the Caverns of Time guard history itself",
+    "references": ["dungeon_zul_farrak", "dungeon_old_hillsbrad_foothills", "dungeon_the_black_morass", "raid_battle_for_mount_hyjal", "dungeon_the_culling_of_stratholme"],
+    "content": "South past Thousand Needles the land bakes into the dunes of Tanaris, where the neutral goblins of Gadgetzan broker any deal for coin and the Sandfury trolls keep their stepped city of Zul'Farrak around a sacred pool. But the desert's true secret lies in a hidden gorge: the Caverns of Time, where the bronze dragonflight watches over every moment that ever was, and where the Infinite Dragonflight comes to unmake the past. Travelers who enter the swirling sands may walk in ages long gone.",
+    "keywords": ["tanaris", "gadgetzan", "sandfury", "caverns of time", "bronze dragonflight", "desert", "goblins"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_dustwallow_marsh",
+    "title": "Dustwallow Marsh",
+    "short_description": "a humid southern marsh holding Theramore's human port and the lair where Onyxia schemes in disguise",
+    "references": ["raid_onyxias_lair"],
+    "content": "Dustwallow Marsh is a steaming wetland on Kalimdor's eastern shore, its mangroves and bogs alive with crocolisks, dragonkin, and the murlocs of the fens. On the coast stands Theramore, Jaina Proudmoore's island fortress and the last great human hold in the west, while the Horde keeps the rough camp of Brackenwall among the marsh's ruins. Hidden within a cave at the heart of the mire coils the black dragon Onyxia, who in the guise of a noblewoman has long whispered poison into the courts of Stormwind. Her brood guards the lair, and few who seek her there return to tell of it.",
+    "keywords": ["dustwallow marsh", "theramore", "jaina proudmoore", "onyxia", "brackenwall", "black dragon", "marsh"],
+    "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_silithus",
+    "title": "Silithus",
+    "short_description": "a wind-scoured desert of silithid hives, where the walled city of C'Thun's qiraji servants looms",
+    "references": ["raid_ruins_of_ahn_qiraj", "raid_temple_of_ahn_qiraj"],
+    "content": "Silithus is a desert of red sand and razor crystal in the far southwest of Kalimdor, where the wind never ceases and the silithid swarm from countless hives beneath the dunes. The Cenarion Circle and the Argent Dawn keep a fragile outpost here, studying the insectoid menace and the strange harmonies the crystals sing. To the south rise the great gates and walls of an ancient city, raised by the qiraji who serve the slumbering old god C'Thun. Behind those walls the insect-empire musters, and the very sand seems to wait for the day its masters wake and pour forth once more.",
+    "keywords": ["silithus", "ahn'qiraj", "c'thun", "qiraji", "silithid", "cenarion circle", "desert"],
+    "tags": ["zone", "contested", "dungeon hub"]
   }
 ]
