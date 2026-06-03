@@ -546,5 +546,77 @@
     "content": "Silithus is a desert of red sand and razor crystal in the far southwest of Kalimdor, where the wind never ceases and the silithid swarm from countless hives beneath the dunes. The Cenarion Circle and the Argent Dawn keep a fragile outpost here, studying the insectoid menace and the strange harmonies the crystals sing. To the south rise the great gates and walls of an ancient city, raised by the qiraji who serve the slumbering old god C'Thun. Behind those walls the insect-empire musters, and the very sand seems to wait for the day its masters wake and pour forth once more.",
     "keywords": ["silithus", "ahn'qiraj", "c'thun", "qiraji", "silithid", "cenarion circle", "desert"],
     "tags": ["zone", "contested", "dungeon hub"]
+  },
+  {
+    "id": "zone_hellfire_peninsula",
+    "title": "Hellfire Peninsula",
+    "short_description": "the red broken gateway of Outland around the Dark Portal, where Honor Hold and Thrallmar face the fel-orc citadel of Hellfire",
+    "references": ["dungeon_hellfire_ramparts", "dungeon_the_blood_furnace", "dungeon_the_shattered_halls", "raid_magtheridons_lair"],
+    "content": "Beyond the Dark Portal the first land of Outland is a shattered red waste of jagged stone and fel-stained ground, the gateway through which all who cross from Azeroth must come. Honor Hold flies the banner of the Alliance and the old Sons of Lothar, while across the wastes Thrallmar holds the Horde's beachhead, and between them the fel orcs of the Fel Horde garrison the great fortress of Hellfire Citadel. Its warrens hide the pit lord Magtheridon, once Outland's ruler and now Illidan's blood-wrung captive, while above the cliffs broken draenei and demon raiders contest the ruined roads. Few cross the Portal and find rest here.",
+    "keywords": ["hellfire peninsula", "dark portal", "honor hold", "thrallmar", "hellfire citadel", "magtheridon", "fel orc", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_zangarmarsh",
+    "title": "Zangarmarsh",
+    "short_description": "a luminous fungal wetland of giant mushrooms and the Cenarion Expedition, drained by Lady Vashj's naga at Coilfang",
+    "references": ["dungeon_the_slave_pens", "dungeon_the_underbog", "dungeon_the_steamvault", "raid_serpentshrine_cavern"],
+    "content": "West of the Hellfire wastes the land turns strange and luminous, a vast wetland of towering mushrooms and glowing spores where pale light drifts through the mist. The Cenarion Expedition makes its base at Cenarion Refuge to study the marsh and guard its fragile balance, troubled by the broken ones and the marsh-dwelling fungal giants. At the wetland's heart looms Coilfang Reservoir, the great pumping station where Lady Vashj's naga drain the marsh's waters for some hidden purpose, holding slaves and brewing schemes in its flooded depths. The sporeggar mushroom-folk eke out their lives at the marsh's edge, caught between the naga and the wild.",
+    "keywords": ["zangarmarsh", "cenarion expedition", "coilfang reservoir", "lady vashj", "naga", "sporeggar", "mushroom", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_terokkar_forest",
+    "title": "Terokkar Forest",
+    "short_description": "a forest of bone-pale trees around Shattrath City, shadowed by the shattered tomb-city of Auchindoun",
+    "references": ["dungeon_mana_tombs", "dungeon_auchenai_crypts", "dungeon_sethekk_halls", "dungeon_shadow_labyrinth"],
+    "content": "West of the Bone Wastes the trees of Terokkar stand pale and close, sheltering Shattrath City where the draenei Sha'tar and every faction weary of war keep an uneasy peace. The arakkoa cling to their spires, the Aldor and Scryers vie for the city's favor, and at the forest's heart the great draenei mausoleum of Auchindoun lies cracked open — its four wings now crawling with ethereal raiders, fallen death-priests, raven-cultists, and the whispering Shadow Council.",
+    "keywords": ["terokkar forest", "shattrath", "auchindoun", "arakkoa", "draenei", "aldor", "scryers", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_netherstorm",
+    "title": "Netherstorm",
+    "short_description": "Outland's torn edge of floating arcane isles, home to Area 52's goblins and Kael'thas's stolen Tempest Keep",
+    "references": ["dungeon_the_mechanar", "dungeon_the_botanica", "dungeon_the_arcatraz", "raid_tempest_keep"],
+    "content": "At the northern edge of Outland the land breaks apart entirely into a storm of floating islands wreathed in raw arcane energy, where the very sky crackles with the magic that tore this world. The goblins of Area 52 have set up shop amid the chaos, building and bargaining beneath their great rocket, while the Kirin Tor of the Violet Tower study the unraveling of the Nether. Across the void hang the satellites of Tempest Keep, the crystalline fortress Kael'thas Sunstrider stole and turned to his master Kil'jaeden's ends. The blood elves of the Sunfury raise their banners here, draining the magic of the broken land to feed their endless hunger.",
+    "keywords": ["netherstorm", "area 52", "tempest keep", "kael'thas", "sunfury", "blood elf", "floating islands", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_blades_edge_mountains",
+    "title": "Blade's Edge Mountains",
+    "short_description": "a range of razor peaks hung with dragon bones, ruled by ogre clans and the gronn overlord Gruul the Dragonkiller",
+    "references": ["raid_gruuls_lair"],
+    "content": "The Blade's Edge Mountains rise in jagged spires of stone so sharp the range takes its name from them, and impaled upon those peaks hang the bones and bodies of slain dragons, a grim trophy of ages of slaughter. The ogre clans hold these heights in scattered holds, warring among themselves and bowing to the gronn, the towering ancestors of the ogres who rule by sheer brute strength. Greatest among them is Gruul the Dragonkiller, who hunts the flights from his lair amid the peaks and counts the impaled dragons as his kills. The Ogri'la and the Sha'tari Skyguard struggle to carve out footholds amid the crags, but the mountains belong to tooth and claw.",
+    "keywords": ["blade's edge mountains", "gruul", "dragonkiller", "gronn", "ogres", "dragon bones", "ogri'la", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_shadowmoon_valley",
+    "title": "Shadowmoon Valley",
+    "short_description": "a hellish volcanic vale of fel green fire, where Illidan broods in the Black Temple besieged by Ashtongue and Aldor",
+    "references": ["raid_black_temple"],
+    "content": "Shadowmoon Valley is a land given over to ruin, its sky boiling red above rivers of lava and the ground scorched by the fel green fire of the volcano the Legion calls home. At its heart stands the Black Temple, once the draenei holy site of Karabor, now the dark fortress where Illidan Stormrage broods over his broken dominion and his servants prepare for war. The Aldor raise their Altar of Sha'tar against the demon-tainted ground, the Ashtongue deathsworn keep their grim vigil, and the dragonmaw orcs break the wild netherdrakes to their will. Few lands in all of Outland are so steeped in old grief and present menace.",
+    "keywords": ["shadowmoon valley", "black temple", "illidan", "karabor", "ashtongue", "aldor", "dragonmaw", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_isle_of_quel_danas",
+    "title": "Isle of Quel'Danas",
+    "short_description": "the sundered elven isle off Quel'Thalas where the Shattered Sun Offensive fights for the corrupted Sunwell as Kil'jaeden stirs",
+    "references": ["dungeon_magisters_terrace", "raid_sunwell_plateau"],
+    "content": "Off the northern shore of Quel'Thalas lies the Isle of Quel'Danas, the sacred ground that once held the Sunwell, the font of arcane power that defined the high elves. Now the isle is a battlefield: Kael'thas Sunstrider has returned to his people's holiest place to reignite the Sunwell as a gateway, that he might summon his demon master Kil'jaeden into the world. Against this betrayal the Shattered Sun Offensive — blood elves and draenei united at last under the Sha'tar — storm the isle, retaking its harbor and its terraces field by field. At the Magisters' Terrace and the Sunwell Plateau the final reckoning of a corrupted people draws near.",
+    "keywords": ["isle of quel'danas", "sunwell", "kael'thas", "kil'jaeden", "shattered sun offensive", "blood elf", "quel'thalas", "outland"],
+    "tags": ["zone", "outland", "dungeon hub"]
+  },
+  {
+    "id": "zone_ghostlands",
+    "title": "Ghostlands",
+    "short_description": "the blighted southern strip of the elven homeland, scarred by the Dead Scar and the Amani warcity of Zul'Aman",
+    "references": ["raid_zul_aman"],
+    "content": "South of Eversong's golden woods the trees turn grey and dead, for the Ghostlands mark where Arthas and his Scourge carved their path of ruin into Quel'Thalas. The Dead Scar still runs black through the land, a road of corruption the undead yet walk, and the blood elf Farstriders hold Tranquillien against the Scourge and the trolls alike. For to the east the Amani trolls have stirred again under their warlord Zul'jin, raising up their ancient beast-gods within the walls of their warcity Zul'Aman, hungry to reclaim the forests the elves took from them long ago. The dead and the vengeful both crowd this narrow, haunted strip of land.",
+    "keywords": ["ghostlands", "dead scar", "farstriders", "tranquillien", "amani", "zul'aman", "zul'jin", "quel'thalas"],
+    "tags": ["zone", "outland", "dungeon hub"]
   }
 ]
