@@ -1429,5 +1429,77 @@
     "content": "In the frozen troll land of Zul'Drak rises Gundrak, the great temple-city where the Drakkari ice trolls have gathered in their hour of desperation. With the Scourge pressing hard upon their borders, the trolls have turned to a monstrous bargain — slaying their own revered animal-gods upon the altars and devouring their power to win strength enough to survive. Blood runs down the temple steps, and the loa themselves are unmade by the very people who once worshipped them.",
     "keywords": ["gundrak", "zul'drak", "drakkari", "ice trolls", "loa", "animal gods", "scourge", "level 76", "northrend", "dungeon"],
     "tags": ["dungeon", "wotlk", "northrend", "troll"]
+  },
+  {
+    "id": "dungeon_halls_of_stone",
+    "title": "Halls of Stone",
+    "short_description": "a titan vault in the roots of Ulduar where the Tribunal of Ages keeps the record of creation",
+    "references": [],
+    "content": "Beneath the peaks of the Storm Peaks, woven into the deep roots of Ulduar, lie the Halls of Stone — a vault the titans raised to safeguard the chronicle of the world's making. At its heart the Tribunal of Ages recites the secret history of creation to any who dare disturb it. But the iron dwarves, twisted servants of a fallen watcher, have broken in to ransack the vault and silence what the stone remembers, and only swift hands can keep their fury from the records.",
+    "keywords": ["halls of stone", "the storm peaks", "ulduar", "titans", "tribunal of ages", "iron dwarves", "level 77", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "dungeon_halls_of_lightning",
+    "title": "Halls of Lightning",
+    "short_description": "Loken's storm-seat in the Storm Peaks, where the betrayer-keeper forges an army against the titans",
+    "references": [],
+    "content": "High in the Storm Peaks stand the Halls of Lightning, the seat of Loken, the watcher who turned against those who set him to guard the world. Here amid crackling arcs and rolling thunder he has bent the iron giants to his rebellion, and his smith Volkhan labors at a forge without rest, hammering out an army of golems to march upon the titans' works. The very air sings with stolen lightning, and the keeper sits enthroned in the storm he stole.",
+    "keywords": ["halls of lightning", "the storm peaks", "loken", "volkhan", "iron giants", "titans", "lightning", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "dungeon_the_violet_hold",
+    "title": "The Violet Hold",
+    "short_description": "the Kirin Tor's arcane prison in floating Dalaran, breaking open as its captive horrors stir",
+    "references": [],
+    "content": "Within the floating city of Dalaran the Kirin Tor keep a warded prison called the Violet Hold, where the mages have sealed away creatures too dangerous to set loose upon the world. Now the wards flicker and fail, and the captives — a dragon, a void terror, and worse — batter at their cells in a coordinated bid for freedom. The guardians of the city must hold the line as wave upon wave spills from the opening gates, lest Dalaran itself fall to the things it locked away.",
+    "keywords": ["the violet hold", "dalaran", "kirin tor", "arcane prison", "mages", "level 75", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "arcane"]
+  },
+  {
+    "id": "dungeon_the_culling_of_stratholme",
+    "title": "The Culling of Stratholme",
+    "short_description": "a Caverns of Time vision of Arthas purging plague-struck Stratholme as the Infinite try to twist it",
+    "references": [],
+    "content": "Within the timeless sands of the Caverns of Time lies a memory the Infinite dragonflight would unmake: the day Arthas came to the plague-cursed city of Stratholme. There the young prince, certain its people were already lost to the undeath in their grain, drew his sword against his own subjects to deny their corpses to the Scourge. Those sent back by the bronze guardians must walk that terrible hour at his side and beat off the shadowy agents who would rewrite it, so that history keeps its grim and rightful shape.",
+    "keywords": ["the culling of stratholme", "caverns of time", "tanaris", "arthas", "stratholme", "infinite dragonflight", "scourge", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "caverns-of-time"]
+  },
+  {
+    "id": "dungeon_trial_of_the_champion",
+    "title": "Trial of the Champion",
+    "short_description": "the Argent Tournament's arena in Icecrown, where champions joust beneath the Lich King's shadow",
+    "references": [],
+    "content": "On the frozen fields of Icecrown the Argent Crusade has raised a great tournament arena, a proving ground for the champions who would one day storm the Lich King's gates. Here mounted knights thunder across the lists with lance and shield, and the finest warriors of the Horde and Alliance test their mettle against the Crusade's own. Yet even this proud contest unfolds in the shadow of the citadel above, and not every challenger who enters the ring fights for honor alone.",
+    "keywords": ["trial of the champion", "icecrown", "argent tournament", "argent crusade", "joust", "champions", "lich king", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "argent"]
+  },
+  {
+    "id": "dungeon_the_forge_of_souls",
+    "title": "The Forge of Souls",
+    "short_description": "the first of the Frozen Halls beneath Icecrown, where the Lich King binds tortured souls into weapons",
+    "references": [],
+    "content": "Deep beneath the Lich King's citadel begin the Frozen Halls, and the first of them is the Forge of Souls — a dreadful furnace where the Scourge harvest the anguish of the dead. Here the Devourer of Souls feeds upon the captured spirits dragged down from the world above, rendering their torment into the cold steel of cursed blades. The Ashen Verdict, cutting a path toward the citadel's heart, must break this engine of misery before its weapons can be turned against them.",
+    "keywords": ["the forge of souls", "icecrown", "frozen halls", "scourge", "devourer of souls", "ashen verdict", "lich king", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "dungeon_pit_of_saron",
+    "title": "Pit of Saron",
+    "short_description": "the Scourge slave-quarry below Icecrown, worked by the damned under Scourgelord Tyrannus",
+    "references": [],
+    "content": "Below the Lich King's citadel yawns the Pit of Saron, a vast quarry where the Scourge drive their captives to hew saronite from the frozen rock until they drop. Scourgelord Tyrannus and his frost-wyrm lord it over the wretched throng of slaves, and the cold itself is a torment that kills as surely as the overseers' lash. Those who follow the Ashen Verdict's path through these depths must free the broken laborers and turn their despair into one last defiant uprising.",
+    "keywords": ["pit of saron", "icecrown", "frozen halls", "scourge", "tyrannus", "saronite", "ashen verdict", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "dungeon_halls_of_reflection",
+    "title": "Halls of Reflection",
+    "short_description": "the frozen gallery beneath Icecrown where Frostmourne was kept and the Lich King springs his trap",
+    "references": [],
+    "content": "Deep under the Icecrown glacier lies a hall of mirrored ice where the runeblade Frostmourne once waited on its dais. Those who come seeking the secret of the Lich King's undoing find instead the echoes of every soul the blade has devoured, and a frozen throne's worth of patience: the Lich King lets them wake the memory they need, then looses an endless tide of Scourge to chase them back out across the ice while a wall of his will closes behind. Few escapes from Northrend have been so narrow.",
+    "keywords": ["halls of reflection", "icecrown", "frostmourne", "lich king", "jaina", "sylvanas", "frozen halls", "level 80", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
   }
 ]
