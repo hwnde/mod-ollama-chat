@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <mutex>
 #include <ctime>
+#include <functional>
 #include "ScriptMgr.h"  // Ensure WorldScript is defined
 
 class Player;
@@ -377,6 +378,22 @@ extern std::string g_EmoteChatInstructionTemplate;  // uses {emote_list}
 bool ApplyChatEmote(Player* bot, std::string& text);
 // Prompt instruction listing allowed emote tags ("" if disabled / empty vocab).
 std::string BuildEmoteChatInstruction();
+
+// --------------------------------------------
+// Speech Delivery (send-side line splitting)
+// --------------------------------------------
+extern bool        g_SpeechSplitEnable;                 // master toggle (1 = split, 0 = legacy single line)
+extern uint32_t    g_SpeechSplitMaxLineLength;          // byte length above which a line is safety-split (0 = never)
+extern bool        g_SpeechSplitDropTrailingFragment;   // drop a cut-off final prose fragment
+extern uint32_t    g_SpeechSplitLineDelayMs;            // delay between consecutive lines of one utterance
+
+// Split a raw LLM reply into ordered, chat-safe lines (never an empty line).
+std::vector<std::string> SplitChatResponse(const std::string& text);
+
+// Send `response` as one-or-more lines via `sendLine` (short delay between lines);
+// returns the joined spoken text (single-space separated), or "" if nothing was sent.
+std::string EmitBotLines(const std::string& response,
+                         const std::function<void(const std::string&)>& sendLine);
 
 // --------------------------------------------
 // Loader Functions

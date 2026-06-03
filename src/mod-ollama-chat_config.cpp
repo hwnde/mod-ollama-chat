@@ -356,6 +356,11 @@ bool g_EnableTypingSimulation = false;
 uint32_t g_TypingSimulationBaseDelay = 1000;     // 1000ms base delay
 uint32_t g_TypingSimulationDelayPerChar = 250;   // 250ms per character (4 chars/sec)
 
+bool        g_SpeechSplitEnable               = true;
+uint32_t    g_SpeechSplitMaxLineLength        = 230;
+bool        g_SpeechSplitDropTrailingFragment = true;
+uint32_t    g_SpeechSplitLineDelayMs          = 700;
+
 // --------------------------------------------
 // Emote-Augmented Chat
 // --------------------------------------------
@@ -805,6 +810,11 @@ void LoadOllamaChatConfig()
     g_EnableTypingSimulation          = sConfigMgr->GetOption<bool>("OllamaChat.EnableTypingSimulation", false);
     g_TypingSimulationBaseDelay       = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationBaseDelay", 1000);
     g_TypingSimulationDelayPerChar    = sConfigMgr->GetOption<uint32_t>("OllamaChat.TypingSimulationDelayPerChar", 250);
+
+    g_SpeechSplitEnable               = sConfigMgr->GetOption<bool>("OllamaChat.SpeechSplitEnable", true);
+    g_SpeechSplitMaxLineLength        = sConfigMgr->GetOption<uint32_t>("OllamaChat.SpeechSplitMaxLineLength", 230);
+    g_SpeechSplitDropTrailingFragment = sConfigMgr->GetOption<bool>("OllamaChat.SpeechSplitDropTrailingFragment", true);
+    g_SpeechSplitLineDelayMs          = sConfigMgr->GetOption<uint32_t>("OllamaChat.SpeechSplitLineDelayMs", 700);
 
     // Emote-Augmented Chat
     g_EmoteChatEnable             = sConfigMgr->GetOption<bool>("OllamaChat.EmoteChat.Enable", true);
