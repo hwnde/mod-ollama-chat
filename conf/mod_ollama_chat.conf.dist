@@ -1082,6 +1082,13 @@ OllamaChat.RAGRandomizeSelection = 1
 #     Default:     8
 OllamaChat.RAGSelectionPoolSize = 8
 
+#
+#    OllamaChat.RAGImprovedScoring
+#        Use IDF-weighted, stopword-filtered, stemmed scoring (1) or the legacy
+#        raw term-frequency scoring (0). Default 1.
+#
+OllamaChat.RAGImprovedScoring = 1
+
 # --------------------------------------------
 # EMOTE-AUGMENTED CHAT
 # --------------------------------------------
