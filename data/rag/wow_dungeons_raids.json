@@ -724,5 +724,181 @@
       "c_thun",
       "instance"
     ]
+  },
+  {
+    "id": "dungeon_gnomeregan",
+    "title": "Gnomeregan",
+    "short_description": "the gnomes' irradiated capital beneath Dun Morogh, seized by a mad tinker after the trogg flood",
+    "references": [],
+    "content": "Carved into the mountains of Dun Morogh, the gleaming gnome capital was lost in a single desperate hour. When troggs boiled up from the deep tunnels, Sicco Thermaplugg convinced High Tinker Mekkatorque to flood the halls with radiation to purge them — a betrayal that poisoned far more gnomes than troggs and left Thermaplugg ruling a glowing ruin. The survivors fled to Ironforge's Tinker Town, and ever since the gnomes have dreamed of scrubbing the radiation from their home and pulling the usurper from his throne of gears.",
+    "keywords": [
+      "gnomeregan",
+      "gnome",
+      "dun morogh",
+      "troggs",
+      "sicco thermaplugg",
+      "mekkatorque",
+      "radiation",
+      "level 25",
+      "alliance"
+    ],
+    "tags": [
+      "dungeon",
+      "alliance",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_scarlet_monastery",
+    "title": "Scarlet Monastery",
+    "short_description": "the fortress-abbey of the fanatic Scarlet Crusade in Tirisfal, besieged by the Forsaken it was built to destroy",
+    "references": [],
+    "content": "Within the haunted woods of Tirisfal Glades stands the cloistered abbey of the Scarlet Crusade, zealots who hunt the undead with a fervor that no longer distinguishes the Scourge from the living. Behind its stained-glass and iron gates, High Inquisitor Whitemane keeps vigil over the fallen Highlord Mograine, whose blade she will not let rest, while the Crusade's commanders drill their swordsmen in cloister and chapel. The Forsaken press against its walls from without, for the fanatics within would burn all of Lordaeron to ash to cleanse it. To walk those candlelit halls is to be named heretic on sight, whether one breathes or not.",
+    "keywords": [
+      "scarlet monastery",
+      "scarlet crusade",
+      "tirisfal glades",
+      "whitemane",
+      "mograine",
+      "forsaken",
+      "undead",
+      "level 35",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_razorfen_kraul",
+    "title": "Razorfen Kraul",
+    "short_description": "a thornbrush warren in the Barrens where the Death's Head quillboar commune with an old god's burning blood",
+    "references": [],
+    "content": "In the southern reaches of the Barrens rises a vast warren woven entirely of living thornbrush, raised by the quillboar over generations until it became a fortress of barbed walls. Here the Death's Head clan keeps its rites, and their ancient hag Charlga Razorflank reads omens in the smoldering blood of Agamaggar, the boar-god slain in ages past whose embers still burn beneath the brambles. The quillboar guard their thorny labyrinth with savage devotion, and any who push into the kraul find every path lined with spines and ambush. It is a green and bristling maze that swallows the careless whole.",
+    "keywords": [
+      "razorfen kraul",
+      "quillboar",
+      "the barrens",
+      "death's head",
+      "charlga razorflank",
+      "agamaggar",
+      "thornbrush",
+      "level 30",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_razorfen_downs",
+    "title": "Razorfen Downs",
+    "short_description": "the quillboar burial mound in the Barrens where Amnennar the Coldbringer has raised a lich's spire among the bones",
+    "references": [],
+    "content": "To the south of the thornbrush kraul lies the great burial mound of the quillboar, a hill of bones and bramble where their dead have been laid for untold generations. The Scourge have found it, and from its peak the lich Amnennar the Coldbringer has raised a spire of frozen death, bending the spirits of the boar-folk to his will and turning their sacred ground into a nursery for the undead. Where once the quillboar mourned, now cold winds carry the chittering of risen things across the Downs. The living dead and the betrayed quillboar both stalk its winding paths, and the chill deepens the higher one climbs.",
+    "keywords": [
+      "razorfen downs",
+      "quillboar",
+      "the barrens",
+      "amnennar the coldbringer",
+      "scourge",
+      "undead",
+      "burial mound",
+      "level 40",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_uldaman",
+    "title": "Uldaman",
+    "short_description": "a buried titan vault in the Badlands where Dark Iron dwarves and troggs claw for the secret of dwarven origins",
+    "references": [],
+    "content": "Beneath the cracked earth of the Badlands sleeps Uldaman, a vault sealed by the titans in the world's first days and forgotten until the dwarves came digging. Within its stone galleries wait the Discs of Norgannon, records said to hold the truth of how the dwarves were shaped from living rock — a truth the Dark Iron clan would seize for itself, and that the Stonevault troggs, mindless creations spilled from the same vault, blindly defend. Constructs of iron and stone still stir in the deep chambers, guarding their makers' work against all comers. To descend is to walk backward into the prehistory of an entire people.",
+    "keywords": [
+      "uldaman",
+      "badlands",
+      "titan",
+      "dark iron",
+      "stonevault",
+      "troggs",
+      "discs of norgannon",
+      "dwarven origins",
+      "level 40",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_the_stockade",
+    "title": "The Stockade",
+    "short_description": "Stormwind's flooded prison beneath the Canals, seized in a Defias riot under Bazil Thredd",
+    "references": [],
+    "content": "Beneath the Canals of Stormwind City lies the Stockade, the human capital's dank prison where the worst of the realm's outlaws are kept behind iron and water. The Defias inmates have risen in open riot, and under the cunning of Bazil Thredd they have overrun their gaolers and turned the flooded cells into a stronghold of their own. The city guard cannot retake the warren alone, and so calls go out for sturdy hands to put down the uprising before the brigands break free into the streets above. It is close, wet, brutal work in the dark under the king's own city.",
+    "keywords": [
+      "the stockade",
+      "stormwind",
+      "defias",
+      "bazil thredd",
+      "prison",
+      "riot",
+      "canals",
+      "level 25",
+      "dungeon",
+      "alliance"
+    ],
+    "tags": [
+      "dungeon",
+      "alliance",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_upper_blackrock_spire",
+    "title": "Upper Blackrock Spire",
+    "short_description": "the high halls of Blackrock Mountain where Rend Blackhand and Lord Victor Nefarius scheme over the black brood",
+    "references": [],
+    "content": "High above the orc warrens that honeycomb Blackrock Mountain rise the upper halls of the Spire, where the Dark Horde still clings to power long after the old wars. Here the warlord Rend Blackhand, last of his bloodline to hold a throne, rules a host of orcs, ogres, and trolls who never bowed to Thrall — and at his side stands Lord Victor Nefarius, a sorcerer who is no man at all but the black dragon Nefarian in stolen guise. Together they breed and twist the black brood in hidden roosts, plotting to loose a flight of dragons upon the world. The smoke-choked heights are a den of warlords and wyrms, and only a warband in force dares climb them.",
+    "keywords": [
+      "upper blackrock spire",
+      "ubrs",
+      "blackrock mountain",
+      "dark horde",
+      "rend blackhand",
+      "victor nefarius",
+      "nefarian",
+      "black dragonflight",
+      "level 55",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "endgame",
+      "classic"
+    ]
   }
 ]
