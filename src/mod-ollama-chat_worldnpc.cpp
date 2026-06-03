@@ -1,6 +1,8 @@
 #include "mod-ollama-chat_worldnpc.h"
 #include "mod-ollama-chat_config.h"
 #include "mod-ollama-chat-utilities.h"   // SafeFormat
+#include "mod-ollama-chat_api.h"         // QueryOllamaAPI
+#include "mod-ollama-chat_rag.h"         // g_RAGSystem, OllamaRAGSystem
 #include "QuestDef.h"                     // QuestGiverStatus / DIALOG_STATUS_*
 #include "UnitDefines.h"                  // UNIT_NPC_FLAG_*
 #include "SharedDefines.h"                // RACE_*, CLASS_*
@@ -22,6 +24,8 @@
 #include <string>
 #include <list>
 #include <unordered_map>
+#include <thread>
+#include <chrono>
 
 // ---- role model -----------------------------------------------------------
 enum WorldNpcRole
@@ -125,6 +129,43 @@ static std::string FillPhrase(const std::string& templ, const std::string& npcNa
                       fmt::arg("class", cls),
                       fmt::arg("zone", zone),
                       fmt::arg("player", playerName));
+}
+
+// Pure: assemble the persona prompt for a curated NPC character. ragInfo/personaHint may be empty.
+static std::string BuildNpcCharacterPrompt(const std::string& name, const std::string& title,
+                                           const std::string& zone, const std::string& race,
+                                           const std::string& cls, const std::string& personaHint,
+                                           const std::string& ragInfo)
+{
+    std::string p = SafeFormat(g_WorldNpcCharacterPrompt,
+                               fmt::arg("name", name),
+                               fmt::arg("title", title.empty() ? "a figure of note" : title),
+                               fmt::arg("zone", zone),
+                               fmt::arg("race", race),
+                               fmt::arg("class", cls));
+    if (!personaHint.empty())
+        p += " " + personaHint;
+    if (!ragInfo.empty())
+        p += "\n" + SafeFormat(g_RAGPromptTemplate, fmt::arg("rag_info", ragInfo));
+    return p;
+}
+
+// Global NPC LLM-call budget: at most g_WorldNpcCharacterCallsPerMin calls per rolling minute.
+// Only called from the world thread (HandleNpcProximityChatter) — static counters are safe.
+static bool ConsumeNpcLlmBudget()
+{
+    static uint32 windowStartMs = 0;
+    static uint32 windowCount   = 0;
+    uint32 now = getMSTime();
+    if (windowStartMs == 0 || GetMSTimeDiffToNow(windowStartMs) >= 60000)
+    {
+        windowStartMs = now;
+        windowCount   = 0;
+    }
+    if (windowCount >= g_WorldNpcCharacterCallsPerMin)
+        return false;
+    ++windowCount;
+    return true;
 }
 
 void WorldNpcChatSelfTest()
@@ -246,6 +287,81 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
             auto nit = s_npcCooldown.find(cguid);
             if (nit != s_npcCooldown.end() && GetMSTimeDiffToNow(nit->second) < npcCdMs)
                 continue;
+
+            // ---- Tier 1: curated LLM character (precedence over role barks) ----
+            if (g_WorldNpcCharactersEnable && !g_WorldNpcCharacters.empty())
+            {
+                auto cit = g_WorldNpcCharacters.find(c->GetEntry());
+                if (cit != g_WorldNpcCharacters.end())
+                {
+                    uint32 cdSec = cit->second.cooldownSec ? cit->second.cooldownSec : g_WorldNpcCharacterCooldownSec;
+                    auto nit2 = s_npcCooldown.find(cguid);
+                    if (nit2 != s_npcCooldown.end() && GetMSTimeDiffToNow(nit2->second) < cdSec * 1000u)
+                    {
+                        continue;   // on cooldown -> stay silent (do NOT fall to role bark)
+                    }
+                    if (!ConsumeNpcLlmBudget())
+                    {
+                        continue;   // global budget spent -> skip (no role-bark fallback)
+                    }
+
+                    std::string title;
+                    CreatureTemplate const* ct = c->GetCreatureTemplate();
+                    if (ct)
+                        title = ct->SubName;
+
+                    std::string ragInfo;
+                    if (g_EnableRAGInitiated && g_RAGSystem)
+                    {
+                        std::string q = c->GetName() + " " + zone + (title.empty() ? "" : (" " + title));
+                        auto rr = g_RAGSystem->RetrieveRelevantInfo(q, g_RAGInitiatedMaxItems, g_RAGSimilarityThreshold);
+                        ragInfo = g_RAGSystem->GetFormattedRAGInfo(rr);
+                    }
+
+                    std::string prompt = BuildNpcCharacterPrompt(
+                        c->GetName(), title, zone,
+                        RaceName(player->getRace()), ClassName(player->getClass()),
+                        cit->second.personaHint, ragInfo);
+
+                    ObjectGuid pg = player->GetGUID();
+                    ObjectGuid cg = c->GetGUID();
+                    float range = g_WorldNpcChatRange;
+
+                    std::thread([pg, cg, prompt, range]() {
+                        try {
+                            std::string response = QueryOllamaAPI(prompt);
+                            if (response.empty())
+                                return;
+                            Player* p = ObjectAccessor::FindPlayer(pg);
+                            if (!p || !p->IsInWorld())
+                                return;
+                            Creature* cr = ObjectAccessor::GetCreature(*p, cg);
+                            if (!cr || !cr->IsInWorld() || !cr->IsAlive())
+                                return;
+                            if (p->GetDistance(cr) > range + 10.0f)
+                                return;   // player wandered off
+                            std::vector<std::string> lines = SplitChatResponse(response);
+                            for (size_t i = 0; i < lines.size(); ++i)
+                            {
+                                if (i > 0 && g_SpeechSplitLineDelayMs > 0)
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(g_SpeechSplitLineDelayMs));
+                                cr->Say(lines[i], LANG_UNIVERSAL, p);
+                            }
+                        } catch (const std::exception& e) {
+                            LOG_ERROR("server.loading", "[Ollama Chat] WorldNpc character thread: {}", e.what());
+                        } catch (...) {}
+                    }).detach();
+
+                    s_npcCooldown[cguid]    = nowMs;
+                    s_playerCooldown[pguid] = nowMs;
+                    ++emitted;
+                    if (g_DebugEnabled)
+                        LOG_INFO("server.loading", "[Ollama Chat] WorldNpc character {} addressed {} (LLM dispatched).",
+                                 c->GetName(), player->GetName());
+                    continue;   // curated -> never also role-bark
+                }
+            }
+            // ---- Tier 2: role barks (existing P1 code follows) ----
 
             QuestGiverStatus questStatus = DIALOG_STATUS_NONE;
             if (flags & UNIT_NPC_FLAG_QUESTGIVER)
