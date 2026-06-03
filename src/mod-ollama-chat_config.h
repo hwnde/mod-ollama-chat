@@ -435,6 +435,13 @@ extern std::vector<std::string> g_WorldNpcPhrasesBanker;
 
 void WorldNpcChatSelfTest();   // debug-gated boot self-test (defined in _worldnpc.cpp)
 
+// World-NPC proximity chat (P2: Tier-1 LLM characters)
+extern bool        g_WorldNpcCharactersEnable;       // Tier-1 LLM characters
+extern uint32_t    g_WorldNpcCharacterCooldownSec;   // default per-NPC cooldown (table may override)
+extern uint32_t    g_WorldNpcCharacterCallsPerMin;   // global NPC LLM-call budget / minute
+extern std::string g_WorldNpcCharacterPrompt;        // persona prompt template
+void WorldNpcCharacterSelfTest();
+
 // --------------------------------------------
 // Loader Functions
 // --------------------------------------------

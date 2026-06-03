@@ -401,6 +401,12 @@ std::vector<std::string> g_WorldNpcPhrasesFlightmaster;
 std::vector<std::string> g_WorldNpcPhrasesTrainer;
 std::vector<std::string> g_WorldNpcPhrasesBanker;
 
+// World-NPC proximity chat (P2: Tier-1 LLM characters)
+bool        g_WorldNpcCharactersEnable     = true;
+uint32_t    g_WorldNpcCharacterCooldownSec = 300;
+uint32_t    g_WorldNpcCharacterCallsPerMin = 6;
+std::string g_WorldNpcCharacterPrompt;
+
 
 static std::vector<std::string> SplitString(const std::string& str, char delim)
 {
@@ -1328,6 +1334,13 @@ void LoadOllamaChatConfig()
     g_WorldNpcPhrasesFlightmaster = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcFlightmasterPhrases", ""));
     g_WorldNpcPhrasesTrainer      = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcTrainerPhrases", ""));
     g_WorldNpcPhrasesBanker       = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcBankerPhrases", ""));
+
+    // World-NPC proximity chat (P2: Tier-1 LLM characters)
+    g_WorldNpcCharactersEnable     = sConfigMgr->GetOption<bool>("OllamaChat.WorldNpcCharactersEnable", true);
+    g_WorldNpcCharacterCooldownSec = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcCharacterCooldownSec", 300);
+    g_WorldNpcCharacterCallsPerMin = sConfigMgr->GetOption<uint32_t>("OllamaChat.WorldNpcCharacterCallsPerMin", 6);
+    g_WorldNpcCharacterPrompt      = sConfigMgr->GetOption<std::string>("OllamaChat.WorldNpcCharacterPrompt",
+        "You are {name}, {title}. A {race} {class} has approached you in {zone}. Greet or address them directly in one or two short sentences, in your own voice and station. Stay fully in character; never mention being an NPC or a game.");
 
     g_EventTypeDefeated           = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeated", "");
     g_EventTypeDefeatedPlayer     = sConfigMgr->GetOption<std::string>("OllamaChat.EventTypeDefeatedPlayer", "");

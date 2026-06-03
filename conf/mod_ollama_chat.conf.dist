@@ -1236,3 +1236,18 @@ OllamaChat.WorldNpcQuestTurninPhrases = You've returned, {race}! Let's see what 
 OllamaChat.WorldNpcFlightmasterPhrases = Need wings, {race}? My gryphons are rested and ready.|Where to, traveler? The skies over {zone} are clear.
 OllamaChat.WorldNpcTrainerPhrases = Sharpen your craft, {class}. I've much to teach.|A {class} should never stop learning, {race}.
 OllamaChat.WorldNpcBankerPhrases = Your valuables are safe with us, {race}.|Need to stow your gold? Step right up.
+
+# OllamaChat.WorldNpcCharactersEnable
+#     Description: When enabled (1), curated 'character' NPCs (mod_ollama_chat_npc table) speak
+#                  LLM-generated in-character lines when a player nears them (Tier 1). Requires
+#                  WorldNpcChatEnable. Disabled (0) -> those NPCs fall back to Tier-2 role barks.
+#     Default:     1 (true)
+OllamaChat.WorldNpcCharactersEnable = 1
+
+# OllamaChat.WorldNpcCharacterCooldownSec - default per-character quiet period (table cooldown_sec overrides). Default 300.
+OllamaChat.WorldNpcCharacterCooldownSec = 300
+# OllamaChat.WorldNpcCharacterCallsPerMin - global cap on character LLM calls per minute (shares the GPU with bot chat). Default 6.
+OllamaChat.WorldNpcCharacterCallsPerMin = 6
+
+# OllamaChat.WorldNpcCharacterPrompt - persona prompt. Placeholders: {name} {title} {zone} {race} {class}
+OllamaChat.WorldNpcCharacterPrompt = You are {name}, {title}. A {race} {class} has approached you in {zone}. Greet or address them directly in one or two short sentences, in your own voice and station. Stay fully in character; never mention being an NPC or a game.
