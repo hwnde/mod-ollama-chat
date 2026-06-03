@@ -1158,5 +1158,123 @@
       "caverns of time",
       "dragons"
     ]
+  },
+  {
+    "id": "dungeon_the_black_morass",
+    "title": "The Black Morass",
+    "short_description": "a wound in time at the Caverns of Time, where the first Dark Portal must be allowed to open",
+    "references": [],
+    "content": "Through the swirling sands of the Caverns beneath Tanaris lies a sodden marsh fixed at the moment the Dark Portal first tore open. The bronze dragonflight stands guard while Medivh, possessed and unknowing, works the spell that will let the orcish horde cross into Azeroth — for that doomed hour must happen exactly as it did. The Infinite Dragonflight pours assassins through the rifts to break the timeline, and only by holding the line through wave upon wave can the present be preserved.",
+    "keywords": [
+      "black morass",
+      "caverns of time",
+      "tanaris",
+      "medivh",
+      "dark portal",
+      "infinite dragonflight",
+      "bronze",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "tbc",
+      "caverns of time",
+      "dragons"
+    ]
+  },
+  {
+    "id": "dungeon_the_mechanar",
+    "title": "The Mechanar",
+    "short_description": "a fortress of Tempest Keep where Kael'thas's blood elves forge arcane war-machines",
+    "references": [],
+    "content": "Adrift in the broken sky of Netherstorm hangs the Mechanar, one of the satellite fortresses of Tempest Keep, the stolen vessel of the naaru. Within its humming corridors Kael'thas Sunstrider's blood elves labor to forge arcane war-machines and animate constructs of crystal and steel, all overseen by the cold genius Pathaleon the Calculator. The whole place is a manufactory of the prince's ambition, churning out engines of magic to serve his mad pact with the Burning Legion.",
+    "keywords": [
+      "mechanar",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "pathaleon the calculator",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_the_botanica",
+    "title": "The Botanica",
+    "short_description": "a Tempest Keep arboretum where the blood elves cultivate void-warped flora",
+    "references": [],
+    "content": "Another of Tempest Keep's drifting fortresses above Netherstorm is the Botanica, a vast crystalline arboretum given over to the blood elves' arcane horticulture. Here Kael'thas's people graft and nurture flora gathered from a hundred worlds, twisting it with raw magic and void energies until the gardens themselves turn hostile. At the heart of the green-glassed halls looms Warp Splinter, a colossal corrupted ancient grown to be the prince's living weapon.",
+    "keywords": [
+      "botanica",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "warp splinter",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_the_arcatraz",
+    "title": "The Arcatraz",
+    "short_description": "Tempest Keep's prison-ship for cosmic horrors, its wardens slain and its cells flung open",
+    "references": [],
+    "content": "The Arcatraz was built by the naaru as a flying prison to hold creatures too dangerous to walk under any sky — abyssal demons, void-things, and worse. When Kael'thas's blood elves seized Tempest Keep, they tore open the cells and freed what slumbered within, chief among them the Harbinger Skyriss, an agent of the void who now schemes to spread madness and dissolution. The shattered wardens drift dead in the halls, and the horrors they once guarded prowl free among the stars.",
+    "keywords": [
+      "arcatraz",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "harbinger skyriss",
+      "void",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "void"
+    ]
+  },
+  {
+    "id": "dungeon_magisters_terrace",
+    "title": "Magisters' Terrace",
+    "short_description": "Kael'thas's last redoubt on the sunwell isle, where the fallen prince makes his final mad stand",
+    "references": [],
+    "content": "On the sun-washed Isle of Quel'Danas, where the broken Sunwell once burned, stands Magisters' Terrace — the final refuge of Kael'thas Sunstrider. Driven from Tempest Keep and wholly given over to his demonic masters, the fallen prince of the blood elves rallies his last loyal magisters here, scheming to call his dread patron Kil'jaeden into the world through the very wellspring of his people's power. His own kin, betrayed and disillusioned, hunt him through the marble halls to end his madness where it began.",
+    "keywords": [
+      "magisters' terrace",
+      "magisters terrace",
+      "isle of quel'danas",
+      "kael'thas",
+      "blood elves",
+      "sunwell",
+      "kil'jaeden",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
   }
 ]
