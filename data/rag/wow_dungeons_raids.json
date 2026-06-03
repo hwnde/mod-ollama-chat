@@ -1357,5 +1357,77 @@
     "content": "Within the shadowed pines of the Ghostlands lies Zul'Aman, the war-capital of the Amani trolls. Their warlord Zul'jin, scarred and embittered by old defeats at elven hands, has risen again with a furious purpose — to call upon the avatars of the animal-gods, the bear, the eagle, the lynx, and the dragonhawk, and loose their primal fury upon all who trespass his forest. He would drive the high elves from these woods forever, or see his kingdom burn in the trying.",
     "keywords": ["zul'aman", "zul aman", "ghostlands", "zul'jin", "amani", "trolls", "animal gods", "high elves", "level 70", "outland", "raid"],
     "tags": ["raid", "tbc", "trolls"]
+  },
+  {
+    "id": "dungeon_utgarde_keep",
+    "title": "Utgarde Keep",
+    "short_description": "the Vrykul stronghold in Howling Fjord where Ingvar the Plunderer wakes frost-giant kin for the Lich King",
+    "references": [],
+    "content": "Carved into the cliffs of the Howling Fjord, the grim hold of Utgarde was raised by the Vrykul, the giant forebears of humankind. Roused from ancient slumber and sworn to the Lich King, these towering warriors arm themselves anew within its frozen forges and crypts. Their captain, Ingvar the Plunderer, drives the host onward, and so steadfast is his oath to the master of the Scourge that death itself does not release him from the fight.",
+    "keywords": ["utgarde keep", "howling fjord", "vrykul", "ingvar", "lich king", "scourge", "level 70", "northrend", "wotlk", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "vrykul"]
+  },
+  {
+    "id": "dungeon_utgarde_pinnacle",
+    "title": "Utgarde Pinnacle",
+    "short_description": "the high summit of Utgarde where King Ymiron and the drake Skadi guard the Vrykul kings' tombs",
+    "references": [],
+    "content": "At the windswept crown of the Howling Fjord rises Utgarde Pinnacle, the sacred high seat of the Vrykul and the resting place of their ancient kings. Here the brooding King Ymiron presides over the tombs of his forebears, calling upon their dead majesty to defend the summit. Above the icy battlements wheels Skadi the Ruthless astride his proto-drake, raining death upon any who dare ascend toward the throne of the giant-kings.",
+    "keywords": ["utgarde pinnacle", "howling fjord", "vrykul", "ymiron", "skadi", "proto-drake", "level 80", "northrend", "wotlk", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "vrykul"]
+  },
+  {
+    "id": "dungeon_the_nexus",
+    "title": "The Nexus",
+    "short_description": "Malygos's icebound spire on Coldarra, where the blue dragonflight hoards the world's magic",
+    "references": [],
+    "content": "On the frozen island of Coldarra off the Borean coast, the blue dragonflight's spire turns like a vast orrery of ice and arcane light. Malygos, the Spell-Weaver, woke from ten thousand years of madness convinced that mortals had bled Azeroth's magic to ruin, and from here his flight wages a war to reclaim every leyline. Within, the captive consort Keristrasza is tormented into service, and the very walls bleed raw arcane frost upon any who climb toward the Aspect's sanctum.",
+    "keywords": ["the nexus", "coldarra", "borean tundra", "malygos", "blue dragonflight", "keristrasza", "arcane", "level 71", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "dungeon_the_oculus",
+    "title": "The Oculus",
+    "short_description": "the floating ring above the Nexus where captured drakes are loosed to fight Malygos's war in the sky",
+    "references": [],
+    "content": "Suspended in the bitter air above Coldarra hangs the Oculus, a shattered ring of arcane platforms that orbits the Nexus far below. Here Malygos's flight cages drakes of every brood, breaking them to serve as mounts in the great arcane war he wages across the heavens. Those who would challenge the Spell-Weaver's design must seize these very steeds and take wing, trading blows amid the clouds where the floating ring slowly wheels.",
+    "keywords": ["the oculus", "coldarra", "borean tundra", "malygos", "blue dragonflight", "drakes", "arcane", "level 71", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "dungeon_azjol_nerub",
+    "title": "Azjol-Nerub",
+    "short_description": "the upper halls of the old nerubian kingdom, where Scourge spider-lords hold against intruders",
+    "references": [],
+    "content": "Beneath the frozen plains of Dragonblight wind the upper passages of Azjol-Nerub, once the proud subterranean empire of the spider-like nerubians. Long ago the Scourge overran this kingdom in a terrible war, and now the Lich King's risen spider-lords skitter through its pillared halls, defending the dark roads that lead ever downward. The carved grandeur of the old empire still stands, though its builders are bent now to the will of death.",
+    "keywords": ["azjol-nerub", "azjol nerub", "dragonblight", "nerubians", "scourge", "spider", "lich king", "level 72", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "nerubian", "scourge"]
+  },
+  {
+    "id": "dungeon_ahnkahet_the_old_kingdom",
+    "title": "Ahn'kahet: The Old Kingdom",
+    "short_description": "the deeper nerubian dark beneath the ice, where a faceless cult of an old god festers",
+    "references": [],
+    "content": "Far below Azjol-Nerub, in the lightless deeps under Dragonblight, lies Ahn'kahet, the Old Kingdom of the nerubians. Here the corruption runs deeper than the Scourge — for the faceless servants of an imprisoned old god, Yogg-Saron, have wormed their way into the ancient halls, spreading a madness that turns even the unliving against one another. Whispers crawl through the dark, and a cult of the void festers in the silence beneath the world.",
+    "keywords": ["ahn'kahet", "ahnkahet", "the old kingdom", "dragonblight", "nerubians", "old god", "yogg-saron", "faceless", "level 73", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "nerubian", "old-god"]
+  },
+  {
+    "id": "dungeon_drak_tharon_keep",
+    "title": "Drak'Tharon Keep",
+    "short_description": "a fallen troll fortress on the Zul'Drak border, now a Scourge slaughterhouse raising the dead",
+    "references": [],
+    "content": "On the cold marches between Grizzly Hills and Zul'Drak stands Drak'Tharon Keep, a brooding stronghold the Drakkari trolls abandoned to the advancing Scourge. Where war-drums once sounded, the undead now toil at a grim harvest, butchering the living and binding the slain into the Lich King's swelling host. The blood of the old garrison still stains its stones, and from its ramparts the dead look out upon a land they could not hold.",
+    "keywords": ["drak'tharon keep", "drak tharon keep", "grizzly hills", "zul'drak", "drakkari", "trolls", "scourge", "level 74", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "troll", "scourge"]
+  },
+  {
+    "id": "dungeon_gundrak",
+    "title": "Gundrak",
+    "short_description": "the temple-city of the Drakkari ice trolls, who butcher their own animal-gods for power against the Scourge",
+    "references": [],
+    "content": "In the frozen troll land of Zul'Drak rises Gundrak, the great temple-city where the Drakkari ice trolls have gathered in their hour of desperation. With the Scourge pressing hard upon their borders, the trolls have turned to a monstrous bargain — slaying their own revered animal-gods upon the altars and devouring their power to win strength enough to survive. Blood runs down the temple steps, and the loa themselves are unmade by the very people who once worshipped them.",
+    "keywords": ["gundrak", "zul'drak", "drakkari", "ice trolls", "loa", "animal gods", "scourge", "level 76", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "troll"]
   }
 ]
