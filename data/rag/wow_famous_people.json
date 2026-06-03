@@ -529,5 +529,41 @@
     "content": "Thassarian serves the Ebon Blade in the Borean Tundra, operating out of the Alliance's forward positions near Valiance Keep with a chain of authority that runs through Acherus rather than through any living marshal. He was a human soldier before the Lich King's forces took him; he woke at Light's Hope with the rest of the freed death knights and chose the Alliance when the Ebon Blade granted its knights that choice. He works in close company with the blood elf Koltira Deathweaver, a pairing that raises eyebrows at Valiance Keep but has proven worth more than the discomfort it costs. Thassarian does not discuss what the Scourge did with his body between his death and his freedom; those who have pressed the question have not pressed it twice.",
     "keywords": ["thassarian", "ebon blade", "death knight", "human", "borean tundra", "valiance keep", "koltira", "alliance"],
     "tags": ["people", "alliance", "living"]
+  },
+  {
+    "id": "person_hamuul_runetotem",
+    "title": "Hamuul Runetotem, Archdruid of the Cenarion Circle",
+    "short_description": "tauren archdruid and elder voice of the Cenarion Circle, who holds council on Thunder Bluff in Mulgore",
+    "references": ["zone_mulgore"],
+    "content": "Hamuul Runetotem sits as archdruid among the Cenarion Circle's tauren elders, carrying the trust of Cairne Bloodhoof while answering to no single banner — the Circle's roots run older than the Horde or Alliance both. He walks the path Cenarius's children first opened, and the tauren have walked it longer than most remember. Thunder Bluff's upper rise is where he keeps his hearth, though the groves of Moonglade draw him back when the Circle convenes. He was among the first tauren the Circle admitted as equals, and he spent years earning that standing through patient study and unhurried service. Those who come to him with haste find the lesson they did not expect; those who sit and listen find the one they needed.",
+    "keywords": ["hamuul", "hamuul runetotem", "runetotem", "archdruid", "cenarion circle", "tauren", "thunder bluff", "mulgore", "moonglade", "druid"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_maxwell_tyrosus",
+    "title": "Maxwell Tyrosus, Commander of the Argent Crusade",
+    "short_description": "human paladin of the Argent Crusade, who keeps vigil at Light's Hope Chapel in the Eastern Plaguelands",
+    "references": ["zone_eastern_plaguelands"],
+    "content": "Maxwell Tyrosus has held the ground around Light's Hope Chapel longer than most soldiers hold any ground at all, first as a Paladin of the Silver Hand, then among the Argent Dawn, and now as one of the Argent Crusade's steadying voices at Highlord Fordring's side. The chapel sits at the edge of the Eastern Plaguelands where the Scourge has pressed hardest and longest, and Tyrosus has been there for all of it. He carries no great name beyond his deeds and no great grudge beyond what the Scourge has done to this land. Knights of both factions pass through Light's Hope and find him unmoved by their heraldry, measuring them instead by how they stand when the undead come to the walls. The chapel endures in part because he does.",
+    "keywords": ["maxwell tyrosus", "tyrosus", "argent crusade", "argent dawn", "paladin", "light's hope chapel", "eastern plaguelands", "human", "fordring"],
+    "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_dranosh_saurfang",
+    "title": "Dranosh Saurfang, Kor'kron Commander Fallen at the Wrathgate",
+    "short_description": "orc son of Varok Saurfang, Kor'kron commander who fell at the Wrathgate in Dragonblight",
+    "references": ["zone_dragonblight", "wow_factions_horde"],
+    "content": "Dranosh Saurfang — whose name means Heart of Draenor in the old tongue — led the Kor'kron vanguard at the Wrathgate in the shadow of Angrathar's great iron doors, where the armies of the Horde and Alliance came at last to the Lich King's gate. He fell there when the Forsaken's blight rolled across friend and foe alike, and the Scourge raised what remained. His father Varok, High Overlord of the Kor'kron and one of the Horde's most decorated living warriors, does not speak of the Wrathgate. The son bore the Saurfang name cleanly in the years he was given: straightforward in battle, short in counsel, loyal to the Horde without calculation. What the Scourge has made of him in the cold of Northrend is a grief too fresh for the orcs who marched beside him to name plainly.",
+    "keywords": ["dranosh", "dranosh saurfang", "saurfang", "heart of draenor", "kor'kron", "orc", "wrathgate", "dragonblight", "angrathar", "varok"],
+    "tags": ["people", "horde", "deceased"]
+  },
+  {
+    "id": "person_farseer_nobundo",
+    "title": "Farseer Nobundo, First Shaman of the Draenei",
+    "short_description": "Broken draenei shaman who first walked the shaman's path among his people, of the Exodar on Azuremyst Isle",
+    "references": ["zone_azuremyst_isle", "wow_factions_alliance"],
+    "content": "Nobundo bears the marks of a Broken — one of those draenei whose bodies twisted when the Burning Legion's corruption swept through the old world of Draenor — and it is from that breaking that his path began. When the spirits of the elements first spoke to him, no draenei had walked the shaman's road before him; the Light had always been their way, and many of his own kind turned from him before they listened. He reached the Exodar with the survivors who fled Draenor and has kept his place among them since, teaching the path he opened and standing farseer before those who would learn. The elements answer his voice with a steadiness the other farseers mark with respect. He does not carry himself lightly, but he does not carry the bitterness some Broken carry either — he tends to say the spirits showed him the long view when his eyes could not reach it.",
+    "keywords": ["nobundo", "farseer nobundo", "broken", "draenei", "shaman", "farseer", "exodar", "azuremyst isle", "elements"],
+    "tags": ["people", "alliance", "living"]
   }
 ]
