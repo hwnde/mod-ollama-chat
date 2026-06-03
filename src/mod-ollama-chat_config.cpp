@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <cctype>
 #include <set>
+#include <map>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -373,6 +374,7 @@ uint32_t    g_SpeechSplitLineDelayMs          = 700;
 bool        g_EmoteChatEnable = true;
 std::string g_EmoteChatVocabularyRaw;
 std::string g_EmoteChatInstructionTemplate;
+bool        g_EmoteActionRouting = true;
 
 
 static std::vector<std::string> SplitString(const std::string& str, char delim)
@@ -446,6 +448,165 @@ static std::set<std::string> EmoteChatAllowed()
             allowed.insert(low);
     }
     return allowed;
+}
+
+// Forward decl: SpeechTrim is a file-static helper defined lower in this TU (added by speech-delivery);
+// the emote-routing helpers below use it before that definition.
+static std::string SpeechTrim(const std::string& s);
+
+// Inflections / synonyms -> canonical curated emote name (single words only).
+static std::map<std::string, std::string> const& EmoteInflectionMap()
+{
+    static const std::map<std::string, std::string> m = {
+        {"waving","wave"},{"waved","wave"},{"waves","wave"},
+        {"laughing","laugh"},{"laughs","laugh"},{"laughed","laugh"},
+        {"cheering","cheer"},{"cheers","cheer"},{"cheered","cheer"},
+        {"crying","cry"},{"cries","cry"},{"cried","cry"},
+        {"pointing","point"},{"points","point"},{"pointed","point"},
+        {"bowing","bow"},{"bows","bow"},{"bowed","bow"},
+        {"flexing","flex"},{"flexes","flex"},{"flexed","flex"},
+        {"applauding","applaud"},{"applauds","applaud"},{"applauded","applaud"},
+        {"clapping","applaud"},{"claps","applaud"},{"clap","applaud"},
+        {"roaring","roar"},{"roars","roar"},{"roared","roar"},
+        {"nodding","yes"},{"nods","yes"},{"nod","yes"},{"agreeing","yes"},{"agrees","yes"},{"agree","yes"},
+        {"disagreeing","no"},{"disagrees","no"},{"disagree","no"},
+        {"shrugging","shrug"},{"shrugs","shrug"},{"shrugged","shrug"},
+        {"saluting","salute"},{"salutes","salute"},{"saluted","salute"},
+        {"kneeling","kneel"},{"kneels","kneel"},{"knelt","kneel"},
+        {"begging","beg"},{"begs","beg"},{"begged","beg"},
+        {"talking","talk"},{"talks","talk"},{"talked","talk"}
+    };
+    return m;
+}
+
+// Resolve a single lowercased tag name to an allowed curated emote id, or 0 if none.
+// Tries exact, then an inflection/synonym; respects the active vocabulary (EmoteChatAllowed()).
+static uint32_t FuzzyResolveEmote(const std::string& lowerName)
+{
+    std::string canon = lowerName;
+    auto const& bm = EmoteChatBuiltinMap();
+    if (!bm.count(canon))
+    {
+        auto inf = EmoteInflectionMap().find(lowerName);
+        if (inf == EmoteInflectionMap().end())
+            return 0;
+        canon = inf->second;
+    }
+    auto it = bm.find(canon);
+    if (it == bm.end())
+        return 0;
+    std::set<std::string> allowed = EmoteChatAllowed();
+    if (!allowed.count(canon))
+        return 0;
+    return (uint32_t)it->second;
+}
+
+ChatLinePlan PlanChatLine(const std::string& line, bool proximity)
+{
+    ChatLinePlan plan;
+
+    size_t startPos = line.find_first_not_of(" \t");
+    if (startPos == std::string::npos || line[startPos] != '[')
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+    size_t close = line.find(']', startPos);
+    if (close == std::string::npos)
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+
+    std::string inside = line.substr(startPos + 1, close - startPos - 1);
+    size_t after = close + 1;
+    while (after < line.size() && (line[after] == ' ' || line[after] == '\t'))
+        ++after;
+    std::string rest = (after < line.size()) ? line.substr(after) : "";
+
+    std::string lname = SpeechTrim(inside);
+    std::transform(lname.begin(), lname.end(), lname.begin(),
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    bool singleWord = !lname.empty() && lname.find(' ') == std::string::npos;
+
+    if (g_EmoteChatEnable && singleWord)
+    {
+        uint32_t id = FuzzyResolveEmote(lname);
+        if (id != 0)
+        {
+            if (rest.empty()) { plan.kind = ChatLinePlan::Perform; plan.emote = id; }
+            else { plan.kind = ChatLinePlan::PerformAndSpeak; plan.emote = id; plan.text = rest; }
+            return plan;
+        }
+    }
+    if (!g_EmoteChatEnable && singleWord && EmoteChatBuiltinMap().count(lname))
+    {
+        if (rest.empty()) { plan.kind = ChatLinePlan::Perform; plan.emote = 0; }
+        else { plan.kind = ChatLinePlan::Speak; plan.text = rest; }
+        return plan;
+    }
+
+    if (!g_EmoteActionRouting)
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = line; return plan;
+    }
+
+    std::string action = SpeechTrim(inside);
+    if (action.empty())
+    {
+        plan.kind = ChatLinePlan::Speak; plan.text = rest; return plan;
+    }
+
+    if (proximity)
+    {
+        plan.kind = ChatLinePlan::ActionEmote;
+        plan.text = action;
+        plan.tail = rest;
+    }
+    else
+    {
+        plan.kind = ChatLinePlan::ActionText;
+        plan.text = "*" + action + "*" + (rest.empty() ? "" : " " + rest);
+    }
+    return plan;
+}
+
+static void EmoteActionRoutingSelfTest()
+{
+    bool savedEnable  = g_EmoteChatEnable;
+    bool savedRouting = g_EmoteActionRouting;
+    std::string savedVocab = g_EmoteChatVocabularyRaw;
+    g_EmoteChatEnable    = true;
+    g_EmoteActionRouting = true;
+    g_EmoteChatVocabularyRaw = "";
+
+    int passed = 0, total = 0;
+    auto check = [&](const char* nm, bool ok) {
+        ++total;
+        if (ok) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] EmoteActionRouting self-test FAIL ({})", nm);
+    };
+
+    check("fuzzy-waving",    FuzzyResolveEmote("waving")    == (uint32_t)EMOTE_ONESHOT_WAVE);
+    check("fuzzy-shrugging", FuzzyResolveEmote("shrugging") == (uint32_t)EMOTE_ONESHOT_QUESTION);
+    check("fuzzy-nod",       FuzzyResolveEmote("nod")       == (uint32_t)EMOTE_ONESHOT_YES);
+    check("fuzzy-unknown",   FuzzyResolveEmote("smile")     == 0);
+
+    { ChatLinePlan p = PlanChatLine("[shrug] hi there", true);
+      check("perform+speak", p.kind == ChatLinePlan::PerformAndSpeak && p.emote == (uint32_t)EMOTE_ONESHOT_QUESTION && p.text == "hi there"); }
+    { ChatLinePlan p = PlanChatLine("[Waving]", false);
+      check("fuzzy-perform", p.kind == ChatLinePlan::Perform && p.emote == (uint32_t)EMOTE_ONESHOT_WAVE); }
+    { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", true);
+      check("freeform-prox", p.kind == ChatLinePlan::ActionEmote && p.text == "smoke blows out slowly" && p.tail.empty()); }
+    { ChatLinePlan p = PlanChatLine("[smoke blows out slowly]", false);
+      check("freeform-nonprox", p.kind == ChatLinePlan::ActionText && p.text == "*smoke blows out slowly*"); }
+    { ChatLinePlan p = PlanChatLine("[smile]", false);
+      check("unknown-single", p.kind == ChatLinePlan::ActionText && p.text == "*smile*"); }
+    { ChatLinePlan p = PlanChatLine("Just a plain line.", true);
+      check("plain", p.kind == ChatLinePlan::Speak && p.text == "Just a plain line."); }
+
+    g_EmoteChatEnable    = savedEnable;
+    g_EmoteActionRouting = savedRouting;
+    g_EmoteChatVocabularyRaw = savedVocab;
+    LOG_INFO("server.loading", "[Ollama Chat] EmoteActionRouting self-test: {}/{} passed", passed, total);
 }
 
 bool ApplyChatEmote(Player* bot, std::string& text)
@@ -664,7 +825,7 @@ static void SpeechSplitSelfTest()
              "[Ollama Chat] SpeechSplit self-test: {}/{} passed", passed, (int)cases.size());
 }
 
-std::string EmitBotLines(const std::string& response,
+std::string EmitBotLines(Player* bot, bool proximity, const std::string& response,
                          const std::function<void(const std::string&)>& sendLine)
 {
     std::vector<std::string> lines = SplitChatResponse(response);
@@ -672,14 +833,38 @@ std::string EmitBotLines(const std::string& response,
         return "";
 
     std::string joined;
+    auto addJoined = [&](const std::string& s) {
+        if (s.empty()) return;
+        if (!joined.empty()) joined += ' ';
+        joined += s;
+    };
+
     for (size_t i = 0; i < lines.size(); ++i)
     {
         if (i > 0 && g_SpeechSplitLineDelayMs > 0)
             std::this_thread::sleep_for(std::chrono::milliseconds(g_SpeechSplitLineDelayMs));
-        sendLine(lines[i]);
-        if (i > 0)
-            joined += ' ';
-        joined += lines[i];
+
+        ChatLinePlan plan = PlanChatLine(lines[i], proximity);
+        switch (plan.kind)
+        {
+            case ChatLinePlan::Speak:
+                if (!plan.text.empty()) { sendLine(plan.text); addJoined(plan.text); }
+                break;
+            case ChatLinePlan::Perform:
+                if (bot && plan.emote) bot->HandleEmoteCommand(plan.emote);
+                break;
+            case ChatLinePlan::PerformAndSpeak:
+                if (bot && plan.emote) bot->HandleEmoteCommand(plan.emote);
+                if (!plan.text.empty()) { sendLine(plan.text); addJoined(plan.text); }
+                break;
+            case ChatLinePlan::ActionEmote:
+                if (bot) bot->TextEmote(plan.text);
+                if (!plan.tail.empty()) { sendLine(plan.tail); addJoined(plan.tail); }
+                break;
+            case ChatLinePlan::ActionText:
+                if (!plan.text.empty()) { sendLine(plan.text); addJoined(plan.text); }
+                break;
+        }
     }
     return joined;
 }
@@ -996,6 +1181,7 @@ void LoadOllamaChatConfig()
     // Emote-Augmented Chat
     g_EmoteChatEnable             = sConfigMgr->GetOption<bool>("OllamaChat.EmoteChat.Enable", true);
     g_EmoteChatVocabularyRaw      = sConfigMgr->GetOption<std::string>("OllamaChat.EmoteChat.Vocabulary", "");
+    g_EmoteActionRouting = sConfigMgr->GetOption<bool>("OllamaChat.EmoteActionRouting", true);
     g_EmoteChatInstructionTemplate = sConfigMgr->GetOption<std::string>(
         "OllamaChat.EmoteChat.InstructionTemplate",
         "You may begin your reply with ONE emote in square brackets from this list, but only if it "
@@ -1173,6 +1359,7 @@ void LoadOllamaChatConfig()
     {
         SpeechSplitSelfTest();
         SoftStopSelfTest();
+        EmoteActionRoutingSelfTest();
     }
 }
 

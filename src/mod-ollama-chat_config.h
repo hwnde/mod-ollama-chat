@@ -374,6 +374,7 @@ extern uint32_t g_TypingSimulationDelayPerChar;   // Delay per character in mill
 extern bool        g_EmoteChatEnable;
 extern std::string g_EmoteChatVocabularyRaw;        // pipe list of allowed emote names ("" = all built-in)
 extern std::string g_EmoteChatInstructionTemplate;  // uses {emote_list}
+extern bool        g_EmoteActionRouting;   // route freeform/unmatched brackets to an action render + fuzzy-match curated inflections
 
 // Perform a leading [emote] tag on `text` (visual oneshot), strip it, and return true if consumed.
 bool ApplyChatEmote(Player* bot, std::string& text);
@@ -391,9 +392,23 @@ extern uint32_t    g_SpeechSplitLineDelayMs;            // delay between consecu
 // Split a raw LLM reply into ordered, chat-safe lines (never an empty line).
 std::vector<std::string> SplitChatResponse(const std::string& text);
 
-// Send `response` as one-or-more lines via `sendLine` (short delay between lines);
-// returns the joined spoken text (single-space separated), or "" if nothing was sent.
-std::string EmitBotLines(const std::string& response,
+// How a single (already split) chat line should be delivered.
+struct ChatLinePlan
+{
+    enum Kind { Speak, Perform, PerformAndSpeak, ActionEmote, ActionText } kind = Speak;
+    uint32_t    emote = 0;
+    std::string text;
+    std::string tail;
+};
+
+// Classify one already-split line. `proximity` = the destination channel is local (Say/Yell).
+ChatLinePlan PlanChatLine(const std::string& line, bool proximity);
+
+// Splits `response` into chat lines and delivers each per its ChatLinePlan: curated emotes
+// perform (HandleEmoteCommand), freeform brackets become a TextEmote (proximity) or "*action*"
+// text (non-proximity), everything else is sent via `sendLine`. `proximity` = local channel
+// (Say/Yell). Returns the joined spoken/channel text for one-shot bookkeeping ("" if nothing).
+std::string EmitBotLines(Player* bot, bool proximity, const std::string& response,
                          const std::function<void(const std::string&)>& sendLine);
 
 // --------------------------------------------

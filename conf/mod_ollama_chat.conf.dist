@@ -1167,3 +1167,12 @@ OllamaChat.EmoteChat.Vocabulary =
 #        Prompt instruction appended to generated chat. {emote_list} expands to the allowed [tag] list.
 #
 OllamaChat.EmoteChat.InstructionTemplate = "You may begin your reply with ONE emote in square brackets from this list, but only if it genuinely fits the mood; otherwise omit it entirely. Allowed: {emote_list}. Example: [cheer] We did it!"
+
+# OllamaChat.EmoteActionRouting
+#     When enabled (1), a bracketed segment becomes an action instead of being spoken verbatim:
+#     a curated emote (exact or a fuzzy-matched inflection like [Waving]) performs the gesture;
+#     a freeform/unmatched bracket (e.g. [smoke blows out slowly]) renders as a /me text-emote in
+#     Say/Yell, or as *action* text in Guild/Party/Raid/General. When disabled (0), only exact curated
+#     emotes perform; unknown brackets are spoken verbatim (legacy).
+#     Default: 1
+OllamaChat.EmoteActionRouting = 1
