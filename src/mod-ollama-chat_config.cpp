@@ -628,6 +628,38 @@ std::vector<std::string> SplitChatResponse(const std::string& text)
     return lines;
 }
 
+static void SpeechSplitSelfTest()
+{
+    struct Case { const char* name; std::string in; std::vector<std::string> out; };
+    const std::vector<Case> cases = {
+        { "plain",          "Hello there.",                         { "Hello there." } },
+        { "two-lines",      "Line one.\nLine two.",                 { "Line one.", "Line two." } },
+        { "double-newline", "Para one.\n\nPara two.",               { "Para one.", "Para two." } },
+        { "literal-esc",    "Literal break.\\nSecond part.",        { "Literal break.", "Second part." } },
+        { "frag-dropped",   "First thought.\nOh man, I'm",          { "First thought." } },
+        { "bracket-kept",   "Looks good.\n[grins broadly]",         { "Looks good.", "[grins broadly]" } },
+        { "single-frag",    "Oh man, I'm",                          { "Oh man, I'm" } },
+    };
+
+    int passed = 0;
+    for (const Case& c : cases)
+    {
+        std::vector<std::string> got = SplitChatResponse(c.in);
+        bool ok = (got == c.out);
+        if (ok)
+            ++passed;
+        else
+        {
+            std::string g;
+            for (const std::string& l : got) { g += "[" + l + "]"; }
+            LOG_ERROR("server.loading",
+                      "[Ollama Chat] SpeechSplit self-test FAIL ({}) -> {}", c.name, g);
+        }
+    }
+    LOG_INFO("server.loading",
+             "[Ollama Chat] SpeechSplit self-test: {}/{} passed", passed, (int)cases.size());
+}
+
 // Load Bot Personalities from Database
 void LoadBotPersonalityList()
 {    
@@ -1111,6 +1143,9 @@ void LoadOllamaChatConfig()
              g_OllamaUrl, g_OllamaModel, g_MaxConcurrentQueries,
              g_EnableRandomChatter, g_MinRandomInterval, g_MaxRandomInterval, g_RandomChatterRealPlayerDistance,
              g_RandomChatterBotCommentChance, g_MaxConcurrentQueries, extraBlacklist);
+
+    if (g_DebugEnabled)
+        SpeechSplitSelfTest();
 }
 
 void LoadPersonalityTemplatesFromDB()
