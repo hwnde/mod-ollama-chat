@@ -376,5 +376,113 @@
     "content": "Alexstrasza the Life-Binder holds Wyrmrest Temple at the center of Dragonblight, where all five flights once gathered at the world's most sacred meeting ground. She is the eldest of the Aspects chosen by the Titans — keeper of all life, whose breath sustains the green and growing things where the cold would otherwise take them. She bore a captivity under the Dragonmaw clan that the red flight does not speak of easily; she was kept in chains at Grim Batol and her clutches were used as weapons of war before she was freed. That wound does not show on her face, but those who have served at Wyrmrest long enough see it in the way she watches captive creatures brought before the temple's steps. She stands at the center of the Wyrmrest Accord now because the Nexus War and the Lich King's assault on Northrend leave no room for old grievances between flights.",
     "keywords": ["alexstrasza", "life-binder", "red dragon aspect", "queen of life", "wyrmrest temple", "dragonblight", "wyrmrest accord", "grim batol"],
     "tags": ["people", "neutral", "living"]
+  },
+  {
+    "id": "person_varok_saurfang",
+    "title": "High Overlord Varok Saurfang, Hero of the Horde",
+    "short_description": "orc High Overlord and Hero of the Horde, who commands the Northrend war from Warsong Hold",
+    "references": ["zone_borean_tundra", "wow_factions_horde"],
+    "content": "Varok Saurfang holds the command post at Warsong Hold in the Borean Tundra, the steadiest hand on the Horde's Northrend campaign. He is elder brother to Broxigar, who died holding the ancient line in the War of the Ancients with an axe in a demon lord's hide, and the weight of that death has never left Varok's face. He fights without recklessness and without ceremony; Horde veterans who have served under him at the Hold say he eats with the common soldiers and walks the perimeter himself before dawn. He buried his son Dranosh on the Wrathgate ridge when the boy fell to the Lich King's blade, and he stood where they laid him down before the army moved again. His is the kind of name soldiers say when they need something to brace against.",
+    "keywords": ["varok saurfang", "saurfang", "high overlord", "hero of the horde", "warsong hold", "borean tundra", "northrend", "orc"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_nathanos_blightcaller",
+    "title": "Nathanos Blightcaller, Champion of the Banshee Queen",
+    "short_description": "undead ranger lord and Champion of the Banshee Queen, who walks the Eastern Plaguelands",
+    "references": ["zone_eastern_plaguelands", "wow_factions_horde"],
+    "content": "Nathanos Blightcaller walks the Marris Stead in the Eastern Plaguelands, the only human ranger ever admitted into the high ranger ranks of Silvermoon — a distinction that won him as much contempt from his own people as it earned him respect from the elves. When the Scourge took the Plaguelands he died and rose again in Sylvanas's service, bound now to the Banshee Queen's will with a loyalty that looks, from the outside, like devotion. He commands the dark rangers who run her eastern errands, and his tone with those who come seeking favor from the Undercity is short regardless of their title. The Forsaken fear him and the Alliance despise him; Nathanos appears entirely comfortable with both arrangements.",
+    "keywords": ["nathanos", "nathanos blightcaller", "blightcaller", "champion", "banshee queen", "sylvanas", "dark ranger", "undead", "marris stead", "eastern plaguelands"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_nazgrel",
+    "title": "Nazgrel, Commander of Thrallmar",
+    "short_description": "former security advisor to Thrall, now commands Thrallmar in Hellfire Peninsula",
+    "references": ["zone_hellfire_peninsula", "wow_factions_horde"],
+    "content": "Nazgrel commands Thrallmar, the Horde's first and heaviest outpost in Hellfire Peninsula on the other side of the Dark Portal. He stood at Thrall's shoulder for years as security advisor in Orgrimmar, learning the Warchief's mind and carrying his orders to places that did not welcome written messages. When the Horde pushed through the Portal he was the man Thrall trusted to hold the Outland side, and Thrallmar rose under his watch where broken stone and demon blood covered the ground. The Fel Horde presses the ramparts from Hellfire Citadel at intervals; Nazgrel has not yielded a pace. He runs a garrison short on comforts and long on vigilance, and the orcs who serve under him say he sleeps less than the sentries he rotates.",
+    "keywords": ["nazgrel", "thrallmar", "hellfire peninsula", "outland", "dark portal", "orc", "fel horde", "horde"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_drekthar",
+    "title": "Drek'Thar, Elder Shaman of the Frostwolf Clan",
+    "short_description": "blind orc shaman and elder of the Frostwolf clan, who leads the Frostwolves in Alterac Valley",
+    "references": ["wow_factions_horde"],
+    "content": "Drek'Thar holds the Frostwolf keep in Alterac Valley, blind in both eyes and clearer of sight than most men who see. He was the shaman who first taught Thrall to listen to the elements when the Warchief was still a boy learning to be something other than a slave, and that debt runs both ways in the way they regard each other. The Frostwolf clan refused the demon's blood during the Second War and paid for that refusal with internment; Drek'Thar led the elders through those camps and brought the clan out whole on the other side. The Stormpike dwarves press into the valley from the north regularly; his wolf riders know every pass. Age has not made him cautious.",
+    "keywords": ["drek'thar", "drekthar", "frostwolf", "frostwolf clan", "alterac valley", "shaman", "elder", "blind", "orc", "thrall"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_magatha_grimtotem",
+    "title": "Elder Crone Magatha Grimtotem",
+    "short_description": "tauren elder crone of the Grimtotem tribe, who dwells uneasily at Thunder Bluff in Mulgore",
+    "references": ["zone_mulgore", "wow_factions_horde"],
+    "content": "Magatha Grimtotem holds a seat at Thunder Bluff that Cairne's patience and the unity of the tribes barely contains. She is elder crone of the Grimtotem, the largest and most fractious of the tauren clans, whose strongholds dot the southern Mulgore highlands and whose warriors do not ride under the Thunder Bluff standard when they can avoid it. She presents herself with the grave courtesy of a woman who has survived every rival who underestimated her, which is all of them. She speaks at the High Chieftain's councils with measured respect and departs those councils with her own plans already made. The Grimtotem druids and shamans serve her before the totem of any other elder, and Baine Bloodhoof watches her more closely than he watches the plains.",
+    "keywords": ["magatha", "magatha grimtotem", "grimtotem", "elder crone", "thunder bluff", "mulgore", "tauren", "tribe"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_eitrigg",
+    "title": "Eitrigg, Advisor to the Warchief",
+    "short_description": "old orc warrior and advisor to the Warchief, who carries a debt of honor with a paladin's memory",
+    "references": ["zone_orgrimmar", "wow_factions_horde"],
+    "content": "Eitrigg serves in Orgrimmar as advisor to Thrall, an old orc who has outlived three chieftains and carries the deliberate manner of a man who knows what hasty counsel costs. He fought in the Second War and survived the internment camps afterward, living for years in a ruined tower in the Plaguelands before Tirion Fordring came across him, took a wound on his behalf, and was stripped of his knighthood for doing it. The two men forged something rare out of that encounter — a trust that crossed the line between their peoples — and Eitrigg has named Tirion's honor in the Warchief's hall when the moment called for it. He fights still when he must, though he no longer seeks it. The younger advisors defer to him; Thrall listens to him at length.",
+    "keywords": ["eitrigg", "orgrimmar", "advisor", "warchief", "orc warrior", "tirion fordring", "honor", "internment"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_baine_bloodhoof",
+    "title": "Baine Bloodhoof, Heir of Thunder Bluff",
+    "short_description": "tauren heir of Thunder Bluff and son of Cairne, who stands to inherit the high chieftain's mantle in Mulgore",
+    "references": ["zone_mulgore", "wow_factions_horde"],
+    "content": "Baine Bloodhoof is Cairne's son and heir, a young bull who has grown up in the shadow of a father whose name fills every hall in Thunder Bluff. He carries his father's frame and something of his patience, though the patience comes harder to Baine at his age; his first instinct runs toward action where Cairne's runs toward counsel. He sits in council beneath the high mesa and learns the running of the clans, the water rights disputes, the boundary negotiations with the centaur packs in the barrens below. The Grimtotem clans watch him the way a predator watches a future meal it is not quite ready to take; he watches them back. Cairne has not sheltered him from that tension, which is a kind of teaching in itself.",
+    "keywords": ["baine", "baine bloodhoof", "bloodhoof", "heir", "thunder bluff", "mulgore", "tauren", "high chieftain", "cairne"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_halduron_brightwing",
+    "title": "Halduron Brightwing, Ranger-General of Silvermoon",
+    "short_description": "blood elf Ranger-General of Silvermoon, who commands the Farstriders in Eversong",
+    "references": ["zone_eversong_woods", "wow_factions_horde"],
+    "content": "Halduron Brightwing holds the Ranger-General's seat in Silvermoon, the rank that Sylvanas Windrunner carried before the Scourge came through the Ghostlands. He commands the Farstriders — the blood elf scouts and rangers who have patrolled Eversong's margins since before living memory — and his patrols hold the boundary between the golden forest and the corrupted Ghostlands to the south. He is direct where Lor'themar is careful, and the Regent Lord values that directness at council. He keeps the Farstriders to their traditional craft: no arcane excess, no blood knight armor — bow, blade, and forest craft, the tools of the old ranger corps. The elves under his command are among the finest light infantry Silvermoon fields.",
+    "keywords": ["halduron", "halduron brightwing", "ranger-general", "silvermoon", "eversong", "farstriders", "blood elf", "sin'dorei"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_liadrin",
+    "title": "Lady Liadrin, Matriarch of the Blood Knights",
+    "short_description": "blood elf Matriarch of the Blood Knights, who leads Silvermoon's holy warriors from Eversong",
+    "references": ["zone_eversong_woods", "wow_factions_horde"],
+    "content": "Lady Liadrin founded the Blood Knights and leads them still, the only order of holy warriors the blood elves have produced — and one whose origins in the draining of a bound naaru are not spoken of loudly in Silvermoon's halls. She was a priestess of the Light before the Sunwell's fall, and when the old disciplines no longer sustained her people's hunger she found another way: M'uru, the naaru held captive in the Sanctum of Light. Since Kael'thas's betrayal sent his forces to steal M'uru and Sunwell Isle has been reborn, the Blood Knights draw on the Sunwell's restored radiance rather than captive faith. Liadrin has walked the changed light since then with something quieter in her bearing, the founding wound acknowledged if not advertised. Her knights are among the most disciplined troops in Silvermoon's order of battle.",
+    "keywords": ["liadrin", "lady liadrin", "blood knights", "matriarch", "silvermoon", "eversong", "blood elf", "paladin", "m'uru", "sunwell"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_aethas_sunreaver",
+    "title": "Aethas Sunreaver, Archmage of the Sunreavers",
+    "short_description": "blood elf archmage and leader of the Sunreavers, who holds a Kirin Tor seat in Dalaran",
+    "references": ["zone_dalaran", "wow_factions_horde"],
+    "content": "Aethas Sunreaver holds the Sunreavers' Sanctuary in Dalaran and occupies a seat on the Kirin Tor's inner council — the first blood elf in that hall since the order's ancient days. He argued the Sunreavers' case before the Kirin Tor when Dalaran lifted into the Northrend skies, pressing for blood elf inclusion in the order's neutrality on the grounds that no mage of sufficient skill should be excluded from the war against the Lich King. Rhonin heard him. His people now hold a quarter of the city and run errands in the Horde's interest that the Kirin Tor officially does not notice. He is young for a man of his rank, ambitious in a way that his council peers find either promising or troubling depending on which side of the Sunreavers' coin they read.",
+    "keywords": ["aethas", "aethas sunreaver", "sunreaver", "archmage", "dalaran", "kirin tor", "blood elf", "sin'dorei", "neutrality"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_rommath",
+    "title": "Grand Magister Rommath of Silvermoon",
+    "short_description": "blood elf master of Silvermoon's magisters, who governs arcane power in Eversong",
+    "references": ["zone_eversong_woods", "wow_factions_horde"],
+    "content": "Rommath holds the Grand Magister's seat in Silvermoon and commands the city's Magisters, the blood elf spellcasters who manage the arcane flows that keep the rebuilt city's spires lit. He spent years in Outland at Kael'thas's side learning to drain magic from external sources, and he brought those methods home to Silvermoon when the Sunwell fell. The magisters he trained are effective and not gentle in their methods; the rumors of arcane addiction among the Silvermoon population sit partly at the door of his curriculum. He is cold where Lor'themar is measured and colder where Halduron is direct; the Regent Lord keeps him at arm's length in council while relying heavily on the martial capacity he maintains. Rommath's loyalty to the Sunstrider name ran longer than Kael'thas's sanity warranted, and that loyalty's end has left him with few obvious attachments.",
+    "keywords": ["rommath", "grand magister", "silvermoon", "eversong", "magisters", "blood elf", "sin'dorei", "arcane", "kael'thas"],
+    "tags": ["people", "horde", "living"]
+  },
+  {
+    "id": "person_koltira_deathweaver",
+    "title": "Koltira Deathweaver, Knight of the Ebon Blade",
+    "short_description": "blood elf death knight of the Ebon Blade, who rides the boundary of the Eastern Plaguelands",
+    "references": ["zone_eastern_plaguelands", "wow_factions_horde"],
+    "content": "Koltira Deathweaver rides the margins of the Eastern Plaguelands in service to the Ebon Blade, a blood elf raised into death by the Lich King's hand and freed at Light's Hope when Mograine broke the chain. He carries the cold of undeath with the controlled bearing of a man who has made terms with what he has become. He works alongside Thassarian, a human death knight, in ways that would have been unimaginable in his living years; the two have ridden into the Plaguelands together on Acherus's orders and neither has found a reason to stop. In the Undercity's shadows, Sylvanas watches a Horde-blooded death knight who no longer answers her call with displeasure she has not yet acted on. The Ebon Blade's charter is the shield between them for now.",
+    "keywords": ["koltira", "koltira deathweaver", "deathweaver", "ebon blade", "death knight", "blood elf", "eastern plaguelands", "thassarian"],
+    "tags": ["people", "horde", "living"]
   }
 ]
