@@ -2212,10 +2212,10 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
     if (g_EnableCrossBotAntiRepetition)
         prompt += GetNearbyBotsRecentReplies(bot);
 
+    prompt += BuildEmoteChatInstruction();
+
     if (g_EnableChannelFrames)
         prompt += " [" + GetChannelFrame(channelCat) + "]";
-
-    prompt += BuildEmoteChatInstruction();
 
     // Debug logging for full prompt including RAG information
     if (g_DebugEnabled && g_DebugShowFullPrompt) {
