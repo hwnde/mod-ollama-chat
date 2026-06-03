@@ -1538,6 +1538,7 @@ void LoadOllamaChatConfig()
         SoftStopSelfTest();
         EmoteActionRoutingSelfTest();
         WorldNpcChatSelfTest();
+        WorldNpcCharacterSelfTest();
     }
 }
 

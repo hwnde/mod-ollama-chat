@@ -193,6 +193,31 @@ void WorldNpcChatSelfTest()
     LOG_INFO("server.loading", "[Ollama Chat] WorldNpcChat self-test: {}/{} passed", passed, total);
 }
 
+void WorldNpcCharacterSelfTest()
+{
+    int passed = 0, total = 0;
+    auto check = [&](const char* nm, bool ok) {
+        ++total;
+        if (ok) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] WorldNpcCharacter self-test FAIL ({})", nm);
+    };
+
+    std::string saved = g_WorldNpcCharacterPrompt;
+    g_WorldNpcCharacterPrompt = "I am {name}, {title}. You, {race} {class}, stand in {zone}.";
+
+    std::string p1 = BuildNpcCharacterPrompt("Thrall", "Warchief of the Horde", "Orgrimmar", "orc", "shaman", "", "");
+    check("basic", p1 == "I am Thrall, Warchief of the Horde. You, orc shaman, stand in Orgrimmar.");
+
+    std::string p2 = BuildNpcCharacterPrompt("Guard", "", "Stormwind", "human", "mage", "", "");
+    check("empty-title-default", p2 == "I am Guard, a figure of note. You, human mage, stand in Stormwind.");
+
+    std::string p3 = BuildNpcCharacterPrompt("Cairne", "High Chieftain", "Thunder Bluff", "tauren", "druid", "Speak slowly and gravely.", "");
+    check("persona-hint-appended", p3.find("Speak slowly and gravely.") != std::string::npos);
+
+    g_WorldNpcCharacterPrompt = saved;
+    LOG_INFO("server.loading", "[Ollama Chat] WorldNpcCharacter self-test: {}/{} passed", passed, total);
+}
+
 OllamaWorldNpcChatter::OllamaWorldNpcChatter() : WorldScript("OllamaWorldNpcChatter") {}
 
 void OllamaWorldNpcChatter::OnUpdate(uint32 diff)
