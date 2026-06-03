@@ -442,6 +442,15 @@ extern uint32_t    g_WorldNpcCharacterCallsPerMin;   // global NPC LLM-call budg
 extern std::string g_WorldNpcCharacterPrompt;        // persona prompt template
 void WorldNpcCharacterSelfTest();
 
+// Tier-1 NPC character record (one row of mod_ollama_chat_npc)
+struct WorldNpcCharacter
+{
+    uint32_t    cooldownSec = 0;   // 0 => use g_WorldNpcCharacterCooldownSec
+    std::string personaHint;       // optional, appended to the prompt
+};
+extern std::unordered_map<uint32_t, WorldNpcCharacter> g_WorldNpcCharacters;  // entry -> record
+void LoadWorldNpcCharacterList();
+
 // --------------------------------------------
 // Loader Functions
 // --------------------------------------------

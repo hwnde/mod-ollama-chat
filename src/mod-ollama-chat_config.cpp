@@ -1017,6 +1017,28 @@ void LoadBotPersonalityList()
     } while (result->NextRow());
 }
 
+// Tier-1 NPC character map (entry -> WorldNpcCharacter)
+std::unordered_map<uint32_t, WorldNpcCharacter> g_WorldNpcCharacters;
+
+void LoadWorldNpcCharacterList()
+{
+    g_WorldNpcCharacters.clear();
+    QueryResult result = CharacterDatabase.Query("SELECT entry, cooldown_sec, persona_hint FROM mod_ollama_chat_npc");
+    if (!result)
+        return;
+    do
+    {
+        Field* f = result->Fetch();
+        uint32_t entry = f[0].Get<uint32>();
+        WorldNpcCharacter rec;
+        rec.cooldownSec = f[1].IsNull() ? 0 : f[1].Get<uint32>();
+        rec.personaHint = f[2].IsNull() ? "" : f[2].Get<std::string>();
+        g_WorldNpcCharacters[entry] = rec;
+    } while (result->NextRow());
+
+    LOG_INFO("server.loading", "[Ollama Chat] Loaded {} WorldNpc character entries.", (uint32)g_WorldNpcCharacters.size());
+}
+
 std::string GetMultiLineConfigValue(const std::string& configFilePath, const std::string& key)
 {
     std::ifstream infile(configFilePath);
@@ -1588,6 +1610,7 @@ void OllamaChatConfigWorldScript::OnStartup()
 {
     LoadOllamaChatConfig();
     LoadBotPersonalityList();
+    LoadWorldNpcCharacterList();
     LoadBotConversationHistoryFromDB();
     InitializeSentimentTracking();
 
