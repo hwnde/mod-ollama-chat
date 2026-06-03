@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <cctype>
 #include <set>
+#include <map>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -448,6 +449,10 @@ static std::set<std::string> EmoteChatAllowed()
     }
     return allowed;
 }
+
+// Forward decl: SpeechTrim is a file-static helper defined lower in this TU (added by speech-delivery);
+// the emote-routing helpers below use it before that definition.
+static std::string SpeechTrim(const std::string& s);
 
 // Inflections / synonyms -> canonical curated emote name (single words only).
 static std::map<std::string, std::string> const& EmoteInflectionMap()
