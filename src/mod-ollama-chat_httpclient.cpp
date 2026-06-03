@@ -156,6 +156,84 @@ std::string OllamaHttpClient::Post(const std::string& url, const std::string& js
     }
 }
 
+bool OllamaHttpClient::PostStreaming(const std::string& url, const std::string& jsonData,
+                                     const std::function<bool(const char*, size_t)>& onChunk)
+{
+    try
+    {
+        std::regex urlRegex(R"(^(https?)://([^:/]+)(?::(\d+))?(/.*)?$)");
+        std::smatch match;
+        if (!std::regex_match(url, match, urlRegex))
+        {
+            LOG_INFO("server.loading", "[Ollama Chat] Invalid URL format: {}", url);
+            return false;
+        }
+
+        std::string protocol = match[1].str();
+        std::string host = match[2].str();
+        int port = 11434;
+        if (match[3].matched)        port = std::stoi(match[3].str());
+        else if (protocol == "https") port = 443;
+        else                          port = 11434;
+        std::string path = match[4].matched ? match[4].str() : "/";
+
+        httplib::Headers headers = {
+            {"Content-Type", "application/json"},
+            {"User-Agent", "AzerothCore-OllamaChat/1.0"},
+            {"Accept", "application/json"}
+        };
+        if (host.find("ngrok") != std::string::npos)
+            headers.emplace("ngrok-skip-browser-warning", "true");
+
+        httplib::ContentReceiver receiver = [&](const char* data, size_t len) -> bool {
+            return onChunk(data, len);
+        };
+
+        httplib::Result res;
+        if (protocol == "https")
+        {
+#ifdef CPPHTTPLIB_OPENSSL_SUPPORT
+            httplib::SSLClient sslClient(host, port);
+            sslClient.enable_server_certificate_verification(false);
+            sslClient.set_connection_timeout(m_timeout);
+            sslClient.set_read_timeout(m_timeout);
+            sslClient.set_write_timeout(m_timeout);
+            res = sslClient.Post(path, headers, jsonData, "application/json", receiver);
+#else
+            LOG_ERROR("server.loading", "[Ollama Chat] HTTPS requested but SSL support not available.");
+            return false;
+#endif
+        }
+        else
+        {
+            httplib::Client client(host, port);
+            client.set_connection_timeout(m_timeout);
+            client.set_read_timeout(m_timeout);
+            client.set_write_timeout(m_timeout);
+            res = client.Post(path, headers, jsonData, "application/json", receiver);
+        }
+
+        if (!res)
+        {
+            if (res.error() == httplib::Error::Canceled)
+                return true;
+            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request failed: {}:{}{}", host, port, path);
+            return false;
+        }
+        if (res->status != 200)
+        {
+            LOG_ERROR("server.loading", "[Ollama Chat] Streaming request HTTP {} for {}:{}{}", res->status, host, port, path);
+            return false;
+        }
+        return true;
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("server.loading", "[Ollama Chat] Streaming client exception: {}", e.what());
+        return false;
+    }
+}
+
 void OllamaHttpClient::SetTimeout(int seconds)
 {
     m_timeout = seconds;
