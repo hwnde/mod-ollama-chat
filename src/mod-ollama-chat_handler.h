@@ -66,4 +66,9 @@ std::string GetAntiRepetitionPrompt(uint64_t botGuid);
 std::string GetNearbyBotsRecentReplies(Player* speaker);
 void LogCrossBotRepetition(Player* speaker, const std::string& emittedLine);
 
+// Build a RAG query string from a bot's context: "<zone> <area> <faction> <class> <race>".
+// Returns empty if the bot has no PlayerbotAI. Unknown zone/area contribute nothing
+// (no "UnknownZone" junk tokens).
+std::string BuildBotContextQuery(Player* bot);
+
 #endif // MOD_OLLAMA_CHAT_HANDLER_H

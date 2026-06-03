@@ -93,6 +93,25 @@ static std::string FormatPlayerRace(uint8_t raceId)
     }
 }
 
+std::string BuildBotContextQuery(Player* bot)
+{
+    if (!bot)
+        return "";
+    PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot);
+    if (!botAI)
+        return "";
+
+    std::string q;
+    AreaTableEntry const* zone = botAI->GetCurrentZone();
+    AreaTableEntry const* area = botAI->GetCurrentArea();
+    if (zone) q += botAI->GetLocalizedAreaName(zone) + " ";
+    if (area) q += botAI->GetLocalizedAreaName(area) + " ";
+    q += (bot->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde");
+    q += " " + botAI->GetChatHelper()->FormatClass(bot->getClass());
+    q += " " + botAI->GetChatHelper()->FormatRace(bot->getRace());
+    return q;
+}
+
 const char* ChatChannelSourceLocalStr[] =
 {
     "Undefined",  // 0
