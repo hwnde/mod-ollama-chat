@@ -1276,5 +1276,86 @@
       "tbc",
       "arcane"
     ]
+  },
+  {
+    "id": "raid_karazhan",
+    "title": "Karazhan",
+    "short_description": "the last Guardian's abandoned tower in Deadwind Pass, haunted by the echoes of Medivh's power",
+    "references": [],
+    "content": "Rising alone from the dead canyon of Deadwind Pass, the tower of Karazhan was the seat of Medivh, last of the Guardians of Tirisfal. Though its master is long dead, the residue of his immense, possessed power never settled — the halls stage phantom operas that play to the death, a chessboard moves armies of its own accord, and the dread Prince Malchezaar of the Burning Legion has slipped in to claim the leyline nexus for himself. Mages and historians covet what the tower remembers; few who climb it descend.",
+    "keywords": ["karazhan", "deadwind pass", "medivh", "guardian", "malchezaar", "tower", "opera", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "magic", "legion"]
+  },
+  {
+    "id": "raid_gruuls_lair",
+    "title": "Gruul's Lair",
+    "short_description": "the cliffside hold of Gruul the Dragonkiller, where the gronn overlord and his son rule the Blade's Edge",
+    "references": [],
+    "content": "High in the jagged crags of Blade's Edge Mountains, the gronn called Gruul the Dragonkiller reigns over a brood of monstrous giants. He earned his dread name by slaughtering the black dragons who once nested among these peaks, hanging their impaled corpses as trophies along the ridgelines. At the threshold of his cavern, his maul-wielding son High King Maulgar commands a savage council of ogres, and any who would reach the old gronn must first break that brutish guard.",
+    "keywords": ["gruul's lair", "gruuls lair", "blade's edge mountains", "gruul", "maulgar", "gronn", "ogres", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "giants"]
+  },
+  {
+    "id": "raid_magtheridons_lair",
+    "title": "Magtheridon's Lair",
+    "short_description": "the chained pit lord beneath Hellfire Citadel, once Outland's master, straining against Illidan's bonds",
+    "references": [],
+    "content": "Far below the ramparts of Hellfire Citadel, in the bleeding heart of the Hellfire Peninsula, the pit lord Magtheridon hangs in agony upon a frame of arcane chains. Before Illidan came, this demon ruled the shattered remnants of Draenor as its self-styled lord; now he is a captive, his very blood drained to corrupt the orcs into fel-mad servants. He howls and strains against his bonds, and his keepers fight to ensure he is never loosed upon the world again.",
+    "keywords": ["magtheridon's lair", "magtheridons lair", "hellfire peninsula", "hellfire citadel", "magtheridon", "pit lord", "illidan", "fel", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "demons", "legion"]
+  },
+  {
+    "id": "raid_serpentshrine_cavern",
+    "title": "Serpentshrine Cavern",
+    "short_description": "the flooded heart of Coilfang where Lady Vashj works Illidan's scheme to drain Outland's waters",
+    "references": [],
+    "content": "Deep within the drowned vaults of Coilfang Reservoir, in the marsh-country of Zangarmarsh, lies the sunken sanctum of Lady Vashj. Once handmaiden to Queen Azshara and now the serpentine right hand of Illidan Stormrage, the naga sorceress hoards Outland's failing waters here, throttling the springs that feed the swamp at her master's command. Her coiled court of naga and beasts guards the flooded shrine, and the parched land withers as she works her slow and ruinous design.",
+    "keywords": ["serpentshrine cavern", "coilfang reservoir", "zangarmarsh", "lady vashj", "naga", "illidan", "water", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "naga", "water"]
+  },
+  {
+    "id": "raid_tempest_keep",
+    "title": "Tempest Keep",
+    "short_description": "the naaru satellite-fortress in Netherstorm seized by Kael'thas, who courts the Legion for power",
+    "references": [],
+    "content": "Adrift in the broken sky of Netherstorm floats Tempest Keep, a crystalline fortress built by the naaru as a vessel of pure Light. Kael'thas Sunstrider, prince of the blood elves, stormed and stole it, turning its arcane engines toward his own insatiable hunger for magic. From this hijacked stronghold he treats with the agents of the Burning Legion, gathering power for a master far darker than any his ruined people once served.",
+    "keywords": ["tempest keep", "netherstorm", "kael'thas", "blood elves", "naaru", "arcane", "legion", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "arcane", "legion"]
+  },
+  {
+    "id": "raid_battle_for_mount_hyjal",
+    "title": "Battle for Mount Hyjal",
+    "short_description": "a Caverns of Time vision of the World Tree's last defense against Archimonde and the Legion",
+    "references": [],
+    "content": "Within the timeless sands of the Caverns of Time, beneath Tanaris, the keepers of history reopen the climax of the Third War upon the slopes of Mount Hyjal. Here the night elves, humans, and orcs stood together in desperate alliance to defend the World Tree from the demon-lord Archimonde and his endless host. Those who walk this vision relive that terrible night — the falling bastions, the rallying defenders, and the final stand at Nordrassil where Archimonde was unmade.",
+    "keywords": ["battle for mount hyjal", "mount hyjal", "caverns of time", "tanaris", "archimonde", "world tree", "nordrassil", "third war", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "legion", "history"]
+  },
+  {
+    "id": "raid_black_temple",
+    "title": "Black Temple",
+    "short_description": "the ruined draenei temple Karabor turned into Illidan's fortress, besieged by Akama and the Aldor",
+    "references": [],
+    "content": "In the ashen ruin of Shadowmoon Valley stands the Black Temple, once the radiant draenei sanctuary of Karabor before the orcs defiled it in blood. Now it is the seat of Illidan Stormrage, the Betrayer, who broods upon his throne behind walls of fel iron and shadow. The broken draenei Akama, long forced into Illidan's service, has turned at last — leading the Aldor and the Ashtongue against the very lord he was bound to obey, that the temple might be cleansed.",
+    "keywords": ["black temple", "shadowmoon valley", "karabor", "illidan", "akama", "aldor", "ashtongue", "draenei", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "demons", "illidan"]
+  },
+  {
+    "id": "raid_sunwell_plateau",
+    "title": "Sunwell Plateau",
+    "short_description": "the corrupted Sunwell on Quel'Danas, where Kil'jaeden is summoned and the Shattered Sun stand fast",
+    "references": [],
+    "content": "Upon the Isle of Quel'Danas, at the desecrated heart of the high elves' ancient Sunwell, the deceiver Kil'jaeden is dragged toward the waking world. The fallen prince Kael'thas spent his last madness to crack the wellspring open as a portal for his demonic master, and through that wound the eredar lord begins to emerge. Against this horror the Shattered Sun Offensive — blood elves and draenei united in last extremity — fight to seal the breach before the deceiver sets foot upon Azeroth.",
+    "keywords": ["sunwell plateau", "isle of quel'danas", "sunwell", "kil'jaeden", "kael'thas", "shattered sun", "blood elves", "draenei", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "legion", "arcane"]
+  },
+  {
+    "id": "raid_zul_aman",
+    "title": "Zul'Aman",
+    "short_description": "the Amani forest kingdom where Zul'jin wakes the animal-god avatars against the high elves",
+    "references": [],
+    "content": "Within the shadowed pines of the Ghostlands lies Zul'Aman, the war-capital of the Amani trolls. Their warlord Zul'jin, scarred and embittered by old defeats at elven hands, has risen again with a furious purpose — to call upon the avatars of the animal-gods, the bear, the eagle, the lynx, and the dragonhawk, and loose their primal fury upon all who trespass his forest. He would drive the high elves from these woods forever, or see his kingdom burn in the trying.",
+    "keywords": ["zul'aman", "zul aman", "ghostlands", "zul'jin", "amani", "trolls", "animal gods", "high elves", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "trolls"]
   }
 ]
