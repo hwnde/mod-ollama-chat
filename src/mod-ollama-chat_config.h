@@ -320,6 +320,7 @@ extern float       g_RAGSimilarityThreshold;             // Similarity threshold
 extern std::string g_RAGPromptTemplate;                  // Template for RAG info in prompts
 extern bool        g_RAGExpandReferences;                // Follow entry references one hop
 extern uint32_t    g_RAGMaxReferences;                   // Max references injected per query
+extern bool        g_RAGRandomizeReferences;             // Per-direct-hit random sampling (vs global FCFS)
 extern bool        g_RAGRandomizeSelection;              // Sample direct hits weighted, not strict top-N
 extern uint32_t    g_RAGSelectionPoolSize;               // Top-K candidate window the sampler draws from
 extern bool        g_RAGImprovedScoring;                 // IDF/stopword/stem scorer (1) vs legacy raw-TF (0)
