@@ -112,6 +112,31 @@ static std::string FillPhrase(const std::string& templ, const std::string& npcNa
                       fmt::arg("player", playerName));
 }
 
+void WorldNpcChatSelfTest()
+{
+    int passed = 0, total = 0;
+    auto check = [&](const char* nm, bool ok) {
+        ++total;
+        if (ok) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] WorldNpcChat self-test FAIL ({})", nm);
+    };
+
+    check("qg-available", ResolveNpcRole(UNIT_NPC_FLAG_QUESTGIVER, DIALOG_STATUS_AVAILABLE) == WN_QUESTGIVER_AVAILABLE);
+    check("qg-turnin",    ResolveNpcRole(UNIT_NPC_FLAG_QUESTGIVER, DIALOG_STATUS_REWARD)    == WN_QUESTGIVER_TURNIN);
+    check("qg-none->vendor", ResolveNpcRole(UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_VENDOR, DIALOG_STATUS_NONE) == WN_VENDOR);
+    check("qg-priority",  ResolveNpcRole(UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_INNKEEPER, DIALOG_STATUS_AVAILABLE) == WN_QUESTGIVER_AVAILABLE);
+    check("innkeeper",    ResolveNpcRole(UNIT_NPC_FLAG_INNKEEPER, 0) == WN_INNKEEPER);
+    check("vendor",       ResolveNpcRole(UNIT_NPC_FLAG_VENDOR, 0) == WN_VENDOR);
+    check("banker",       ResolveNpcRole(UNIT_NPC_FLAG_BANKER, 0) == WN_BANKER);
+    check("none",         ResolveNpcRole(0, 0) == WN_NONE);
+
+    std::string s = FillPhrase("Rest here, {race} {class}, welcome to {zone}.",
+                               "Innkeeper Bob", "orc", "warrior", "Durotar", "Hero");
+    check("phrase-fill", s == "Rest here, orc warrior, welcome to Durotar.");
+
+    LOG_INFO("server.loading", "[Ollama Chat] WorldNpcChat self-test: {}/{} passed", passed, total);
+}
+
 OllamaWorldNpcChatter::OllamaWorldNpcChatter() : WorldScript("OllamaWorldNpcChatter") {}
 
 void OllamaWorldNpcChatter::OnUpdate(uint32 diff)

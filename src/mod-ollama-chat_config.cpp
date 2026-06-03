@@ -1502,6 +1502,7 @@ void LoadOllamaChatConfig()
         SpeechSplitSelfTest();
         SoftStopSelfTest();
         EmoteActionRoutingSelfTest();
+        WorldNpcChatSelfTest();
     }
 }
 
