@@ -724,5 +724,827 @@
       "c_thun",
       "instance"
     ]
+  },
+  {
+    "id": "dungeon_gnomeregan",
+    "title": "Gnomeregan",
+    "short_description": "the gnomes' irradiated capital beneath Dun Morogh, seized by a mad tinker after the trogg flood",
+    "references": [],
+    "content": "Carved into the mountains of Dun Morogh, the gleaming gnome capital was lost in a single desperate hour. When troggs boiled up from the deep tunnels, Sicco Thermaplugg convinced High Tinker Mekkatorque to flood the halls with radiation to purge them — a betrayal that poisoned far more gnomes than troggs and left Thermaplugg ruling a glowing ruin. The survivors fled to Ironforge's Tinker Town, and ever since the gnomes have dreamed of scrubbing the radiation from their home and pulling the usurper from his throne of gears.",
+    "keywords": [
+      "gnomeregan",
+      "gnome",
+      "dun morogh",
+      "troggs",
+      "sicco thermaplugg",
+      "mekkatorque",
+      "radiation",
+      "level 25",
+      "alliance"
+    ],
+    "tags": [
+      "dungeon",
+      "alliance",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_scarlet_monastery",
+    "title": "Scarlet Monastery",
+    "short_description": "the fortress-abbey of the fanatic Scarlet Crusade in Tirisfal, besieged by the Forsaken it was built to destroy",
+    "references": [],
+    "content": "Within the haunted woods of Tirisfal Glades stands the cloistered abbey of the Scarlet Crusade, zealots who hunt the undead with a fervor that no longer distinguishes the Scourge from the living. Behind its stained-glass and iron gates, High Inquisitor Whitemane keeps vigil over the fallen Highlord Mograine, whose blade she will not let rest, while the Crusade's commanders drill their swordsmen in cloister and chapel. The Forsaken press against its walls from without, for the fanatics within would burn all of Lordaeron to ash to cleanse it. To walk those candlelit halls is to be named heretic on sight, whether one breathes or not.",
+    "keywords": [
+      "scarlet monastery",
+      "scarlet crusade",
+      "tirisfal glades",
+      "whitemane",
+      "mograine",
+      "forsaken",
+      "undead",
+      "level 35",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_razorfen_kraul",
+    "title": "Razorfen Kraul",
+    "short_description": "a thornbrush warren in the Barrens where the Death's Head quillboar commune with an old god's burning blood",
+    "references": [],
+    "content": "In the southern reaches of the Barrens rises a vast warren woven entirely of living thornbrush, raised by the quillboar over generations until it became a fortress of barbed walls. Here the Death's Head clan keeps its rites, and their ancient hag Charlga Razorflank reads omens in the smoldering blood of Agamaggar, the boar-god slain in ages past whose embers still burn beneath the brambles. The quillboar guard their thorny labyrinth with savage devotion, and any who push into the kraul find every path lined with spines and ambush. It is a green and bristling maze that swallows the careless whole.",
+    "keywords": [
+      "razorfen kraul",
+      "quillboar",
+      "the barrens",
+      "death's head",
+      "charlga razorflank",
+      "agamaggar",
+      "thornbrush",
+      "level 30",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_razorfen_downs",
+    "title": "Razorfen Downs",
+    "short_description": "the quillboar burial mound in the Barrens where Amnennar the Coldbringer has raised a lich's spire among the bones",
+    "references": [],
+    "content": "To the south of the thornbrush kraul lies the great burial mound of the quillboar, a hill of bones and bramble where their dead have been laid for untold generations. The Scourge have found it, and from its peak the lich Amnennar the Coldbringer has raised a spire of frozen death, bending the spirits of the boar-folk to his will and turning their sacred ground into a nursery for the undead. Where once the quillboar mourned, now cold winds carry the chittering of risen things across the Downs. The living dead and the betrayed quillboar both stalk its winding paths, and the chill deepens the higher one climbs.",
+    "keywords": [
+      "razorfen downs",
+      "quillboar",
+      "the barrens",
+      "amnennar the coldbringer",
+      "scourge",
+      "undead",
+      "burial mound",
+      "level 40",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_uldaman",
+    "title": "Uldaman",
+    "short_description": "a buried titan vault in the Badlands where Dark Iron dwarves and troggs claw for the secret of dwarven origins",
+    "references": [],
+    "content": "Beneath the cracked earth of the Badlands sleeps Uldaman, a vault sealed by the titans in the world's first days and forgotten until the dwarves came digging. Within its stone galleries wait the Discs of Norgannon, records said to hold the truth of how the dwarves were shaped from living rock — a truth the Dark Iron clan would seize for itself, and that the Stonevault troggs, mindless creations spilled from the same vault, blindly defend. Constructs of iron and stone still stir in the deep chambers, guarding their makers' work against all comers. To descend is to walk backward into the prehistory of an entire people.",
+    "keywords": [
+      "uldaman",
+      "badlands",
+      "titan",
+      "dark iron",
+      "stonevault",
+      "troggs",
+      "discs of norgannon",
+      "dwarven origins",
+      "level 40",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_the_stockade",
+    "title": "The Stockade",
+    "short_description": "Stormwind's flooded prison beneath the Canals, seized in a Defias riot under Bazil Thredd",
+    "references": [],
+    "content": "Beneath the Canals of Stormwind City lies the Stockade, the human capital's dank prison where the worst of the realm's outlaws are kept behind iron and water. The Defias inmates have risen in open riot, and under the cunning of Bazil Thredd they have overrun their gaolers and turned the flooded cells into a stronghold of their own. The city guard cannot retake the warren alone, and so calls go out for sturdy hands to put down the uprising before the brigands break free into the streets above. It is close, wet, brutal work in the dark under the king's own city.",
+    "keywords": [
+      "the stockade",
+      "stormwind",
+      "defias",
+      "bazil thredd",
+      "prison",
+      "riot",
+      "canals",
+      "level 25",
+      "dungeon",
+      "alliance"
+    ],
+    "tags": [
+      "dungeon",
+      "alliance",
+      "leveling",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_upper_blackrock_spire",
+    "title": "Upper Blackrock Spire",
+    "short_description": "the high halls of Blackrock Mountain where Rend Blackhand and Lord Victor Nefarius scheme over the black brood",
+    "references": [],
+    "content": "High above the orc warrens that honeycomb Blackrock Mountain rise the upper halls of the Spire, where the Dark Horde still clings to power long after the old wars. Here the warlord Rend Blackhand, last of his bloodline to hold a throne, rules a host of orcs, ogres, and trolls who never bowed to Thrall — and at his side stands Lord Victor Nefarius, a sorcerer who is no man at all but the black dragon Nefarian in stolen guise. Together they breed and twist the black brood in hidden roosts, plotting to loose a flight of dragons upon the world. The smoke-choked heights are a den of warlords and wyrms, and only a warband in force dares climb them.",
+    "keywords": [
+      "upper blackrock spire",
+      "ubrs",
+      "blackrock mountain",
+      "dark horde",
+      "rend blackhand",
+      "victor nefarius",
+      "nefarian",
+      "black dragonflight",
+      "level 55",
+      "dungeon",
+      "contested"
+    ],
+    "tags": [
+      "dungeon",
+      "contested",
+      "endgame",
+      "classic"
+    ]
+  },
+  {
+    "id": "dungeon_hellfire_ramparts",
+    "title": "Hellfire Ramparts",
+    "short_description": "the battlements of Hellfire Citadel where Kargath's fel orcs watch over the ruined peninsula",
+    "references": [],
+    "content": "The first wall any soul faces upon entering Hellfire Citadel is the Ramparts, a sweep of jagged battlements thrust over the red wastes of the peninsula. Here the Shattered Hand orcs of Kargath Bladefist keep watch, their flesh corrupted to crimson by the fel draughts brewed within, and they loose hellish hounds and warlocks upon any who climb toward the keep. From these heights the whole blasted land can be seen, and from these heights the fel horde rains fire down upon the green road below.",
+    "keywords": [
+      "hellfire ramparts",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "kargath bladefist",
+      "shattered hand",
+      "fel orcs",
+      "level 60",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_blood_furnace",
+    "title": "The Blood Furnace",
+    "short_description": "the forge within Hellfire Citadel where the captive pit lord's blood is rendered into fel orcs",
+    "references": [],
+    "content": "Deep in Hellfire Citadel, beyond the Ramparts, the orcs keep a furnace fed not by coal but by blood. The pit lord Magtheridon, broken and chained below, is bled drop by drop, and his tainted blood is worked into draught after draught that turns common orcs into red-skinned, fel-maddened killers for Illidan's armies. Magtheridon's own jailers run the works, and the prisoners dragged here do not return.",
+    "keywords": [
+      "blood furnace",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "magtheridon",
+      "fel orcs",
+      "illidan",
+      "level 61",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_shattered_halls",
+    "title": "The Shattered Halls",
+    "short_description": "Kargath Bladefist's inner stronghold within Hellfire Citadel, the last bastion of the Shattered Hand",
+    "references": [],
+    "content": "Within the heart of Hellfire Citadel lie the Shattered Halls, the inner sanctum where Kargath Bladefist himself holds court over the Shattered Hand. The corridors run with the blood of captives chained in rows, awaiting the blade or the brewing-vats, and Kargath's most savage warriors stalk the smoke-filled passages with axe and fel-fire. This is the orcs' last redoubt in the peninsula, and to reach the warchief who severed his own hand to escape his shackles is to fight through every horror his clan can muster.",
+    "keywords": [
+      "shattered halls",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "kargath bladefist",
+      "shattered hand",
+      "fel orcs",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_slave_pens",
+    "title": "The Slave Pens",
+    "short_description": "the holding cages of Coilfang Reservoir where Vashj's naga drown the broken into bondage",
+    "references": [],
+    "content": "Beneath the drowned marsh of Zangarmarsh, the naga of Coilfang Reservoir keep their Slave Pens, a maze of flooded cages and dripping stone. Here Lady Vashj's serpent-folk herd captured Broken draenei and others into chains, breaking their spirits with toil and water until they labor for the great work below. Naga overseers and their summoned tide-creatures patrol the channels, and the cries of the drowning echo down the green-lit halls.",
+    "keywords": [
+      "slave pens",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "lady vashj",
+      "naga",
+      "broken draenei",
+      "level 62",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_the_underbog",
+    "title": "The Underbog",
+    "short_description": "the fungal deep of Coilfang where bog lords and the great hydra Hungarfen rule the spore-stalks",
+    "references": [],
+    "content": "Below the cages of Coilfang the stone gives way to the Underbog, a cavernous fen where titanic mushrooms rise like towers and the air hangs thick with spores. Lumbering bog lords and shambling fungal giants wander the murk, and in the deepest pool coils Hungarfen, an ancient hydra whose many heads drag the unwary beneath the muck. The naga suffer these wild things to thrive, for the rot they spread feeds the works that drain the marsh.",
+    "keywords": [
+      "underbog",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "hungarfen",
+      "bog lords",
+      "naga",
+      "level 63",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_the_steamvault",
+    "title": "The Steamvault",
+    "short_description": "the pumping heart of Coilfang where the naga drain the marsh dry for Vashj's design",
+    "references": [],
+    "content": "At the lowest reach of Coilfang Reservoir thrums the Steamvault, a roaring machine-works of pipes, turbines, and scalding mist. Here Lady Vashj's naga labor at the true purpose of the whole drowned complex: to pump the waters of Zangarmarsh away into the void, withering Outland's last green marsh for some design known only to their mistress. Hydromancers and steam-wreathed guardians defend the controls, and the thunder of the pumps never ceases.",
+    "keywords": [
+      "steamvault",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "lady vashj",
+      "naga",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_mana_tombs",
+    "title": "Mana-Tombs",
+    "short_description": "a wing of Auchindoun where the Consortium and void-summoners fight among the draenei dead",
+    "references": [],
+    "content": "Within the shattered crypt-city of Auchindoun, beneath Terokkar Forest, lie the Mana-Tombs, vaults raised to house the honored draenei dead. Now the place is a battleground: the ethereal traders of the Consortium delve the tombs for the rich arcane charge sealed within, while Nexus-Prince Shaffar's rival ethereals summon creatures of the void to claim it for themselves. Among the resting draenei, ghostly and starlit foes clash over the ruins of a holy place.",
+    "keywords": [
+      "mana-tombs",
+      "mana tombs",
+      "auchindoun",
+      "terokkar forest",
+      "consortium",
+      "ethereals",
+      "nexus-prince shaffar",
+      "void",
+      "level 64",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_auchenai_crypts",
+    "title": "Auchenai Crypts",
+    "short_description": "the ossuary of Auchindoun where the draenei death-priests turned to necromancy",
+    "references": [],
+    "content": "The Auchenai were the draenei keepers of Auchindoun, sworn to tend the dead and guard the passage of souls. But when the crypt-city was sundered, despair and dark powers turned them from their vigil, and now the Auchenai Crypts ring with necromantic rites where once there were prayers. Exarch Maladaar, once a noble shepherd of the departed, presides over the ossuary as its corrupted lord, raising the very dead he was meant to honor against any who trespass.",
+    "keywords": [
+      "auchenai crypts",
+      "auchindoun",
+      "terokkar forest",
+      "auchenai",
+      "exarch maladaar",
+      "draenei",
+      "necromancy",
+      "level 65",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "undead"
+    ]
+  },
+  {
+    "id": "dungeon_sethekk_halls",
+    "title": "Sethekk Halls",
+    "short_description": "the arakkoa wing of Auchindoun where the Sethekk cult worships the raven-god Anzu",
+    "references": [],
+    "content": "One wing of broken Auchindoun has fallen to the Sethekk, a sect of the bird-like arakkoa cast out and embittered. In these shadowed halls they bow not to the Light but to Anzu, the raven-god of the cursed, and their talon-priests work dark rites to call their patron back into the world. Feathered fanatics and summoned shadow-ravens haunt the passages, and at their heart the Sethekk seers chant for the wings of their dread deity.",
+    "keywords": [
+      "sethekk halls",
+      "auchindoun",
+      "terokkar forest",
+      "arakkoa",
+      "sethekk",
+      "anzu",
+      "raven god",
+      "level 67",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "shadow"
+    ]
+  },
+  {
+    "id": "dungeon_shadow_labyrinth",
+    "title": "Shadow Labyrinth",
+    "short_description": "the deepest wing of Auchindoun where the Shadow Council whispers and a captive lord of sound is bound",
+    "references": [],
+    "content": "The deepest and darkest reach of Auchindoun is the Shadow Labyrinth, a winding maze claimed by the Shadow Council, the warlock cabal that has served the Legion since the orcs' first fall. Through these black corridors their whispers spread corruption, and at the labyrinth's heart they hold Murmur, a vast and ancient lord of sound and silence dragged from beyond the world and chained to do their bidding. To walk here is to be deafened by a being whose merest voice can shatter stone.",
+    "keywords": [
+      "shadow labyrinth",
+      "auchindoun",
+      "terokkar forest",
+      "shadow council",
+      "murmur",
+      "warlocks",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "shadow"
+    ]
+  },
+  {
+    "id": "dungeon_old_hillsbrad_foothills",
+    "title": "Old Hillsbrad Foothills",
+    "short_description": "a passage at the Caverns of Time to the day a young Thrall was meant to remain a prisoner",
+    "references": [],
+    "content": "Through the sands of the Caverns beneath Tanaris opens a road into the past, to the green hills of Hillsbrad as they were in years long gone. Here a young Thrall languishes in the internment camp at Durnholde Keep, and history demands that he break free to become the warchief who will lead his people to freedom. The Infinite Dragonflight schemes to murder him in his chains and unravel all that followed, and the bronze guardians beg travelers to shield the slave's escape and keep the timeline whole.",
+    "keywords": [
+      "old hillsbrad foothills",
+      "caverns of time",
+      "tanaris",
+      "thrall",
+      "durnholde keep",
+      "taretha",
+      "infinite dragonflight",
+      "bronze",
+      "level 66",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "tbc",
+      "caverns of time",
+      "dragons"
+    ]
+  },
+  {
+    "id": "dungeon_the_black_morass",
+    "title": "The Black Morass",
+    "short_description": "a wound in time at the Caverns of Time, where the first Dark Portal must be allowed to open",
+    "references": [],
+    "content": "Through the swirling sands of the Caverns beneath Tanaris lies a sodden marsh fixed at the moment the Dark Portal first tore open. The bronze dragonflight stands guard while Medivh, possessed and unknowing, works the spell that will let the orcish horde cross into Azeroth — for that doomed hour must happen exactly as it did. The Infinite Dragonflight pours assassins through the rifts to break the timeline, and only by holding the line through wave upon wave can the present be preserved.",
+    "keywords": [
+      "black morass",
+      "caverns of time",
+      "tanaris",
+      "medivh",
+      "dark portal",
+      "infinite dragonflight",
+      "bronze",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "tbc",
+      "caverns of time",
+      "dragons"
+    ]
+  },
+  {
+    "id": "dungeon_the_mechanar",
+    "title": "The Mechanar",
+    "short_description": "a fortress of Tempest Keep where Kael'thas's blood elves forge arcane war-machines",
+    "references": [],
+    "content": "Adrift in the broken sky of Netherstorm hangs the Mechanar, one of the satellite fortresses of Tempest Keep, the stolen vessel of the naaru. Within its humming corridors Kael'thas Sunstrider's blood elves labor to forge arcane war-machines and animate constructs of crystal and steel, all overseen by the cold genius Pathaleon the Calculator. The whole place is a manufactory of the prince's ambition, churning out engines of magic to serve his mad pact with the Burning Legion.",
+    "keywords": [
+      "mechanar",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "pathaleon the calculator",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_the_botanica",
+    "title": "The Botanica",
+    "short_description": "a Tempest Keep arboretum where the blood elves cultivate void-warped flora",
+    "references": [],
+    "content": "Another of Tempest Keep's drifting fortresses above Netherstorm is the Botanica, a vast crystalline arboretum given over to the blood elves' arcane horticulture. Here Kael'thas's people graft and nurture flora gathered from a hundred worlds, twisting it with raw magic and void energies until the gardens themselves turn hostile. At the heart of the green-glassed halls looms Warp Splinter, a colossal corrupted ancient grown to be the prince's living weapon.",
+    "keywords": [
+      "botanica",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "warp splinter",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_the_arcatraz",
+    "title": "The Arcatraz",
+    "short_description": "Tempest Keep's prison-ship for cosmic horrors, its wardens slain and its cells flung open",
+    "references": [],
+    "content": "The Arcatraz was built by the naaru as a flying prison to hold creatures too dangerous to walk under any sky — abyssal demons, void-things, and worse. When Kael'thas's blood elves seized Tempest Keep, they tore open the cells and freed what slumbered within, chief among them the Harbinger Skyriss, an agent of the void who now schemes to spread madness and dissolution. The shattered wardens drift dead in the halls, and the horrors they once guarded prowl free among the stars.",
+    "keywords": [
+      "arcatraz",
+      "netherstorm",
+      "tempest keep",
+      "kael'thas",
+      "blood elves",
+      "harbinger skyriss",
+      "void",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "void"
+    ]
+  },
+  {
+    "id": "dungeon_magisters_terrace",
+    "title": "Magisters' Terrace",
+    "short_description": "Kael'thas's last redoubt on the sunwell isle, where the fallen prince makes his final mad stand",
+    "references": [],
+    "content": "On the sun-washed Isle of Quel'Danas, where the broken Sunwell once burned, stands Magisters' Terrace — the final refuge of Kael'thas Sunstrider. Driven from Tempest Keep and wholly given over to his demonic masters, the fallen prince of the blood elves rallies his last loyal magisters here, scheming to call his dread patron Kil'jaeden into the world through the very wellspring of his people's power. His own kin, betrayed and disillusioned, hunt him through the marble halls to end his madness where it began.",
+    "keywords": [
+      "magisters' terrace",
+      "magisters terrace",
+      "isle of quel'danas",
+      "kael'thas",
+      "blood elves",
+      "sunwell",
+      "kil'jaeden",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "raid_karazhan",
+    "title": "Karazhan",
+    "short_description": "the last Guardian's abandoned tower in Deadwind Pass, haunted by the echoes of Medivh's power",
+    "references": [],
+    "content": "Rising alone from the dead canyon of Deadwind Pass, the tower of Karazhan was the seat of Medivh, last of the Guardians of Tirisfal. Though its master is long dead, the residue of his immense, possessed power never settled — the halls stage phantom operas that play to the death, a chessboard moves armies of its own accord, and the dread Prince Malchezaar of the Burning Legion has slipped in to claim the leyline nexus for himself. Mages and historians covet what the tower remembers; few who climb it descend.",
+    "keywords": ["karazhan", "deadwind pass", "medivh", "guardian", "malchezaar", "tower", "opera", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "magic", "legion"]
+  },
+  {
+    "id": "raid_gruuls_lair",
+    "title": "Gruul's Lair",
+    "short_description": "the cliffside hold of Gruul the Dragonkiller, where the gronn overlord and his son rule the Blade's Edge",
+    "references": [],
+    "content": "High in the jagged crags of Blade's Edge Mountains, the gronn called Gruul the Dragonkiller reigns over a brood of monstrous giants. He earned his dread name by slaughtering the black dragons who once nested among these peaks, hanging their impaled corpses as trophies along the ridgelines. At the threshold of his cavern, his maul-wielding son High King Maulgar commands a savage council of ogres, and any who would reach the old gronn must first break that brutish guard.",
+    "keywords": ["gruul's lair", "gruuls lair", "blade's edge mountains", "gruul", "maulgar", "gronn", "ogres", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "giants"]
+  },
+  {
+    "id": "raid_magtheridons_lair",
+    "title": "Magtheridon's Lair",
+    "short_description": "the chained pit lord beneath Hellfire Citadel, once Outland's master, straining against Illidan's bonds",
+    "references": [],
+    "content": "Far below the ramparts of Hellfire Citadel, in the bleeding heart of the Hellfire Peninsula, the pit lord Magtheridon hangs in agony upon a frame of arcane chains. Before Illidan came, this demon ruled the shattered remnants of Draenor as its self-styled lord; now he is a captive, his very blood drained to corrupt the orcs into fel-mad servants. He howls and strains against his bonds, and his keepers fight to ensure he is never loosed upon the world again.",
+    "keywords": ["magtheridon's lair", "magtheridons lair", "hellfire peninsula", "hellfire citadel", "magtheridon", "pit lord", "illidan", "fel", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "demons", "legion"]
+  },
+  {
+    "id": "raid_serpentshrine_cavern",
+    "title": "Serpentshrine Cavern",
+    "short_description": "the flooded heart of Coilfang where Lady Vashj works Illidan's scheme to drain Outland's waters",
+    "references": [],
+    "content": "Deep within the drowned vaults of Coilfang Reservoir, in the marsh-country of Zangarmarsh, lies the sunken sanctum of Lady Vashj. Once handmaiden to Queen Azshara and now the serpentine right hand of Illidan Stormrage, the naga sorceress hoards Outland's failing waters here, throttling the springs that feed the swamp at her master's command. Her coiled court of naga and beasts guards the flooded shrine, and the parched land withers as she works her slow and ruinous design.",
+    "keywords": ["serpentshrine cavern", "coilfang reservoir", "zangarmarsh", "lady vashj", "naga", "illidan", "water", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "naga", "water"]
+  },
+  {
+    "id": "raid_tempest_keep",
+    "title": "Tempest Keep",
+    "short_description": "the naaru satellite-fortress in Netherstorm seized by Kael'thas, who courts the Legion for power",
+    "references": [],
+    "content": "Adrift in the broken sky of Netherstorm floats Tempest Keep, a crystalline fortress built by the naaru as a vessel of pure Light. Kael'thas Sunstrider, prince of the blood elves, stormed and stole it, turning its arcane engines toward his own insatiable hunger for magic. From this hijacked stronghold he treats with the agents of the Burning Legion, gathering power for a master far darker than any his ruined people once served.",
+    "keywords": ["tempest keep", "netherstorm", "kael'thas", "blood elves", "naaru", "arcane", "legion", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "arcane", "legion"]
+  },
+  {
+    "id": "raid_battle_for_mount_hyjal",
+    "title": "Battle for Mount Hyjal",
+    "short_description": "a Caverns of Time vision of the World Tree's last defense against Archimonde and the Legion",
+    "references": [],
+    "content": "Within the timeless sands of the Caverns of Time, beneath Tanaris, the keepers of history reopen the climax of the Third War upon the slopes of Mount Hyjal. Here the night elves, humans, and orcs stood together in desperate alliance to defend the World Tree from the demon-lord Archimonde and his endless host. Those who walk this vision relive that terrible night — the falling bastions, the rallying defenders, and the final stand at Nordrassil where Archimonde was unmade.",
+    "keywords": ["battle for mount hyjal", "mount hyjal", "caverns of time", "tanaris", "archimonde", "world tree", "nordrassil", "third war", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "legion", "history"]
+  },
+  {
+    "id": "raid_black_temple",
+    "title": "Black Temple",
+    "short_description": "the ruined draenei temple Karabor turned into Illidan's fortress, besieged by Akama and the Aldor",
+    "references": [],
+    "content": "In the ashen ruin of Shadowmoon Valley stands the Black Temple, once the radiant draenei sanctuary of Karabor before the orcs defiled it in blood. Now it is the seat of Illidan Stormrage, the Betrayer, who broods upon his throne behind walls of fel iron and shadow. The broken draenei Akama, long forced into Illidan's service, has turned at last — leading the Aldor and the Ashtongue against the very lord he was bound to obey, that the temple might be cleansed.",
+    "keywords": ["black temple", "shadowmoon valley", "karabor", "illidan", "akama", "aldor", "ashtongue", "draenei", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "demons", "illidan"]
+  },
+  {
+    "id": "raid_sunwell_plateau",
+    "title": "Sunwell Plateau",
+    "short_description": "the corrupted Sunwell on Quel'Danas, where Kil'jaeden is summoned and the Shattered Sun stand fast",
+    "references": [],
+    "content": "Upon the Isle of Quel'Danas, at the desecrated heart of the high elves' ancient Sunwell, the deceiver Kil'jaeden is dragged toward the waking world. The fallen prince Kael'thas spent his last madness to crack the wellspring open as a portal for his demonic master, and through that wound the eredar lord begins to emerge. Against this horror the Shattered Sun Offensive — blood elves and draenei united in last extremity — fight to seal the breach before the deceiver sets foot upon Azeroth.",
+    "keywords": ["sunwell plateau", "isle of quel'danas", "sunwell", "kil'jaeden", "kael'thas", "shattered sun", "blood elves", "draenei", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "legion", "arcane"]
+  },
+  {
+    "id": "raid_zul_aman",
+    "title": "Zul'Aman",
+    "short_description": "the Amani forest kingdom where Zul'jin wakes the animal-god avatars against the high elves",
+    "references": [],
+    "content": "Within the shadowed pines of the Ghostlands lies Zul'Aman, the war-capital of the Amani trolls. Their warlord Zul'jin, scarred and embittered by old defeats at elven hands, has risen again with a furious purpose — to call upon the avatars of the animal-gods, the bear, the eagle, the lynx, and the dragonhawk, and loose their primal fury upon all who trespass his forest. He would drive the high elves from these woods forever, or see his kingdom burn in the trying.",
+    "keywords": ["zul'aman", "zul aman", "ghostlands", "zul'jin", "amani", "trolls", "animal gods", "high elves", "level 70", "outland", "raid"],
+    "tags": ["raid", "tbc", "trolls"]
+  },
+  {
+    "id": "dungeon_utgarde_keep",
+    "title": "Utgarde Keep",
+    "short_description": "the Vrykul stronghold in Howling Fjord where Ingvar the Plunderer wakes frost-giant kin for the Lich King",
+    "references": [],
+    "content": "Carved into the cliffs of the Howling Fjord, the grim hold of Utgarde was raised by the Vrykul, the giant forebears of humankind. Roused from ancient slumber and sworn to the Lich King, these towering warriors arm themselves anew within its frozen forges and crypts. Their captain, Ingvar the Plunderer, drives the host onward, and so steadfast is his oath to the master of the Scourge that death itself does not release him from the fight.",
+    "keywords": ["utgarde keep", "howling fjord", "vrykul", "ingvar", "lich king", "scourge", "level 70", "northrend", "wotlk", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "vrykul"]
+  },
+  {
+    "id": "dungeon_utgarde_pinnacle",
+    "title": "Utgarde Pinnacle",
+    "short_description": "the high summit of Utgarde where King Ymiron and the drake Skadi guard the Vrykul kings' tombs",
+    "references": [],
+    "content": "At the windswept crown of the Howling Fjord rises Utgarde Pinnacle, the sacred high seat of the Vrykul and the resting place of their ancient kings. Here the brooding King Ymiron presides over the tombs of his forebears, calling upon their dead majesty to defend the summit. Above the icy battlements wheels Skadi the Ruthless astride his proto-drake, raining death upon any who dare ascend toward the throne of the giant-kings.",
+    "keywords": ["utgarde pinnacle", "howling fjord", "vrykul", "ymiron", "skadi", "proto-drake", "level 80", "northrend", "wotlk", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "vrykul"]
+  },
+  {
+    "id": "dungeon_the_nexus",
+    "title": "The Nexus",
+    "short_description": "Malygos's icebound spire on Coldarra, where the blue dragonflight hoards the world's magic",
+    "references": [],
+    "content": "On the frozen island of Coldarra off the Borean coast, the blue dragonflight's spire turns like a vast orrery of ice and arcane light. Malygos, the Spell-Weaver, woke from ten thousand years of madness convinced that mortals had bled Azeroth's magic to ruin, and from here his flight wages a war to reclaim every leyline. Within, the captive consort Keristrasza is tormented into service, and the very walls bleed raw arcane frost upon any who climb toward the Aspect's sanctum.",
+    "keywords": ["the nexus", "coldarra", "borean tundra", "malygos", "blue dragonflight", "keristrasza", "arcane", "level 71", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "dungeon_the_oculus",
+    "title": "The Oculus",
+    "short_description": "the floating ring above the Nexus where captured drakes are loosed to fight Malygos's war in the sky",
+    "references": [],
+    "content": "Suspended in the bitter air above Coldarra hangs the Oculus, a shattered ring of arcane platforms that orbits the Nexus far below. Here Malygos's flight cages drakes of every brood, breaking them to serve as mounts in the great arcane war he wages across the heavens. Those who would challenge the Spell-Weaver's design must seize these very steeds and take wing, trading blows amid the clouds where the floating ring slowly wheels.",
+    "keywords": ["the oculus", "coldarra", "borean tundra", "malygos", "blue dragonflight", "drakes", "arcane", "level 71", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "dungeon_azjol_nerub",
+    "title": "Azjol-Nerub",
+    "short_description": "the upper halls of the old nerubian kingdom, where Scourge spider-lords hold against intruders",
+    "references": [],
+    "content": "Beneath the frozen plains of Dragonblight wind the upper passages of Azjol-Nerub, once the proud subterranean empire of the spider-like nerubians. Long ago the Scourge overran this kingdom in a terrible war, and now the Lich King's risen spider-lords skitter through its pillared halls, defending the dark roads that lead ever downward. The carved grandeur of the old empire still stands, though its builders are bent now to the will of death.",
+    "keywords": ["azjol-nerub", "azjol nerub", "dragonblight", "nerubians", "scourge", "spider", "lich king", "level 72", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "nerubian", "scourge"]
+  },
+  {
+    "id": "dungeon_ahnkahet_the_old_kingdom",
+    "title": "Ahn'kahet: The Old Kingdom",
+    "short_description": "the deeper nerubian dark beneath the ice, where a faceless cult of an old god festers",
+    "references": [],
+    "content": "Far below Azjol-Nerub, in the lightless deeps under Dragonblight, lies Ahn'kahet, the Old Kingdom of the nerubians. Here the corruption runs deeper than the Scourge — for the faceless servants of an imprisoned old god, Yogg-Saron, have wormed their way into the ancient halls, spreading a madness that turns even the unliving against one another. Whispers crawl through the dark, and a cult of the void festers in the silence beneath the world.",
+    "keywords": ["ahn'kahet", "ahnkahet", "the old kingdom", "dragonblight", "nerubians", "old god", "yogg-saron", "faceless", "level 73", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "nerubian", "old-god"]
+  },
+  {
+    "id": "dungeon_drak_tharon_keep",
+    "title": "Drak'Tharon Keep",
+    "short_description": "a fallen troll fortress on the Zul'Drak border, now a Scourge slaughterhouse raising the dead",
+    "references": [],
+    "content": "On the cold marches between Grizzly Hills and Zul'Drak stands Drak'Tharon Keep, a brooding stronghold the Drakkari trolls abandoned to the advancing Scourge. Where war-drums once sounded, the undead now toil at a grim harvest, butchering the living and binding the slain into the Lich King's swelling host. The blood of the old garrison still stains its stones, and from its ramparts the dead look out upon a land they could not hold.",
+    "keywords": ["drak'tharon keep", "drak tharon keep", "grizzly hills", "zul'drak", "drakkari", "trolls", "scourge", "level 74", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "troll", "scourge"]
+  },
+  {
+    "id": "dungeon_gundrak",
+    "title": "Gundrak",
+    "short_description": "the temple-city of the Drakkari ice trolls, who butcher their own animal-gods for power against the Scourge",
+    "references": [],
+    "content": "In the frozen troll land of Zul'Drak rises Gundrak, the great temple-city where the Drakkari ice trolls have gathered in their hour of desperation. With the Scourge pressing hard upon their borders, the trolls have turned to a monstrous bargain — slaying their own revered animal-gods upon the altars and devouring their power to win strength enough to survive. Blood runs down the temple steps, and the loa themselves are unmade by the very people who once worshipped them.",
+    "keywords": ["gundrak", "zul'drak", "drakkari", "ice trolls", "loa", "animal gods", "scourge", "level 76", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "troll"]
+  },
+  {
+    "id": "dungeon_halls_of_stone",
+    "title": "Halls of Stone",
+    "short_description": "a titan vault in the roots of Ulduar where the Tribunal of Ages keeps the record of creation",
+    "references": [],
+    "content": "Beneath the peaks of the Storm Peaks, woven into the deep roots of Ulduar, lie the Halls of Stone — a vault the titans raised to safeguard the chronicle of the world's making. At its heart the Tribunal of Ages recites the secret history of creation to any who dare disturb it. But the iron dwarves, twisted servants of a fallen watcher, have broken in to ransack the vault and silence what the stone remembers, and only swift hands can keep their fury from the records.",
+    "keywords": ["halls of stone", "the storm peaks", "ulduar", "titans", "tribunal of ages", "iron dwarves", "level 77", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "dungeon_halls_of_lightning",
+    "title": "Halls of Lightning",
+    "short_description": "Loken's storm-seat in the Storm Peaks, where the betrayer-keeper forges an army against the titans",
+    "references": [],
+    "content": "High in the Storm Peaks stand the Halls of Lightning, the seat of Loken, the watcher who turned against those who set him to guard the world. Here amid crackling arcs and rolling thunder he has bent the iron giants to his rebellion, and his smith Volkhan labors at a forge without rest, hammering out an army of golems to march upon the titans' works. The very air sings with stolen lightning, and the keeper sits enthroned in the storm he stole.",
+    "keywords": ["halls of lightning", "the storm peaks", "loken", "volkhan", "iron giants", "titans", "lightning", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "dungeon_the_violet_hold",
+    "title": "The Violet Hold",
+    "short_description": "the Kirin Tor's arcane prison in floating Dalaran, breaking open as its captive horrors stir",
+    "references": [],
+    "content": "Within the floating city of Dalaran the Kirin Tor keep a warded prison called the Violet Hold, where the mages have sealed away creatures too dangerous to set loose upon the world. Now the wards flicker and fail, and the captives — a dragon, a void terror, and worse — batter at their cells in a coordinated bid for freedom. The guardians of the city must hold the line as wave upon wave spills from the opening gates, lest Dalaran itself fall to the things it locked away.",
+    "keywords": ["the violet hold", "dalaran", "kirin tor", "arcane prison", "mages", "level 75", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "arcane"]
+  },
+  {
+    "id": "dungeon_the_culling_of_stratholme",
+    "title": "The Culling of Stratholme",
+    "short_description": "a Caverns of Time vision of Arthas purging plague-struck Stratholme as the Infinite try to twist it",
+    "references": [],
+    "content": "Within the timeless sands of the Caverns of Time lies a memory the Infinite dragonflight would unmake: the day Arthas came to the plague-cursed city of Stratholme. There the young prince, certain its people were already lost to the undeath in their grain, drew his sword against his own subjects to deny their corpses to the Scourge. Those sent back by the bronze guardians must walk that terrible hour at his side and beat off the shadowy agents who would rewrite it, so that history keeps its grim and rightful shape.",
+    "keywords": ["the culling of stratholme", "caverns of time", "tanaris", "arthas", "stratholme", "infinite dragonflight", "scourge", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "caverns-of-time"]
+  },
+  {
+    "id": "dungeon_trial_of_the_champion",
+    "title": "Trial of the Champion",
+    "short_description": "the Argent Tournament's arena in Icecrown, where champions joust beneath the Lich King's shadow",
+    "references": [],
+    "content": "On the frozen fields of Icecrown the Argent Crusade has raised a great tournament arena, a proving ground for the champions who would one day storm the Lich King's gates. Here mounted knights thunder across the lists with lance and shield, and the finest warriors of the Horde and Alliance test their mettle against the Crusade's own. Yet even this proud contest unfolds in the shadow of the citadel above, and not every challenger who enters the ring fights for honor alone.",
+    "keywords": ["trial of the champion", "icecrown", "argent tournament", "argent crusade", "joust", "champions", "lich king", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "argent"]
+  },
+  {
+    "id": "dungeon_the_forge_of_souls",
+    "title": "The Forge of Souls",
+    "short_description": "the first of the Frozen Halls beneath Icecrown, where the Lich King binds tortured souls into weapons",
+    "references": [],
+    "content": "Deep beneath the Lich King's citadel begin the Frozen Halls, and the first of them is the Forge of Souls — a dreadful furnace where the Scourge harvest the anguish of the dead. Here the Devourer of Souls feeds upon the captured spirits dragged down from the world above, rendering their torment into the cold steel of cursed blades. The Ashen Verdict, cutting a path toward the citadel's heart, must break this engine of misery before its weapons can be turned against them.",
+    "keywords": ["the forge of souls", "icecrown", "frozen halls", "scourge", "devourer of souls", "ashen verdict", "lich king", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "dungeon_pit_of_saron",
+    "title": "Pit of Saron",
+    "short_description": "the Scourge slave-quarry below Icecrown, worked by the damned under Scourgelord Tyrannus",
+    "references": [],
+    "content": "Below the Lich King's citadel yawns the Pit of Saron, a vast quarry where the Scourge drive their captives to hew saronite from the frozen rock until they drop. Scourgelord Tyrannus and his frost-wyrm lord it over the wretched throng of slaves, and the cold itself is a torment that kills as surely as the overseers' lash. Those who follow the Ashen Verdict's path through these depths must free the broken laborers and turn their despair into one last defiant uprising.",
+    "keywords": ["pit of saron", "icecrown", "frozen halls", "scourge", "tyrannus", "saronite", "ashen verdict", "level 80", "northrend", "dungeon"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "dungeon_halls_of_reflection",
+    "title": "Halls of Reflection",
+    "short_description": "the frozen gallery beneath Icecrown where Frostmourne was kept and the Lich King springs his trap",
+    "references": [],
+    "content": "Deep under the Icecrown glacier lies a hall of mirrored ice where the runeblade Frostmourne once waited on its dais. Those who come seeking the secret of the Lich King's undoing find instead the echoes of every soul the blade has devoured, and a frozen throne's worth of patience: the Lich King lets them wake the memory they need, then looses an endless tide of Scourge to chase them back out across the ice while a wall of his will closes behind. Few escapes from Northrend have been so narrow.",
+    "keywords": ["halls of reflection", "icecrown", "frostmourne", "lich king", "jaina", "sylvanas", "frozen halls", "level 80", "northrend"],
+    "tags": ["dungeon", "wotlk", "northrend", "scourge"]
+  },
+  {
+    "id": "raid_vault_of_archavon",
+    "title": "Vault of Archavon",
+    "short_description": "a titan vault under the Wintergrasp battlefield, opened only by whichever faction holds the keep",
+    "references": [],
+    "content": "Beneath the frozen battlefield of Wintergrasp, where Horde and Alliance grind against one another without end, the titans left a sealed vault and set a stone watcher named Archavon to guard it. Its great doors answer only to victory — whichever side holds the fortress above may descend to challenge what waits within. The colossal sentinel and his kin have slept since the world's shaping, and they do not take kindly to being roused from their long and patient watch.",
+    "keywords": ["vault of archavon", "wintergrasp", "titans", "archavon", "horde", "alliance", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "titan"]
+  },
+  {
+    "id": "raid_the_obsidian_sanctum",
+    "title": "The Obsidian Sanctum",
+    "short_description": "the black dragonflight's clutch beneath Wyrmrest, where Sartharion and his consorts guard the eggs",
+    "references": [],
+    "content": "Deep beneath the Wyrmrest Temple in Dragonblight lies the Obsidian Sanctum, a smoldering cavern where the remnants of the black dragonflight have hidden their precious clutch of eggs. The drake Sartharion stands watch over the nest, and with him three fierce consorts coiled and waiting, ready to wake the unhatched horrors should any threaten the brood. To strike at the black flight's future, intruders must brave the heat and the wings that defend it.",
+    "keywords": ["the obsidian sanctum", "dragonblight", "wyrmrest", "black dragonflight", "sartharion", "eggs", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "dragons"]
+  },
+  {
+    "id": "raid_the_eye_of_eternity",
+    "title": "The Eye of Eternity",
+    "short_description": "Malygos's innermost arena above the Nexus, where the Aspect of Magic makes his stand amid the void",
+    "references": [],
+    "content": "Crowning the spire of the Nexus in the Borean Tundra floats the Eye of Eternity, the innermost sanctum of Malygos, the Aspect of Magic driven to madness over the world's misuse of the arcane. Here, upon a shattered platform suspended in a churning void of raw power, the great blue dragon makes his stand against those who would stop his war upon mortal spellcasters. The very ground falls away beneath the combatants as the Aspect unleashes the full fury of the magic he was charged to protect.",
+    "keywords": ["the eye of eternity", "borean tundra", "the nexus", "malygos", "blue dragonflight", "aspect of magic", "arcane", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "dragons", "arcane"]
+  },
+  {
+    "id": "raid_trial_of_the_crusader",
+    "title": "Trial of the Crusader",
+    "short_description": "the Argent Crusade's grand coliseum in Icecrown, a gauntlet that ends when the Scourge erupt through the floor",
+    "references": [],
+    "content": "Upon the ice of Icecrown the Argent Crusade has raised a grand coliseum, the proving ground where champions earn the right to march on the Lich King's gates. Within its ring the bravest of the Horde and Alliance face a gauntlet of fierce beasts, rival warriors, and creatures dragged up from Northrend's depths. But the contest is no safe pageant — for the Scourge have tunneled beneath the arena, and when the floor splits open the trial becomes a desperate fight for survival against the very enemy it was meant to prepare them for.",
+    "keywords": ["trial of the crusader", "icecrown", "argent crusade", "coliseum", "champions", "scourge", "lich king", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "argent"]
+  },
+  {
+    "id": "raid_icecrown_citadel",
+    "title": "Icecrown Citadel",
+    "short_description": "the Lich King's fortress crowning the Icecrown glacier, the Frozen Throne's final approach",
+    "references": [],
+    "content": "Above the frozen waste of Icecrown the Lich King's citadel claws at the sky, a black spire raised by the Scourge as their unbreachable heart. Behind its gates wait the death knights of the Ebon Blade turned jailers, the abominations of the great laboratories, and the rotting court that serves the throne. The Ashen Verdict — Argent and Ebon, old enemies bound by one purpose — batters at the doors so that a chosen few might climb to the summit where Arthas keeps his vigil over a dying world.",
+    "keywords": ["icecrown citadel", "icecrown", "lich king", "arthas", "frozen throne", "ashen verdict", "scourge", "level 80", "northrend", "raid"],
+    "tags": ["raid", "wotlk", "northrend", "scourge", "endgame"]
   }
 ]
