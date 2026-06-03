@@ -77,6 +77,13 @@ bool OllamaRAGSystem::Initialize()
     LOG_INFO("server.loading", "[Ollama Chat RAG] References checked: {}, dangling: {}",
              refTotal, refDangling);
 
+    if (g_RAGImprovedScoring)
+    {
+        BuildIdf();
+        BuildEntryVectors();
+        LOG_INFO("server.loading", "[Ollama Chat RAG] IDF table built ({} terms)", m_idf.size());
+    }
+
     m_initialized = true;
     LOG_INFO("server.loading", "[Ollama Chat RAG] Initialized with {} entries and {} vocabulary terms",
              m_ragEntries.size(), m_vocabulary.size());
@@ -192,10 +199,43 @@ std::vector<RAGResult> OllamaRAGSystem::RetrieveRelevantInfo(const std::string& 
         return results;
     }
 
-    for (const auto& entry : m_ragEntries) {
-        float similarity = CalculateSimilarity(query, entry);
-        if (similarity >= similarityThreshold) {
-            results.push_back({&entry, similarity});
+    if (g_RAGImprovedScoring)
+    {
+        // Build the query's sparse, L2-normalized TF-IDF vector once.
+        std::unordered_map<std::string, float> tf;
+        for (const auto& t : NormalizeTokens(query))
+            tf[t] += 1.0f;
+        std::unordered_map<std::string, float> queryVec;
+        float norm = 0.0f;
+        for (const auto& kv : tf)
+        {
+            auto it = m_idf.find(kv.first);
+            float w = kv.second * (it != m_idf.end() ? it->second : 0.0f);
+            if (w != 0.0f)
+            {
+                queryVec[kv.first] = w;
+                norm += w * w;
+            }
+        }
+        norm = std::sqrt(norm);
+        if (norm > 0.0f)
+            for (auto& kv : queryVec)
+                kv.second /= norm;
+
+        for (size_t i = 0; i < m_ragEntries.size(); ++i)
+        {
+            float similarity = CalculateSimilarityImproved(queryVec, i);
+            if (similarity >= similarityThreshold)
+                results.push_back({&m_ragEntries[i], similarity});
+        }
+    }
+    else
+    {
+        for (const auto& entry : m_ragEntries)
+        {
+            float similarity = CalculateSimilarity(query, entry);
+            if (similarity >= similarityThreshold)
+                results.push_back({&entry, similarity});
         }
     }
 
@@ -513,4 +553,20 @@ void OllamaRAGSystem::BuildEntryVectors()
             for (auto& kv : vec)
                 kv.second /= norm;
     }
+}
+
+float OllamaRAGSystem::CalculateSimilarityImproved(
+    const std::unordered_map<std::string, float>& queryVec, size_t entryIndex) const
+{
+    if (entryIndex >= m_entryVectors.size())
+        return 0.0f;
+    const auto& entryVec = m_entryVectors[entryIndex];
+    float dot = 0.0f;
+    for (const auto& kv : queryVec)
+    {
+        auto it = entryVec.find(kv.first);
+        if (it != entryVec.end())
+            dot += kv.second * it->second;
+    }
+    return dot;   // both operands are pre-L2-normalized -> dot == cosine
 }

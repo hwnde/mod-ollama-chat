@@ -64,6 +64,8 @@ private:
     std::vector<std::string> NormalizeTokens(const std::string& text) const;  // preprocess->tokenize->drop stopwords->stem
     void BuildIdf();           // fill m_idf from m_ragEntries via NormalizeTokens
     void BuildEntryVectors();  // fill m_entryVectors (sparse, L2-normalized)
+    float CalculateSimilarityImproved(const std::unordered_map<std::string, float>& queryVec,
+                                      size_t entryIndex) const;
 
 private:
     std::vector<RAGEntry> m_ragEntries;
