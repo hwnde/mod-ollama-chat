@@ -189,39 +189,49 @@ static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string
     switch (cat)
     {
         case ChannelCategory::Guild:
+        {
             if (g_DisableForGuild) return;
-            botAI->SayToGuild(response);
-            ProcessBotChatMessage(botPtr, response, SRC_GUILD_LOCAL, nullptr);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToGuild(l); });
+            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_GUILD_LOCAL, nullptr);
             break;
+        }
         case ChannelCategory::Party:
+        {
             if (g_DisableForParty) return;
-            botAI->SayToParty(response);
-            ProcessBotChatMessage(botPtr, response, SRC_PARTY_LOCAL, nullptr);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToParty(l); });
+            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_PARTY_LOCAL, nullptr);
             break;
+        }
         case ChannelCategory::Raid:
+        {
             if (g_DisableForParty) return;
-            botAI->SayToRaid(response);
-            ProcessBotChatMessage(botPtr, response, SRC_RAID_LOCAL, nullptr);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToRaid(l); });
+            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_RAID_LOCAL, nullptr);
             break;
+        }
         case ChannelCategory::Say:
+        {
             if (g_DisableForSayYell || !AnyRealPlayer(botPtr, true)) return;
-            botAI->Say(response);
-            ProcessBotChatMessage(botPtr, response, SRC_SAY_LOCAL, nullptr);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Say(l); });
+            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
             break;
+        }
         case ChannelCategory::Yell:
+        {
             if (g_DisableForSayYell || !AnyRealPlayer(botPtr, true)) return;
-            botAI->Yell(response);
-            ProcessBotChatMessage(botPtr, response, SRC_YELL_LOCAL, nullptr);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->Yell(l); });
+            if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_YELL_LOCAL, nullptr);
             break;
+        }
         case ChannelCategory::General:
         {
             if (g_DisableForCustomChannels || !AnyRealPlayer(botPtr, false)) return;
             Channel* generalChannel = nullptr;
             if (ChannelMgr* cMgr = ChannelMgr::forTeam(botPtr->GetTeamId()))
                 generalChannel = cMgr->GetChannel("General", botPtr);
-            bool sent = botAI->SayToChannel(response, ChatChannelId::GENERAL);
-            if (sent && generalChannel)
-                ProcessBotChatMessage(botPtr, response, SRC_GENERAL_LOCAL, generalChannel);
+            std::string spoken = EmitBotLines(response, [&](const std::string& l){ botAI->SayToChannel(l, ChatChannelId::GENERAL); });
+            if (!spoken.empty() && generalChannel)
+                ProcessBotChatMessage(botPtr, spoken, SRC_GENERAL_LOCAL, generalChannel);
             break;
         }
         default:
