@@ -1089,6 +1089,29 @@ OllamaChat.RAGSelectionPoolSize = 8
 #
 OllamaChat.RAGImprovedScoring = 1
 
+#
+#    OllamaChat.EnableRAGInitiated
+#        Inject context-derived world knowledge into initiated/ambient bot chatter.
+#        Default 1. (Requires OllamaChat.EnableRAG = 1.)
+#
+OllamaChat.EnableRAGInitiated = 1
+#
+#    OllamaChat.RAGInitiatedMaxItems
+#        Max RAG entries injected per initiated message. Default 1 (small for token budget).
+#
+OllamaChat.RAGInitiatedMaxItems = 1
+#
+#    OllamaChat.EnableRAGReplyContext
+#        Also pull a small number of locale/faction context entries on the reply path,
+#        merged with the player-message results. Default 1. (Requires OllamaChat.EnableRAG = 1.)
+#
+OllamaChat.EnableRAGReplyContext = 1
+#
+#    OllamaChat.RAGReplyContextItems
+#        Max extra context entries appended to reply-path retrieval. Default 1.
+#
+OllamaChat.RAGReplyContextItems = 1
+
 # --------------------------------------------
 # EMOTE-AUGMENTED CHAT
 # --------------------------------------------

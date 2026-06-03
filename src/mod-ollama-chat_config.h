@@ -321,6 +321,10 @@ extern uint32_t    g_RAGMaxReferences;                   // Max references injec
 extern bool        g_RAGRandomizeSelection;              // Sample direct hits weighted, not strict top-N
 extern uint32_t    g_RAGSelectionPoolSize;               // Top-K candidate window the sampler draws from
 extern bool        g_RAGImprovedScoring;                 // IDF/stopword/stem scorer (1) vs legacy raw-TF (0)
+extern bool        g_EnableRAGInitiated;       // RAG on the initiated/ambient path
+extern uint32_t    g_RAGInitiatedMaxItems;     // cap for initiated retrieval
+extern bool        g_EnableRAGReplyContext;    // add a small context pull on the reply path
+extern uint32_t    g_RAGReplyContextItems;     // cap for the reply-path context pull
 
 class OllamaRAGSystem;
 extern OllamaRAGSystem* g_RAGSystem;                     // Global RAG system instance

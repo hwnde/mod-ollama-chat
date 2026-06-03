@@ -202,6 +202,10 @@ uint32_t    g_RAGMaxReferences = 5;
 bool        g_RAGRandomizeSelection = true;
 uint32_t    g_RAGSelectionPoolSize = 8;
 bool        g_RAGImprovedScoring = true;
+bool        g_EnableRAGInitiated    = true;
+uint32_t    g_RAGInitiatedMaxItems  = 1;
+bool        g_EnableRAGReplyContext = true;
+uint32_t    g_RAGReplyContextItems  = 1;
 
 class OllamaRAGSystem;
 OllamaRAGSystem* g_RAGSystem = nullptr;
@@ -790,6 +794,10 @@ void LoadOllamaChatConfig()
     g_RAGRandomizeSelection           = sConfigMgr->GetOption<bool>("OllamaChat.RAGRandomizeSelection", true);
     g_RAGSelectionPoolSize            = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGSelectionPoolSize", 8);
     g_RAGImprovedScoring              = sConfigMgr->GetOption<bool>("OllamaChat.RAGImprovedScoring", true);
+    g_EnableRAGInitiated              = sConfigMgr->GetOption<bool>("OllamaChat.EnableRAGInitiated", true);
+    g_RAGInitiatedMaxItems            = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGInitiatedMaxItems", 1);
+    g_EnableRAGReplyContext           = sConfigMgr->GetOption<bool>("OllamaChat.EnableRAGReplyContext", true);
+    g_RAGReplyContextItems            = sConfigMgr->GetOption<uint32_t>("OllamaChat.RAGReplyContextItems", 1);
 
     g_ThinkModeEnableForModule        = sConfigMgr->GetOption<bool>("OllamaChat.ThinkModeEnableForModule", false);
 

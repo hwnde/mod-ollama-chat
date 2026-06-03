@@ -1,6 +1,7 @@
 #include "mod-ollama-chat_random.h"
 #include "mod-ollama-chat_config.h"
 #include "mod-ollama-chat_handler.h"
+#include "mod-ollama-chat_rag.h"
 #include "mod-ollama-chat_sentiment.h"
 #include "Log.h"
 #include "Player.h"
@@ -787,6 +788,19 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                 }
                 if (!activityTopic.empty())
                     prompt += " [Bring up, in your own words: " + activityTopic + "]";
+
+                if (g_EnableRAGInitiated && g_RAGSystem)
+                {
+                    std::string ctxQuery = BuildBotContextQuery(bot);
+                    if (!ctxQuery.empty())
+                    {
+                        auto ragResults = g_RAGSystem->RetrieveRelevantInfo(
+                            ctxQuery, g_RAGInitiatedMaxItems, g_RAGSimilarityThreshold);
+                        std::string ragContent = g_RAGSystem->GetFormattedRAGInfo(ragResults);
+                        if (!ragContent.empty())
+                            prompt += "\n" + SafeFormat(g_RAGPromptTemplate, fmt::arg("rag_info", ragContent));
+                    }
+                }
 
                 prompt += BuildEmoteChatInstruction();
                 return prompt;
