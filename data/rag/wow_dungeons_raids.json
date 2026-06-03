@@ -900,5 +900,263 @@
       "endgame",
       "classic"
     ]
+  },
+  {
+    "id": "dungeon_hellfire_ramparts",
+    "title": "Hellfire Ramparts",
+    "short_description": "the battlements of Hellfire Citadel where Kargath's fel orcs watch over the ruined peninsula",
+    "references": [],
+    "content": "The first wall any soul faces upon entering Hellfire Citadel is the Ramparts, a sweep of jagged battlements thrust over the red wastes of the peninsula. Here the Shattered Hand orcs of Kargath Bladefist keep watch, their flesh corrupted to crimson by the fel draughts brewed within, and they loose hellish hounds and warlocks upon any who climb toward the keep. From these heights the whole blasted land can be seen, and from these heights the fel horde rains fire down upon the green road below.",
+    "keywords": [
+      "hellfire ramparts",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "kargath bladefist",
+      "shattered hand",
+      "fel orcs",
+      "level 60",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_blood_furnace",
+    "title": "The Blood Furnace",
+    "short_description": "the forge within Hellfire Citadel where the captive pit lord's blood is rendered into fel orcs",
+    "references": [],
+    "content": "Deep in Hellfire Citadel, beyond the Ramparts, the orcs keep a furnace fed not by coal but by blood. The pit lord Magtheridon, broken and chained below, is bled drop by drop, and his tainted blood is worked into draught after draught that turns common orcs into red-skinned, fel-maddened killers for Illidan's armies. Magtheridon's own jailers run the works, and the prisoners dragged here do not return.",
+    "keywords": [
+      "blood furnace",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "magtheridon",
+      "fel orcs",
+      "illidan",
+      "level 61",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_shattered_halls",
+    "title": "The Shattered Halls",
+    "short_description": "Kargath Bladefist's inner stronghold within Hellfire Citadel, the last bastion of the Shattered Hand",
+    "references": [],
+    "content": "Within the heart of Hellfire Citadel lie the Shattered Halls, the inner sanctum where Kargath Bladefist himself holds court over the Shattered Hand. The corridors run with the blood of captives chained in rows, awaiting the blade or the brewing-vats, and Kargath's most savage warriors stalk the smoke-filled passages with axe and fel-fire. This is the orcs' last redoubt in the peninsula, and to reach the warchief who severed his own hand to escape his shackles is to fight through every horror his clan can muster.",
+    "keywords": [
+      "shattered halls",
+      "hellfire peninsula",
+      "hellfire citadel",
+      "kargath bladefist",
+      "shattered hand",
+      "fel orcs",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "fel"
+    ]
+  },
+  {
+    "id": "dungeon_the_slave_pens",
+    "title": "The Slave Pens",
+    "short_description": "the holding cages of Coilfang Reservoir where Vashj's naga drown the broken into bondage",
+    "references": [],
+    "content": "Beneath the drowned marsh of Zangarmarsh, the naga of Coilfang Reservoir keep their Slave Pens, a maze of flooded cages and dripping stone. Here Lady Vashj's serpent-folk herd captured Broken draenei and others into chains, breaking their spirits with toil and water until they labor for the great work below. Naga overseers and their summoned tide-creatures patrol the channels, and the cries of the drowning echo down the green-lit halls.",
+    "keywords": [
+      "slave pens",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "lady vashj",
+      "naga",
+      "broken draenei",
+      "level 62",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_the_underbog",
+    "title": "The Underbog",
+    "short_description": "the fungal deep of Coilfang where bog lords and the great hydra Hungarfen rule the spore-stalks",
+    "references": [],
+    "content": "Below the cages of Coilfang the stone gives way to the Underbog, a cavernous fen where titanic mushrooms rise like towers and the air hangs thick with spores. Lumbering bog lords and shambling fungal giants wander the murk, and in the deepest pool coils Hungarfen, an ancient hydra whose many heads drag the unwary beneath the muck. The naga suffer these wild things to thrive, for the rot they spread feeds the works that drain the marsh.",
+    "keywords": [
+      "underbog",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "hungarfen",
+      "bog lords",
+      "naga",
+      "level 63",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_the_steamvault",
+    "title": "The Steamvault",
+    "short_description": "the pumping heart of Coilfang where the naga drain the marsh dry for Vashj's design",
+    "references": [],
+    "content": "At the lowest reach of Coilfang Reservoir thrums the Steamvault, a roaring machine-works of pipes, turbines, and scalding mist. Here Lady Vashj's naga labor at the true purpose of the whole drowned complex: to pump the waters of Zangarmarsh away into the void, withering Outland's last green marsh for some design known only to their mistress. Hydromancers and steam-wreathed guardians defend the controls, and the thunder of the pumps never ceases.",
+    "keywords": [
+      "steamvault",
+      "coilfang reservoir",
+      "zangarmarsh",
+      "lady vashj",
+      "naga",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "naga"
+    ]
+  },
+  {
+    "id": "dungeon_mana_tombs",
+    "title": "Mana-Tombs",
+    "short_description": "a wing of Auchindoun where the Consortium and void-summoners fight among the draenei dead",
+    "references": [],
+    "content": "Within the shattered crypt-city of Auchindoun, beneath Terokkar Forest, lie the Mana-Tombs, vaults raised to house the honored draenei dead. Now the place is a battleground: the ethereal traders of the Consortium delve the tombs for the rich arcane charge sealed within, while Nexus-Prince Shaffar's rival ethereals summon creatures of the void to claim it for themselves. Among the resting draenei, ghostly and starlit foes clash over the ruins of a holy place.",
+    "keywords": [
+      "mana-tombs",
+      "mana tombs",
+      "auchindoun",
+      "terokkar forest",
+      "consortium",
+      "ethereals",
+      "nexus-prince shaffar",
+      "void",
+      "level 64",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "arcane"
+    ]
+  },
+  {
+    "id": "dungeon_auchenai_crypts",
+    "title": "Auchenai Crypts",
+    "short_description": "the ossuary of Auchindoun where the draenei death-priests turned to necromancy",
+    "references": [],
+    "content": "The Auchenai were the draenei keepers of Auchindoun, sworn to tend the dead and guard the passage of souls. But when the crypt-city was sundered, despair and dark powers turned them from their vigil, and now the Auchenai Crypts ring with necromantic rites where once there were prayers. Exarch Maladaar, once a noble shepherd of the departed, presides over the ossuary as its corrupted lord, raising the very dead he was meant to honor against any who trespass.",
+    "keywords": [
+      "auchenai crypts",
+      "auchindoun",
+      "terokkar forest",
+      "auchenai",
+      "exarch maladaar",
+      "draenei",
+      "necromancy",
+      "level 65",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "undead"
+    ]
+  },
+  {
+    "id": "dungeon_sethekk_halls",
+    "title": "Sethekk Halls",
+    "short_description": "the arakkoa wing of Auchindoun where the Sethekk cult worships the raven-god Anzu",
+    "references": [],
+    "content": "One wing of broken Auchindoun has fallen to the Sethekk, a sect of the bird-like arakkoa cast out and embittered. In these shadowed halls they bow not to the Light but to Anzu, the raven-god of the cursed, and their talon-priests work dark rites to call their patron back into the world. Feathered fanatics and summoned shadow-ravens haunt the passages, and at their heart the Sethekk seers chant for the wings of their dread deity.",
+    "keywords": [
+      "sethekk halls",
+      "auchindoun",
+      "terokkar forest",
+      "arakkoa",
+      "sethekk",
+      "anzu",
+      "raven god",
+      "level 67",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "shadow"
+    ]
+  },
+  {
+    "id": "dungeon_shadow_labyrinth",
+    "title": "Shadow Labyrinth",
+    "short_description": "the deepest wing of Auchindoun where the Shadow Council whispers and a captive lord of sound is bound",
+    "references": [],
+    "content": "The deepest and darkest reach of Auchindoun is the Shadow Labyrinth, a winding maze claimed by the Shadow Council, the warlock cabal that has served the Legion since the orcs' first fall. Through these black corridors their whispers spread corruption, and at the labyrinth's heart they hold Murmur, a vast and ancient lord of sound and silence dragged from beyond the world and chained to do their bidding. To walk here is to be deafened by a being whose merest voice can shatter stone.",
+    "keywords": [
+      "shadow labyrinth",
+      "auchindoun",
+      "terokkar forest",
+      "shadow council",
+      "murmur",
+      "warlocks",
+      "level 70",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "outland",
+      "tbc",
+      "shadow"
+    ]
+  },
+  {
+    "id": "dungeon_old_hillsbrad_foothills",
+    "title": "Old Hillsbrad Foothills",
+    "short_description": "a passage at the Caverns of Time to the day a young Thrall was meant to remain a prisoner",
+    "references": [],
+    "content": "Through the sands of the Caverns beneath Tanaris opens a road into the past, to the green hills of Hillsbrad as they were in years long gone. Here a young Thrall languishes in the internment camp at Durnholde Keep, and history demands that he break free to become the warchief who will lead his people to freedom. The Infinite Dragonflight schemes to murder him in his chains and unravel all that followed, and the bronze guardians beg travelers to shield the slave's escape and keep the timeline whole.",
+    "keywords": [
+      "old hillsbrad foothills",
+      "caverns of time",
+      "tanaris",
+      "thrall",
+      "durnholde keep",
+      "taretha",
+      "infinite dragonflight",
+      "bronze",
+      "level 66",
+      "outland"
+    ],
+    "tags": [
+      "dungeon",
+      "tbc",
+      "caverns of time",
+      "dragons"
+    ]
   }
 ]
