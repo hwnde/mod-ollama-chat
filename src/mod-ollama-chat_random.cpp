@@ -163,6 +163,19 @@ static const char* ChannelCategoryName(ChannelCategory c)
     }
 }
 
+static std::string PickPoiTopic(BotCityPoi poi)
+{
+    if (poi == POI_NONE)
+        return "";
+    int idx = static_cast<int>(poi) - 1;   // POI_AUCTIONEER==1 -> 0
+    if (idx < 0 || idx >= 5)
+        return "";
+    std::vector<std::string> const& topics = g_PoiTopics[idx];
+    if (topics.empty())
+        return "";
+    return topics[topics.size() == 1 ? 0 : urand(0, topics.size() - 1)];
+}
+
 static std::string PickActivityTopic(BotActivity activity)
 {
     std::vector<std::string> const* topics = nullptr;
@@ -332,6 +345,21 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     {
                         activityTopic = PickActivityTopic(activity);
                         if (!activityTopic.empty())
+                            chosenChannel = ChannelCategory::Say;   // overheard locally
+                    }
+                }
+            }
+
+            std::string poiTopic;
+            if (g_PoiChatterEnable)
+            {
+                if (PlayerbotAI* poiBotAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot))
+                {
+                    BotCityPoi poi = poiBotAI->GetCurrentCityPoi();
+                    if (poi != POI_NONE && urand(0, 99) < g_PoiChatterChance)
+                    {
+                        poiTopic = PickPoiTopic(poi);
+                        if (!poiTopic.empty())
                             chosenChannel = ChannelCategory::Say;   // overheard locally
                     }
                 }
@@ -708,7 +736,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
             }
 
 
-            auto prompt = [bot, &environmentInfo, chosenChannel, activityTopic]()
+            auto prompt = [bot, &environmentInfo, chosenChannel, activityTopic, poiTopic]()
             {
                 PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot);
                 if (!botAI)
@@ -795,6 +823,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                 }
                 if (!activityTopic.empty())
                     prompt += " [Bring up, in your own words: " + activityTopic + "]";
+                if (!poiTopic.empty())
+                    prompt += " [Bring up, in your own words: " + poiTopic + "]";
 
                 if (g_EnableRAGInitiated && g_RAGSystem)
                 {
