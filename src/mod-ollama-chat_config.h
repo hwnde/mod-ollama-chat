@@ -44,6 +44,7 @@ extern uint32_t   g_EventChatterMaxBotsPerPlayer;
 extern std::string g_OllamaUrl;
 extern std::string g_OllamaModel;
 extern uint32_t    g_OllamaNumPredict;
+extern bool        g_SoftStopEnable;   // stream + stop at a sentence boundary past NumPredict (soft cap)
 extern float       g_OllamaTemperature;
 extern float       g_OllamaTopP;
 extern float       g_OllamaRepeatPenalty;
