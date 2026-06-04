@@ -82,42 +82,6 @@ static std::vector<std::string> const& PhrasesForRole(WorldNpcRole r)
     }
 }
 
-static std::string RaceName(uint8 race)
-{
-    switch (race)
-    {
-        case RACE_HUMAN:            return "human";
-        case RACE_ORC:              return "orc";
-        case RACE_DWARF:            return "dwarf";
-        case RACE_NIGHTELF:         return "night elf";
-        case RACE_UNDEAD_PLAYER:    return "forsaken";
-        case RACE_TAUREN:           return "tauren";
-        case RACE_GNOME:            return "gnome";
-        case RACE_TROLL:            return "troll";
-        case RACE_BLOODELF:         return "blood elf";
-        case RACE_DRAENEI:          return "draenei";
-        default:                    return "traveler";
-    }
-}
-
-static std::string ClassName(uint8 cls)
-{
-    switch (cls)
-    {
-        case CLASS_WARRIOR:      return "warrior";
-        case CLASS_PALADIN:      return "paladin";
-        case CLASS_HUNTER:       return "hunter";
-        case CLASS_ROGUE:        return "rogue";
-        case CLASS_PRIEST:       return "priest";
-        case CLASS_DEATH_KNIGHT: return "death knight";
-        case CLASS_SHAMAN:       return "shaman";
-        case CLASS_MAGE:         return "mage";
-        case CLASS_WARLOCK:      return "warlock";
-        case CLASS_DRUID:        return "druid";
-        default:                 return "adventurer";
-    }
-}
-
 // Pure: fill a phrase template's placeholders.
 static std::string FillPhrase(const std::string& templ, const std::string& npcName,
                               const std::string& race, const std::string& cls,
@@ -132,17 +96,16 @@ static std::string FillPhrase(const std::string& templ, const std::string& npcNa
 }
 
 // Pure: assemble the persona prompt for a curated NPC character. ragInfo/personaHint may be empty.
+// `visitor` is the pre-built descriptor of the approaching character (DescribeCharacter()).
 static std::string BuildNpcCharacterPrompt(const std::string& name, const std::string& title,
-                                           const std::string& zone, const std::string& race,
-                                           const std::string& cls, const std::string& personaHint,
-                                           const std::string& ragInfo)
+                                           const std::string& zone, const std::string& visitor,
+                                           const std::string& personaHint, const std::string& ragInfo)
 {
     std::string p = SafeFormat(g_WorldNpcCharacterPrompt,
                                fmt::arg("name", name),
                                fmt::arg("title", title.empty() ? "a figure of note" : title),
                                fmt::arg("zone", zone),
-                               fmt::arg("race", race),
-                               fmt::arg("class", cls));
+                               fmt::arg("visitor", visitor));
     if (!personaHint.empty())
         p += " " + personaHint;
     if (!ragInfo.empty())
@@ -203,15 +166,18 @@ void WorldNpcCharacterSelfTest()
     };
 
     std::string saved = g_WorldNpcCharacterPrompt;
-    g_WorldNpcCharacterPrompt = "I am {name}, {title}. You, {race} {class}, stand in {zone}.";
+    g_WorldNpcCharacterPrompt = "I am {name}, {title}. Before you stands {visitor}, here in {zone}.";
 
-    std::string p1 = BuildNpcCharacterPrompt("Thrall", "Warchief of the Horde", "Orgrimmar", "orc", "shaman", "", "");
-    check("basic", p1 == "I am Thrall, Warchief of the Horde. You, orc shaman, stand in Orgrimmar.");
+    std::string p1 = BuildNpcCharacterPrompt("Thrall", "Warchief of the Horde", "Orgrimmar",
+                                             "a female orc shaman named Garona", "", "");
+    check("basic", p1 == "I am Thrall, Warchief of the Horde. Before you stands a female orc shaman named Garona, here in Orgrimmar.");
 
-    std::string p2 = BuildNpcCharacterPrompt("Guard", "", "Stormwind", "human", "mage", "", "");
-    check("empty-title-default", p2 == "I am Guard, a figure of note. You, human mage, stand in Stormwind.");
+    std::string p2 = BuildNpcCharacterPrompt("Guard", "", "Stormwind",
+                                             "a male human mage named Bob", "", "");
+    check("empty-title-default", p2 == "I am Guard, a figure of note. Before you stands a male human mage named Bob, here in Stormwind.");
 
-    std::string p3 = BuildNpcCharacterPrompt("Cairne", "High Chieftain", "Thunder Bluff", "tauren", "druid", "Speak slowly and gravely.", "");
+    std::string p3 = BuildNpcCharacterPrompt("Cairne", "High Chieftain", "Thunder Bluff",
+                                             "a tauren druid named Baine", "Speak slowly and gravely.", "");
     check("persona-hint-appended", p3.find("Speak slowly and gravely.") != std::string::npos);
 
     g_WorldNpcCharacterPrompt = saved;
@@ -350,7 +316,7 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
 
                     std::string prompt = BuildNpcCharacterPrompt(
                         c->GetName(), title, zone,
-                        RaceName(player->getRace()), ClassName(player->getClass()),
+                        DescribeCharacter(player),
                         cit->second.personaHint, ragInfo);
 
                     ObjectGuid pg = player->GetGUID();

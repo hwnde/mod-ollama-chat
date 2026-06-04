@@ -1249,5 +1249,5 @@ OllamaChat.WorldNpcCharacterCooldownSec = 300
 # OllamaChat.WorldNpcCharacterCallsPerMin - global cap on character LLM calls per minute (shares the GPU with bot chat). Default 6.
 OllamaChat.WorldNpcCharacterCallsPerMin = 6
 
-# OllamaChat.WorldNpcCharacterPrompt - persona prompt. Placeholders: {name} {title} {zone} {race} {class}
-OllamaChat.WorldNpcCharacterPrompt = You are {name}, {title}. A {race} {class} has approached you in {zone}. Greet or address them directly in one or two short sentences, in your own voice and station. Stay fully in character; never mention being an NPC or a game.
+# OllamaChat.WorldNpcCharacterPrompt - persona prompt. Placeholders: {name} {title} {zone} {visitor}
+OllamaChat.WorldNpcCharacterPrompt = You are {name}, {title}. {visitor} has approached you in {zone}. Greet or address them directly in one or two short sentences, in your own voice and station. Stay fully in character; never mention being an NPC or a game.
