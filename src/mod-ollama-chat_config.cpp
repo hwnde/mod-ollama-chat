@@ -1539,7 +1539,112 @@ void LoadOllamaChatConfig()
         EmoteActionRoutingSelfTest();
         WorldNpcChatSelfTest();
         WorldNpcCharacterSelfTest();
+        CharacterDescriptorSelfTest();
     }
+}
+
+// --------------------------------------------
+// Character descriptor helpers
+// --------------------------------------------
+
+std::string RaceName(uint8 race)
+{
+    switch (race)
+    {
+        case RACE_HUMAN:         return "human";
+        case RACE_ORC:           return "orc";
+        case RACE_DWARF:         return "dwarf";
+        case RACE_NIGHTELF:      return "night elf";
+        case RACE_UNDEAD_PLAYER: return "forsaken";
+        case RACE_TAUREN:        return "tauren";
+        case RACE_GNOME:         return "gnome";
+        case RACE_TROLL:         return "troll";
+        case RACE_BLOODELF:      return "blood elf";
+        case RACE_DRAENEI:       return "draenei";
+        default:                 return "traveler";
+    }
+}
+
+std::string ClassName(uint8 cls)
+{
+    switch (cls)
+    {
+        case CLASS_WARRIOR:      return "warrior";
+        case CLASS_PALADIN:      return "paladin";
+        case CLASS_HUNTER:       return "hunter";
+        case CLASS_ROGUE:        return "rogue";
+        case CLASS_PRIEST:       return "priest";
+        case CLASS_DEATH_KNIGHT: return "death knight";
+        case CLASS_SHAMAN:       return "shaman";
+        case CLASS_MAGE:         return "mage";
+        case CLASS_WARLOCK:      return "warlock";
+        case CLASS_DRUID:        return "druid";
+        default:                 return "adventurer";
+    }
+}
+
+std::string GenderWord(uint8 gender)
+{
+    if (gender == GENDER_MALE)   return "male";
+    if (gender == GENDER_FEMALE) return "female";
+    return "";
+}
+
+std::string ComposeCharacterDescriptor(const std::string& gender, const std::string& race,
+                                       const std::string& cls, const std::string& name)
+{
+    std::string d = "a ";
+    if (!gender.empty()) d += gender + " ";
+    d += race + " " + cls;
+    if (!name.empty())   d += " named " + name;
+    return d;
+}
+
+std::string DescribeCharacter(Player* p)
+{
+    if (!p) return "someone";
+    return ComposeCharacterDescriptor(GenderWord(p->getGender()),
+                                      RaceName(p->getRace()),
+                                      ClassName(p->getClass()),
+                                      p->GetName());
+}
+
+std::string DescribeUnit(Unit* u)
+{
+    if (!u) return "someone";
+    if (Player* p = u->ToPlayer()) return DescribeCharacter(p);
+    return u->GetName();
+}
+
+void CharacterDescriptorSelfTest()
+{
+    int passed = 0, total = 0;
+    auto check = [&](const char* nm, bool ok) {
+        ++total;
+        if (ok) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] CharacterDescriptor self-test FAIL ({})", nm);
+    };
+
+    check("gender-male",   GenderWord(GENDER_MALE)   == "male");
+    check("gender-female", GenderWord(GENDER_FEMALE) == "female");
+    check("gender-none",   GenderWord(GENDER_NONE).empty());
+    check("race-dwarf",    RaceName(RACE_DWARF)  == "dwarf");
+    check("class-hunter",  ClassName(CLASS_HUNTER) == "hunter");
+
+    check("compose-female",
+          ComposeCharacterDescriptor("female", "dwarf", "hunter", "Karen")
+          == "a female dwarf hunter named Karen");
+    check("compose-male",
+          ComposeCharacterDescriptor("male", "human", "mage", "Bob")
+          == "a male human mage named Bob");
+    check("compose-no-gender",
+          ComposeCharacterDescriptor("", "tauren", "druid", "Cairne")
+          == "a tauren druid named Cairne");
+    check("compose-no-name",
+          ComposeCharacterDescriptor("female", "gnome", "rogue", "")
+          == "a female gnome rogue");
+
+    LOG_INFO("server.loading", "[Ollama Chat] CharacterDescriptor self-test: {}/{} passed", passed, total);
 }
 
 void LoadPersonalityTemplatesFromDB()

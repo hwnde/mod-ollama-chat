@@ -442,6 +442,27 @@ extern uint32_t    g_WorldNpcCharacterCallsPerMin;   // global NPC LLM-call budg
 extern std::string g_WorldNpcCharacterPrompt;        // persona prompt template
 void WorldNpcCharacterSelfTest();
 
+// --------------------------------------------
+// Character descriptor (uniform gender-bearing introduction)
+// --------------------------------------------
+// Lowercase RP race/class words (promoted from _worldnpc.cpp; safe fallbacks).
+std::string RaceName(uint8 race);
+std::string ClassName(uint8 cls);
+// GENDER_MALE -> "male", GENDER_FEMALE -> "female", else "" (e.g. GENDER_NONE).
+std::string GenderWord(uint8 gender);
+
+// Pure assembly (testable without a Player): "a female dwarf hunter named Karen".
+// Omits the gender word when `gender` is empty. Empty `name` -> drops "named ...".
+std::string ComposeCharacterDescriptor(const std::string& gender, const std::string& race,
+                                       const std::string& cls, const std::string& name);
+
+// Resolve a character to its descriptor. nullptr -> "someone".
+std::string DescribeCharacter(Player* p);
+// Player (incl. bots) -> DescribeCharacter; Creature/other Unit -> its name.
+std::string DescribeUnit(Unit* u);
+
+void CharacterDescriptorSelfTest();  // debug-gated boot self-test (defined in _config.cpp)
+
 // Tier-1 NPC character record (one row of mod_ollama_chat_npc)
 struct WorldNpcCharacter
 {
