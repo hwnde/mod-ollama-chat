@@ -2116,6 +2116,8 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
     std::string playerRole          = ChatHelper::FormatClass(player, AiFactory::GetPlayerSpecTab(player));
     uint8_t playerGenderByte        = player->getGender();
     std::string playerGender        = (playerGenderByte == 0 ? "Male" : "Female");
+    std::string botDescriptor       = DescribeCharacter(bot);
+    std::string playerDescriptor    = DescribeCharacter(player);
     std::string playerFaction       = (player->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde");
     std::string playerGuild         = (player->GetGuild() ? player->GetGuild()->GetName() : "No Guild");
     std::string playerGroupStatus   = (player->GetGroup() ? "In a group" : "Solo");
@@ -2191,6 +2193,8 @@ std::string GenerateBotPrompt(Player* bot, std::string playerMessage, Player* pl
         fmt::arg("player_level", playerLevel),
         fmt::arg("player_class", playerClass),
         fmt::arg("player_name", playerName),
+        fmt::arg("player_descriptor", playerDescriptor),
+        fmt::arg("bot_descriptor", botDescriptor),
         fmt::arg("player_message", playerMessage),
         fmt::arg("extra_info", extraInfo),
         fmt::arg("chat_history", chatHistory),

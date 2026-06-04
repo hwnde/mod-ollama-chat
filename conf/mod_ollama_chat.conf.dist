@@ -645,9 +645,9 @@ OllamaChat.SentimentPromptTemplate = "Your relationship sentiment with {player_n
 
 # OllamaChat.ChatPromptTemplate
 #   Description: The main template for bot chat prompts sent to the LLM.
-#   Placeholders (named): {bot_name} {bot_level} {bot_class} {bot_personality} {bot_personality_name} {player_level} {player_class} {player_name} {player_message} {extra_info} {sentiment_info}
+#   Placeholders (named): {bot_name} {bot_level} {bot_class} {bot_personality} {bot_personality_name} {player_level} {player_class} {player_name} {player_descriptor} {bot_descriptor} {player_message} {extra_info} {sentiment_info}
 #   Note: {bot_personality_name} contains the name/key of the personality (e.g., "grumpy", "helpful"), while {bot_personality} contains the full personality description text.
-OllamaChat.ChatPromptTemplate = "You are {bot_name}, a {bot_class}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} {chat_history} {player_name}, a {player_class}, says to you: '{player_message}'. {extra_info} Reply in under 20 words. Answer what {player_name} actually asked — speak of your surroundings, the local lands, your craft, or your kin. Raise the wider war, the Scourge, or the Lich King only if {player_name} brings them up or you stand at a war front. No prefix."
+OllamaChat.ChatPromptTemplate = "You are {bot_name}, a {bot_class}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} {chat_history} {player_descriptor} says to you: '{player_message}'. {extra_info} Reply in under 20 words. Answer what they actually asked — speak of your surroundings, the local lands, your craft, or your kin. Raise the wider war, the Scourge, or the Lich King only if they bring them up or you stand at a war front. No prefix."
 
 # OllamaChat.ChatExtraInfoTemplate
 #   Description: The context/details string about the bot and player, injected into the chat prompt as the last parameter.
