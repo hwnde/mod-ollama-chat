@@ -479,15 +479,17 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
     std::string botZoneName = botCurrentZone ? ai->GetLocalizedAreaName(botCurrentZone) : "UnknownZone";
     std::string botMapName = bot->GetMap() ? bot->GetMap()->GetMapName() : "UnknownMap";
 
-    // Try to get sentiment information if the actor is a player
+    // Resolve the actor once: players/bots get a gender-bearing descriptor; others keep the name.
+    std::string actorDescriptor = actorName;
     std::string sentimentInfo = "";
-    if (g_EnableSentimentTracking && !actorName.empty())
+    if (!actorName.empty())
     {
-        // Try to find the actor player by name
         Player* actorPlayer = ObjectAccessor::FindPlayerByName(actorName);
         if (actorPlayer)
         {
-            sentimentInfo = GetSentimentPromptAddition(bot, actorPlayer);
+            actorDescriptor = DescribeCharacter(actorPlayer);
+            if (g_EnableSentimentTracking)
+                sentimentInfo = GetSentimentPromptAddition(bot, actorPlayer);
         }
     }
 
@@ -508,6 +510,7 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
         fmt::arg("event_type", eventType),
         fmt::arg("event_detail", eventDetail),
         fmt::arg("actor_name", actorName),
+        fmt::arg("actor_descriptor", actorDescriptor),
         fmt::arg("sentiment_info", sentimentInfo)
     );
 
