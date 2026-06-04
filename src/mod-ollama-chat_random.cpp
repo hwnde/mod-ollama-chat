@@ -750,6 +750,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                 std::string botRace             = botAI->GetChatHelper()->FormatRace(bot->getRace());
                 std::string botRole             = ChatHelper::FormatClass(bot, AiFactory::GetPlayerSpecTab(bot));
                 std::string botGender           = (bot->getGender() == 0 ? "Male" : "Female");
+                std::string botDescriptor       = DescribeCharacter(bot);
                 std::string botFaction          = (bot->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde");
 
                 AreaTableEntry const* botCurrentArea = botAI->GetCurrentArea();
@@ -765,6 +766,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     fmt::arg("bot_class", botClass),
                     fmt::arg("bot_race", botRace),
                     fmt::arg("bot_gender", botGender),
+                    fmt::arg("bot_descriptor", botDescriptor),
                     fmt::arg("bot_role", botRole),
                     fmt::arg("bot_faction", botFaction),
                     fmt::arg("bot_area", botAreaName),
