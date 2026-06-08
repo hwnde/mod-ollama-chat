@@ -1668,7 +1668,7 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
         std::thread([botGuid, senderGuid, prompt, sourceLocal, channelId = (channel ? channel->GetChannelId() : 0), channelName = (channel ? channel->GetName() : ""), msg]() {
             try {
                 // Use the QueryManager to submit the query.
-                auto responseFuture = SubmitQuery(prompt);
+                auto responseFuture = SubmitQuery(prompt, QueryPriority::High);
                 if (!responseFuture.valid())
                 {
                     return;

@@ -62,7 +62,7 @@ float AnalyzeMessageSentiment(const std::string& message)
     }
     
     // Query the LLM for sentiment analysis
-    std::string response = QueryOllamaAPI(prompt, false);
+    std::string response = SubmitQuery(prompt, QueryPriority::Normal, false).get();
 
     if (response.empty())
     {

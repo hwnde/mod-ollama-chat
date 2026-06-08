@@ -551,7 +551,7 @@ bool IsValidAPIResponse(const std::string& response)
 QueryManager g_queryManager;
 
 // Interface function to submit a query.
-std::future<std::string> SubmitQuery(const std::string& prompt)
+std::future<std::string> SubmitQuery(const std::string& prompt, QueryPriority prio, bool applySalt)
 {
-    return g_queryManager.submitQuery(prompt);
+    return g_queryManager.submitQuery(prompt, prio, applySalt);
 }

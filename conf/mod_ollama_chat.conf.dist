@@ -204,11 +204,12 @@ OllamaChat.MaxQueueDepth = 0
 #        Default:     0
 OllamaChat.QueueMaxAgeMs = 0
 #
-#    OllamaChat.PrioritizeReplies
-#        Description: When true, player-directed replies are served ahead of ambient bot chatter.
-#                     false = single FIFO queue (legacy behavior).
-#        Default:     0
-OllamaChat.PrioritizeReplies = 0
+# OllamaChat.PrioritizeReplies
+#     When 1, player-directed replies (High) preempt queued ambient chatter / sentiment (Normal),
+#     and a reply may evict the oldest queued ambient line to claim a slot under MaxQueueDepth.
+#     When 0, all traffic shares one FIFO. Only matters once MaxConcurrentQueries/MaxQueueDepth bound the queue.
+#     Default: 1
+OllamaChat.PrioritizeReplies = 1
 
 # --------------------------------------------
 # THINK MODE SUPPORT

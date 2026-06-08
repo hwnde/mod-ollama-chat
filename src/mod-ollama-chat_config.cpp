@@ -1140,10 +1140,10 @@ void LoadOllamaChatConfig()
     g_MaxConcurrentQueries            = sConfigMgr->GetOption<uint32_t>("OllamaChat.MaxConcurrentQueries", 0);
     g_OllamaQueueMaxDepth             = sConfigMgr->GetOption<int>("OllamaChat.MaxQueueDepth", 0);
     g_OllamaQueueMaxAgeMs             = sConfigMgr->GetOption<int>("OllamaChat.QueueMaxAgeMs", 0);
-    g_OllamaQueuePrioritizeReplies    = sConfigMgr->GetOption<bool>("OllamaChat.PrioritizeReplies", false);
+    g_OllamaQueuePrioritizeReplies    = sConfigMgr->GetOption<bool>("OllamaChat.PrioritizeReplies", true);
 
-    LOG_INFO("server.loading", "[Ollama Chat] Query queue: maxDepth={} maxAgeMs={} prioritizeReplies={}",
-             g_OllamaQueueMaxDepth, g_OllamaQueueMaxAgeMs, g_OllamaQueuePrioritizeReplies);
+    LOG_INFO("server.loading", "[Ollama Chat] Query gate: cap={} maxDepth={} maxAgeMs={} prioritizeReplies={}",
+             g_MaxConcurrentQueries, g_OllamaQueueMaxDepth, g_OllamaQueueMaxAgeMs, g_OllamaQueuePrioritizeReplies);
 
     g_Enable                          = sConfigMgr->GetOption<bool>("OllamaChat.Enable", true);
     g_DisableRepliesInCombat          = sConfigMgr->GetOption<bool>("OllamaChat.DisableRepliesInCombat", true);

@@ -17,30 +17,49 @@ void QueryManager::setMaxConcurrentQueries(int maxQueries) {
 }
 
 // Submit a query and return a future for the result.
-std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
+std::future<std::string> QueryManager::submitQuery(const std::string& prompt, QueryPriority prio, bool applySalt) {
     std::promise<std::string> promise;
     std::future<std::string> future = promise.get_future();
 
     bool shouldRunNow = false;
     bool rejectedFull = false;
     size_t depthSnapshot = 0;
+    std::promise<std::string> evictedPromise;   // fulfilled "" after the lock
+    bool haveEvicted = false;
 
     {
         std::lock_guard<std::mutex> lock(mutex_);
+        const bool high = g_OllamaQueuePrioritizeReplies && (prio == QueryPriority::High);
+
         if (maxConcurrentQueries == 0 || currentQueries < maxConcurrentQueries) {
             ++currentQueries;
             shouldRunNow = true;
-        } else if (g_OllamaQueueMaxDepth > 0 &&
-                   taskQueue.size() >= static_cast<size_t>(g_OllamaQueueMaxDepth)) {
-            rejectedFull = true;
-            depthSnapshot = taskQueue.size();
         } else {
-            taskQueue.push({ prompt, std::move(promise), std::chrono::steady_clock::now() });
+            const size_t depth = highQueue.size() + normalQueue.size();
+            const bool full = (g_OllamaQueueMaxDepth > 0 &&
+                               depth >= static_cast<size_t>(g_OllamaQueueMaxDepth));
+            if (full) {
+                if (high && !normalQueue.empty()) {
+                    // A High reply evicts the oldest queued Normal to make room.
+                    evictedPromise = std::move(normalQueue.front().promise);
+                    normalQueue.pop();
+                    haveEvicted = true;
+                    highQueue.push({ prompt, std::move(promise), std::chrono::steady_clock::now(), applySalt });
+                } else {
+                    // Queue full and either a Normal submit, or a High with no Normal to evict.
+                    rejectedFull = true;
+                    depthSnapshot = depth;
+                }
+            } else {
+                QueryTask task{ prompt, std::move(promise), std::chrono::steady_clock::now(), applySalt };
+                if (high) highQueue.push(std::move(task));
+                else      normalQueue.push(std::move(task));
+            }
         }
     }
 
     if (shouldRunNow) {
-        std::thread(&QueryManager::processQuery, this, prompt, std::move(promise)).detach();
+        std::thread(&QueryManager::processQuery, this, prompt, std::move(promise), applySalt).detach();
     } else if (rejectedFull) {
         promise.set_value("");
         ++droppedFull;
@@ -50,26 +69,39 @@ std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
         }
     }
 
+    if (haveEvicted) {
+        evictedPromise.set_value("");
+        ++droppedEvicted;
+        if (g_DebugEnabled) {
+            LOG_INFO("server.loading", "[Ollama Chat] Query dropped: evicted (droppedEvicted={})",
+                     droppedEvicted.load());
+        }
+    }
+
     return future;
 }
 
 // Process the query by calling the API and then handling any queued tasks.
-void QueryManager::processQuery(const std::string& prompt, std::promise<std::string> promise) {
-    std::string result = QueryOllamaAPI(prompt, true);
+void QueryManager::processQuery(const std::string& prompt, std::promise<std::string> promise, bool applySalt) {
+    std::string result = QueryOllamaAPI(prompt, applySalt);
     promise.set_value(result);
 
     std::vector<std::promise<std::string>> stalePromises;  // fulfilled after the lock
     std::string nextPrompt;
     std::promise<std::string> nextPromise;
+    bool nextApplySalt = true;
     bool haveNext = false;
 
     {
         std::lock_guard<std::mutex> lock(mutex_);
         --currentQueries;
-        // Pull the next runnable task, skipping any that have aged past the deadline.
-        while (!taskQueue.empty() && (maxConcurrentQueries == 0 || currentQueries < maxConcurrentQueries)) {
-            QueryTask task = std::move(taskQueue.front());
-            taskQueue.pop();
+        // Pull the next runnable task, draining the High lane first, skipping any aged past the deadline.
+        // (With PrioritizeReplies off, highQueue is always empty -> plain normalQueue FIFO.)
+        while ((!highQueue.empty() || !normalQueue.empty()) &&
+               (maxConcurrentQueries == 0 || currentQueries < maxConcurrentQueries)) {
+            std::queue<QueryTask>& lane = !highQueue.empty() ? highQueue : normalQueue;
+            QueryTask task = std::move(lane.front());
+            lane.pop();
 
             if (g_OllamaQueueMaxAgeMs > 0) {
                 auto ageMs = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -84,6 +116,7 @@ void QueryManager::processQuery(const std::string& prompt, std::promise<std::str
             ++currentQueries;
             nextPrompt = task.prompt;
             nextPromise = std::move(task.promise);
+            nextApplySalt = task.applySalt;
             haveNext = true;
             break;
         }
@@ -100,6 +133,6 @@ void QueryManager::processQuery(const std::string& prompt, std::promise<std::str
         }
     }
     if (haveNext) {
-        std::thread(&QueryManager::processQuery, this, nextPrompt, std::move(nextPromise)).detach();
+        std::thread(&QueryManager::processQuery, this, nextPrompt, std::move(nextPromise), nextApplySalt).detach();
     }
 }

@@ -325,7 +325,7 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
 
                     std::thread([pg, cg, prompt, range]() {
                         try {
-                            std::string response = QueryOllamaAPI(prompt, true);
+                            std::string response = SubmitQuery(prompt, QueryPriority::Normal).get();
                             if (response.empty())
                                 return;
                             Player* p = ObjectAccessor::FindPlayer(pg);
