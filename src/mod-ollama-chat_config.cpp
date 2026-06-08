@@ -72,6 +72,9 @@ uint32_t    g_OllamaNumThreads = 0;
 std::string g_OllamaStop = "";
 std::string g_OllamaSystemPrompt = "";
 std::string g_OllamaSeed = "";
+OllamaApiMode             g_ApiMode        = API_GENERATE;
+bool                      g_TrimRunaway    = true;
+std::vector<std::string>  g_RunawayPatterns;
 
 // --------------------------------------------
 // Concurrency/Queueing
@@ -1109,6 +1112,24 @@ void LoadOllamaChatConfig()
     g_OllamaStop                      = sConfigMgr->GetOption<std::string>("OllamaChat.Stop", "");
     g_OllamaSystemPrompt              = sConfigMgr->GetOption<std::string>("OllamaChat.SystemPrompt", "");
     g_OllamaSeed                      = sConfigMgr->GetOption<std::string>("OllamaChat.Seed", "");
+    {
+        std::string apiMode = sConfigMgr->GetOption<std::string>("OllamaChat.ApiMode", "generate");
+        std::transform(apiMode.begin(), apiMode.end(), apiMode.begin(), ::tolower);
+        g_ApiMode = (apiMode == "chat") ? API_CHAT : API_GENERATE;
+    }
+    g_TrimRunaway = sConfigMgr->GetOption<bool>("OllamaChat.TrimRunaway", true);
+    {
+        g_RunawayPatterns.clear();
+        std::string raw = sConfigMgr->GetOption<std::string>(
+            "OllamaChat.RunawayPatterns", "");
+        std::stringstream ss(raw);
+        std::string item;
+        while (std::getline(ss, item, '|'))
+        {
+            if (!item.empty())
+                g_RunawayPatterns.push_back(item);   // literal substring, do NOT trim
+        }
+    }
 
     g_MaxConcurrentQueries            = sConfigMgr->GetOption<uint32_t>("OllamaChat.MaxConcurrentQueries", 0);
 
@@ -1531,6 +1552,20 @@ void LoadOllamaChatConfig()
              g_OllamaUrl, g_OllamaModel, g_MaxConcurrentQueries,
              g_EnableRandomChatter, g_MinRandomInterval, g_MaxRandomInterval, g_RandomChatterRealPlayerDistance,
              g_RandomChatterBotCommentChance, g_MaxConcurrentQueries, extraBlacklist);
+
+    {
+        const char* modeStr = (g_ApiMode == API_CHAT) ? "chat" : "generate";
+        LOG_INFO("server.loading", "[Ollama Chat] API mode: {} -> {}", modeStr, g_OllamaUrl);
+
+        bool urlIsChat     = (g_OllamaUrl.find("/api/chat")     != std::string::npos);
+        bool urlIsGenerate = (g_OllamaUrl.find("/api/generate") != std::string::npos);
+        if (g_ApiMode == API_CHAT && urlIsGenerate)
+            LOG_ERROR("server.loading", "[Ollama Chat] WARN: ApiMode=chat but Url ends in /api/generate ({}) — endpoint mismatch.", g_OllamaUrl);
+        if (g_ApiMode == API_GENERATE && urlIsChat)
+            LOG_ERROR("server.loading", "[Ollama Chat] WARN: ApiMode=generate but Url ends in /api/chat ({}) — endpoint mismatch.", g_OllamaUrl);
+        if (g_ApiMode == API_CHAT && g_OllamaSystemPrompt.empty())
+            LOG_ERROR("server.loading", "[Ollama Chat] WARN: ApiMode=chat with an empty SystemPrompt — the persona is no longer supplied by a Modelfile on /api/chat.");
+    }
 
     if (g_DebugEnabled)
     {
