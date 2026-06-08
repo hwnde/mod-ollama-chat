@@ -55,7 +55,7 @@ std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
 
 // Process the query by calling the API and then handling any queued tasks.
 void QueryManager::processQuery(const std::string& prompt, std::promise<std::string> promise) {
-    std::string result = QueryOllamaAPI(prompt);
+    std::string result = QueryOllamaAPI(prompt, true);
     promise.set_value(result);
 
     std::vector<std::promise<std::string>> stalePromises;  // fulfilled after the lock

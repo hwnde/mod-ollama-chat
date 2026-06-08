@@ -335,7 +335,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
             std::string prompt = BuildPrompt(botPtr, g_EventChatterPromptTemplate, type, detail, actorName, eventCat);
             if (prompt.empty()) return;
 
-            std::string response = QueryOllamaAPI(prompt);
+            std::string response = QueryOllamaAPI(prompt, true);
             if (response.empty())
             {
                 if (g_DebugEnabled)

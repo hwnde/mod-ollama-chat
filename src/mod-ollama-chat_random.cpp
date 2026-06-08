@@ -858,7 +858,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     Player* botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
                     if (!botPtr) return;
 
-                    std::string response = QueryOllamaAPI(prompt);
+                    std::string response = QueryOllamaAPI(prompt, true);
                     if (response.empty())
                     {
                         if (g_DebugEnabled)

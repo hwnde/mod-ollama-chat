@@ -11,6 +11,7 @@
 #include <queue>
 #include <future>
 #include <algorithm>
+#include <random>
 
 std::string ExtractTextBetweenDoubleQuotes(const std::string& response)
 {
@@ -249,8 +250,18 @@ void RunawayTrimSelfTest()
     g_RunawayPatterns = savedPatterns;
 }
 
+// Per-request salt: the Lemonade hybrid-NPU backend decodes deterministically, so two
+// bots fed an identical prompt say an identical line. A unique opaque tag makes each
+// chat request a distinct input -> a distinct deterministic answer. thread_local RNG:
+// QueryOllamaAPI runs on detached worker threads (no shared-state contention).
+static std::string GenerateSalt()
+{
+    static thread_local std::mt19937 rng(std::random_device{}());
+    return fmt::format("req-{:08x}", static_cast<uint32_t>(rng()));
+}
+
 // Function to perform the API call.
-std::string QueryOllamaAPI(const std::string& prompt)
+std::string QueryOllamaAPI(const std::string& prompt, bool applySalt)
 {
     // Initialize our custom HTTP client
     static OllamaHttpClient httpClient;
@@ -271,14 +282,25 @@ std::string QueryOllamaAPI(const std::string& prompt)
     // Sanitize the prompt to ensure it's valid UTF-8 before creating JSON
     std::string sanitizedPrompt = SanitizeUTF8(prompt);
 
+    // Salt appended after any trailing /no_think — validated to leave /no_think effective.
+    // Only when a system prompt exists (chat mode requires one; empty already WARNs at boot).
+    std::string sysPrompt = g_OllamaSystemPrompt;
+    if (g_PromptSalt && applySalt && !sysPrompt.empty())
+    {
+        std::string tag = GenerateSalt();
+        sysPrompt += " [" + tag + "]";
+        if (g_DebugEnabled)
+            LOG_INFO("server.loading", "[Ollama Chat] Prompt salt tag: {}", tag);
+    }
+
     nlohmann::json requestData;
     requestData["model"]  = model;
     requestData["stream"] = false;
     if (g_ApiMode == API_CHAT)
     {
         nlohmann::json messages = nlohmann::json::array();
-        if (!g_OllamaSystemPrompt.empty())
-            messages.push_back({{"role", "system"}, {"content", SanitizeUTF8(g_OllamaSystemPrompt)}});
+        if (!sysPrompt.empty())
+            messages.push_back({{"role", "system"}, {"content", SanitizeUTF8(sysPrompt)}});
         messages.push_back({{"role", "user"}, {"content", sanitizedPrompt}});
         requestData["messages"] = messages;
     }
@@ -375,10 +397,10 @@ std::string QueryOllamaAPI(const std::string& prompt)
                 requestData["stop"] = stopSeqs;              // generate: unchanged (root)
         }
     }
-    if (g_ApiMode == API_GENERATE && !g_OllamaSystemPrompt.empty())
+    if (g_ApiMode == API_GENERATE && !sysPrompt.empty())
     {
         // Sanitize system prompt as well
-        requestData["system"] = SanitizeUTF8(g_OllamaSystemPrompt);
+        requestData["system"] = SanitizeUTF8(sysPrompt);
     }
 
     if (g_ThinkModeEnableForModule)
