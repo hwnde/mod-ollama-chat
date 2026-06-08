@@ -80,6 +80,9 @@ std::vector<std::string>  g_RunawayPatterns;
 // Concurrency/Queueing
 // --------------------------------------------
 uint32_t    g_MaxConcurrentQueries = 0;
+int         g_OllamaQueueMaxDepth = 0;          // 0 = unbounded (legacy)
+int         g_OllamaQueueMaxAgeMs = 0;          // 0 = no staleness deadline (legacy)
+bool        g_OllamaQueuePrioritizeReplies = false;  // false = single FIFO (legacy)
 
 // --------------------------------------------
 // Feature Toggles & Core Settings
@@ -1133,6 +1136,12 @@ void LoadOllamaChatConfig()
     }
 
     g_MaxConcurrentQueries            = sConfigMgr->GetOption<uint32_t>("OllamaChat.MaxConcurrentQueries", 0);
+    g_OllamaQueueMaxDepth             = sConfigMgr->GetOption<int>("OllamaChat.MaxQueueDepth", 0);
+    g_OllamaQueueMaxAgeMs             = sConfigMgr->GetOption<int>("OllamaChat.QueueMaxAgeMs", 0);
+    g_OllamaQueuePrioritizeReplies    = sConfigMgr->GetOption<bool>("OllamaChat.PrioritizeReplies", false);
+
+    LOG_INFO("server.loading", "[Ollama Chat] Query queue: maxDepth={} maxAgeMs={} prioritizeReplies={}",
+             g_OllamaQueueMaxDepth, g_OllamaQueueMaxAgeMs, g_OllamaQueuePrioritizeReplies);
 
     g_Enable                          = sConfigMgr->GetOption<bool>("OllamaChat.Enable", true);
     g_DisableRepliesInCombat          = sConfigMgr->GetOption<bool>("OllamaChat.DisableRepliesInCombat", true);
