@@ -178,11 +178,21 @@ std::string QueryOllamaAPI(const std::string& prompt)
     // Sanitize the prompt to ensure it's valid UTF-8 before creating JSON
     std::string sanitizedPrompt = SanitizeUTF8(prompt);
 
-    nlohmann::json requestData = {
-        {"model",  model},
-        {"prompt", sanitizedPrompt},
-        {"stream", false}
-    };
+    nlohmann::json requestData;
+    requestData["model"]  = model;
+    requestData["stream"] = false;
+    if (g_ApiMode == API_CHAT)
+    {
+        nlohmann::json messages = nlohmann::json::array();
+        if (!g_OllamaSystemPrompt.empty())
+            messages.push_back({{"role", "system"}, {"content", SanitizeUTF8(g_OllamaSystemPrompt)}});
+        messages.push_back({{"role", "user"}, {"content", sanitizedPrompt}});
+        requestData["messages"] = messages;
+    }
+    else
+    {
+        requestData["prompt"] = sanitizedPrompt;   // /api/generate -- unchanged
+    }
 
     // Create options object for model parameters
     nlohmann::json options;
@@ -265,9 +275,14 @@ std::string QueryOllamaAPI(const std::string& prompt)
                 stopSeqs.push_back(item.substr(start, end - start + 1));
         }
         if (!stopSeqs.empty())
-            requestData["stop"] = stopSeqs;
+        {
+            if (g_ApiMode == API_CHAT)
+                requestData["options"]["stop"] = stopSeqs;   // chat: stop lives under options
+            else
+                requestData["stop"] = stopSeqs;              // generate: unchanged (root)
+        }
     }
-    if (!g_OllamaSystemPrompt.empty())
+    if (g_ApiMode == API_GENERATE && !g_OllamaSystemPrompt.empty())
     {
         // Sanitize system prompt as well
         requestData["system"] = SanitizeUTF8(g_OllamaSystemPrompt);
