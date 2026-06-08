@@ -184,6 +184,24 @@ OllamaChat.RunawayPatterns = \n\nUser:|\n\nAssistant:|\n\nHuman:|\nNote:|\nEdite
 #     Description: The maximum number of concurrent API queries allowed. Use 0 for no limit.
 #     Default:     0
 OllamaChat.MaxConcurrentQueries = 0
+#
+#    OllamaChat.MaxQueueDepth
+#        Description: Max bot-chat requests waiting behind the in-flight one before new ones are dropped (bot stays silent).
+#                     0 = unbounded queue (legacy behavior).
+#        Default:     0
+OllamaChat.MaxQueueDepth = 0
+#
+#    OllamaChat.QueueMaxAgeMs
+#        Description: Drop a queued chat request once it has waited longer than this (ms) instead of replying late.
+#                     0 = no staleness deadline (legacy behavior).
+#        Default:     0
+OllamaChat.QueueMaxAgeMs = 0
+#
+#    OllamaChat.PrioritizeReplies
+#        Description: When true, player-directed replies are served ahead of ambient bot chatter.
+#                     false = single FIFO queue (legacy behavior).
+#        Default:     0
+OllamaChat.PrioritizeReplies = 0
 
 # --------------------------------------------
 # THINK MODE SUPPORT

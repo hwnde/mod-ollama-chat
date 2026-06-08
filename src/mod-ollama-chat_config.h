@@ -71,6 +71,9 @@ extern std::string g_OllamaSeed;
 // Concurrency/Queueing
 // --------------------------------------------
 extern uint32_t    g_MaxConcurrentQueries;
+extern int         g_OllamaQueueMaxDepth;
+extern int         g_OllamaQueueMaxAgeMs;
+extern bool        g_OllamaQueuePrioritizeReplies;
 
 // --------------------------------------------
 // Feature Toggles & Core Settings
