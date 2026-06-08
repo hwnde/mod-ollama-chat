@@ -1,6 +1,7 @@
 #ifndef MOD_OLLAMA_CHAT_QUERYMANAGER_H
 #define MOD_OLLAMA_CHAT_QUERYMANAGER_H
 
+#include <atomic>
 #include <chrono>
 #include <string>
 #include <future>
@@ -29,6 +30,8 @@ private:
     int currentQueries;
     std::mutex mutex_;
     std::queue<QueryTask> taskQueue;
+    std::atomic<uint64_t> droppedFull{0};
+    std::atomic<uint64_t> droppedStale{0};
 };
 
 #endif // MOD_OLLAMA_CHAT_QUERYMANAGER_H

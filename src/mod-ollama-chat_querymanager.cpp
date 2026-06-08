@@ -1,5 +1,6 @@
 #include "mod-ollama-chat_querymanager.h"
 #include "mod-ollama-chat_config.h"  // For g_MaxConcurrentQueries
+#include "Log.h"
 #include <thread>
 
 // Constructor: initialize with the configuration value.
@@ -20,12 +21,18 @@ std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
     std::future<std::string> future = promise.get_future();
 
     bool shouldRunNow = false;
+    bool rejectedFull = false;
+    size_t depthSnapshot = 0;
 
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (maxConcurrentQueries == 0 || currentQueries < maxConcurrentQueries) {
             ++currentQueries;
             shouldRunNow = true;
+        } else if (g_OllamaQueueMaxDepth > 0 &&
+                   taskQueue.size() >= static_cast<size_t>(g_OllamaQueueMaxDepth)) {
+            rejectedFull = true;
+            depthSnapshot = taskQueue.size();
         } else {
             taskQueue.push({ prompt, std::move(promise), std::chrono::steady_clock::now() });
         }
@@ -33,6 +40,13 @@ std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
 
     if (shouldRunNow) {
         std::thread(&QueryManager::processQuery, this, prompt, std::move(promise)).detach();
+    } else if (rejectedFull) {
+        promise.set_value("");
+        ++droppedFull;
+        if (g_DebugEnabled) {
+            LOG_INFO("server.loading", "[Ollama Chat] Query dropped: full (depth={}/max={}, droppedFull={})",
+                     depthSnapshot, g_OllamaQueueMaxDepth, droppedFull.load());
+        }
     }
 
     return future;
