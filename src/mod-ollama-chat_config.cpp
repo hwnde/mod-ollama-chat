@@ -1114,7 +1114,8 @@ void LoadOllamaChatConfig()
     g_OllamaSeed                      = sConfigMgr->GetOption<std::string>("OllamaChat.Seed", "");
     {
         std::string apiMode = sConfigMgr->GetOption<std::string>("OllamaChat.ApiMode", "generate");
-        std::transform(apiMode.begin(), apiMode.end(), apiMode.begin(), ::tolower);
+        std::transform(apiMode.begin(), apiMode.end(), apiMode.begin(),
+                       [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
         g_ApiMode = (apiMode == "chat") ? API_CHAT : API_GENERATE;
     }
     g_TrimRunaway = sConfigMgr->GetOption<bool>("OllamaChat.TrimRunaway", true);
