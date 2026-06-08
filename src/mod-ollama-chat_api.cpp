@@ -70,7 +70,7 @@ struct OllamaStreamAccumulator
             nlohmann::json j = nlohmann::json::parse(line);
             std::string piece;
             if (j.contains("message") && j["message"].is_object()
-                && j["message"].contains("content"))
+                && j["message"].contains("content") && j["message"]["content"].is_string())
                 piece = j["message"]["content"].get<std::string>();   // /api/chat
             else if (j.contains("response"))
                 piece = j["response"].get<std::string>();             // /api/generate
@@ -379,7 +379,7 @@ std::string QueryOllamaAPI(const std::string& prompt)
                 if (g_ApiMode == API_CHAT)
                 {
                     if (jsonResponse.contains("message") && jsonResponse["message"].is_object()
-                        && jsonResponse["message"].contains("content"))
+                        && jsonResponse["message"].contains("content") && jsonResponse["message"]["content"].is_string())
                         extractedResponse << jsonResponse["message"]["content"].get<std::string>();
                 }
                 else if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
