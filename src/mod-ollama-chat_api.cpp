@@ -107,6 +107,51 @@ struct OllamaStreamAccumulator
     }
 };
 
+// Cut the reply at the earliest runaway/stop marker the NPU sometimes emits past
+// the real answer (fake "User:"/"Assistant:" turns, chat-template tokens, wiki artifacts).
+// Patterns are literal substrings from OllamaChat.RunawayPatterns. The config stores
+// the two-character sequence backslash-n for newline markers; expand those here so a
+// real '\n' in the model text matches the configured "\n\nUser:" style pattern.
+static std::string ExpandEscapes(const std::string& in)
+{
+    std::string out;
+    out.reserve(in.size());
+    for (size_t i = 0; i < in.size(); ++i)
+    {
+        if (in[i] == '\\' && i + 1 < in.size() && in[i + 1] == 'n')
+        {
+            out.push_back('\n');
+            ++i;
+        }
+        else
+            out.push_back(in[i]);
+    }
+    return out;
+}
+
+std::string TrimRunawayGeneration(const std::string& reply)
+{
+    if (!g_TrimRunaway || g_RunawayPatterns.empty() || reply.empty())
+        return reply;
+
+    size_t cut = std::string::npos;
+    for (const std::string& rawPat : g_RunawayPatterns)
+    {
+        std::string pat = ExpandEscapes(rawPat);
+        if (pat.empty())
+            continue;
+        size_t pos = reply.find(pat);
+        if (pos != std::string::npos && pos < cut)
+            cut = pos;
+    }
+    if (cut == std::string::npos)
+        return reply;
+
+    std::string trimmed = reply.substr(0, cut);
+    size_t end = trimmed.find_last_not_of(" \t\r\n");
+    return (end == std::string::npos) ? std::string() : trimmed.substr(0, end + 1);
+}
+
 void SoftStopSelfTest()
 {
     int passed = 0, total = 0;
@@ -175,6 +220,33 @@ void SoftStopSelfTest()
     }
 
     LOG_INFO("server.loading", "[Ollama Chat] SoftStop self-test: {}/{} passed", passed, total);
+}
+
+void RunawayTrimSelfTest()
+{
+    int passed = 0, total = 0;
+    // Save/restore the live config so the test is hermetic.
+    bool savedEnable = g_TrimRunaway;
+    std::vector<std::string> savedPatterns = g_RunawayPatterns;
+    g_TrimRunaway = true;
+    g_RunawayPatterns = { "\\n\\nUser:", "<|eot_id|>", "\\n[[", "Wikipedia" };
+
+    auto check = [&](const std::string& in, const std::string& want, const char* name) {
+        ++total;
+        std::string got = TrimRunawayGeneration(in);
+        if (got == want) ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] RunawayTrim self-test FAIL ({}) -> got=[{}] want=[{}]", name, got, want);
+    };
+
+    check("A clean line.", "A clean line.", "no-marker");
+    check("Hello there.\n\nUser: ignore this", "Hello there.", "fake-user-turn");
+    check("Bye.<|eot_id|>junk", "Bye.", "eot-token");
+    check("Real reply.\n[[Special:Foo]]", "Real reply.", "wiki-link");
+
+    LOG_INFO("server.loading", "[Ollama Chat] RunawayTrim self-test: {}/{} passed", passed, total);
+
+    g_TrimRunaway = savedEnable;
+    g_RunawayPatterns = savedPatterns;
 }
 
 // Function to perform the API call.
@@ -401,6 +473,7 @@ std::string QueryOllamaAPI(const std::string& prompt)
     }
 
     botReply = ExtractTextBetweenDoubleQuotes(botReply);
+    botReply = TrimRunawayGeneration(botReply);
 
     // Check for unclosed think tags
     if (botReply.find("<think>") != std::string::npos || botReply.find("</think>") != std::string::npos)

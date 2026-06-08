@@ -10,6 +10,13 @@ std::string QueryOllamaAPI(const std::string& prompt);
 // Debug-only sanity check of the streaming soft-stop accumulator (no network).
 void SoftStopSelfTest();
 
+// Trims runaway NPU continuation past the real answer (fake turns, chat-template tokens, wiki artifacts).
+// No-op when OllamaChat.TrimRunaway = 0 or RunawayPatterns is empty.
+std::string TrimRunawayGeneration(const std::string& reply);
+
+// Boot self-test for TrimRunawayGeneration.
+void RunawayTrimSelfTest();
+
 // Checks if an API response is valid (not an error message)
 bool IsValidAPIResponse(const std::string& response);
 
