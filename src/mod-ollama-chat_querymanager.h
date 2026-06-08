@@ -1,6 +1,7 @@
 #ifndef MOD_OLLAMA_CHAT_QUERYMANAGER_H
 #define MOD_OLLAMA_CHAT_QUERYMANAGER_H
 
+#include <chrono>
 #include <string>
 #include <future>
 #include <mutex>
@@ -19,6 +20,7 @@ private:
     struct QueryTask {
         std::string prompt;
         std::promise<std::string> promise;
+        std::chrono::steady_clock::time_point enqueuedAt;
     };
 
     void processQuery(const std::string& prompt, std::promise<std::string> promise);

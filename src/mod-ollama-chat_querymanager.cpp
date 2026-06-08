@@ -27,7 +27,7 @@ std::future<std::string> QueryManager::submitQuery(const std::string& prompt) {
             ++currentQueries;
             shouldRunNow = true;
         } else {
-            taskQueue.push({ prompt, std::move(promise) });
+            taskQueue.push({ prompt, std::move(promise), std::chrono::steady_clock::now() });
         }
     }
 
