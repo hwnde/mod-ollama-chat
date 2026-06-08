@@ -47,6 +47,7 @@ extern uint32_t   g_EventChatterMaxBotsPerPlayer;
 enum OllamaApiMode { API_GENERATE = 0, API_CHAT = 1 };
 extern OllamaApiMode             g_ApiMode;
 extern bool                      g_TrimRunaway;
+extern bool                      g_PromptSalt;
 extern std::vector<std::string>  g_RunawayPatterns;
 
 extern std::string g_OllamaUrl;

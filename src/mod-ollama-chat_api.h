@@ -5,7 +5,7 @@
 #include <future>
 #include "mod-ollama-chat_querymanager.h"
 
-std::string QueryOllamaAPI(const std::string& prompt);
+std::string QueryOllamaAPI(const std::string& prompt, bool applySalt);
 
 // Debug-only sanity check of the streaming soft-stop accumulator (no network).
 void SoftStopSelfTest();

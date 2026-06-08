@@ -9,7 +9,7 @@
 #include <queue>
 #include <thread>
 
-std::string QueryOllamaAPI(const std::string& prompt);
+std::string QueryOllamaAPI(const std::string& prompt, bool applySalt);
 
 class QueryManager {
 public:
