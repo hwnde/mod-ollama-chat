@@ -156,6 +156,30 @@ OllamaChat.SystemPrompt =
 #     Default:     (empty)
 OllamaChat.Seed =
 
+# OllamaChat.ApiMode
+#     Which Ollama-compatible endpoint to call.
+#     "generate" -> POST /api/generate (prompt + top-level system) — legacy/default.
+#     "chat"     -> POST /api/chat (messages[] array; reply at .message.content).
+#     Use "chat" for backends that only apply the model chat template on /api/chat
+#     (e.g. Lemonade NPU). When "chat", set OllamaChat.Url to the /api/chat endpoint
+#     and supply the persona via OllamaChat.SystemPrompt (no Modelfile on /api/chat).
+#     Default: generate
+OllamaChat.ApiMode = generate
+
+# OllamaChat.TrimRunaway
+#     1 -> cut the reply at the first runaway/stop marker (see RunawayPatterns).
+#     Guards against backends that don't always honor stop tokens (NPU runtimes).
+#     Default: 1
+OllamaChat.TrimRunaway = 1
+
+# OllamaChat.RunawayPatterns
+#     "|"-separated literal substrings; the reply is truncated at the earliest match.
+#     Use \n for newline. Empty -> no trimming.
+#     NOTE: a pattern cannot itself contain the "|" delimiter, so chat-template tokens
+#     like <|eot_id|> / <|im_end|> are NOT listed here — put those in OllamaChat.Stop.
+#     Default below covers fake chat turns and wiki/edit artifacts.
+OllamaChat.RunawayPatterns = \n\nUser:|\n\nAssistant:|\n\nHuman:|\nNote:|\nEdited|\n[[|Wikipedia
+
 # OllamaChat.MaxConcurrentQueries
 #     Description: The maximum number of concurrent API queries allowed. Use 0 for no limit.
 #     Default:     0
