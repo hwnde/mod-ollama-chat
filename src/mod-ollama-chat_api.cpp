@@ -72,7 +72,7 @@ struct OllamaStreamAccumulator
             if (j.contains("message") && j["message"].is_object()
                 && j["message"].contains("content") && j["message"]["content"].is_string())
                 piece = j["message"]["content"].get<std::string>();   // /api/chat
-            else if (j.contains("response"))
+            else if (j.contains("response") && j["response"].is_string())
                 piece = j["response"].get<std::string>();             // /api/generate
             if (!piece.empty())
             {
@@ -454,7 +454,7 @@ std::string QueryOllamaAPI(const std::string& prompt)
                         && jsonResponse["message"].contains("content") && jsonResponse["message"]["content"].is_string())
                         extractedResponse << jsonResponse["message"]["content"].get<std::string>();
                 }
-                else if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+                else if (jsonResponse.contains("response") && jsonResponse["response"].is_string() && !jsonResponse["response"].get<std::string>().empty())
                 {
                     extractedResponse << jsonResponse["response"].get<std::string>();
                 }
