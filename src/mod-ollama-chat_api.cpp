@@ -68,14 +68,16 @@ struct OllamaStreamAccumulator
         try
         {
             nlohmann::json j = nlohmann::json::parse(line);
-            if (j.contains("response"))
+            std::string piece;
+            if (j.contains("message") && j["message"].is_object()
+                && j["message"].contains("content"))
+                piece = j["message"]["content"].get<std::string>();   // /api/chat
+            else if (j.contains("response"))
+                piece = j["response"].get<std::string>();             // /api/generate
+            if (!piece.empty())
             {
-                std::string piece = j["response"].get<std::string>();
-                if (!piece.empty())
-                {
-                    text += piece;
-                    ++tokens;
-                }
+                text += piece;
+                ++tokens;
             }
             if (j.contains("done") && j["done"].is_boolean() && j["done"].get<bool>())
                 done = true;
@@ -151,6 +153,25 @@ void SoftStopSelfTest()
         bool stopped = feedAll(acc, s);
         if (stopped && acc.text == "Hi bye") ++passed;
         else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (done-flag) -> stopped={} text=[{}]", stopped, acc.text);
+    }
+
+    {   // chat shape: stop at sentence boundary
+        ++total;
+        OllamaStreamAccumulator acc(2);
+        std::string s =
+            "{\"message\":{\"content\":\"Hello\"}}\n{\"message\":{\"content\":\" world\"}}\n{\"message\":{\"content\":\".\"}}\n{\"message\":{\"content\":\" extra\"}}\n";
+        bool stopped = feedAll(acc, s);
+        if (stopped && acc.text == "Hello world.") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (chat stop-at-period) -> stopped={} text=[{}]", stopped, acc.text);
+    }
+
+    {   // chat shape: done flag terminates
+        ++total;
+        OllamaStreamAccumulator acc(10);
+        std::string s = "{\"message\":{\"content\":\"Hi\"},\"done\":false}\n{\"message\":{\"content\":\" bye\"},\"done\":true}\n";
+        bool stopped = feedAll(acc, s);
+        if (stopped && acc.text == "Hi bye") ++passed;
+        else LOG_ERROR("server.loading", "[Ollama Chat] SoftStop self-test FAIL (chat done-flag) -> stopped={} text=[{}]", stopped, acc.text);
     }
 
     LOG_INFO("server.loading", "[Ollama Chat] SoftStop self-test: {}/{} passed", passed, total);
@@ -355,7 +376,13 @@ std::string QueryOllamaAPI(const std::string& prompt)
 
                 nlohmann::json jsonResponse = nlohmann::json::parse(line);
 
-                if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
+                if (g_ApiMode == API_CHAT)
+                {
+                    if (jsonResponse.contains("message") && jsonResponse["message"].is_object()
+                        && jsonResponse["message"].contains("content"))
+                        extractedResponse << jsonResponse["message"]["content"].get<std::string>();
+                }
+                else if (jsonResponse.contains("response") && !jsonResponse["response"].get<std::string>().empty())
                 {
                     extractedResponse << jsonResponse["response"].get<std::string>();
                 }
