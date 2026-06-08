@@ -180,6 +180,13 @@ OllamaChat.TrimRunaway = 1
 #     Default below covers fake chat turns and wiki/edit artifacts.
 OllamaChat.RunawayPatterns = \n\nUser:|\n\nAssistant:|\n\nHuman:|\nNote:|\nEdited|\n[[|Wikipedia
 
+# OllamaChat.PromptSalt
+#     1 -> append a unique per-request tag to the system prompt so the deterministic
+#          Lemonade NPU yields varied replies for same-context bots. 0 = byte-for-byte legacy.
+#     The tag is never spoken (validated leak-free); excluded from sentiment classification.
+#     Default: 1
+OllamaChat.PromptSalt = 1
+
 # OllamaChat.MaxConcurrentQueries
 #     Description: The maximum number of concurrent API queries allowed. Use 0 for no limit.
 #     Default:     0

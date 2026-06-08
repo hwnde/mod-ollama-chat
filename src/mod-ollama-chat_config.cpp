@@ -74,6 +74,7 @@ std::string g_OllamaSystemPrompt = "";
 std::string g_OllamaSeed = "";
 OllamaApiMode             g_ApiMode        = API_GENERATE;
 bool                      g_TrimRunaway    = true;
+bool                      g_PromptSalt     = true;
 std::vector<std::string>  g_RunawayPatterns;
 
 // --------------------------------------------
@@ -1122,6 +1123,7 @@ void LoadOllamaChatConfig()
         g_ApiMode = (apiMode == "chat") ? API_CHAT : API_GENERATE;
     }
     g_TrimRunaway = sConfigMgr->GetOption<bool>("OllamaChat.TrimRunaway", true);
+    g_PromptSalt = sConfigMgr->GetOption<bool>("OllamaChat.PromptSalt", true);
     {
         g_RunawayPatterns.clear();
         std::string raw = sConfigMgr->GetOption<std::string>(
@@ -1576,6 +1578,7 @@ void LoadOllamaChatConfig()
         if (g_ApiMode == API_CHAT && g_OllamaSystemPrompt.empty())
             LOG_ERROR("server.loading", "[Ollama Chat] WARN: ApiMode=chat with an empty SystemPrompt — the persona is no longer supplied by a Modelfile on /api/chat.");
     }
+    LOG_INFO("server.loading", "[Ollama Chat] Prompt salt: {}", g_PromptSalt ? "enabled" : "disabled");
 
     if (g_DebugEnabled)
     {
