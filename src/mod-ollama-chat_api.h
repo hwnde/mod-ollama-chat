@@ -20,8 +20,11 @@ void RunawayTrimSelfTest();
 // Checks if an API response is valid (not an error message)
 bool IsValidAPIResponse(const std::string& response);
 
-// Submits a query to the API.
-std::future<std::string> SubmitQuery(const std::string& prompt);
+// Submits a query to the API at the given priority (Normal = ambient/sentiment, High = replies).
+// applySalt mirrors QueryOllamaAPI's param (chat = true, sentiment = false) and rides through the queue.
+std::future<std::string> SubmitQuery(const std::string& prompt,
+                                     QueryPriority prio = QueryPriority::Normal,
+                                     bool applySalt = true);
 
 // Declare the global QueryManager variable.
 extern QueryManager g_queryManager;
