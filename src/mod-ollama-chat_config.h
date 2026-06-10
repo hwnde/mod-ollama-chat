@@ -10,6 +10,7 @@
 #include <ctime>
 #include <functional>
 #include "ScriptMgr.h"  // Ensure WorldScript is defined
+#include "PlayerbotAIConfig.h"  // BotBehaviorId / BEH_COUNT (cross-module contract)
 
 class Player;
 
@@ -180,18 +181,15 @@ extern bool                     g_EnableChannelFrames;
 extern bool                     g_EnableChannelTopics;
 extern std::string              g_ChannelFrames[8];
 extern std::vector<std::string> g_ChannelTopics[8];
-extern bool                     g_PoiChatterEnable;
-extern uint32_t                 g_PoiChatterChance;     // 0-100
-extern std::vector<std::string> g_PoiTopics[5];         // indexed by BotCityPoi - 1 (AUCTIONEER..MAILBOX)
 extern uint32_t                 g_ChannelWeights[8];
 
-extern bool                     g_ActivityChatterEnable;
-extern uint32_t                 g_ActivityChatterChance;     // 0-100
-extern std::vector<std::string> g_ActivityTopicsSocial;
-extern std::vector<std::string> g_ActivityTopicsFishing;
-extern std::vector<std::string> g_ActivityTopicsGather;
-extern std::vector<std::string> g_ActivityTopicsCraft;
-extern std::vector<std::string> g_ActivityTopicsDuel;
+// --------------------------------------------
+// Occupation-keyed ambient topic store (replaces the old activity + POI pools)
+// --------------------------------------------
+extern bool                     g_OccupationChatterEnable;
+extern uint32_t                 g_OccupationChatterChance;        // 0-100
+extern std::vector<std::string> g_OccupationTopics[BEH_COUNT];    // indexed by BotBehaviorId
+extern std::vector<std::string> g_LoiterPoiTopics[6];             // BEH_LOITER variant: BotCityPoi-1 (AUCTIONEER..FORGE)
 
 // --------------------------------------------
 // Blacklist: Prefixes for Commands (not chat)

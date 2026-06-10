@@ -163,35 +163,17 @@ static const char* ChannelCategoryName(ChannelCategory c)
     }
 }
 
-static std::string PickPoiTopic(BotCityPoi poi)
+static std::string PickOccupationTopic(BotBehaviorId beh, uint8 variant)
 {
-    if (poi == POI_NONE)
+    if (beh == BEH_NONE || beh >= BEH_COUNT)
         return "";
-    int idx = static_cast<int>(poi) - 1;   // POI_AUCTIONEER==1 -> 0
-    if (idx < 0 || idx >= 5)
+    std::vector<std::string> const* topics = &g_OccupationTopics[beh];
+    // Loiter resolves by POI variant (variant = BotCityPoi); fall back to the default loiter pool.
+    if (beh == BEH_LOITER && variant >= 1 && variant <= 6 && !g_LoiterPoiTopics[variant - 1].empty())
+        topics = &g_LoiterPoiTopics[variant - 1];
+    if (topics->empty())
         return "";
-    std::vector<std::string> const& topics = g_PoiTopics[idx];
-    if (topics.empty())
-        return "";
-    return topics[topics.size() == 1 ? 0 : urand(0, topics.size() - 1)];
-}
-
-static std::string PickActivityTopic(BotActivity activity)
-{
-    std::vector<std::string> const* topics = nullptr;
-    switch (activity)
-    {
-        case ACTIVITY_SOCIAL: topics = &g_ActivityTopicsSocial;  break;
-        case ACTIVITY_FISH:   topics = &g_ActivityTopicsFishing; break;
-        case ACTIVITY_GATHER: topics = &g_ActivityTopicsGather;  break;
-        case ACTIVITY_CRAFT:  topics = &g_ActivityTopicsCraft;   break;
-        case ACTIVITY_DUEL:   topics = &g_ActivityTopicsDuel;    break;
-        // ACTIVITY_LOITER is intentionally NOT mapped -- poi-flavor-chatter owns loitering.
-        default: return "";   // ACTIVITY_NONE / ACTIVITY_LOITER / any future unmapped activity
-    }
-    if (!topics || topics->empty())
-        return "";
-    return (*topics)[topics->size() == 1 ? 0 : urand(0, topics->size() - 1)];
+    return (*topics)[urand(0, topics->size() - 1)];
 }
 
 static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string response, ChannelCategory cat)
@@ -334,32 +316,16 @@ void OllamaBotRandomChatter::HandleRandomChatter()
             }
             ChannelCategory chosenChannel = PickWeightedChannel(eligibleChannels);
 
-            std::string activityTopic;
-            if (g_ActivityChatterEnable)
+            std::string occupationTopic;
+            if (g_OccupationChatterEnable)
             {
-                if (PlayerbotAI* actBotAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot))
+                if (PlayerbotAI* occBotAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot))
                 {
-                    BotActivity activity = actBotAI->GetCurrentActivity();
-                    if (activity != ACTIVITY_NONE && activity != ACTIVITY_LOITER &&
-                        urand(0, 99) < g_ActivityChatterChance)
+                    if (urand(0, 99) < g_OccupationChatterChance)
                     {
-                        activityTopic = PickActivityTopic(activity);
-                        if (!activityTopic.empty())
-                            chosenChannel = ChannelCategory::Say;   // overheard locally
-                    }
-                }
-            }
-
-            std::string poiTopic;
-            if (g_PoiChatterEnable)
-            {
-                if (PlayerbotAI* poiBotAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot))
-                {
-                    BotCityPoi poi = poiBotAI->GetCurrentCityPoi();
-                    if (poi != POI_NONE && urand(0, 99) < g_PoiChatterChance)
-                    {
-                        poiTopic = PickPoiTopic(poi);
-                        if (!poiTopic.empty())
+                        occupationTopic = PickOccupationTopic(occBotAI->GetCurrentBehaviorId(),
+                                                              occBotAI->GetCurrentVariant());
+                        if (!occupationTopic.empty())
                             chosenChannel = ChannelCategory::Say;   // overheard locally
                     }
                 }
@@ -736,7 +702,7 @@ void OllamaBotRandomChatter::HandleRandomChatter()
             }
 
 
-            auto prompt = [bot, &environmentInfo, chosenChannel, activityTopic, poiTopic]()
+            auto prompt = [bot, &environmentInfo, chosenChannel, occupationTopic]()
             {
                 PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot);
                 if (!botAI)
@@ -825,10 +791,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
                     if (!topic.empty())
                         prompt += " [Bring up, in your own words: " + topic + "]";
                 }
-                if (!activityTopic.empty())
-                    prompt += " [Bring up, in your own words: " + activityTopic + "]";
-                if (!poiTopic.empty())
-                    prompt += " [Bring up, in your own words: " + poiTopic + "]";
+                if (!occupationTopic.empty())
+                    prompt += " [Bring up, in your own words: " + occupationTopic + "]";
 
                 if (g_EnableRAGInitiated && g_RAGSystem)
                 {
