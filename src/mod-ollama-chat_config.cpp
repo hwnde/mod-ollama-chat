@@ -10,6 +10,7 @@
 #include "WorldPacket.h"
 #include "Opcodes.h"
 #include "mod-ollama-chat_api.h"
+#include "PlayerbotAI.h"  // PlayerbotAI::BehaviorKey (cross-module contract)
 #include <fmt/core.h>
 #include <sstream>
 #include <fstream>
@@ -180,18 +181,12 @@ bool                     g_EnableChannelFrames = true;
 bool                     g_EnableChannelTopics = true;
 std::string              g_ChannelFrames[8];
 std::vector<std::string> g_ChannelTopics[8];
-bool                     g_PoiChatterEnable = true;
-uint32_t                 g_PoiChatterChance = 40;
-std::vector<std::string> g_PoiTopics[5];
 uint32_t                 g_ChannelWeights[8] = { 25, 20, 15, 30, 5, 15, 0, 0 };
 
-bool                     g_ActivityChatterEnable = true;
-uint32_t                 g_ActivityChatterChance = 40;
-std::vector<std::string> g_ActivityTopicsSocial;
-std::vector<std::string> g_ActivityTopicsFishing;
-std::vector<std::string> g_ActivityTopicsGather;
-std::vector<std::string> g_ActivityTopicsCraft;
-std::vector<std::string> g_ActivityTopicsDuel;
+bool                     g_OccupationChatterEnable = true;
+uint32_t                 g_OccupationChatterChance = 40;
+std::vector<std::string> g_OccupationTopics[BEH_COUNT];
+std::vector<std::string> g_LoiterPoiTopics[6];
 
 time_t g_LastHistorySaveTime = 0;
 
@@ -1284,37 +1279,62 @@ void LoadOllamaChatConfig()
     for (int i = 0; i < 8; ++i)
         g_ChannelTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(kTopicKeys[i], kTopicDef[i]));
 
-    g_ActivityChatterEnable = sConfigMgr->GetOption<bool>("OllamaChat.ActivityChatter.Enable", true);
-    g_ActivityChatterChance = sConfigMgr->GetOption<uint32_t>("OllamaChat.ActivityChatter.Chance", 40);
+    // Occupation-keyed ambient topic store (replaces the old activity + POI pools).
+    // Keyed by BotBehaviorId via PlayerbotAI::BehaviorKey; most behaviors ship empty
+    // (graceful skip) — the 5 legacy activity pools are migrated verbatim as defaults
+    // (the old "Gather" pool now lives under the gathering_circuit behavior).
+    g_OccupationChatterEnable = sConfigMgr->GetOption<bool>("OllamaChat.OccupationChatter.Enable", true);
+    g_OccupationChatterChance = sConfigMgr->GetOption<uint32_t>("OllamaChat.OccupationChatter.Chance", 40);
+    for (uint8 b = 0; b < BEH_COUNT; ++b)
+    {
+        std::string key = PlayerbotAI::BehaviorKey((BotBehaviorId)b);
+        if (key.empty())
+            continue;
+        // Migrated legacy defaults (pinned verbatim from the prior activity pools).
+        std::string def = "";
+        switch (b)
+        {
+            case BEH_SOCIAL:
+                def = "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here";
+                break;
+            case BEH_FISH:
+                def = "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away";
+                break;
+            case BEH_GATHERING_CIRCUIT:
+                def = "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going";
+                break;
+            case BEH_CRAFT:
+                def = "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work";
+                break;
+            case BEH_DUEL:
+                def = "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced";
+                break;
+            default:
+                break;
+        }
+        g_OccupationTopics[b] = ParsePipeList(
+            sConfigMgr->GetOption<std::string>("OllamaChat.OccupationTopics." + key, def));
+    }
 
-    g_ActivityTopicsSocial  = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Social",
-        "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here"));
-    g_ActivityTopicsFishing = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Fishing",
-        "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away"));
-    g_ActivityTopicsGather  = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Gather",
-        "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"));
-    g_ActivityTopicsCraft   = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Craft",
-        "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"));
-    g_ActivityTopicsDuel    = ParsePipeList(sConfigMgr->GetOption<std::string>("OllamaChat.ActivityTopics.Duel",
-        "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"));
-
-    g_PoiChatterEnable = sConfigMgr->GetOption<bool>("OllamaChat.PoiChatter.Enable", true);
-    g_PoiChatterChance = sConfigMgr->GetOption<uint32_t>("OllamaChat.PoiChatter.Chance", 40);
-
-    static const char* kPoiTopicKeys[5] = {
-        "OllamaChat.PoiTopics.Auctioneer", "OllamaChat.PoiTopics.Banker",
-        "OllamaChat.PoiTopics.Innkeeper",  "OllamaChat.PoiTopics.Trainer",
-        "OllamaChat.PoiTopics.Mailbox"
+    // BEH_LOITER resolves by POI variant (BotCityPoi - 1: AUCTIONEER..FORGE).
+    // The legacy POI pool had no forge slot; index 5 defaults to empty (graceful skip).
+    static const char* kLoiterPoiKeys[6] = {
+        "auctioneer", "banker", "innkeeper", "trainer", "mailbox", "forge"
     };
-    static const char* kPoiTopicDef[5] = {
+    static const char* kLoiterPoiDef[6] = {
         "the outrageous auction prices|a bargain you just spotted at the auction house|something you are hoping to sell",
         "needing to clear out your overstuffed bank|your dwindling gold|the valuables you keep stored away",
         "the comforts of the inn|the food and drink served here|setting your hearthstone",
         "a new skill you wish to learn|the steep cost of training|mastering your craft",
-        "a letter you have been waiting for|mail from an old friend|a package that still has not arrived"
+        "a letter you have been waiting for|mail from an old friend|a package that still has not arrived",
+        ""
     };
-    for (int i = 0; i < 5; ++i)
-        g_PoiTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(kPoiTopicKeys[i], kPoiTopicDef[i]));
+    for (int i = 0; i < 6; ++i)
+        g_LoiterPoiTopics[i] = ParsePipeList(sConfigMgr->GetOption<std::string>(
+            std::string("OllamaChat.OccupationTopics.loiter.") + kLoiterPoiKeys[i], kLoiterPoiDef[i]));
+
+    LOG_INFO("server.loading", "[Ollama Chat] Occupation chatter: {} (chance {}), behaviors={}",
+             g_OccupationChatterEnable ? "enabled" : "disabled", g_OccupationChatterChance, (uint32)BEH_COUNT - 1);
 
     static const char* kWeightKeys[8] = {
         "OllamaChat.ChannelWeight.Guild", "OllamaChat.ChannelWeight.Party",

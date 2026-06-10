@@ -585,52 +585,48 @@ OllamaChat.ChannelTopics.Others  =
 OllamaChat.ChannelWeight.Trade   = 0
 OllamaChat.ChannelWeight.Others  = 0
 #
-#    OllamaChat.ActivityChatter.Enable
-#        While a bot is performing a NewRpg pastime activity (fishing, gathering,
-#        crafting, dueling, socializing), occasionally inject an activity-themed
-#        topic into its initiated chatter and force it to a local Say line.
+#    OllamaChat.OccupationChatter.Enable
+#        While a bot is engaged in a NewRpg occupation (any of the 16 behaviors below)
+#        occasionally inject an occupation-themed topic into its initiated chatter and
+#        force it to a local Say line.
 #        Default: 1 (enabled)
 #
-OllamaChat.ActivityChatter.Enable = 1
+OllamaChat.OccupationChatter.Enable = 1
 #
-#    OllamaChat.ActivityChatter.Chance
-#        Percent chance (0-100), per eligible initiated message while performing an
-#        activity, to inject the activity topic. Default: 40
+#    OllamaChat.OccupationChatter.Chance
+#        Percent chance (0-100), per eligible initiated message while engaged in an
+#        occupation, to inject the occupation topic. Default: 40
 #
-OllamaChat.ActivityChatter.Chance = 40
+OllamaChat.OccupationChatter.Chance = 40
 #
-#    OllamaChat.ActivityTopics.<Activity>
-#        Pipe-delimited ( | ) list of topics the bot may bring up for each activity,
-#        written in its own personality voice by the LLM. One list per activity.
+#    OllamaChat.OccupationTopics.<behavior>
+#        Pipe-delimited ( | ) list of topics the bot may bring up for each behavior,
+#        rewritten in its own personality voice by the LLM. One list per behavior.
+#        An empty list means that behavior contributes no themed topic (graceful skip).
+#        Behavior keys (the 16 rationalized behaviors):
+#          go_grind, wander_random, do_quest, gathering_circuit, rest, wander_npc,
+#          travel_flight, travel_mount, outdoor_pvp, social, loiter, fish, craft,
+#          duel, repair_sell, dummy
+#        Most ship empty by default; the 5 below carry the migrated legacy pools.
 #
-OllamaChat.ActivityTopics.Social = "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here"
-OllamaChat.ActivityTopics.Fishing = "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away"
-OllamaChat.ActivityTopics.Gather = "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"
-OllamaChat.ActivityTopics.Craft = "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"
-OllamaChat.ActivityTopics.Duel = "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"
+OllamaChat.OccupationTopics.social = "the good company at this gathering|how pleasant it is to relax with others for a while|an old friend you ran into here"
+OllamaChat.OccupationTopics.fish = "the fish finally biting|the big catch you are hoping to land|how peaceful it is to fish by the water|the one that got away"
+OllamaChat.OccupationTopics.gathering_circuit = "a rich vein or herb you just spotted|the materials you have been collecting|how the day's gathering is going"
+OllamaChat.OccupationTopics.craft = "the piece you are working on|honing your trade skill|a recipe you have been wanting to try|the quality of your latest work"
+OllamaChat.OccupationTopics.duel = "a friendly duel to test your skills|how the sparring is going|a worthy opponent you just faced"
 #
-#    OllamaChat.PoiChatter.Enable
-#        1 = while a bot dwells at a city point-of-interest (auctioneer/banker/innkeeper/
-#            trainer/mailbox) it occasionally says a themed line about it, in its own voice.
-#        0 = off (normal initiated chatter unchanged).
+#    OllamaChat.OccupationTopics.loiter.<poi>
+#        The loiter behavior resolves its topic by the city point-of-interest the bot
+#        dwells at. POI keys: auctioneer, banker, innkeeper, trainer, mailbox, forge.
+#        (forge has no legacy pool; it defaults to empty.) Falls back to the plain
+#        OllamaChat.OccupationTopics.loiter list when a POI list is empty.
 #
-OllamaChat.PoiChatter.Enable = 1
-#
-#    OllamaChat.PoiChatter.Chance
-#        Percent chance (0-100) per eligible initiated-chatter tick to emit a POI line
-#        while dwelling. Default: 40
-#
-OllamaChat.PoiChatter.Chance = 40
-#
-#    OllamaChat.PoiTopics.<Type>
-#        Pipe-separated topic phrases the bot may bring up while dwelling at each POI type.
-#        The LLM rewrites the chosen phrase in its own personality voice (no canned text).
-#
-OllamaChat.PoiTopics.Auctioneer = "the outrageous auction prices|a bargain you just spotted at the auction house|something you are hoping to sell"
-OllamaChat.PoiTopics.Banker = "needing to clear out your overstuffed bank|your dwindling gold|the valuables you keep stored away"
-OllamaChat.PoiTopics.Innkeeper = "the comforts of the inn|the food and drink served here|setting your hearthstone"
-OllamaChat.PoiTopics.Trainer = "a new skill you wish to learn|the steep cost of training|mastering your craft"
-OllamaChat.PoiTopics.Mailbox = "a letter you have been waiting for|mail from an old friend|a package that still has not arrived"
+OllamaChat.OccupationTopics.loiter.auctioneer = "the outrageous auction prices|a bargain you just spotted at the auction house|something you are hoping to sell"
+OllamaChat.OccupationTopics.loiter.banker = "needing to clear out your overstuffed bank|your dwindling gold|the valuables you keep stored away"
+OllamaChat.OccupationTopics.loiter.innkeeper = "the comforts of the inn|the food and drink served here|setting your hearthstone"
+OllamaChat.OccupationTopics.loiter.trainer = "a new skill you wish to learn|the steep cost of training|mastering your craft"
+OllamaChat.OccupationTopics.loiter.mailbox = "a letter you have been waiting for|mail from an old friend|a package that still has not arrived"
+OllamaChat.OccupationTopics.loiter.forge =
 
 # ----------------------------------------------
 # CROSS-BOT ANTI-REPETITION (Say-range awareness)
