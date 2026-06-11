@@ -118,9 +118,10 @@ extern std::string g_ChatExtraInfoTemplate;
 // --------------------------------------------
 extern std::unordered_map<uint64_t, std::string> g_BotPersonalityList;
 extern std::unordered_map<std::string, std::string> g_PersonalityPrompts;
-extern std::map<std::pair<std::string, std::string>, std::string> g_ActivityPrompts; // (activity,lifecycle) -> instruction fragment
-extern bool        g_ActivityEventsEnable;
-extern uint32      g_ActivityEventsChance;       // 0..100
+struct ActivityPrompt { std::string prompt; uint32 chance; };
+extern std::map<std::pair<std::string, std::string>, ActivityPrompt> g_ActivityPrompts; // (behaviorKey,lifecycle) -> {fragment, chance}
+extern bool   g_OccupationLifecycleEnable;
+extern uint32 g_OccupationLifecycleChance;   // 0..100 global fallback
 extern std::string g_ActivityChatterPromptTemplate;
 extern std::vector<std::string> g_PersonalityKeys;
 extern std::vector<std::string> g_PersonalityKeysRandomOnly; // Personalities that can be randomly assigned

@@ -130,9 +130,9 @@ std::string g_ChatExtraInfoTemplate;
 // --------------------------------------------
 std::unordered_map<uint64_t, std::string> g_BotPersonalityList;
 std::unordered_map<std::string, std::string> g_PersonalityPrompts;
-std::map<std::pair<std::string, std::string>, std::string> g_ActivityPrompts;
-bool        g_ActivityEventsEnable        = false;
-uint32      g_ActivityEventsChance        = 20;
+std::map<std::pair<std::string, std::string>, ActivityPrompt> g_ActivityPrompts;
+bool        g_OccupationLifecycleEnable    = false;
+uint32      g_OccupationLifecycleChance    = 20;
 std::string g_ActivityChatterPromptTemplate;
 std::vector<std::string> g_PersonalityKeys;
 std::vector<std::string> g_PersonalityKeysRandomOnly;
@@ -1205,14 +1205,14 @@ void LoadOllamaChatConfig()
 
     g_EventChatterPromptTemplate     = sConfigMgr->GetOption<std::string>("OllamaChat.EventChatterPromptTemplate", "");
 
-    g_ActivityEventsEnable = sConfigMgr->GetOption<bool>("OllamaChat.ActivityEvents.Enable", false);
-    g_ActivityEventsChance = sConfigMgr->GetOption<uint32>("OllamaChat.ActivityEvents.Chance", 20);
+    g_OccupationLifecycleEnable = sConfigMgr->GetOption<bool>("OllamaChat.OccupationLifecycle.Enable", false);
+    g_OccupationLifecycleChance = sConfigMgr->GetOption<uint32>("OllamaChat.OccupationLifecycle.Chance", 20);
     g_ActivityChatterPromptTemplate = sConfigMgr->GetOption<std::string>(
         "OllamaChat.ActivityChatterPromptTemplate",
         "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, in {bot_area} of {bot_zone}. "
         "Personality: {bot_personality_name}: {bot_personality}. {activity_instruction}");
-    LOG_INFO("server.loading", "[Ollama Chat] Activity events: {} (chance {})",
-             g_ActivityEventsEnable ? "enabled" : "disabled", g_ActivityEventsChance);
+    LOG_INFO("server.loading", "[Ollama Chat] Occupation lifecycle: {} (chance {})",
+             g_OccupationLifecycleEnable ? "enabled" : "disabled", g_OccupationLifecycleChance);
 
     g_ChatPromptTemplate              = sConfigMgr->GetOption<std::string>("OllamaChat.ChatPromptTemplate", "");
     
@@ -1767,7 +1767,7 @@ void LoadActivityPromptsFromDB()
 {
     g_ActivityPrompts.clear();
     QueryResult result = CharacterDatabase.Query(
-        "SELECT `activity`, `lifecycle`, `prompt` FROM `mod_ollama_chat_activity_prompts`");
+        "SELECT `activity`, `lifecycle`, `prompt`, `chance` FROM `mod_ollama_chat_activity_prompts`");
     uint32 n = 0;
     if (result)
     {
@@ -1776,7 +1776,8 @@ void LoadActivityPromptsFromDB()
             std::string activity  = (*result)[0].Get<std::string>();
             std::string lifecycle = (*result)[1].Get<std::string>();
             std::string prompt    = (*result)[2].Get<std::string>();
-            g_ActivityPrompts[{activity, lifecycle}] = prompt;
+            uint32      chance    = (*result)[3].Get<uint32>();
+            g_ActivityPrompts[{activity, lifecycle}] = { prompt, chance };
             ++n;
         } while (result->NextRow());
     }

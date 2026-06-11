@@ -530,15 +530,29 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
     return builtPrompt;
 }
 
-// BotActivity enum value -> activity-prompt store key. Phase 1: fishing only.
-// (values mirror mod-playerbots PlayerbotAIConfig.h BotActivity, passed as uint32 over the core hook:
-//  ACTIVITY_SOCIAL=0, ACTIVITY_LOITER=1, ACTIVITY_FISH=2, ...)
-static std::string ActivityKey(uint32 activity)
+// uint32 behaviorId (BotBehaviorId in mod-playerbots/PlayerbotAIConfig.h) -> store key.
+// MUST stay in lockstep with PlayerbotAI::BehaviorKey(). BEH_NONE=0 / unknown -> "".
+static std::string BehaviorIdToKey(uint32 b)
 {
-    switch (activity)
+    switch (b)
     {
-        case 2: return "fishing";   // ACTIVITY_FISH
-        default: return "";          // unmapped -> no line (Phase 2 adds the rest)
+        case 1:  return "go_grind";
+        case 2:  return "wander_random";
+        case 3:  return "do_quest";
+        case 4:  return "gathering_circuit";
+        case 5:  return "rest";
+        case 6:  return "wander_npc";
+        case 7:  return "travel_flight";
+        case 8:  return "travel_mount";
+        case 9:  return "outdoor_pvp";
+        case 10: return "social";
+        case 11: return "loiter";
+        case 12: return "fish";
+        case 13: return "craft";
+        case 14: return "duel";
+        case 15: return "repair_sell";
+        case 16: return "dummy";
+        default: return "";
     }
 }
 
@@ -595,21 +609,22 @@ static std::string BuildActivityPrompt(Player* bot, PlayerbotAI* ai, const std::
 }
 
 // Gate, look up the fragment, compose + send on a detached worker thread (mirrors QueueEvent).
-static void DispatchActivityEvent(Player* bot, uint32 activity, const std::string& lifecycle)
+static void DispatchActivityEvent(Player* bot, uint32 behaviorId, const std::string& lifecycle)
 {
-    if (!g_Enable || !g_ActivityEventsEnable || !bot)
+    if (!g_Enable || !g_OccupationLifecycleEnable || !bot)
         return;
-    std::string key = ActivityKey(activity);
+    std::string key = BehaviorIdToKey(behaviorId);
     if (key.empty())
         return;
     auto it = g_ActivityPrompts.find({key, lifecycle});
-    if (it == g_ActivityPrompts.end())
-        return;                                  // no row for this (activity,lifecycle)
-    if (urand(0, 99) >= g_ActivityEventsChance)
+    if (it == g_ActivityPrompts.end() || it->second.prompt.empty())
+        return;                                  // no row for this (behavior,lifecycle)
+    uint32 chance = it->second.chance ? it->second.chance : g_OccupationLifecycleChance;  // 0 -> global fallback
+    if (urand(0, 99) >= chance)
         return;                                  // chance-gated: most sessions are silent
 
     uint64_t botGuid = bot->GetGUID().GetRawValue();
-    std::string fragment = it->second;
+    std::string fragment = it->second.prompt;
 
     std::thread([botGuid, fragment]()
     {
@@ -972,13 +987,13 @@ void ChatOnLogin::OnPlayerLogin(Player* player)
 
 OllamaActivityEventScript::OllamaActivityEventScript() : PlayerbotScript("OllamaActivityEventScript") { }
 
-void OllamaActivityEventScript::OnPlayerbotActivityStart(Player* bot, uint32 activity)
+void OllamaActivityEventScript::OnPlayerbotActivityStart(Player* bot, uint32 behaviorId)
 {
-    DispatchActivityEvent(bot, activity, "start");
+    DispatchActivityEvent(bot, behaviorId, "start");
 }
 
-void OllamaActivityEventScript::OnPlayerbotActivityFinish(Player* bot, uint32 activity)
+void OllamaActivityEventScript::OnPlayerbotActivityFinish(Player* bot, uint32 behaviorId)
 {
-    DispatchActivityEvent(bot, activity, "finish");
+    DispatchActivityEvent(bot, behaviorId, "finish");
 }
 
