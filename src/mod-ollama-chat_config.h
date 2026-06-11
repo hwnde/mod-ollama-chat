@@ -6,6 +6,8 @@
 #include <vector>
 #include <deque>
 #include <unordered_map>
+#include <map>
+#include <utility>
 #include <mutex>
 #include <ctime>
 #include <functional>
@@ -116,6 +118,10 @@ extern std::string g_ChatExtraInfoTemplate;
 // --------------------------------------------
 extern std::unordered_map<uint64_t, std::string> g_BotPersonalityList;
 extern std::unordered_map<std::string, std::string> g_PersonalityPrompts;
+extern std::map<std::pair<std::string, std::string>, std::string> g_ActivityPrompts; // (activity,lifecycle) -> instruction fragment
+extern bool        g_ActivityEventsEnable;
+extern uint32      g_ActivityEventsChance;       // 0..100
+extern std::string g_ActivityChatterPromptTemplate;
 extern std::vector<std::string> g_PersonalityKeys;
 extern std::vector<std::string> g_PersonalityKeysRandomOnly; // Personalities that can be randomly assigned
 extern std::string g_DefaultPersonalityPrompt;
@@ -486,6 +492,7 @@ void LoadOllamaChatConfig();
 void LoadBotPersonalityList();
 void LoadBotConversationHistoryFromDB();
 void LoadPersonalityTemplatesFromDB();
+void LoadActivityPromptsFromDB();
 
 // --------------------------------------------
 // Declaration of the configuration WorldScript.
