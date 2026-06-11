@@ -122,6 +122,15 @@ public:
     void OnPlayerLeaveCombat(Player* player) override;
 };
 
+// Subscribes to core bot activity lifecycle hooks (start/finish) and speaks a DB-driven line.
+class OllamaActivityEventScript : public PlayerbotScript
+{
+public:
+    OllamaActivityEventScript();
+    void OnPlayerbotActivityStart(Player* bot, uint32 activity) override;
+    void OnPlayerbotActivityFinish(Player* bot, uint32 activity) override;
+};
+
 // Guild membership events. AzerothCore exposes these on GuildScript (NOT PlayerScript):
 // OnAddMember / OnRemoveMember cover join/leave (and hand us the Guild* + Player* directly),
 // while OnEvent carries promote/demote via the guild event-log type.

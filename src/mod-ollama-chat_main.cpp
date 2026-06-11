@@ -32,5 +32,6 @@ void Addmod_ollama_chatScripts()
     new ChatOnReputationRank();
     new ChatOnResurrect();
     new ChatOnCombat();
+    new OllamaActivityEventScript();
     new OllamaChatConfigCommand();
 }

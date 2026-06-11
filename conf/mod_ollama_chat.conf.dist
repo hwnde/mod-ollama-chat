@@ -424,6 +424,27 @@ OllamaChat.EventChatterMaxBotsPerPlayer = 2
 #     Note: {actor_descriptor} expands to a gender-bearing description for player/bot actors (e.g. "Thrall, a male Orc Warrior") and falls back to {actor_name} for creatures.
 OllamaChat.EventChatterPromptTemplate = "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, standing in {bot_area} of {bot_zone}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} You have just witnessed: {actor_descriptor} {event_type} {event_detail}. React in under 15 words, grounded in what just happened here in {bot_area} — not in the wider war."
 
+#
+#    OllamaChat.ActivityEvents.Enable
+#        Master switch for chat lines fired by bot activity lifecycle events
+#        (start/finish). Default: 0
+#
+OllamaChat.ActivityEvents.Enable = 0
+
+#
+#    OllamaChat.ActivityEvents.Chance
+#        Percent chance (0-100) a bot speaks on a given activity start/finish.
+#        Default: 20
+#
+OllamaChat.ActivityEvents.Chance = 20
+
+#
+#    OllamaChat.ActivityChatterPromptTemplate
+#        First-person scaffold for activity lines. {activity_instruction} is filled
+#        from the mod_ollama_chat_activity_prompts table per (activity,lifecycle).
+#
+OllamaChat.ActivityChatterPromptTemplate = "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, in {bot_area} of {bot_zone}. Personality: {bot_personality_name}: {bot_personality}. {activity_instruction}"
+
 # --------------------------------------------
 # TYPING SIMULATION
 # --------------------------------------------

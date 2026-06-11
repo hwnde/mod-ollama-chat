@@ -530,6 +530,120 @@ std::string OllamaBotEventChatter::BuildPrompt(Player* bot, std::string promptTe
     return builtPrompt;
 }
 
+// BotActivity enum value -> activity-prompt store key. Phase 1: fishing only.
+// (values mirror mod-playerbots PlayerbotAIConfig.h BotActivity, passed as uint32 over the core hook:
+//  ACTIVITY_SOCIAL=0, ACTIVITY_LOITER=1, ACTIVITY_FISH=2, ...)
+static std::string ActivityKey(uint32 activity)
+{
+    switch (activity)
+    {
+        case 2: return "fishing";   // ACTIVITY_FISH
+        default: return "";          // unmapped -> no line (Phase 2 adds the rest)
+    }
+}
+
+// First-person activity prompt: mirror BuildPrompt's identity/personality/area resolution,
+// but use g_ActivityChatterPromptTemplate with {activity_instruction} from the DB fragment.
+static std::string BuildActivityPrompt(Player* bot, PlayerbotAI* ai, const std::string& fragment)
+{
+    if (!bot || !ai) return "";
+
+    std::string personality       = GetBotPersonality(bot);
+    std::string personalityPrompt = GetPersonalityPromptAddition(personality);
+    std::string botName   = bot->GetName();
+    std::string botClass  = ai->GetChatHelper() ? ai->GetChatHelper()->FormatClass(bot->getClass()) : "UnknownClass";
+    uint32_t    botLevel  = bot->GetLevel();
+    std::string botRace   = ai->GetChatHelper() ? ai->GetChatHelper()->FormatRace(bot->getRace()) : "UnknownRace";
+    std::string botRole   = ai->GetChatHelper() ? ChatHelper::FormatClass(bot, AiFactory::GetPlayerSpecTab(bot)) : "UnknownRole";
+    std::string botGender = bot->getGender() == GENDER_MALE ? "Male" : "Female";
+    std::string botFaction= bot->GetTeamId() == TEAM_ALLIANCE ? "Alliance" : "Horde";
+
+    AreaTableEntry const* botCurrentArea = ai->GetCurrentArea();
+    AreaTableEntry const* botCurrentZone = ai->GetCurrentZone();
+    std::string botAreaName = botCurrentArea ? ai->GetLocalizedAreaName(botCurrentArea) : "UnknownArea";
+    std::string botZoneName = botCurrentZone ? ai->GetLocalizedAreaName(botCurrentZone) : "UnknownZone";
+    std::string botMapName  = bot->GetMap() ? bot->GetMap()->GetMapName() : "UnknownMap";
+
+    std::string builtPrompt = SafeFormat(
+        g_ActivityChatterPromptTemplate,
+        fmt::arg("bot_name", botName),
+        fmt::arg("bot_level", botLevel),
+        fmt::arg("bot_class", botClass),
+        fmt::arg("bot_race", botRace),
+        fmt::arg("bot_gender", botGender),
+        fmt::arg("bot_role", botRole),
+        fmt::arg("bot_faction", botFaction),
+        fmt::arg("bot_area", botAreaName),
+        fmt::arg("bot_zone", botZoneName),
+        fmt::arg("bot_map", botMapName),
+        fmt::arg("bot_personality", personalityPrompt),
+        fmt::arg("bot_personality_name", personality),
+        fmt::arg("activity_instruction", fragment)
+    );
+
+    if (g_EnableChatBotSnapshotTemplate)
+        builtPrompt += GenerateBotGameStateSnapshot(bot);
+    if (g_EnableAntiRepetition)
+        builtPrompt += GetAntiRepetitionPrompt(bot->GetGUID().GetRawValue());
+    if (g_EnableCrossBotAntiRepetition)
+        builtPrompt += GetNearbyBotsRecentReplies(bot);
+    builtPrompt += BuildEmoteChatInstruction();
+    if (g_EnableChannelFrames)
+        builtPrompt += " [" + GetChannelFrame(ChannelCategory::Say) + "]";
+
+    return builtPrompt;
+}
+
+// Gate, look up the fragment, compose + send on a detached worker thread (mirrors QueueEvent).
+static void DispatchActivityEvent(Player* bot, uint32 activity, const std::string& lifecycle)
+{
+    if (!g_Enable || !g_ActivityEventsEnable || !bot)
+        return;
+    std::string key = ActivityKey(activity);
+    if (key.empty())
+        return;
+    auto it = g_ActivityPrompts.find({key, lifecycle});
+    if (it == g_ActivityPrompts.end())
+        return;                                  // no row for this (activity,lifecycle)
+    if (urand(0, 99) >= g_ActivityEventsChance)
+        return;                                  // chance-gated: most sessions are silent
+
+    uint64_t botGuid = bot->GetGUID().GetRawValue();
+    std::string fragment = it->second;
+
+    std::thread([botGuid, fragment]()
+    {
+        try
+        {
+            Player* botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
+            if (!botPtr) return;
+            PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);
+            if (!botAI) return;
+
+            std::string prompt = BuildActivityPrompt(botPtr, botAI, fragment);
+            if (prompt.empty()) return;
+
+            std::string response = SubmitQuery(prompt, QueryPriority::Normal).get();
+            if (response.empty()) return;
+
+            AppendBotRecentReply(botGuid, response);
+
+            // reacquire pointers before use (the API call may have outlived the bot)
+            botPtr = ObjectAccessor::FindPlayer(ObjectGuid(botGuid));
+            if (!botPtr) return;
+            LogCrossBotRepetition(botPtr, response);
+            botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);
+            if (!botAI) return;
+
+            EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
+        }
+        catch (const std::exception& e)
+        {
+            LOG_ERROR("server.loading", "[OllamaChat] Exception in DispatchActivityEvent thread: {}", e.what());
+        }
+    }).detach();
+}
+
 // === Script Hooks ===
 
 ChatOnKill::ChatOnKill() : PlayerScript("ChatOnKill") {}
@@ -854,5 +968,17 @@ void ChatOnLogin::OnPlayerLogin(Player* player)
         return;
     if (!g_GuildEventTypeGuildLogin.empty())
         eventChatter.DispatchGameEvent(player, g_GuildEventTypeGuildLogin, guild->GetName(), guild);
+}
+
+OllamaActivityEventScript::OllamaActivityEventScript() : PlayerbotScript("OllamaActivityEventScript") { }
+
+void OllamaActivityEventScript::OnPlayerbotActivityStart(Player* bot, uint32 activity)
+{
+    DispatchActivityEvent(bot, activity, "start");
+}
+
+void OllamaActivityEventScript::OnPlayerbotActivityFinish(Player* bot, uint32 activity)
+{
+    DispatchActivityEvent(bot, activity, "finish");
 }
 

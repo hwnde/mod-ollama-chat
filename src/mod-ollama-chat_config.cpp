@@ -130,6 +130,10 @@ std::string g_ChatExtraInfoTemplate;
 // --------------------------------------------
 std::unordered_map<uint64_t, std::string> g_BotPersonalityList;
 std::unordered_map<std::string, std::string> g_PersonalityPrompts;
+std::map<std::pair<std::string, std::string>, std::string> g_ActivityPrompts;
+bool        g_ActivityEventsEnable        = false;
+uint32      g_ActivityEventsChance        = 20;
+std::string g_ActivityChatterPromptTemplate;
 std::vector<std::string> g_PersonalityKeys;
 std::vector<std::string> g_PersonalityKeysRandomOnly;
 std::string g_DefaultPersonalityPrompt;
@@ -1201,6 +1205,15 @@ void LoadOllamaChatConfig()
 
     g_EventChatterPromptTemplate     = sConfigMgr->GetOption<std::string>("OllamaChat.EventChatterPromptTemplate", "");
 
+    g_ActivityEventsEnable = sConfigMgr->GetOption<bool>("OllamaChat.ActivityEvents.Enable", false);
+    g_ActivityEventsChance = sConfigMgr->GetOption<uint32>("OllamaChat.ActivityEvents.Chance", 20);
+    g_ActivityChatterPromptTemplate = sConfigMgr->GetOption<std::string>(
+        "OllamaChat.ActivityChatterPromptTemplate",
+        "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, in {bot_area} of {bot_zone}. "
+        "Personality: {bot_personality_name}: {bot_personality}. {activity_instruction}");
+    LOG_INFO("server.loading", "[Ollama Chat] Activity events: {} (chance {})",
+             g_ActivityEventsEnable ? "enabled" : "disabled", g_ActivityEventsChance);
+
     g_ChatPromptTemplate              = sConfigMgr->GetOption<std::string>("OllamaChat.ChatPromptTemplate", "");
     
     g_ChatExtraInfoTemplate           = sConfigMgr->GetOption<std::string>("OllamaChat.ChatExtraInfoTemplate", "");
@@ -1465,6 +1478,7 @@ void LoadOllamaChatConfig()
     }
 
     LoadPersonalityTemplatesFromDB();
+    LoadActivityPromptsFromDB();
 
     g_queryManager.setMaxConcurrentQueries(g_MaxConcurrentQueries);
 
@@ -1745,8 +1759,28 @@ void LoadPersonalityTemplatesFromDB()
         }
     } while (result->NextRow());
 
-    LOG_INFO("server.loading", "[Ollama Chat] Cached {} personalities ({} available for random assignment).", 
+    LOG_INFO("server.loading", "[Ollama Chat] Cached {} personalities ({} available for random assignment).",
              g_PersonalityKeys.size(), g_PersonalityKeysRandomOnly.size());
+}
+
+void LoadActivityPromptsFromDB()
+{
+    g_ActivityPrompts.clear();
+    QueryResult result = CharacterDatabase.Query(
+        "SELECT `activity`, `lifecycle`, `prompt` FROM `mod_ollama_chat_activity_prompts`");
+    uint32 n = 0;
+    if (result)
+    {
+        do
+        {
+            std::string activity  = (*result)[0].Get<std::string>();
+            std::string lifecycle = (*result)[1].Get<std::string>();
+            std::string prompt    = (*result)[2].Get<std::string>();
+            g_ActivityPrompts[{activity, lifecycle}] = prompt;
+            ++n;
+        } while (result->NextRow());
+    }
+    LOG_INFO("server.loading", "[Ollama Chat] Activity prompts: {} loaded", n);
 }
 
 void LoadBotConversationHistoryFromDB()
