@@ -233,6 +233,9 @@ void OllamaWorldNpcChatter::HandleNpcProximityChatter()
     uint32 npcCdMs    = g_WorldNpcChatNpcCooldownSec    * 1000;
     uint32 playerCdMs = g_WorldNpcChatPlayerCooldownSec * 1000;
 
+    // Audibility invariant: this path is real-players-only BY CONSTRUCTION -- it sweeps real players
+    // and barks nearby NPCs at them, so its trigger IS a real audience. No RealPlayerCanHear() call
+    // is needed here (unlike the bot-initiated speech paths).
     for (auto const& pair : ObjectAccessor::GetPlayers())
     {
         Player* player = pair.second;

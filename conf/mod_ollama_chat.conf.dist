@@ -425,6 +425,14 @@ OllamaChat.EventChatterMaxBotsPerPlayer = 2
 OllamaChat.EventChatterPromptTemplate = "You are {bot_name}, a {bot_race} {bot_class} of the {bot_faction}, standing in {bot_area} of {bot_zone}. Personality: {bot_personality_name}: {bot_personality}. {sentiment_info} You have just witnessed: {actor_descriptor} {event_type} {event_detail}. React in under 15 words, grounded in what just happened here in {bot_area} — not in the wider war."
 
 #
+# AUDIBILITY INVARIANT (always on -- no setting controls it):
+#   A bot only generates an LLM chat line when a real (non-bot) player can actually perceive it on
+#   the line's delivery channel -- say/yell within range, Guild only if a real guildmate is online,
+#   Party/Raid only with a real player in the group, General/Trade only with a real player in the
+#   same zone+team. Feature toggles below switch features on/off, but any enabled chat feature is
+#   always audibility-gated. There is intentionally no key to disable this gate.
+#
+#
 #    OllamaChat.OccupationLifecycle.Enable
 #        Master switch for chat lines fired by bot occupation lifecycle events
 #        (start/finish of a BotBehaviorId occupation). Default: 0
