@@ -598,6 +598,8 @@ static void DispatchActivityEvent(Player* bot, uint32 behaviorId, const std::str
 {
     if (!g_Enable || !g_OccupationLifecycleEnable || !bot)
         return;
+    if (!RealPlayerCanHear(bot, ChannelCategory::Say))   // line delivered via botAI->Say
+        return;
     std::string key = BehaviorIdToKey(behaviorId);
     if (key.empty())
         return;
