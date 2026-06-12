@@ -6,6 +6,15 @@
 #include "Log.h"
 #include <vector>
 #include <sstream>
+#include "mod-ollama-chat_handler.h"   // for ChannelCategory
+
+class Player;
+
+// INVARIANT: No code path may call SubmitQuery/QueryOllamaAPI to make a bot speak unless a real
+// player can perceive the line on the specific channel it is delivered to. This check runs on the
+// WORLD THREAD, before the LLM worker thread is spawned. No exceptions, no bypass knob.
+// Every new bot-speech path MUST call this on the world thread before SubmitQuery/QueryOllamaAPI.
+bool RealPlayerCanHear(Player* bot, ChannelCategory cat);
 
 // Safe formatting utility for the Ollama Chat module.
 // This will catch all fmt::format errors and log them.

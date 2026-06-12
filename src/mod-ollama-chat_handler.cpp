@@ -1660,12 +1660,14 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
             continue;
         }
         ChannelCategory channelCat = ClassifyChannel(sourceLocal, channel);
+        if (senderIsBot && !RealPlayerCanHear(bot, channelCat))
+            continue;   // bot-to-bot reply with no human in the audience — don't burn the LLM
         std::string prompt = GenerateBotPrompt(bot, msg, player, channelCat);
         if (g_EnableConversationThreading)
             prompt += GetChannelThreadPrompt(ComputeChannelKey(sourceLocal, channel, player));
         uint64_t botGuid = bot->GetGUID().GetRawValue();
         
-        std::thread([botGuid, senderGuid, prompt, sourceLocal, channelId = (channel ? channel->GetChannelId() : 0), channelName = (channel ? channel->GetName() : ""), msg]() {
+        std::thread([botGuid, senderGuid, prompt, sourceLocal, channelId = (channel ? channel->GetChannelId() : 0), channelName = (channel ? channel->GetName() : ""), msg, senderIsBot]() {
             try {
                 // Use the QueryManager to submit the query.
                 auto responseFuture = SubmitQuery(prompt, QueryPriority::High);
@@ -1909,7 +1911,8 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                 }
                 
                 // Update sentiment based on the player's message
-                UpdateBotPlayerSentiment(botPtr, senderPtr, msg);
+                if (!senderIsBot)
+                    UpdateBotPlayerSentiment(botPtr, senderPtr, msg);
                 
                 AppendBotConversation(botGuid, senderGuid, msg, response);
                 AppendBotRecentReply(botGuid, response);

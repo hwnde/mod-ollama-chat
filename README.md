@@ -295,6 +295,9 @@ Lists all available personalities and their descriptions.
 9. **Fully Configurable**  
    All settings—reply logic, distances, frequencies, blacklist, prompt templates, chat history, personalities, random/event chatter, LLM params, and more—are controlled via `mod-ollama-chat.conf` and can be adjusted and reloaded live at any time.
 
+10. **Audibility Gate (always on)**  
+    A bot only spends an LLM request to speak when a real (non-bot) player can actually perceive the line on its delivery channel: say/yell within range, Guild only when a real guildmate is online, Party/Raid only with a real player in the group, and General/Trade only with a real player in the same zone and team. Feature toggles still switch chat features on and off, but any enabled feature is always audibility-gated. This rule is structural—there is intentionally no config key to disable it.
+
 ## Personality Packs
 
 `mod-ollama-chat` supports Personality Packs, which are collections of personality templates that define how bots roleplay and interact in-game.

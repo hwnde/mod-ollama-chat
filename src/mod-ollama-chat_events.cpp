@@ -46,7 +46,6 @@ void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, 
     Guild* eventGuild = guildOverride ? guildOverride : source->GetGuild();
 
     bool isSourceBot = PlayerbotsMgr::instance().GetPlayerbotAI(source) != nullptr;
-    bool hasNearbyRealPlayer = false;
     bool isGuildEvent = false;
 
     // Only set isGuildEvent for specific event types
@@ -80,27 +79,13 @@ void OllamaBotEventChatter::DispatchGameEvent(Player* source, std::string type, 
         }
     }
 
-    // Check for nearby real players (original logic)
-    for (auto const& pair : source->GetMap()->GetPlayers())
+    // Audibility gate: a bot only burns the LLM if a real player can perceive
+    // the line on its delivery channel (Guild for guild events, else Say).
+    if (isSourceBot)
     {
-        Player* player = pair.GetSource();
-        if (player == source)
-            continue;
-
-        if (!PlayerbotsMgr::instance().GetPlayerbotAI(player) && player->IsWithinDist(source, g_EventChatterRealPlayerDistance, false))
-        {
-            hasNearbyRealPlayer = true;
-            break;
-        }
-    }
-
-    if (isSourceBot && !hasNearbyRealPlayer && !isGuildEvent)
-    {
-        if (g_DebugEnabled)
-        {
-            //LOG_INFO("server.loading", "[OllamaChat] Skipping bot source {} - no real players nearby", source->GetName());
-        }
-        return;
+        ChannelCategory eventCat = isGuildEvent ? ChannelCategory::Guild : ChannelCategory::Say;
+        if (!RealPlayerCanHear(source, eventCat))
+            return;
     }
 
     if (g_DebugEnabled)
@@ -612,6 +597,8 @@ static std::string BuildActivityPrompt(Player* bot, PlayerbotAI* ai, const std::
 static void DispatchActivityEvent(Player* bot, uint32 behaviorId, const std::string& lifecycle)
 {
     if (!g_Enable || !g_OccupationLifecycleEnable || !bot)
+        return;
+    if (!RealPlayerCanHear(bot, ChannelCategory::Say))   // line delivered via botAI->Say
         return;
     std::string key = BehaviorIdToKey(behaviorId);
     if (key.empty())

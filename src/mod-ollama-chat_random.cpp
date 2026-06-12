@@ -20,6 +20,7 @@
 #include "Map.h"
 #include "GridNotifiers.h"
 #include "Guild.h"
+#include "Group.h"
 #include <vector>
 #include <random>
 #include <thread>
@@ -81,28 +82,74 @@ void OllamaBotRandomChatter::OnUpdate(uint32 diff)
 
 // --- Channel-frames: initiated-path channel selection + send ---
 
-static bool AnyRealPlayer(Player* bot, bool sayRange)
+// Shared per-channel audibility predicate (declared in mod-ollama-chat-utilities.h).
+// Lives in this already-compiled TU so it can use the module's static helpers/globals
+// without forcing a CMake reconfigure for a new source file.
+// Pure-read, world-thread-only: never mutates Player/Group/Guild state.
+bool RealPlayerCanHear(Player* bot, ChannelCategory cat)
 {
     if (!bot || !bot->IsInWorld())
         return false;
-    for (auto const& pair : ObjectAccessor::GetPlayers())
+    switch (cat)
     {
-        Player* p = pair.second;
-        if (!p || !p->IsInWorld())
-            continue;
-        if (PlayerbotsMgr::instance().GetPlayerbotAI(p))
-            continue;
-        if (sayRange)
+        case ChannelCategory::Party:
+        case ChannelCategory::Raid:
         {
-            if (bot->GetDistance(p) <= g_SayDistance)
-                return true;
+            Group* grp = bot->GetGroup();
+            if (!grp) return false;
+            if (cat == ChannelCategory::Raid && !grp->isRaidGroup()) return false;
+            for (GroupReference* ref = grp->GetFirstMember(); ref; ref = ref->next())
+            {
+                Player* m = ref->GetSource();
+                if (m && m->IsInWorld() && !PlayerbotsMgr::instance().GetPlayerbotAI(m))
+                    return true;
+            }
+            return false;
         }
-        else if (p->GetTeamId() == bot->GetTeamId() && p->GetZoneId() == bot->GetZoneId())
+        case ChannelCategory::Guild:
         {
-            return true;
+            Guild* g = bot->GetGuild();
+            if (!g) return false;
+            for (auto const& pair : ObjectAccessor::GetPlayers())
+            {
+                Player* p = pair.second;
+                if (!p || !p->IsInWorld()) continue;
+                if (PlayerbotsMgr::instance().GetPlayerbotAI(p)) continue;
+                if (p->GetGuild() && p->GetGuild()->GetId() == g->GetId())
+                    return true;
+            }
+            return false;
+        }
+        case ChannelCategory::Say:
+        case ChannelCategory::Yell:
+        {
+            float dist = (cat == ChannelCategory::Yell) ? g_YellDistance : g_SayDistance;
+            for (auto const& pair : ObjectAccessor::GetPlayers())
+            {
+                Player* p = pair.second;
+                if (!p || !p->IsInWorld()) continue;
+                if (PlayerbotsMgr::instance().GetPlayerbotAI(p)) continue;
+                if (bot->GetDistance(p) <= dist)
+                    return true;
+            }
+            return false;
+        }
+        case ChannelCategory::General:
+        case ChannelCategory::Trade:
+        case ChannelCategory::Others:
+        default:
+        {
+            for (auto const& pair : ObjectAccessor::GetPlayers())
+            {
+                Player* p = pair.second;
+                if (!p || !p->IsInWorld()) continue;
+                if (PlayerbotsMgr::instance().GetPlayerbotAI(p)) continue;
+                if (p->GetTeamId() == bot->GetTeamId() && p->GetZoneId() == bot->GetZoneId())
+                    return true;
+            }
+            return false;
         }
     }
-    return false;
 }
 
 static std::vector<ChannelCategory> GetEligibleInitiatedChannels(Player* bot, Guild* guild, bool hasRealPlayerInGuild)
@@ -116,15 +163,19 @@ static std::vector<ChannelCategory> GetEligibleInitiatedChannels(Player* bot, Gu
 
     if (Group* g = bot->GetGroup())
         if (!g_DisableForParty)
-            out.push_back(g->isRaidGroup() ? ChannelCategory::Raid : ChannelCategory::Party);
+        {
+            ChannelCategory cat = g->isRaidGroup() ? ChannelCategory::Raid : ChannelCategory::Party;
+            if (RealPlayerCanHear(bot, cat))
+                out.push_back(cat);
+        }
 
-    if (!g_DisableForSayYell && AnyRealPlayer(bot, true))
+    if (!g_DisableForSayYell && RealPlayerCanHear(bot, ChannelCategory::Say))
     {
         out.push_back(ChannelCategory::Say);
         out.push_back(ChannelCategory::Yell);
     }
 
-    if (!g_DisableForCustomChannels && AnyRealPlayer(bot, false))
+    if (!g_DisableForCustomChannels && RealPlayerCanHear(bot, ChannelCategory::General))
         out.push_back(ChannelCategory::General);
 
     return out;
@@ -203,21 +254,21 @@ static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string
         }
         case ChannelCategory::Say:
         {
-            if (g_DisableForSayYell || !AnyRealPlayer(botPtr, true)) return;
+            if (g_DisableForSayYell || !RealPlayerCanHear(botPtr, ChannelCategory::Say)) return;
             std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::Yell:
         {
-            if (g_DisableForSayYell || !AnyRealPlayer(botPtr, true)) return;
+            if (g_DisableForSayYell || !RealPlayerCanHear(botPtr, ChannelCategory::Yell)) return;
             std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Yell(l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_YELL_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::General:
         {
-            if (g_DisableForCustomChannels || !AnyRealPlayer(botPtr, false)) return;
+            if (g_DisableForCustomChannels || !RealPlayerCanHear(botPtr, ChannelCategory::General)) return;
             Channel* generalChannel = nullptr;
             if (ChannelMgr* cMgr = ChannelMgr::forTeam(botPtr->GetTeamId()))
                 generalChannel = cMgr->GetChannel("General", botPtr);
@@ -255,24 +306,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
         if (processedBotsThisTick.count(bot->GetGUID().GetRawValue())) continue;
 
         // If bot is in a guild, check if any real player from their guild is online
-        bool hasRealPlayerInGuild = false;
         Guild* guild = bot->GetGuild();
-        if (guild)
-        {
-            for (auto const& pair : ObjectAccessor::GetPlayers())
-            {
-                Player* player = pair.second;
-                if (!player || !player->IsInWorld())
-                    continue;
-                if (PlayerbotsMgr::instance().GetPlayerbotAI(player))
-                    continue;
-                if (player->GetGuild() && player->GetGuild()->GetId() == guild->GetId())
-                {
-                    hasRealPlayerInGuild = true;
-                    break;
-                }
-            }
-        }
+        bool hasRealPlayerInGuild = RealPlayerCanHear(bot, ChannelCategory::Guild);
 
         // For non-guild random chatter, require proximity to a real player
         bool nearRealPlayer = false;
@@ -602,21 +637,8 @@ void OllamaBotRandomChatter::HandleRandomChatter()
             if (g_EnableGuildRandomAmbientChatter && bot->GetGuild() && chosenChannel == ChannelCategory::Guild)
             {
                 // Check if there are real players in the guild
-                bool hasRealPlayerInGuild = false;
                 Guild* guild = bot->GetGuild();
-                for (auto const& pair : ObjectAccessor::GetPlayers())
-                {
-                    Player* player = pair.second;
-                    if (!player || !player->IsInWorld())
-                        continue;
-                    if (PlayerbotsMgr::instance().GetPlayerbotAI(player))
-                        continue;
-                    if (player->GetGuild() && player->GetGuild()->GetId() == guild->GetId())
-                    {
-                        hasRealPlayerInGuild = true;
-                        break;
-                    }
-                }
+                bool hasRealPlayerInGuild = RealPlayerCanHear(bot, ChannelCategory::Guild);
                 if (hasRealPlayerInGuild && urand(0, 99) < g_GuildRandomChatterChance)
                 {
                     // Guild member comments
