@@ -13,6 +13,8 @@
 #include "PlayerbotAI.h"  // PlayerbotAI::BehaviorKey (cross-module contract)
 #include "PlayerbotMgr.h"
 #include "ObjectAccessor.h"
+#include "ChannelMgr.h"
+#include "Channel.h"
 #include <fmt/core.h>
 #include <sstream>
 #include <fstream>
@@ -1036,6 +1038,12 @@ void DrainBotChatQueue()
                     botAI->Say(msg.line);
                 break;
             case BotChatKind::Whisper: botAI->Whisper(msg.line, msg.whisperTarget); break;
+            case BotChatKind::CustomChannel:
+                if (ChannelMgr* cMgr = ChannelMgr::forTeam(bot->GetTeamId()))
+                    if (Channel* ch = cMgr->GetChannel(msg.whisperTarget, bot))
+                        if (bot->IsInChannel(ch))
+                            ch->Say(bot->GetGUID(), msg.line, LANG_UNIVERSAL);
+                break;
         }
     }
 }

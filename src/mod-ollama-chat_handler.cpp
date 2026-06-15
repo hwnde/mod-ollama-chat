@@ -1758,8 +1758,8 @@ void PlayerBotChatHandler::ProcessChat(Player* player, uint32_t /*type*/, uint32
                                     LOG_INFO("server.loading", "[Ollama Chat] Bot {} is confirmed in channel '{}', sending message...",
                                             botPtr->GetName(), channelName);
                                 }
-                                std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){
-                                    targetChannel->Say(botPtr->GetGUID(), l, LANG_UNIVERSAL); });
+                                std::string spoken = EmitBotLines(botPtr, false, response, [botGuid, channelName](const std::string& l){
+                                    EnqueueBotChat(botGuid, BotChatKind::CustomChannel, l, channelName); });
                                 if (!spoken.empty())
                                     ProcessBotChatMessage(botPtr, spoken, SRC_GENERAL_LOCAL, targetChannel);
                                 if(g_DebugEnabled)
