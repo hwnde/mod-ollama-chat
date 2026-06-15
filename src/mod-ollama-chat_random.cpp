@@ -38,6 +38,8 @@ std::unordered_map<uint64_t, time_t> nextRandomChatTime;
 
 void OllamaBotRandomChatter::OnUpdate(uint32 diff)
 {
+    DrainBotChatQueue(); // MUST be first: delivers queued bot lines on the world thread
+
     if (!g_Enable)
         return;
 
@@ -229,40 +231,41 @@ static std::string PickOccupationTopic(BotBehaviorId beh, uint8 variant)
 
 static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string response, ChannelCategory cat)
 {
+    uint64 botGuid = botPtr->GetGUID().GetRawValue();
     switch (cat)
     {
         case ChannelCategory::Guild:
         {
             if (g_DisableForGuild) return;
-            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToGuild(l); });
+            std::string spoken = EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Guild, l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_GUILD_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::Party:
         {
             if (g_DisableForParty) return;
-            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToParty(l); });
+            std::string spoken = EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Party, l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_PARTY_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::Raid:
         {
             if (g_DisableForParty) return;
-            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToRaid(l); });
+            std::string spoken = EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Raid, l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_RAID_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::Say:
         {
             if (g_DisableForSayYell || !RealPlayerCanHear(botPtr, ChannelCategory::Say)) return;
-            std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
+            std::string spoken = EmitBotLines(botPtr, true, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Say, l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_SAY_LOCAL, nullptr);
             break;
         }
         case ChannelCategory::Yell:
         {
             if (g_DisableForSayYell || !RealPlayerCanHear(botPtr, ChannelCategory::Yell)) return;
-            std::string spoken = EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Yell(l); });
+            std::string spoken = EmitBotLines(botPtr, true, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Yell, l); });
             if (!spoken.empty()) ProcessBotChatMessage(botPtr, spoken, SRC_YELL_LOCAL, nullptr);
             break;
         }
@@ -272,7 +275,7 @@ static void SendBotInitiatedLine(Player* botPtr, PlayerbotAI* botAI, std::string
             Channel* generalChannel = nullptr;
             if (ChannelMgr* cMgr = ChannelMgr::forTeam(botPtr->GetTeamId()))
                 generalChannel = cMgr->GetChannel("General", botPtr);
-            std::string spoken = EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToChannel(l, ChatChannelId::GENERAL); });
+            std::string spoken = EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::General, l); });
             if (!spoken.empty() && generalChannel)
                 ProcessBotChatMessage(botPtr, spoken, SRC_GENERAL_LOCAL, generalChannel);
             break;

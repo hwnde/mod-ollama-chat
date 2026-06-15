@@ -431,6 +431,23 @@ std::string EmitBotLines(Player* bot, bool proximity, const std::string& respons
                          const std::function<void(const std::string&)>& sendLine);
 
 // --------------------------------------------
+// Deferred, world-thread-safe bot-chat delivery
+// --------------------------------------------
+// Workers ENQUEUE; DrainBotChatQueue() delivers on the world thread (called from OnUpdate).
+enum class BotChatKind : uint8 { Say, Yell, Guild, Party, Raid, General, Whisper };
+
+struct PendingBotChat
+{
+    uint64      botGuid;
+    BotChatKind kind;
+    std::string line;
+    std::string whisperTarget; // used only for Whisper
+};
+
+void EnqueueBotChat(uint64 botGuid, BotChatKind kind, const std::string& line, const std::string& whisperTarget = "");
+void DrainBotChatQueue();
+
+// --------------------------------------------
 // World-NPC proximity chat (P1: role barks)
 // --------------------------------------------
 extern bool        g_WorldNpcChatEnable;

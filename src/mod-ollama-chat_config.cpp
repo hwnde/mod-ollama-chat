@@ -11,6 +11,8 @@
 #include "Opcodes.h"
 #include "mod-ollama-chat_api.h"
 #include "PlayerbotAI.h"  // PlayerbotAI::BehaviorKey (cross-module contract)
+#include "PlayerbotMgr.h"
+#include "ObjectAccessor.h"
 #include <fmt/core.h>
 #include <sstream>
 #include <fstream>
@@ -986,6 +988,56 @@ std::string EmitBotLines(Player* bot, bool proximity, const std::string& respons
         }
     }
     return joined;
+}
+
+// --- Deferred, world-thread-safe bot-chat delivery -------------------------------
+// All ollama-chat send paths run on detached worker threads; delivering via
+// botAI->Say/Yell/etc. there hits PlayerbotsMgr::GetPlayerbotAI (a bot-map read)
+// off the world thread, racing the world thread's bot login/logout map mutation
+// (0xC0000005). Workers now ENQUEUE; DrainBotChatQueue() delivers on the world thread.
+static std::mutex g_botChatQueueMutex;
+static std::deque<PendingBotChat> g_botChatQueue;
+
+void EnqueueBotChat(uint64 botGuid, BotChatKind kind, const std::string& line, const std::string& whisperTarget)
+{
+    if (line.empty())
+        return;
+    std::lock_guard<std::mutex> lock(g_botChatQueueMutex);
+    g_botChatQueue.push_back(PendingBotChat{ botGuid, kind, line, whisperTarget });
+}
+
+void DrainBotChatQueue()
+{
+    // MUST be called only on the world thread (from a WorldScript::OnUpdate).
+    std::deque<PendingBotChat> batch;
+    {
+        std::lock_guard<std::mutex> lock(g_botChatQueueMutex);
+        if (g_botChatQueue.empty())
+            return;
+        batch.swap(g_botChatQueue);
+    }
+    for (PendingBotChat const& msg : batch)
+    {
+        Player* bot = ObjectAccessor::FindPlayer(ObjectGuid(msg.botGuid));
+        if (!bot)
+            continue;
+        PlayerbotAI* botAI = PlayerbotsMgr::instance().GetPlayerbotAI(bot);
+        if (!botAI)
+            continue;
+        switch (msg.kind)
+        {
+            case BotChatKind::Say:     botAI->Say(msg.line); break;
+            case BotChatKind::Yell:    botAI->Yell(msg.line); break;
+            case BotChatKind::Guild:   botAI->SayToGuild(msg.line); break;
+            case BotChatKind::Party:   botAI->SayToParty(msg.line); break;
+            case BotChatKind::Raid:    botAI->SayToRaid(msg.line); break;
+            case BotChatKind::General:
+                if (!botAI->SayToChannel(msg.line, ChatChannelId::GENERAL))
+                    botAI->Say(msg.line);
+                break;
+            case BotChatKind::Whisper: botAI->Whisper(msg.line, msg.whisperTarget); break;
+        }
+    }
 }
 
 // Load Bot Personalities from Database

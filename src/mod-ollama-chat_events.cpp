@@ -364,7 +364,7 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                     return;
                 }
 
-                EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToGuild(l); });
+                EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Guild, l); });
             }
             else if (botPtr->GetGroup())
             {
@@ -375,26 +375,26 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                         LOG_INFO("server.loading", "[Ollama Chat] Party event chatter skipped (party channels disabled)");
                     return;
                 }
-                
-                EmitBotLines(botPtr, false, response, [&](const std::string& l){ botAI->SayToParty(l); });
+
+                EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Party, l); });
             }
             else
             {
                 // For solo bots, randomly pick between Say and General channel
                 std::vector<std::string> channels;
-                
+
                 // Only add General if custom channels are not disabled
                 if (!g_DisableForCustomChannels)
                 {
                     channels.push_back("General");
                 }
-                
+
                 // Only add Say if not disabled
                 if (!g_DisableForSayYell)
                 {
                     channels.push_back("Say");
                 }
-                
+
                 // If no channels are available, skip event chatter
                 if (channels.empty())
                 {
@@ -402,34 +402,25 @@ void OllamaBotEventChatter::QueueEvent(Player* bot, std::string type, std::strin
                         LOG_INFO("server.loading", "[Ollama Chat] Bot {} skipping event chatter (all available channels disabled)", botPtr->GetName());
                     return;
                 }
-                
+
                 std::random_device rd;
                 std::mt19937 gen(rd());
                 std::uniform_int_distribution<size_t> dist(0, channels.size() - 1);
                 std::string selectedChannel = channels[dist(gen)];
-                
+
                 if (selectedChannel == "Say")
                 {
                     if (g_DebugEnabled)
                         LOG_INFO("server.loading", "[Ollama Chat] Bot Event Chatter Say: {}", response);
-                    EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
+                    EmitBotLines(botPtr, true, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Say, l); });
                 }
                 else if (selectedChannel == "General")
                 {
                     if (g_DebugEnabled)
                         LOG_INFO("server.loading", "[Ollama Chat] Bot Event Chatter General: {}", response);
-                    
-                    // Use playerbots' SayToChannel method if available, otherwise use direct channel access
-                    bool anySent = false;
-                    EmitBotLines(botPtr, false, response, [&](const std::string& l){
-                        if (botAI->SayToChannel(l, ChatChannelId::GENERAL)) anySent = true; });
-                    if (!anySent)
-                    {
-                        // Fallback to Say if no channel line was sent
-                        if (g_DebugEnabled)
-                            LOG_INFO("server.loading", "[Ollama Chat] Failed to send to General channel, falling back to Say");
-                        EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
-                    }
+
+                    // Enqueue for world-thread delivery; DrainBotChatQueue handles General->Say fallback.
+                    EmitBotLines(botPtr, false, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::General, l); });
                 }
             }
         }
@@ -637,7 +628,7 @@ static void DispatchActivityEvent(Player* bot, uint32 behaviorId, const std::str
             botAI = PlayerbotsMgr::instance().GetPlayerbotAI(botPtr);
             if (!botAI) return;
 
-            EmitBotLines(botPtr, true, response, [&](const std::string& l){ botAI->Say(l); });
+            EmitBotLines(botPtr, true, response, [botGuid](const std::string& l){ EnqueueBotChat(botGuid, BotChatKind::Say, l); });
         }
         catch (const std::exception& e)
         {
